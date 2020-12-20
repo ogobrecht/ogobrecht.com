@@ -1,0 +1,10 @@
+{{- $section := .Get 0 }}
+{{ range (where .Site.RegularPages "Section" "eq" $section).GroupByDate "2006" }}
+<h2 id="year-{{ .Key }}">{{ .Key }}</h2>
+<ul class="item-list-archive">
+{{ range .Pages }}
+<li><a href="{{ .URL }}">{{ .Title }}</a>
+{{ with .Description }}<br><span class="item-meta">{{ . }}</span>{{ end }}</li>
+{{ end }}
+</ul>
+{{ end }}

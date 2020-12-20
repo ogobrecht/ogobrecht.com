@@ -1,0 +1,12 @@
+{{- $author := $.Site.Params.author }}
+  <p class="item-meta">Posted by {{ with $author.url }}<a href="{{.}}">{{ end }}{{ $author.name }}{{ if $author.url }}</a>{{ end }} on <time datetime="{{ .PublishDate.Format "2006-01-02" }}" itemprop="datePublished">{{ .PublishDate.Format "January 2, 2006" }}</time>, tagged with 
+{{- $.Scratch.Set "i" 0 }}
+{{- $.Scratch.Set "length" 0 }}
+{{- if .Page.Params.tags }}{{ $.Scratch.Add "length" (len .Page.Params.tags) }}{{ end }}
+{{- range .Page.Params.tags }}
+  {{- $.Scratch.Add "i" 1 }}
+  {{- if ne ($.Scratch.Get "i") 1 }}{{ if ne ($.Scratch.Get "i") ($.Scratch.Get "length") }}, {{ else }} and {{ end }}{{ end }}
+    <a href="/tags/{{ . | urlize }}/">{{ index $.Site.Params.labels . | default . }}</a>
+{{- end }}.
+    Last changed on {{ .Lastmod.Format "January 2, 2006" }}.
+  </p>

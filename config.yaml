@@ -1,0 +1,123 @@
+baseURL: 'https://ogobrecht.com/'
+languageCode: en
+title: Ottmar’s Notes
+paginate: 100
+pygmentsCodefences: true
+pygmentsUseClasses: true
+enableRobotsTXT: true
+disableAliases: false
+metaDataFormat: yaml
+publishDir: public
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xHTML: false
+  highlight:
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ''
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2
+params:
+  rssLimit: 20
+  description: Mainly about Oracle APEX and PL/SQL
+  author:
+    name: Ottmar Gobrecht
+    email: ottmar.gobrecht@gmail.com
+    url: /about/
+    socialMedia:
+      - name: GitHub
+        url: 'https://github.com/ogobrecht'
+        weight: 10
+      - name: Twitter
+        url: 'https://twitter.com/ogobrecht'
+        weight: 20
+      - name: XING
+        url: 'https://xing.com/profile/Ottmar_Gobrecht'
+        weight: 30
+  labels:
+    apex: APEX
+    chart: Chart
+    converter: Converter
+    d3js: D3.js
+    doag: DOAG
+    docker: Docker
+    docs: Docs
+    dokuwiki: DokuWiki
+    generator: Generator
+    html: HTML
+    jquery: jQuery
+    mac: Mac
+    markdown: Markdown
+    matplotlib: Matplotlib
+    nodejs: Node.js
+    oracle: Oracle
+    pandoc: Pandoc
+    php: PHP
+    plsql: PL/SQL
+    plugin: Plugin
+    postcard: Postcard
+    project: Open Source Project
+    python: Python
+    revealjs: Reveal.js
+    script: Script
+    slides: Slides
+    sqlplus: SQL*Plus
+    svg: SVG
+    version-control: Version Control
+    wallet: Wallet
+permalinks:
+  posts: '/:section/:year-:month-:day-:filename/'
+taxonomies:
+  tag: tags
+outputs:
+  home:
+    - HTML
+    - FEED
+  section:
+    - HTML
+mediaTypes:
+  application/rss:
+    suffixes:
+      - xml
+outputFormats:
+  FEED:
+    mediatype: application/rss
+    baseName: feed
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 10
+    - name: APEX
+      url: /tags/apex/
+      weight: 20
+    - name: PL/SQL
+      url: /tags/plsql/
+      weight: 30
+    - name: Open Source Projects
+      url: /tags/project/
+      weight: 40

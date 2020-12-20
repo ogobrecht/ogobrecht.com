@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="index">
+
+<header class="item-header">
+  <h1 class="item-title">{{ index $.Site.Params.labels .Title | default .Title }}</h1>
+</header>
+
+<div class="item-content">
+
+{{ .Content }}
+
+<ul class="item-list">
+{{ range .Paginator.Pages }}
+{{ block "list-item" . }}{{ partial "list-item.html" . }}{{ end }}
+{{ end }}
+</ul>
+
+{{ template "_internal/pagination.html" . }}
+
+</div>{{ "<!--item-content-->" | safeHTML }}
+
+</section>
+{{ end }}

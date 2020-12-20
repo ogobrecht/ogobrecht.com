@@ -1,0 +1,36 @@
+/* theme VS from http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html */
+/* Background */ .chroma { background-color: $grey-color-light; }
+
+.chroma .hll { background-color: #ffffcc }
+.chroma .c { color: #008000 } /* Comment */
+.chroma .err { border: 1px solid #FF0000 } /* Error */
+.chroma .k { color: #0000ff } /* Keyword */
+.chroma .cm { color: #008000 } /* Comment.Multiline */
+.chroma .cp { color: #0000ff } /* Comment.Preproc */
+.chroma .c1 { color: #008000 } /* Comment.Single */
+.chroma .cs { color: #008000 } /* Comment.Special */
+.chroma .ge { font-style: italic } /* Generic.Emph */
+.chroma .gh { font-weight: bold } /* Generic.Heading */
+.chroma .gp { font-weight: bold } /* Generic.Prompt */
+.chroma .gs { font-weight: bold } /* Generic.Strong */
+.chroma .gu { font-weight: bold } /* Generic.Subheading */
+.chroma .kc { color: #0000ff } /* Keyword.Constant */
+.chroma .kd { color: #0000ff } /* Keyword.Declaration */
+.chroma .kn { color: #0000ff } /* Keyword.Namespace */
+.chroma .kp { color: #0000ff } /* Keyword.Pseudo */
+.chroma .kr { color: #0000ff } /* Keyword.Reserved */
+.chroma .kt { color: #2b91af } /* Keyword.Type */
+.chroma .s { color: #a31515 } /* Literal.String */
+.chroma .nc { color: #2b91af } /* Name.Class */
+.chroma .ow { color: #0000ff } /* Operator.Word */
+.chroma .sb { color: #a31515 } /* Literal.String.Backtick */
+.chroma .sc { color: #a31515 } /* Literal.String.Char */
+.chroma .sd { color: #a31515 } /* Literal.String.Doc */
+.chroma .s2 { color: #a31515 } /* Literal.String.Double */
+.chroma .se { color: #a31515 } /* Literal.String.Escape */
+.chroma .sh { color: #a31515 } /* Literal.String.Heredoc */
+.chroma .si { color: #a31515 } /* Literal.String.Interpol */
+.chroma .sx { color: #a31515 } /* Literal.String.Other */
+.chroma .sr { color: #a31515 } /* Literal.String.Regex */
+.chroma .s1 { color: #a31515 } /* Literal.String.Single */
+.chroma .ss { color: #a31515 } /* Literal.String.Symbol */

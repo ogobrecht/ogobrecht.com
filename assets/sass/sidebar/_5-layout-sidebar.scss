@@ -1,0 +1,84 @@
+/* file layout-sidebar.scss */
+
+.sidebar {
+    background: $brand-color;
+    color: #fff;
+    display: block;
+    float: left;
+    height: 100%;
+    line-height: 1.4em;
+    overflow: hidden;
+    position: fixed;
+    width: 250px;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .wrapper {
+        max-height: 100%;
+        margin-right: -100px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes 
+        padding: $spacing-unit ($spacing-unit + 100) $spacing-unit $spacing-unit;
+    }
+
+    header {
+        margin-bottom: $spacing-unit / 2;
+
+        h2 {
+            font-size: $site-header-font-size;
+            line-height: $small-line-height;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: $extra-small-font-size;
+            line-height: $small-line-height;
+            margin-bottom: 0;
+        }
+    }
+
+    nav {
+        h3 {
+            margin-top: 0;
+            margin-bottom: $spacing-unit / 4;
+            font-size: 1em;
+        }
+
+        ul {
+            margin-left: $spacing-unit / 2;
+            margin-bottom: $spacing-unit;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .meta {
+            opacity: .75;
+            font-size: $extra-small-font-size;
+            line-height: $small-line-height;
+        }
+
+        a {
+            display: block;
+            font-size: $small-font-size;
+            margin-top: $spacing-unit / 3;
+            opacity: .75;
+
+            &:hover {
+                opacity: 1;
+                text-decoration: none;
+            }
+
+            &.active {
+                font-weight: bold;
+                opacity: 1;
+            }
+        }
+    }
+}

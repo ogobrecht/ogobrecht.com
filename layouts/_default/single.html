@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">{{ .Title }}</h1>
+  {{- if in (slice "posts") .Type }}{{ with .Page.Description }}<p class="item-subtitle">{{.}}</p>{{ end }}{{ end }}
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  {{ .Content }}
+</div>{{ "<!--articleBody-end-->" | safeHTML }}
+{{ if in (slice "posts") .Type }}
+<footer>
+  {{- if in (slice "posts") .Type }}{{ block "item-meta" . }}{{ partial "item-meta.html" . }}{{ end }}{{ end }}
+  {{ with .PrevInSection }}<span class="left item-meta">&#x2190; <a href="{{ .RelPermalink }}">{{ .Title }}</a></span>{{ end }}
+  {{ with .NextInSection }}<span class="right item-meta"><a href="{{ .RelPermalink }}">{{ .Title }}</a> &#x2192;</span>{{ end }}
+</footer>
+{{- end }}
+
+</article>
+
+{{ if in (slice "posts") .Type }}
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+{{ end }}
+
+{{ end }}

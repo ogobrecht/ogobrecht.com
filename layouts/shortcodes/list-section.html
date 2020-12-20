@@ -1,0 +1,7 @@
+{{- $section := .Get 0 }}
+{{- $limit := .Get 1 | default 5 }}
+<ul class="item-list">
+{{ range first $limit (where .Site.RegularPages "Section" "eq" $section) }}
+{{ block "list-item" . }}{{ partial "list-item.html" . }}{{ end }}
+{{ end }}
+</ul>

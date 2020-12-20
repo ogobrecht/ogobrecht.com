@@ -1,0 +1,268 @@
+/* file base.scss */
+
+* {
+    box-sizing: border-box;
+}
+
+/* Reset some basic elements */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+pre,
+ul,
+ol,
+dl,
+dd,
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font: $base-font-weight #{$base-font-size} / #{$base-line-height} $base-font-family;
+    color: $text-color;
+    background-color: $background-color;
+    text-size-adjust: 100%;
+    font-feature-settings: 'kern' 1;
+    font-kerning: normal;
+    word-wrap: break-word;
+}
+
+
+/* Maintain vertical rhythm */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+pre,
+ul,
+ol,
+dl,
+hr,
+table,
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: $base-font-weight;
+    //text-transform: uppercase;
+}
+
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: $spacing-unit;
+}
+
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    border-radius: $base-border-radius;
+    box-shadow: $box-shadow-img-pre;
+}
+
+
+figure {
+    border: 0;
+
+    & img {
+        display: block;
+    }
+
+    & pre {
+        margin-bottom: 0;
+    }
+
+    & table {
+        margin-bottom: 0;
+    }
+}
+
+// https://stackoverflow.com/questions/38324326/sass-multiplication-with-units
+figcaption,
+/*pseudo captions*/
+div.highlight + p > em,
+table + p > em,
+img + p > em {
+    font-style: italic;
+    font-size: $small-font-size;
+    color: $grey-color;
+    line-height: $small-line-height;
+    margin-top: 5px;
+}
+
+// eliminate SVGs extra bottom margin because of default baseline setting for inline elements
+// https://stackoverflow.com/questions/22337292/spurious-margin-on-svg-element
+svg { 
+    vertical-align: top 
+}
+
+
+ul,
+ol {
+    margin-left: $spacing-unit;
+}
+
+li {
+    >ul,
+    >ol {
+        margin-bottom: 0;
+    }
+
+    >h2,
+    >h3,
+    >h4,
+    >h5,
+    >h6 {
+        margin-top: 0;
+    }
+}
+
+dt {
+    font-style: italic;
+    font-weight: 600;
+}
+
+dd {
+    padding: 0 $spacing-unit / 2;
+}
+
+
+a {
+    color: $brand-color;
+    text-decoration: $link-text-decoration;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+blockquote {
+    color: $grey-color;
+    border-left: 4px solid $grey-color-light;
+    padding-left: $spacing-unit / 2;
+    letter-spacing: -1px;
+    font-style: italic;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+pre,
+code {
+    font-size: $small-font-size;
+    background-color: $grey-color-light;
+    border-radius: $base-border-radius;
+}
+
+code {
+    padding: 1px 5px;
+
+}
+
+pre {
+    padding: 8px 12px;
+    overflow-x: auto;
+    box-shadow: $box-shadow-img-pre;
+
+    > code {
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+/* Mark text as keyboard key: `SHIFT`{:.keyboard} + `CTRL`{:.keyboard} */
+.keyboard {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    display: inline-block;
+    font-family: consolas, 'Liberation Mono', courier, monospace;
+    font-size: $small-font-size;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+
+
+hr {
+    display: block;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 4px solid $grey-color-light;
+}
+
+
+p {
+    line-height: $large-line-height;
+}
+
+
+table {
+    width: 100%;
+    font-size: $small-font-size;
+    text-align: $table-text-align;
+    color: lighten($text-color, 18%);
+    border-collapse: collapse;
+    border: 1px solid $grey-color-light;
+
+    tr {
+        &:nth-child(even) {
+            background-color: lighten($grey-color-light, 6%);
+        }
+    }
+
+    th,
+    td {
+        padding: ($spacing-unit / 3) ($spacing-unit / 2);
+    }
+
+    th {
+        background-color: lighten($grey-color-light, 3%);
+        border: 1px solid darken($grey-color-light, 4%);
+        border-bottom-color: darken($grey-color-light, 12%);
+    }
+
+    td {
+        border: 1px solid $grey-color-light;
+    }
+
+    // Don't use a margin on code samples within tables
+    pre {
+        margin-bottom: 0;
+    }
+}

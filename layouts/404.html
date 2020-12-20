@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="index">
+  <header class="item-header">
+    <h1 class="item-title">Sorry, page not found :-(</h1>
+  </header>
+  <div class="item-content">
+
+<p>The page you are looking for does not exist. Here is a list of the available posts in chronological order - please also note the navigation (<a href="/">back to home</a>):</p>
+
+{{ range first 100 ((where .Site.RegularPages "Section" "in" (slice "posts")).GroupByDate "2006")}}
+<h2 id="year-{{ .Key }}">{{ .Key }}</h2>
+<ul class="item-list-archive">
+{{ range .Pages }}
+<li><a href="{{ .URL }}">{{ .Title }}</a>
+{{ with .Description }}<br><span class="item-meta">{{ . }}</span>{{ end }}</li>
+{{ end }}
+</ul>
+{{ end }}
+
+  </div>
+</section>
+{{ end }}

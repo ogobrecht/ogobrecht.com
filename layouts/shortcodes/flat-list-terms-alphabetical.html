@@ -1,0 +1,4 @@
+{{- $taxonomy := .Get 0 }}
+{{- range $i, $term := (index .Site.Taxonomies $taxonomy).Alphabetical }}
+<span class="nowrap"><a href="/{{ $taxonomy }}/{{ $term.Name | urlize }}/">{{ index $.Site.Params.labels $term.Name | default $term.Name }}</a><sub class="item-meta xs"> {{ $term.Count }}</sub></span>&nbsp;
+{{- end }}
