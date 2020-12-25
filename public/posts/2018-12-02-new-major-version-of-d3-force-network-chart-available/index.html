@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Major Version of D3 Force Network Chart Available</title>
+  <meta name="description" content="Better responsiveness by implementing a resize observer">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">New Major Version of D3 Force Network Chart Available</h1><p class="item-subtitle">Better responsiveness by implementing a resize observer</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <div id="example"></div><!--the graph container-->
+<p>Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes. How can the graph react to this?</p>
+<p>The problem is that a network chart is not a simple image which can be resized according to the available space. The graph is an SVG with multiple layers to handle the zoom and pan, the lasso, a legend that needs to be in a fixed size&hellip;   As you can see, there must be a procedural solution. And for this we need a trigger, which always fires when the (possible) size of the graphs parent DOM element changes.</p>
+<p>Fortunately, there is a <a href="https://wicg.github.io/ResizeObserver/">W3C draft for a resize observer</a> and a <a href="https://github.com/que-etc/resize-observer-polyfill">polyfill</a> available.</p>
+<p>To put the things together, I had to make breaking changes on the API (the reason for a new major version):</p>
+<p>I made the API zoom methods independent of the option <code>zoomMode</code> and set the default to true for the following options:</p>
+<ul>
+<li><code>zoomToFitOnForceEnd</code> (was false in the past)</li>
+<li><code>zoomToFitOnResize</code> (new option)</li>
+<li><code>keepAspectRatioOnResize</code> (new option)</li>
+</ul>
+<p>When setting the option <code>useDomParentWidth</code> to true together with the previous mentioned defaults, you can achieve a responsiveness like with images set to width 100%. Try it out by resizing your browser window.</p>
+<p>For the full change log see the project on <a href="https://github.com/ogobrecht/d3-force-apex-plugin#changelog">GitHub</a> and for a demo the app on <a href="https://apex.oracle.com/pls/apex/f?p=18290:1">apex.oracle.com</a> (which currently does not use the universal theme, new demo app is work in progress&hellip;).</p>
+<p>Happy networking :-)<br>
+Ottmar</p>
+<link  href="/assets/d3.js/d3-force-3.0.0.css" rel="stylesheet" type="text/css">
+<script src="/assets/d3.js/ResizeObserver-1.5.0.min.js"></script>
+<script src="/assets/d3.js/d3-3.5.6.min.js"></script>
+<script src="/assets/d3.js/d3-force-3.0.0.min.js"></script>
+<style>.net_gobrechts_d3_force_tooltip { z-index: auto; }</style>
+<script>
+window.onload = function() {
+    window.example = netGobrechtsD3Force('example')
+        .height(400)
+        .width(800)
+        .useDomParentWidth(true) //for responsive layout
+        //.zoomMode(true)
+        .lassoMode(true)
+        .wrapLabels(true)
+        .showBorder(false)
+        .debug(true) //to enable the customization wizard
+        .render(); //sample data is provided when called without data
+        //see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
+    d3.select('#example').select('svg').classed('shadow', true);
+}
+</script>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2018-12-02" itemprop="datePublished">December 2, 2018</time>, tagged with
+    <a href="/tags/oracle/">Oracle</a>, 
+    <a href="/tags/apex/">APEX</a>, 
+    <a href="/tags/plugin/">Plugin</a>, 
+    <a href="/tags/d3js/">D3.js</a>, 
+    <a href="/tags/chart/">Chart</a> and 
+    <a href="/tags/svg/">SVG</a>.
+    Last changed on December 5, 2018.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2018-08-26-plex-plsql-export-utilities/">PLEX - PL/SQL Export Utilities</a></span>
+  <span class="right item-meta"><a href="/posts/2018-12-26-table-api-generator-v0.5.0-available/">Table API Generator v0.5.0 Available</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

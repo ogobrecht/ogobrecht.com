@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Schnellstart - Versionskontrolle für existierende (APEX-)Projekte</title>
+  <meta name="description" content="Folien für DOAG Regionaltreffen 11. März 2019, München">
+  <meta name="author" content="Ottmar Gobrecht">
+  <link rel="stylesheet" href="/assets/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="/assets/reveal.js/css/theme/solarized.css">
+  <link rel="stylesheet" href="/assets/reveal.js/lib/css/zenburn.css">
+  <base target="_blank">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+	<link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+	<link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+	<link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+	<link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+	<meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
+	<meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? '/assets/reveal.js/css/print/pdf.css' : '/assets/reveal.js/css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown="slides.md"
+               data-separator="^\r?\n-----\r?\n$"
+               data-separator-vertical="^\r?\n---\r?\n$"
+               data-separator-notes="^(?:Anmerkung|Anmerkungen|Note|Notes):\s*$"
+               data-charset="utf-8">
+      </section>
+    </div>
+  </div>
+  <script src="/assets/reveal.js/lib/js/head.min.js"></script>
+  <script src="/assets/reveal.js/js/reveal.js"></script>
+  <script>
+  // do not show controls, when presentation runs over localhost (on a talk)
+  var showControls = (
+    location.hostname === "localhost" || 
+    location.hostname === "127.0.0.1" || 
+    location.hostname === "" ? false : true);
+  // https://github.com/hakimel/reveal.js/#configuration
+  Reveal.initialize({
+    controls: showControls,
+    progress: showControls,
+    fragments: true,
+    pdfSeparateFragments: false,
+    history: true,
+    transition: "fade",
+    dependencies: [
+      { src: '/assets/reveal.js/plugin/markdown/marked.js' },
+      { src: '/assets/reveal.js/plugin/markdown/markdown.js' },
+      { src: '/assets/reveal.js/plugin/notes/notes.js', async: true },
+      { src: '/assets/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+    ]
+  });
+  </script>
+
+<!--content-begin-->
+<script>
+window.to_png = function(){
+  var images = document.getElementsByTagName('img');
+  for (var i = 0; i < images.length; i++) {
+    var image = images.item(i);
+    var source = image.getAttribute('src');
+    if (source.indexOf(".png.svg") !== -1) {
+      image.setAttribute('src', source.replace(".png.svg",".svg.png"));
+    }
+  }
+}
+window.to_svg = function(){
+  var images = document.getElementsByTagName('img');
+  for (var i = 0; i < images.length; i++) {
+    var image = images.item(i);
+    var source = image.getAttribute('src');
+    if (source.indexOf(".svg.png") !== -1) {
+      image.setAttribute('src', source.replace(".svg.png",".png.svg"));
+    }
+  }
+}
+</script>
+
+<style>
+/* white font color and text shadow when slide has background image */
+.reveal section[data-background-image], 
+.reveal section[data-background-image] h1,
+.reveal section[data-background-image] h2,
+.reveal section[data-background-image] h3,
+.reveal section[data-background-image] ul
+ {
+  color: white; 
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+.reveal section[data-background-image] a:hover {
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+.reveal section[data-background-image] ul,
+.reveal section[data-background-image] blockquote {
+  font-weight: bold;
+}
+.reveal section[data-background-image] ul {
+  list-style-type: none;
+  margin: 0;
+  font-weight: bold;
+}
+.reveal section[data-background-image] li:before {
+  content: '\2022\2000';
+}
+.reveal section[data-background-image] blockquote {
+  background: none;
+  box-shadow: none;
+}
+</style>
+
+<!--content-end-->
+
+</body>
+</html>

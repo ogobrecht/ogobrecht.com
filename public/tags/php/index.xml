@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>php on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/php/</link>
+    <description>Recent content in php on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DokuWiki Plugin Reveal.js</title>
+      <link>https://ogobrecht.com/posts/2017-03-05-dokuwiki-plugin-revealjs/</link>
+      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2017-03-05-dokuwiki-plugin-revealjs/</guid>
+      <description>DokuWiki is very good for creating documentation in a team. It is PHP based, needs less resources and is running without a database only on files on nearly every webserver. If your infrastructure is crashed for whatever reason and you have at least access to the files (on the webserver or in a backup) you can read your documentation with a simple text editor, because DokuWiki&#39;s syntax is designed to be readable as possible without any rendering to HTML.</description>
+    </item>
+    
+  </channel>
+</rss>

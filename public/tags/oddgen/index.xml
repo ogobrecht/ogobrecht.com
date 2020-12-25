@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>oddgen on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/oddgen/</link>
+    <description>Recent content in oddgen on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Table API Generator v0.5.0 Available</title>
+      <link>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
+      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:
+ Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods:  Can have the dictionary column defaults Can return the whole row instead of the primary key   You can exclude columns (e.</description>
+    </item>
+    
+    <item>
+      <title>Table API Generator</title>
+      <link>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</link>
+      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</guid>
+      <description>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</description>
+    </item>
+    
+  </channel>
+</rss>

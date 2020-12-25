@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>version-control on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/version-control/</link>
+    <description>Recent content in version-control on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Download BLOBs with SQL*Plus</title>
+      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
+    </item>
+    
+    <item>
+      <title>DOAG Konferenz 2019</title>
+      <link>https://ogobrecht.com/posts/2019-11-19-doag-konferenz/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-11-19-doag-konferenz/</guid>
+      <description>Leider konnte ich meinen Vortrag im PDF-Format zuerst nicht auf die DOAG-Webseite hochladen, da dort eine Größenbeschränkung von 10 MB gilt. Letztendlich habe ich dann eine Version ohne Hintergrundbilder hochgeladen. Aber Ihr habt ja hier die Möglichkeit die Original-HTML-Version anzuschauen, die auf der Konferenz gezeigt wurde. Viel Spaß damit.
+Wer noch im Nachgang Fragen zum Thema hat, kann mich gern direkt kontaktieren (für Kontaktmöglichkeiten einfach in der Navigation schauen). Für Fragen zum vorgestellten Tool „PLEX“ nutzt bitte die Feedbackfunktion auf GitHub innerhalb der Projektseite, damit alle Nutzer etwas davon haben.</description>
+    </item>
+    
+    <item>
+      <title>Schnellstart - Versionskontrolle für existierende Oracle-Projekte</title>
+      <link>https://ogobrecht.com/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</guid>
+      <description>Viele Oracle-Projekte setzen bis heute keine Versionskontrolle ein. Die Gründe dafür sind vielfältig. Meist geht man wohl davon aus, dass die Datenbank ein sicherer Ort für den Quellcode ist. Mit einem funktionierenden Backup ist das auch richtig, man verliert aber auf jeden Fall die komplette Historie der Änderungen. Oft fehlt in laufenden Projekten auch einfach die Zeit, sich zusätzlich noch mit der Einführung einer Quellcodeversionierung zu beschäftigen, weil auf den ersten Blick kein direkter Nutzen zu sehen ist.</description>
+    </item>
+    
+    <item>
+      <title>New Major Version of PL/SQL Export Utilities Available</title>
+      <link>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</guid>
+      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.
+After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&#39;t use APEX&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>DOAG Regionaltreffen 11. März 2019, München</title>
+      <link>https://ogobrecht.com/posts/2019-03-11-doag-regionaltreffen-muenchen/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-03-11-doag-regionaltreffen-muenchen/</guid>
+      <description>Ich hatte die Ehre an einer gemeinsamen Veranstaltung der DOAG Regionalgruppe München und der Oracle APEX Meetup-Gruppe München einen Vortrag halten zu dürfen zu dem im Untertitel genannten Thema.
+Danke an Alle, die an dem Abend da waren. Der Raum war voll - wohl wegen Carsten Czarski und den von ihm vorgestellten APEX 19.1 Data Loading Features. Mit so vielen Teilnehmern macht das gleich doppelt Spaß.
+Für die Teilnehmer hier die Folien:</description>
+    </item>
+    
+    <item>
+      <title>PLEX - PL/SQL Export Utilities</title>
+      <link>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</guid>
+      <description>UPDATE 2019-06-26 regarding PLEX v2.0.0: PLEX can now be installed and used without an APEX installation. However, to export an APEX app you need APEX 5.1.4 or higher installed on your system. Without APEX your PLEX package has no options for an app export because of conditional compilation. You are still able to export your schema DDL and table data. Hope this helps some folks out there &amp;ndash; Ottmar</description>
+    </item>
+    
+    <item>
+      <title>APEX_EXPORT and Version Control</title>
+      <link>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</guid>
+      <description>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply ask Google. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</description>
+    </item>
+    
+  </channel>
+</rss>

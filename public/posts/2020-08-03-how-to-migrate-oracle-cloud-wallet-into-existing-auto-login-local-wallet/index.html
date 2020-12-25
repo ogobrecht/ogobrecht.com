@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
+  <meta name="description" content="One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">How to migrate Oracle Cloud wallet into existing auto_login_local wallet</h1><p class="item-subtitle">One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with <code>orapki</code> instead of <code>mkstore</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">orapki wallet create -wallet <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -pwd myPassword -auto_login_local
+</code></pre></div><p>You can then add new alias/user/password entries with mkstore (you need to add each alias to your tnsnames.ora):</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">mkstore -wrl <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -createCredential myAlias myUser myPassword
+</code></pre></div><p>If you use only the instant client and cannot find mkstore and orapki, then have a look at my <a href="/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/">previous post</a> on how to simulate these tools.</p>
+<h2 id="the-migration">The Migration</h2>
+<p>I assume you have set an environment variable called TNS_ADMIN pointing to your TNS directory. In this directory, you have your wallet files and also your existing tnsnames.ora and sqlnet.ora to successfully connect to your local Oracle instances.</p>
+<p>Now you need to extract the downloaded cloud wallet - for security reasons it makes sense to create a temporary subdirectory in your TNS directory and extract the cloud wallet there. You need to migrate the entries from <code>tnsnames.ora</code> and <code>sqlnet.ora</code> into your own TNS files and align the path to your wallet directory. Additionally, you should also copy over the file <code>ojdbc.properties</code> if you do not have it already and you plan to use SQLcl or SQL Developer with your wallet.</p>
+<p>My resulting sqlnet.ora:</p>
+<pre><code>WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY = &quot;C:\\path\\to\\my\\wallet&quot;)))
+SSL_SERVER_DN_MATCH = yes
+sqlnet.wallet_override = true
+</code></pre><p>My resulting tnsnames.ora:</p>
+<pre><code>myCloudDbName_high, myAlias = (description = (...
+myCloudDbName_medium        = (description = (...
+myCloudDbName_low           = (description = (...
+myCloudDbName_tp            = (description = (...
+myCloudDbName_tpurgent      = (description = (...
+
+myLocalDbName, myOtherAlias = (description = (...
+...
+</code></pre><p>That was the easy part, but how you migrate the needed private key and all certificates?</p>
+<p>It took me some time to figure this out because most people seem to use the cloud wallet as it is. This is understandable since SQL Developer can direct use the zipped version of the wallet. But my target is not to manage the passwords in multiple places - the databases, multiple wallets, SQL Developer and possibly other tools. I want to manage the passwords only in the databases and in one wallet and use this wallet with all the tools - in my case SQL*Plus, SQLcl and SQL Developer.</p>
+<p>First I tried to export the private key and all certificates from the cloud wallet and then import it into my wallet. I was not successful with this mostly because of the private key and unknown alias names - maybe I was too tired from all the try and error things on how to achieve this. I came finally up with the idea to use the cloud wallet Java KeyStore files and convert them into my wallet with the orapki method <code>jks_to_pkcs12</code>.</p>
+<p>Migrate private key and certificate from cloud wallet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">orapki wallet jks_to_pkcs12 -wallet <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -pwd myPassword -keystore <span class="s2">&#34;</span><span class="s2">path/to/cloud/wallet/keystore.jks</span><span class="s2">&#34;</span> -jkspwd myCloudWalletPassword
+</code></pre></div><p>Migrate trusted certificates from cloud wallet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">orapki wallet jks_to_pkcs12 -wallet <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -pwd myPassword -keystore <span class="s2">&#34;</span><span class="s2">path/to/cloud/wallet/truststore.jks</span><span class="s2">&#34;</span> -jkspwd myCloudWalletPassword
+</code></pre></div><p>Finally, list the wallet content to see the migrated entries:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">orapki wallet display -wallet . -pwd myPassword
+  or
+orapki wallet display -wallet . -pwd myPassword -complete
+</code></pre></div><p>The final file list in my TNS directory (without the Java KeyStore files from the cloud wallet):</p>
+<pre><code>cwallet.sso
+cwallet.sso.lck
+ewallet.p12
+ewallet.p12.lck
+ojdbc.properties
+sqlnet.ora
+tnsnames.ora
+</code></pre><p>I am now able to connect to my cloud database with the desired tools without providing user/password details (tested version):</p>
+<ul>
+<li>SQL*Plus (19.6): <code>sqlplus /@myAlias</code></li>
+<li>SQLcl (20.2): <code>sql /@myAlias</code></li>
+<li>SQL Developer (20.2): authentication type &ldquo;OS&rdquo;, connection type &ldquo;Custom JDBC&rdquo; with URL <code>jdbc:oracle:thin:/@myAlias</code></li>
+</ul>
+<p>If you forgot which aliases you have configured in your wallet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">mkstore -wrl <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -listCredential
+</code></pre></div><p>Hope this helps someone else.</p>
+<p>Happy developing and scripting<br>
+Ottmar</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2020-08-03" itemprop="datePublished">August 3, 2020</time>, tagged with
+    <a href="/tags/oracle/">Oracle</a>, 
+    <a href="/tags/wallet/">Wallet</a> and 
+    <a href="/tags/script/">Script</a>.
+    Last changed on November 28, 2020.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/">How to use mkstore and orapki with Oracle Instant Client</a></span>
+  
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

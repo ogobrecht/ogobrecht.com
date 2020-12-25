@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>doag on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/doag/</link>
+    <description>Recent content in doag on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/doag/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DOAG Konferenz 2019</title>
+      <link>https://ogobrecht.com/posts/2019-11-19-doag-konferenz/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-11-19-doag-konferenz/</guid>
+      <description>Leider konnte ich meinen Vortrag im PDF-Format zuerst nicht auf die DOAG-Webseite hochladen, da dort eine Größenbeschränkung von 10 MB gilt. Letztendlich habe ich dann eine Version ohne Hintergrundbilder hochgeladen. Aber Ihr habt ja hier die Möglichkeit die Original-HTML-Version anzuschauen, die auf der Konferenz gezeigt wurde. Viel Spaß damit.
+Wer noch im Nachgang Fragen zum Thema hat, kann mich gern direkt kontaktieren (für Kontaktmöglichkeiten einfach in der Navigation schauen). Für Fragen zum vorgestellten Tool „PLEX“ nutzt bitte die Feedbackfunktion auf GitHub innerhalb der Projektseite, damit alle Nutzer etwas davon haben.</description>
+    </item>
+    
+    <item>
+      <title>Schnellstart - Versionskontrolle für existierende Oracle-Projekte</title>
+      <link>https://ogobrecht.com/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</guid>
+      <description>Viele Oracle-Projekte setzen bis heute keine Versionskontrolle ein. Die Gründe dafür sind vielfältig. Meist geht man wohl davon aus, dass die Datenbank ein sicherer Ort für den Quellcode ist. Mit einem funktionierenden Backup ist das auch richtig, man verliert aber auf jeden Fall die komplette Historie der Änderungen. Oft fehlt in laufenden Projekten auch einfach die Zeit, sich zusätzlich noch mit der Einführung einer Quellcodeversionierung zu beschäftigen, weil auf den ersten Blick kein direkter Nutzen zu sehen ist.</description>
+    </item>
+    
+    <item>
+      <title>DOAG Regionaltreffen 11. März 2019, München</title>
+      <link>https://ogobrecht.com/posts/2019-03-11-doag-regionaltreffen-muenchen/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-03-11-doag-regionaltreffen-muenchen/</guid>
+      <description>Ich hatte die Ehre an einer gemeinsamen Veranstaltung der DOAG Regionalgruppe München und der Oracle APEX Meetup-Gruppe München einen Vortrag halten zu dürfen zu dem im Untertitel genannten Thema.
+Danke an Alle, die an dem Abend da waren. Der Raum war voll - wohl wegen Carsten Czarski und den von ihm vorgestellten APEX 19.1 Data Loading Features. Mit so vielen Teilnehmern macht das gleich doppelt Spaß.
+Für die Teilnehmer hier die Folien:</description>
+    </item>
+    
+    <item>
+      <title>Reporting mal anders, Markdown sei Dank</title>
+      <link>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
+      <description>Die Folien zu meinem Vortrag:
+Open HTML presentation in a new window/tab
+You need a modern browser with activated JavaScript. Navigation tips:
+N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
+Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
+    </item>
+    
+    <item>
+      <title>APEX Fine Art Printing, Markdown Überall</title>
+      <link>https://ogobrecht.com/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</link>
+      <pubDate>Tue, 26 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</guid>
+      <description>Die Folien zu meinem Vortrag:
+Open HTML presentation in a new window/tab
+You need a modern browser with activated JavaScript. Navigation tips:
+N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+    </item>
+    
+    <item>
+      <title>D3.js - Data Driven Documents</title>
+      <link>https://ogobrecht.com/posts/2015-06-09-d3js-data-driven-documents/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2015-06-09-d3js-data-driven-documents/</guid>
+      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
+Open HTML presentation in a new window/tab
+You need a modern browser with activated JavaScript. Navigation tips:
+N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+    </item>
+    
+    <item>
+      <title>D3.js Grundlagen</title>
+      <link>https://ogobrecht.com/posts/2015-03-01-d3js-grundlagen/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2015-03-01-d3js-grundlagen/</guid>
+      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit  Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Data Sets for Oracle</title>
+  <meta name="description" content="A collection of common data sets for testing purposes">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">Sample Data Sets for Oracle</h1><p class="item-subtitle">A collection of common data sets for testing purposes</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>Sometimes you need only some small tables and some rows of data to play around with, to test things out. I think most of you immediately would say EMP, DEPT&hellip;</p>
+<p>Sure, but a bit more data would be nice. Ok, OE and HR schema&hellip;</p>
+<p>Sure, but I have no SYS rights on the database in my current project to install the schemas, can I have it in my current dev schema?&hellip;</p>
+<p>Sure, but then I have to fiddle a bit with the scripts to make it run in my dev schema, I need it fast, no time at all&hellip;</p>
+<p>Mmhhh, sounds this familiar to you? Maybe I can help&hellip;</p>
+<p>The sample data sets from Oracle were normally created for a dedicated schema. I changed that and omitted all the schema creation parts of the scripts. Instead, all objects from a data set get a prefix - an example: All objects from the customer orders schema (one of the newer data sets from Oracle) are prefixed with CO_. This allows me to use all data sets in parallel in a single schema and easily identify the data set the object belongs to.</p>
+<p>All table scripts are created with identity columns and the simplest possible options for easy readability - no fancy constraint and index names. Constraints and indexes will be renamed with global helper scripts after the table creation. Only real indexes are coded - foreign key indexes are generated with a global helper script too.</p>
+<p>For each data set, you have always the same three scripts to handle the installation/data refresh/uninstallation.</p>
+<h2 id="list-of-data-sets-copyrights">List of Data Sets, Copyrights</h2>
+<ul>
+<li>EMP &amp; DEPT (2 tabs, 18 rows), <a href="https://github.com/oracle/dotnet-db-samples/blob/master/schemas/scott.sql">source</a>, Copyright Oracle (<a href="https://github.com/oracle/dotnet-db-samples/blob/master/LICENSE">MIT license</a>)</li>
+<li>Order Entry &amp; Human Resources (15 tabs, 3.002 rows), <a href="https://github.com/oracle/db-sample-schemas/tree/master/order_entry">source oe</a>, <a href="https://github.com/oracle/db-sample-schemas/tree/master/human_resources">source hr</a>, Copyright Oracle (<a href="https://github.com/oracle/db-sample-schemas/blob/master/LICENSE.md">MIT license</a>)</li>
+<li>Customer Orders (5 tabs, 6.325 rows), <a href="https://github.com/oracle/db-sample-schemas/tree/master/customer_orders">source</a>, Copyright Oracle (<a href="https://github.com/oracle/db-sample-schemas/blob/master/LICENSE.md">MIT license</a>)</li>
+<li>Sakila DVD Rental Store (16 tabs, 46.273 rows), <a href="https://github.com/jOOQ/jOOQ/tree/master/jOOQ-examples/Sakila">source</a>, <a href="https://code.google.com/archive/p/sakila-sample-database-ports/">original source</a>, Copyright MySQL AB documentation team, DB Software Laboratory, Lukas Eder (<a href="http://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause license</a>)</li>
+</ul>
+<p>For more info about the Oracle sample schemas see the <a href="https://docs.oracle.com/database/121/COMSC/overview.htm#COMSC002">docs</a>.</p>
+<h2 id="list-of-global-helper-scripts">List of Global Helper Scripts</h2>
+<ul>
+<li>Disable/enable all foreign key constraints</li>
+<li>Create missing foreign key indexes</li>
+<li>Unify constraint names</li>
+<li>Unify index names</li>
+<li>Sync sequence values to data</li>
+</ul>
+<p>You can find the project on <a href="https://github.com/ogobrecht/sample-data-sets-for-oracle">GitHub</a>.</p>
+<p>Hope this helps someone else&hellip;</p>
+<p>Happy data modeling and testing<br>
+Ottmar</p>
+<p>P.S. For those of you who are working with Oracle APEX: Have a look under SQL Workshop &gt; Utilities &gt; Sample Datasets</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2020-05-25" itemprop="datePublished">May 25, 2020</time>, tagged with
+    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/oracle/">Oracle</a> and 
+    <a href="/tags/script/">Script</a>.
+    Last changed on May 25, 2020.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/">Why I Like SQL*Plus for Deployment Scripts</a></span>
+  <span class="right item-meta"><a href="/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/">How to use mkstore and orapki with Oracle Instant Client</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

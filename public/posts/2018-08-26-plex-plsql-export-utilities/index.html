@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLEX - PL/SQL Export Utilities</title>
+  <meta name="description" content="Export Oracle APEX app, ORDS modules, all schema objects and table data in one go">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">PLEX - PL/SQL Export Utilities</h1><p class="item-subtitle">Export Oracle APEX app, ORDS modules, all schema objects and table data in one go</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <blockquote>
+<p>UPDATE 2019-06-26 regarding PLEX v2.0.0: PLEX can now be installed and used without an APEX installation. However, to export an APEX app you need APEX 5.1.4 or higher installed on your system. Without APEX your PLEX package has no options for an app export because of conditional compilation. You are still able to export your schema DDL and table data. Hope this helps some folks out there &ndash; Ottmar</p>
+</blockquote>
+<p>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called <strong>BackApp</strong> and <strong>Queries_to_CSV</strong>. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:</p>
+<ul>
+<li>Export the app definition of an APEX app (splitted files and optional single SQL file)</li>
+<li>Export all ORDS modules from the current schema</li>
+<li>Export all object DDL from the current schema</li>
+<li>Export table data into CSV files</li>
+<li>Provide basic script templates for export/import of whole app for DEV, TEST and PROD</li>
+<li>Everything in a (hopefully) nice directory structure ready to use with version control</li>
+<li>Return value is a file collection of type plex.tab_export_files (it was apex_t_export_files before PLEX version 2) for further processing
+<ul>
+<li>Each file in the collection is represented by a record with two columns
+<ul>
+<li><code>name</code> of type VARCHAR2(255), which is in fact the file path</li>
+<li><code>contents</code> of type CLOB</li>
+</ul>
+</li>
+<li>You can optionally zip the file collection with the helper function <code>to_zip</code></li>
+<li>Also see the my previous post on <a href="https://ogobrecht.github.io/posts/2018-07-25-apex-export-and-version-control">how to handle the apex_t_export_files type returned by the APEX_EXPORT package with SQL*Plus</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<ol>
+<li><a href="https://github.com/ogobrecht/plex/releases/latest">Download the latest code</a></li>
+<li>Run the provided install script <code>plex_install.sql</code> (provides compiler flags) in your desired schema - could also be a central tools schema, don't forget <code>grant execute on plex to xxx</code></li>
+<li>Startup your favorite SQL Tool, connect to your app schema and fire up the following query:</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span><span class="n">p_app_id</span> <span class="o">=</span><span class="o">&gt;</span> <span class="n">yourAppId</span><span class="p">)</span><span class="p">)</span> <span class="k">from</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div><p>Save the resulting BLOB file under a name with the extension <code>.zip</code> and extract it to a local directory of your choice. You will find this directory structure and files:</p>
+<div class="highlight"><pre class="chroma"><code class="language-txt" data-lang="txt">- app_backend (only, when p_include_object_ddl is set to true, see next example)
+  - package_bodies
+  - packages
+  - tables
+  - ref_constraints
+  - ...
+- app_data (only, when p_include_data is set to true)
+- app_frontend (for the apex app files without subfolder fxxx)
+  - pages
+  - shared_components
+  - ...
+- app_web_services (only, when p_include_ords_modules is set to true)
+- docs
+- scripts
+  - logs
+  - templates
+    - 1_export_app_from_DEV.bat
+    - 2_install_app_into_TEST.bat
+    - 3_install_app_into_PROD.bat
+    - export_app_custom_code.sql
+    - install_app_custom_code.sql
+  - install_backend_generated_by_plex.sql
+  - install_frontend_generated_by_apex.sql
+  - install_web_services_generated_by_ords.sql
+- tests
+- plex_README.md
+- plex_runtime_log.md
+</code></pre></div><p>If you like, you can fully configure your first export into the zip file. The <code>PLEX.BackApp</code> method has boolean parameters, so you need to use an inline function in a pure SQL context. You can also use an anonymous PL/SQL block or you create a small SQL wrapper for the method like the inline function of the example. All parameters are optional and listed here with their default values:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- Inline function because of boolean parameters (needs Oracle 12c or higher).
+</span><span class="c1"></span><span class="c1">-- Alternative create a helper function and call that in a SQL context.
+</span><span class="c1"></span><span class="k">WITH</span>
+  <span class="k">FUNCTION</span> <span class="n">backapp</span> <span class="k">RETURN</span> <span class="nb">BLOB</span> <span class="k">IS</span>
+  <span class="k">BEGIN</span>
+    <span class="k">RETURN</span> <span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span>
+      <span class="c1">-- All parameters are optional and shown with their defaults
+</span><span class="c1"></span>      <span class="c1">-- APEX App (only available, when APEX is installed):
+</span><span class="c1"></span>      <span class="n">p_app_id</span>                      <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- If null, we simply skip the APEX app export.
+</span><span class="c1"></span>      <span class="n">p_app_date</span>                    <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, include export date and time in the result.
+</span><span class="c1"></span>      <span class="n">p_app_public_reports</span>          <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, include public reports that a user saved.
+</span><span class="c1"></span>      <span class="n">p_app_private_reports</span>         <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, include private reports that a user saved.
+</span><span class="c1"></span>      <span class="n">p_app_notifications</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, include report notifications.
+</span><span class="c1"></span>      <span class="n">p_app_translations</span>            <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, include application translation mappings and all text from the translation repository.
+</span><span class="c1"></span>      <span class="n">p_app_pkg_app_mapping</span>         <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, export installed packaged applications with references to the packaged application definition. If FALSE, export them as normal applications.
+</span><span class="c1"></span>      <span class="n">p_app_original_ids</span>            <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, export with the IDs as they were when the application was imported.
+</span><span class="c1"></span>      <span class="n">p_app_subscriptions</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, components contain subscription references.
+</span><span class="c1"></span>      <span class="n">p_app_comments</span>                <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, include developer comments.
+</span><span class="c1"></span>      <span class="n">p_app_supporting_objects</span>      <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- If &#39;Y&#39;, export supporting objects. If &#39;I&#39;, automatically install on import. If &#39;N&#39;, do not export supporting objects. If null, the application&#39;s include in export deployment value is used.
+</span><span class="c1"></span>      <span class="n">p_app_include_single_file</span>     <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, the single sql install file is also included beside the splitted files.
+</span><span class="c1"></span>      <span class="n">p_app_build_status_run_only</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, the build status of the app will be overwritten to RUN_ONLY.
+</span><span class="c1"></span>      <span class="c1">-- ORDS Modules (only available, when ORDS is installed):
+</span><span class="c1"></span>      <span class="n">p_include_ords_modules</span>        <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, include ORDS modules of current user/schema.
+</span><span class="c1"></span>      <span class="c1">-- Schema Objects:
+</span><span class="c1"></span>      <span class="n">p_include_object_ddl</span>          <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, include DDL of current user/schema and all its objects.
+</span><span class="c1"></span>      <span class="n">p_object_type_like</span>            <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of like expressions to filter the objects - example: &#39;%BODY,JAVA%&#39; will be translated to: ... from user_objects where ... and (object_type like &#39;%BODY&#39; escape &#39;\&#39; or object_type like &#39;JAVA%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="n">p_object_type_not_like</span>        <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of not like expressions to filter the objects - example: &#39;%BODY,JAVA%&#39; will be translated to: ... from user_objects where ... and (object_type not like &#39;%BODY&#39; escape &#39;\&#39; and object_type not like &#39;JAVA%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="n">p_object_name_like</span>            <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of like expressions to filter the objects - example: &#39;EMP%,DEPT%&#39; will be translated to: ... from user_objects where ... and (object_name like &#39;EMP%&#39; escape &#39;\&#39; or object_name like &#39;DEPT%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="n">p_object_name_not_like</span>        <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of not like expressions to filter the objects - example: &#39;EMP%,DEPT%&#39; will be translated to: ... from user_objects where ... and (object_name not like &#39;EMP%&#39; escape &#39;\&#39; and object_name not like &#39;DEPT%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="n">p_object_view_remove_col_list</span> <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, the outer column list, added by Oracle on views during compilation, is removed
+</span><span class="c1"></span>      <span class="c1">-- Table Data:
+</span><span class="c1"></span>      <span class="n">p_include_data</span>                <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">-- If true, include CSV data of each table.
+</span><span class="c1"></span>      <span class="n">p_data_as_of_minutes_ago</span>      <span class="o">=</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>     <span class="c1">-- Read consistent data with the resulting timestamp(SCN).
+</span><span class="c1"></span>      <span class="n">p_data_max_rows</span>               <span class="o">=</span><span class="o">&gt;</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1">-- Maximum number of rows per table.
+</span><span class="c1"></span>      <span class="n">p_data_table_name_like</span>        <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of like expressions to filter the tables - example: &#39;EMP%,DEPT%&#39; will be translated to: where ... and (table_name like &#39;EMP%&#39; escape &#39;\&#39; or table_name like &#39;DEPT%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="n">p_data_table_name_not_like</span>    <span class="o">=</span><span class="o">&gt;</span> <span class="k">null</span><span class="p">,</span>  <span class="c1">-- A comma separated list of not like expressions to filter the tables - example: &#39;EMP%,DEPT%&#39; will be translated to: where ... and (table_name not like &#39;EMP%&#39; escape &#39;\&#39; and table_name not like &#39;DEPT%&#39; escape &#39;\&#39;).
+</span><span class="c1"></span>      <span class="c1">-- General Options:
+</span><span class="c1"></span>      <span class="n">p_include_templates</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, include templates for README.md, export and install scripts.
+</span><span class="c1"></span>      <span class="n">p_include_runtime_log</span>         <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, generate file plex_runtime_log.md with detailed runtime infos.
+</span><span class="c1"></span>      <span class="n">p_include_error_log</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">-- If true, generate file plex_error_log.md with detailed error messages.
+</span><span class="c1"></span>      <span class="n">p_base_path_backend</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">app_backend</span><span class="s1">&#39;</span><span class="p">,</span>      <span class="c1">-- The base path in the project root for the Schema objects.
+</span><span class="c1"></span>      <span class="n">p_base_path_frontend</span>          <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">app_frontend</span><span class="s1">&#39;</span><span class="p">,</span>     <span class="c1">-- The base path in the project root for the APEX app.
+</span><span class="c1"></span>      <span class="n">p_base_path_web_services</span>      <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">app_web_services</span><span class="s1">&#39;</span><span class="p">,</span> <span class="c1">-- The base path in the project root for the ORDS modules.
+</span><span class="c1"></span>      <span class="n">p_base_path_data</span>              <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">app_data</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>       <span class="c1">-- The base path in the project root for the table data.
+</span><span class="c1"></span>  <span class="k">END</span> <span class="n">backapp</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">backapp</span> <span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div><p>ATTENTION: Exporting all database objects can take some time. I have seen huge runtime differences from 6 seconds for a small app up to several hundred seconds for big apps and/or slow databases. This is normally not the problem of PLEX. If you are interested in runtime statistics of PLEX, you can inspect the delivered <code>plex_runtime_log.md</code> in the root directory.<br>
+Also, the possibility to export the data of your tables into CSV files does not mean that you should do this without thinking about it. The main reason for me to implement this feature was to track changes on catalog tables by regularly calling this export feature with a sensitive table filter and max rows parameter as catalog data is often relevant in business logic.</p>
+<p>If you have organized your app into multiple schemas as described in <a href="https://www.salvis.com/blog/2018/07/18/the-pink-database-paradigm-pinkdb/">The Pink Database Paradigm</a>, you may need to export database objects from more then one schema. This is no problem for PLEX.BackApp as all parameters are optional - you can simply logon to your second or third schema and extract only the DDL for these schemas by omitting the <code>p_app_id</code> parameter and setting <code>p_include_object_ddl</code> to <code>true</code>. Then unload the DDL files into a different directory - for example <code>app_backend_schemaName</code>.</p>
+<p>A last word: you should inspect all the exported files and scripts and check if this solution can work for you. If not, please let me know what is missing or what should be done in a different way &hellip;</p>
+<p>Feedback is welcome - simply create a <a href="https://github.com/ogobrecht/plex/issues/new">new issue</a> at the <a href="https://github.com/ogobrecht/plex">GitHub project page</a></p>
+<h2 id="next-steps">Next Steps</h2>
+<p>It is up to you how you organize the version control repository and how often you export your APEX app or object DDL. I would follow the files first approach and extract the object DDL only ones to have a starting point. The APEX application needs regular exports - if you like, you can automate this.</p>
+<p>Following the files first approach is sometimes not easy when you are using low code tools like <a href="https://apex.oracle.com/quicksql/">Quick SQL</a> and <a href="https://docs.oracle.com/database/apex-18.1/HTMDB/using-blueprints.htm">Blueprint</a> in APEX or code generators like <a href="https://github.com/OraMUC/table-api-generator">OraMUC's Table API Generator</a>. There could be a need to regularly extract (maybe unknown) objects (not created by yourself) into version control to understand and document what you got from others (people or generators)&hellip;</p>
+<p>If the directory structure provided by PLEX does not match your needs - no problem - you can align it. Simply loop over the returned file collection and do your necessary work - here an example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DECLARE</span>
+  <span class="n">l_files</span> <span class="n">plex</span><span class="p">.</span><span class="n">tab_export_files</span><span class="p">;</span> <span class="c1">-- before PLEX v2 it was apex_t_export_files
+</span><span class="c1"></span><span class="k">BEGIN</span>
+  <span class="n">l_files</span> <span class="p">:</span><span class="o">=</span> <span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span><span class="n">p_app_id</span> <span class="o">=</span><span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="mi">1</span><span class="p">.</span><span class="p">.</span><span class="n">l_files</span><span class="p">.</span><span class="k">count</span> <span class="n">LOOP</span>
+    <span class="c1">-- relocate APEX app files from app_frontend to app_ui
+</span><span class="c1"></span>    <span class="k">IF</span> <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="k">LIKE</span> <span class="s1">&#39;</span><span class="s1">app_frontend/%</span><span class="s1">&#39;</span> <span class="k">THEN</span>
+      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">app_frontend/</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">app_ui/</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">prompt --app_frontend/</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">prompt --app_ui/</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
+    <span class="c1">-- correct file links in install script
+</span><span class="c1"></span>    <span class="k">IF</span> <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">scripts/install_frontend_generated_by_apex.sql</span><span class="s1">&#39;</span> <span class="k">THEN</span>
+      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">@../app_frontend/</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">@../app_ui/</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
+  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+
+  <span class="c1">-- more alignments...
+</span><span class="c1"></span><span class="k">END</span><span class="p">;</span>
+</code></pre></div><p>For unloading the resulting file collection with SQL*Plus, please have a look in the <code>scripts/templates</code> folder of your export - there are examples to do this. See also my previous post on <a href="https://ogobrecht.github.io/posts/2018-07-25-apex-export-and-version-control">how to handle the apex_t_export_files type returned by the APEX_EXPORT package with SQL*Plus</a>.</p>
+<p>Some people prefer to devide their DDL scripts into the two categories <strong>restartable</strong> (like packages) and <strong>run once</strong> (like tables). Others like to have their scripts in a way that they are always restartable and the DDL script itself takes care about doing the work only once when needed. The advantage of the second way is that your backend install/deployment script is always the same and it simply calls all objects DDL scripts.</p>
+<p>There is no right or wrong in doing it this or that way - each project/team has its specific requirements and history. The important thing is, that you start to use a version control system to be able to log your changes and document your code.</p>
+<p>By the way - PLEX provides script templates and object DDL that follows the second approach: You can always have the same install/deployment script and the DDL scripts are restartable - check it out by looking in one of your exported table DDL scripts.</p>
+<p>You are now at the point where PLEX can't do anything more for you. If you like to export your object DDL scripts more often, you have to find a way to be able to protect some of your scripts against overwriting. Imagine you had to add two columns to a table and you provided a restartable alter statement for this in the existing DDL script. If you export this table script the next time with PLEX (or with dbms_metadata.get_ddl, which is used in the background), your alter statements are gone and the new columns are simply listed in the create table statement. With this script you are not be able to deploy your changes to TEST or PROD.<br>
+One solution is to copy the original table script and name it e.g. <code>EMPLOYEES.dev.sql</code>. In this script you maintain the restartable alter statements. If you run PLEX.BackApp again you are overwrite save. The script <code>EMPLOYEES.sql</code> reflects your current table definition and can still be executed - it does nothing because the table is already existing. The script <code>EMPLOYEES.dev.sql</code> reflects your development history and need to be added to your custom install/deployment script.</p>
+<p>As you can see, PLEX can do only the basics for you. It is up to the developers how they manage their version control repository and how they do their deployments - there are thousends of ways to do it &hellip;</p>
+<h2 id="inspirations--further-reading">Inspirations / Further Reading</h2>
+<p>Thanks are going to:</p>
+<ul>
+<li>André Borngräber for his ability to think and discuss database topics in deep details</li>
+<li>Blain Carter for his thoughts on <a href="https://learncodeshare.net/2018/07/16/ci-cd-for-database-developers-export-database-objects-into-version-control/">CI/CD for Database Developers – Export Database Objects into Version Control</a></li>
+<li>Markus Dötsch for the first BackApp tests and cross-reading the first version of this post</li>
+<li>Martin D'Souza for his time and the interesting discussion about code generation and version control at the APEX Connect 2018 in Düsseldorf, Germany and his blog post <a href="https://www.talkapex.com/2018/07/exporting-apex-application-in-sqlcl-with-build-status-override/">Exporting APEX Application in SQLcl with Build Status Override</a> - PLEX.BackApp has now a parameter for this ;-)</li>
+<li>Philipp Salvisberg for his thoughts on <a href="https://www.salvis.com/blog/2018/07/18/the-pink-database-paradigm-pinkdb/">The Pink Database Paradigm</a></li>
+<li>Samuel Nitsche for his thoughts on <a href="https://cleandatabase.wordpress.com/2017/09/22/there-is-no-clean-database-development-without-version-control/">There is no clean (database) development without Version Control</a></li>
+<li>Tim Hall for his article about <a href="https://oracle-base.com/articles/9i/generating-csv-files">Generating CSV Files</a></li>
+</ul>
+<h2 id="thats-it">Thats It</h2>
+<p>Hope PLEX.BackApp helps someone else.</p>
+<p>Happy coding, apexing, version controlling :-)<br>
+Ottmar</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2018-08-26" itemprop="datePublished">August 26, 2018</time>, tagged with
+    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/oracle/">Oracle</a>, 
+    <a href="/tags/apex/">APEX</a>, 
+    <a href="/tags/plsql/">PL/SQL</a> and 
+    <a href="/tags/version-control/">Version Control</a>.
+    Last changed on January 1, 2020.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2018-07-25-apex-export-and-version-control/">APEX_EXPORT and Version Control</a></span>
+  <span class="right item-meta"><a href="/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/">New Major Version of D3 Force Network Chart Available</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

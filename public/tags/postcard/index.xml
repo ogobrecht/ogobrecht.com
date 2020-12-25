@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postcard on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/postcard/</link>
+    <description>Recent content in postcard on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 27 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/postcard/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Postcard Comment</title>
+      <link>https://ogobrecht.com/posts/2017-12-27-first-postcard-comment/</link>
+      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2017-12-27-first-postcard-comment/</guid>
+      <description>Maybe you already saw my footer and were wondering about the postcard comments. I love postcards and thought it would be nice to get postcards from people who enjoyed some of my posts or open source projects.
+After a while I thought no one would do this these days - it is easier to send an email than a postcard.
+But just before Christmas the first postcard arrived. Oliver Gorwits from the United Kingdom is using my D3 force-directed network chart in one of his own projects and has sent me a nice postcard.</description>
+    </item>
+    
+  </channel>
+</rss>

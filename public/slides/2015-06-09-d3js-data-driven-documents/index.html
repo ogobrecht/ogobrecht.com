@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D3.js - Data Driven Documents</title>
+  <meta name="description" content="Folien für DOAG APEX connect 2015, Düsseldorf">
+  <meta name="author" content="Ottmar Gobrecht">
+  <link rel="stylesheet" href="/assets/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="/assets/reveal.js/css/theme/solarized.css">
+  <link rel="stylesheet" href="/assets/reveal.js/lib/css/zenburn.css">
+  <base target="_blank">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+	<link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+	<link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+	<link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+	<link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+	<meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
+	<meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? '/assets/reveal.js/css/print/pdf.css' : '/assets/reveal.js/css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown="slides.md"
+               data-separator="^\r?\n-----\r?\n$"
+               data-separator-vertical="^\r?\n---\r?\n$"
+               data-separator-notes="^Anmerkung:"
+               data-charset="utf-8">
+      </section>
+    </div>
+  </div>
+  <script src="/assets/reveal.js/lib/js/head.min.js"></script>
+  <script src="/assets/reveal.js/js/reveal.js"></script>
+  <script>
+  Reveal.initialize({
+    controls: true,
+    fragments: true,
+    history: true,
+    dependencies: [
+      { src: '/assets/reveal.js/plugin/markdown/marked.js' },
+      { src: '/assets/reveal.js/plugin/markdown/markdown.js' },
+      { src: '/assets/reveal.js/plugin/notes/notes.js', async: true },
+      { src: '/assets/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+    ]
+  });
+  </script>
+
+<!--content-begin-->
+<link href="/assets/d3.js/d3-force-3.0.0.css" rel="stylesheet" type="text/css" />
+
+<script src="/assets/d3.js/d3-3.5.6.min.js"></script>
+
+<script src="/assets/d3.js/d3-force-3.0.0.min.js"></script>
+
+<script>
+Reveal.addEventListener( 'ready', function( event ) {
+
+  //Beispiel 3
+  window.data = [
+    {"id":1, "r":14, "x":80,  "y":15, "color":"red"},
+    {"id":2, "r":14, "x":100, "y":15, "color":"green"},
+    {"id":3, "r":14, "x":120, "y":15, "color":"blue"}
+  ];
+  window.svg = d3.select('svg#Beispiel_3');
+  window.circle = window.svg.selectAll('circle')
+    .data(data, function(d){ return d.id; });
+  window.circle.exit().remove();
+  window.circle.enter().append('circle');
+  window.circle
+    .attr('r', function(d) { return d.r; })
+    .attr('cx', function(d) { return d.x; })
+    .attr('cy', function(d) { return d.y; })
+    .attr('fill', function(d) { return d.color; });
+
+  //Beispiel 4
+  window.nodes = [
+    {"name":"King","dept":10},{"name":"Blake","dept":30},
+    {"name":"Clark","dept":10},{"name":"Jones","dept":20},
+    {"name":"Scott","dept":20},{"name":"Ford","dept":20},
+    {"name":"Smith","dept":20},{"name":"Allen","dept":30},
+    {"name":"Ward","dept":30},{"name":"Martin","dept":30},
+    {"name":"Turner","dept":30},{"name":"Adams","dept":20},
+    {"name":"James","dept":30},{"name":"Miller","dept":10}
+  ];
+  window.links = [
+    {"source":1,"target":0},{"source":2,"target":0},
+    {"source":3,"target":0},{"source":7,"target":1},
+    {"source":8,"target":1},{"source":9,"target":1},
+    {"source":10,"target":1},{"source":12,"target":1},
+    {"source":13,"target":2},{"source":4,"target":3},
+    {"source":5,"target":3},{"source":6,"target":5},
+    {"source":11,"target":4}
+  ];
+  window.width = 600, height = 400;
+  window.svg_4 = d3.select("svg#Beispiel_4")
+    .attr("width",width).attr("height", height);
+  window.color = d3.scale.category10();
+  window.force = d3.layout.force().size([width,height]);
+  window.link = svg_4.selectAll("line").data(window.links)
+    .enter().append("line").style('stroke','#999');
+  window.node = svg_4.selectAll("circle").data(window.nodes)
+    .enter().append("circle")
+      .attr("r", 5)
+      .style("fill", function(d){ return color(d.dept); })
+      .call(force.drag);
+  window.force.on("tick", function(){
+    window.link.attr("x1", function(d){ return d.source.x; })
+        .attr("y1", function(d){ return d.source.y; })
+        .attr("x2", function(d){ return d.target.x; })
+        .attr("y2", function(d){ return d.target.y; });
+    window.node.attr("cx", function(d){ return d.x; })
+        .attr("cy", function(d){ return d.y; });
+  });
+  window.force.nodes(window.nodes).links(window.links).start();
+
+  //Beispiel 5
+  window.demo_emp = netGobrechtsD3Force('demo_emp')
+    .width(800)
+    .height(500)
+    .colorScheme('color10')
+    .showTooltips(false)
+    .wrapLabels(true)
+    .start();
+
+  //Beispiel Anhang
+  window.my_chart = function () {
+    var conf = { "width": 600, "height": 400 };
+    function chart(){/*create chart with conf*/}
+    chart.render = function(){
+      chart();
+      return chart;
+    };
+    chart.width = function(value) {
+      if (!arguments.length) return conf.width;
+      conf.width = value;
+      return chart;
+    };
+    return chart;
+  }
+
+});
+</script>
+
+
+<!--content-end-->
+
+</body>
+</html>

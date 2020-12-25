@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download BLOBs with SQL*Plus</title>
+  <meta name="description" content="New version of PL/SQL Export Utilities available">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">Download BLOBs with SQL*Plus</h1><p class="item-subtitle">New version of PL/SQL Export Utilities available</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script. It was working, but far from elegant. Also, when I was in the home office with a less powerful connection, it was slowing down the whole export process significantly.</p>
+<p>If you are using PLEX (PL/SQL Export Utilities) and this sounds familiar to you - the described method was the default for exporting an APEX app or your schema DDL with the delivered export script templates.</p>
+<p>If you have no idea what I am talking about: PLEX is a PL/SQL package that is able to export an Oracle APEX app, ORDS modules, all schema objects and table data into a nice directory structure in one go ready to use for version control. Check out the <a href="https://github.com/ogobrecht/plex">project on GitHub</a> and this <a href="/posts/2018-08-26-plex-plsql-export-utilities">blog post on how to get started</a>.</p>
+<p>But there is a better way: Simply convert the BLOB into a base64 encoded CLOB. I have no idea why this was not my first solution for the PLEX export templates. In the new version 2.1.0 of PLEX the templates are using this approach. Here is a simplified example.</p>
+<p>File export.sql:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">off</span> <span class="n">heading</span> <span class="k">off</span>
+<span class="k">set</span> <span class="n">trimout</span> <span class="k">on</span> <span class="n">trimspool</span> <span class="k">on</span> <span class="n">pagesize</span> <span class="mi">0</span> <span class="n">linesize</span> <span class="mi">5000</span> <span class="n">long</span> <span class="mi">100000000</span> <span class="n">longchunksize</span> <span class="mi">32767</span>
+<span class="k">whenever</span> <span class="k">sqlerror</span> <span class="n">exit</span> <span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span> <span class="k">rollback</span>
+<span class="k">variable</span> <span class="n">contents</span> <span class="k">clob</span>
+<span class="k">BEGIN</span>
+  <span class="p">:</span><span class="n">contents</span> <span class="p">:</span><span class="o">=</span> <span class="n">plex</span><span class="p">.</span><span class="n">to_base64</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span>
+    <span class="n">p_app_id</span>               <span class="o">=</span><span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">p_include_ords_modules</span> <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="n">p_include_object_ddl</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="n">p_include_data</span>         <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="n">p_include_templates</span>    <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="o">/</span>
+<span class="k">set</span> <span class="n">termout</span> <span class="k">off</span>
+<span class="n">spool</span> <span class="s2">&#34;</span><span class="s2">app_100.zip.base64</span><span class="s2">&#34;</span>
+<span class="n">print</span> <span class="n">contents</span>
+<span class="n">spool</span> <span class="k">off</span>
+<span class="k">set</span> <span class="n">termout</span> <span class="k">on</span>
+</code></pre></div><p>Congratulations - You are the owner of a base64 encoded CLOB on your client disk. And now? Before you can unzip the file you need to decode it - depending on your operating system you can do this with your OS tools:</p>
+<ul>
+<li>Windows: <code>certutil -decode app_100.zip.base64 app_100.zip</code></li>
+<li>Mac: <code>base64 -D -i app_100.zip.base64 -o app_100.zip</code></li>
+<li>Linux: <code>base64 -d app_100.zip.base64 &gt; app_100.zip</code></li>
+</ul>
+<p>Here a simple Windows batch file, which calls the SQL script above, decodes the file and deletes the base64 version.</p>
+<p>File export.bat</p>
+<div class="highlight"><pre class="chroma"><code class="language-batch" data-lang="batch"><span class="k">echo</span> exit <span class="p">|</span> sqlplus -S demo/oracle@localhost:1521/xepdb1 @export.sql
+certutil -decode app_100.zip.base64 app_100.zip
+<span class="k">del</span> app_100.zip.base64
+</code></pre></div><p>The described method to download a BLOB is independent of the package PLEX - you only need a small helper function to encode the BLOB. I found an example provided by Tim Hall on his <a href="https://oracle-base.com/dba/script?category=miscellaneous&amp;file=base64encode.sql">Oracle Base site</a>. Thanks for sharing Tim!</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">base64encode</span><span class="p">(</span><span class="n">p_blob</span> <span class="k">IN</span> <span class="nb">BLOB</span><span class="p">)</span>
+  <span class="k">RETURN</span> <span class="k">CLOB</span>
+<span class="c1">-- -----------------------------------------------------------------------------------
+</span><span class="c1"></span><span class="c1">-- File Name    : https://oracle-base.com/dba/miscellaneous/base64encode.sql
+</span><span class="c1"></span><span class="c1">-- Author       : Tim Hall
+</span><span class="c1"></span><span class="c1">-- Description  : Encodes a BLOB into a Base64 CLOB.
+</span><span class="c1"></span><span class="c1">-- Last Modified: 09/11/2011
+</span><span class="c1"></span><span class="c1">-- -----------------------------------------------------------------------------------
+</span><span class="c1"></span><span class="k">IS</span>
+  <span class="n">l_clob</span> <span class="k">CLOB</span><span class="p">;</span>
+  <span class="n">l_step</span> <span class="n">PLS_INTEGER</span> <span class="p">:</span><span class="o">=</span> <span class="mi">12000</span><span class="p">;</span> <span class="c1">-- make sure you set a multiple of 3 not higher than 24573
+</span><span class="c1"></span><span class="k">BEGIN</span>
+  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="mi">0</span> <span class="p">.</span><span class="p">.</span> <span class="n">TRUNC</span><span class="p">(</span><span class="p">(</span><span class="n">DBMS_LOB</span><span class="p">.</span><span class="n">getlength</span><span class="p">(</span><span class="n">p_blob</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">)</span><span class="o">/</span><span class="n">l_step</span><span class="p">)</span> <span class="n">LOOP</span>
+    <span class="n">l_clob</span> <span class="p">:</span><span class="o">=</span> <span class="n">l_clob</span> <span class="o">|</span><span class="o">|</span> <span class="n">UTL_RAW</span><span class="p">.</span><span class="n">cast_to_varchar2</span><span class="p">(</span><span class="n">UTL_ENCODE</span><span class="p">.</span><span class="n">base64_encode</span><span class="p">(</span><span class="n">DBMS_LOB</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">p_blob</span><span class="p">,</span> <span class="n">l_step</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">l_step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+  <span class="k">RETURN</span> <span class="n">l_clob</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="o">/</span>
+</code></pre></div><p>This function is included in the newest version of PLEX (named to_base64) - you can download PLEX <a href="https://github.com/ogobrecht/plex/releases/latest">here</a>.</p>
+<p>Happy scripting, exporting and version controlling :-)<br>
+Ottmar</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2020-01-01" itemprop="datePublished">January 1, 2020</time>, tagged with
+    <a href="/tags/oracle/">Oracle</a>, 
+    <a href="/tags/apex/">APEX</a>, 
+    <a href="/tags/plsql/">PL/SQL</a>, 
+    <a href="/tags/script/">Script</a>, 
+    <a href="/tags/sqlplus/">SQL*Plus</a> and 
+    <a href="/tags/version-control/">Version Control</a>.
+    Last changed on October 26, 2020.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2019-11-19-doag-konferenz/">DOAG Konferenz 2019</a></span>
+  <span class="right item-meta"><a href="/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/">Why I Like SQL*Plus for Deployment Scripts</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

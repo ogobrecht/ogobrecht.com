@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chart on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/chart/</link>
+    <description>Recent content in chart on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/chart/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>New Version of D3 Force Network Chart Available</title>
+      <link>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</guid>
+      <description>First of all: Thanks to the community!
+From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.
+The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above.</description>
+    </item>
+    
+    <item>
+      <title>New Major Version of D3 Force Network Chart Available</title>
+      <link>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</link>
+      <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</guid>
+      <description>Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes.</description>
+    </item>
+    
+    <item>
+      <title>APEX Plugin dhtmlxGantt</title>
+      <link>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
+      <description>Some weeks ago I was asked, if I can create a plugin for the Gantt chart library from dhtmlx.com. I had a look at the library and I thought that it should be possible.
+Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality.</description>
+    </item>
+    
+    <item>
+      <title>Reporting mal anders, Markdown sei Dank</title>
+      <link>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
+      <description>Die Folien zu meinem Vortrag:
+Open HTML presentation in a new window/tab
+You need a modern browser with activated JavaScript. Navigation tips:
+N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
+Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
+    </item>
+    
+    <item>
+      <title>D3.js Force-Directed Network Chart</title>
+      <link>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</link>
+      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</guid>
+      <description>My first Oracle APEX plugin and open source project :-)
+Everything started some months ago when I stumbled over this fascinating force-directed graph. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitfalls with Oracle 11g XE and Docker on Mac OS</title>
+  <meta name="description" content="The swap space problem and how to fix it">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">Pitfalls with Oracle 11g XE and Docker on Mac OS</h1><p class="item-subtitle">The swap space problem and how to fix it</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>Recently I tried to install Oracle XE into a docker container on Mac OS Sierra using the <a href="https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe">official docker file</a> from Oracle. I had no luck, because the installation failed with this error message:</p>
+<blockquote>
+<p>This system does not meet the minimum requirements for swap space. Based on the amount of physical memory available on the system, Oracle Database 11g Express Edition requires 2048 MB of swap space. This system has 0 MB of swap space. Configure more swap space on the system and retry the installation.</p>
+</blockquote>
+<p>The problem is, that you can't do anything for this on a Mac - the system manages the swap files by itself and if you need for an example 64 GB you will get it. My new standard MacBook has 8 GB RAM and there is currently no reason for a swap file.</p>
+<p>So, what can we do? After a short search I found <a href="https://www.elastichosts.com/blog/oracle-database-installation-on-a-container-running-centos/">this blog post</a>, which describes how to alter the pre-installation script of the RPM installation file with the help of the <code>repmrebuild</code> command. Unfortunately this command is not available on Mac OS. I found only rpmbuild as part of the rpm installation with <a href="https://brew.sh">Homebrew</a>.</p>
+<p>Luckily I found another way to modify a rpm package under Mac OS: There is a Ruby based tool to build packages for multiple platforms called <a href="https://github.com/jordansissel/fpm">fpm</a>. So, lets start:</p>
+<p>If you don't have <a href="https://brew.sh">Homebrew</a> on your Mac, install this first:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/ruby -e <span class="se">\</span>
+<span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></div><p>Install rpm:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install rpm
+</code></pre></div><p>Install tar:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install gnu-tar
+</code></pre></div><p>Install fpm:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">gem install --no-ri --no-rdoc fpm
+</code></pre></div><p>Unzip the downloaded Linux XE installation archive and go into the directory Disk1:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<span class="nb">cd</span> Disk1
+</code></pre></div><p>Write rpm scripts to text file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rpm <span class="se">\</span>
+  --scripts <span class="se">\</span>
+  -qp oracle-xe-11.2.0-1.0.x86_64.rpm <span class="se">\</span>
+  &gt; scripts.txt
+</code></pre></div><p>Find this loop (from line 197 until line 212 as of this writing) and comment out or delete it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># check and disallow install, if swap space is less than Min( 2047, 2 * RAM)`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$swapspace</span> -lt <span class="nv">$requiredswapspace</span> <span class="o">]</span>
+<span class="k">then</span>
+	<span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$requiredswapspace</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;2047&#34;</span> <span class="o">]</span><span class="p">;</span>
+	<span class="k">then</span>
+		<span class="nv">requiredswapspace</span><span class="o">=</span>2048
+	<span class="k">fi</span>
+	<span class="nb">echo</span>
+        <span class="nb">echo</span> <span class="s2">&#34;</span><span class="s2">This system does not meet the minimum requirements for swap space.  Based on
+</span><span class="s2">the amount of physical memory available on the system, Oracle Database 11g
+</span><span class="s2">Express Edition requires </span><span class="nv">$requiredswapspace</span><span class="s2"> MB of swap space. This system has </span><span class="nv">$swapspace</span><span class="s2"> MB
+</span><span class="s2">of swap space.  Configure more swap space on the system and retry the
+</span><span class="s2">installation.</span><span class="s2">&#34;</span>
+	<span class="nb">echo</span>
+        <span class="nb">exit</span> 1
+<span class="k">fi</span>
+</code></pre></div><p>Find this line (starting on line 328 as of this writing) and delete the line and everything behind until the file end:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">postinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
+</code></pre></div><p>Delete the very first line containing this code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">preinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
+</code></pre></div><p>Save the file and bring it back into the rpm with this command (will take some time):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">fpm <span class="se">\</span>
+  -s rpm <span class="se">\</span>
+  -t rpm <span class="se">\</span>
+  -f --before-install scripts.txt <span class="se">\</span>
+  ./oracle-xe-11.2.0-1.0.x86_64.rpm
+</code></pre></div><p>Go out of Disk1 and update the zip archive, because the Oracle provided build script needs it compressed (will take some time):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> <span class="se">\</span>
+zip -r oracle-xe-11.2.0-1.0.x86_64.rpm.zip Disk1
+</code></pre></div><p>When you now do the Docker build you will face another error message:</p>
+<blockquote>
+<p>package oracle-xe-11.2.0-1.0.x86_64 is intended for a different operating system</p>
+</blockquote>
+<p>To fix this is fairly easy. Open the Dockerfile.xe, go to line 61 (as of this writing) and change this code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rpm -i Disk1/*.rpm <span class="o">&amp;&amp;</span>    <span class="se">\</span>
+</code></pre></div><p>to this one:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rpm -i --ignoreos Disk1/*.rpm <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</code></pre></div><p>When you now start the docker build you should be successful (will take some time):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo ./buildDockerImage.sh -v 11.2.0.2 -x -i
+</code></pre></div><p>The last step is to run the container - on the first startup the database is created (will take some time, align the name to your needs):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run <span class="se">\</span>
+  --name orclapex51 <span class="se">\</span>
+  --shm-size<span class="o">=</span>1g <span class="se">\</span>
+  -p 1521:1521 <span class="se">\</span>
+  -p 8080:8080 <span class="se">\</span>
+  oracle/database:11.2.0.2-xe
+</code></pre></div><p>If you plan to use APEX without any dedicated webserver (maybe because you are the only user and it is only a small dev instance) you should pimp the EPG a little bit:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">system</span> <span class="k">set</span> <span class="n">shared_servers</span><span class="o">=</span><span class="mi">10</span> <span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">system</span> <span class="k">set</span> <span class="n">max_shared_servers</span><span class="o">=</span><span class="mi">20</span> <span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">system</span> <span class="k">set</span> <span class="n">dispatchers</span><span class="o">=</span><span class="s1">&#39;</span><span class="s1">(PROTOCOL=TCP) (SERVICE=xeXDB) (DISPATCHERS=2)</span><span class="s1">&#39;</span> <span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span>
+</code></pre></div><p>I use currently a Node.js based proxy server running directly on my Mac OS, because I need a webserver there anyway. The nice thing is, that the EPG don't need to serve the images and I also don't need to install the images into the EPG, when I upgrade to a newer APEX version. This saves me time and the EPG runs faster because of less number of requests. I will cover this topic in the next post.</p>
+<p>Happy installing :-)<br>
+Ottmar</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2017-03-21" itemprop="datePublished">March 21, 2017</time>, tagged with
+    <a href="/tags/docker/">Docker</a>, 
+    <a href="/tags/oracle/">Oracle</a> and 
+    <a href="/tags/mac/">Mac</a>.
+    Last changed on August 12, 2017.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2017-03-14-apex-plugin-dhtmlx-gantt/">APEX Plugin dhtmlxGantt</a></span>
+  <span class="right item-meta"><a href="/posts/2017-04-03-jquery-plugin-svg2img/">jQuery Plugin svg2img</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>

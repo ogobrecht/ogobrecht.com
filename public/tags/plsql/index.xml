@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plsql on Ottmar’s Notes</title>
+    <link>https://ogobrecht.com/tags/plsql/</link>
+    <description>Recent content in plsql on Ottmar’s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ogobrecht.com/tags/plsql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Download BLOBs with SQL*Plus</title>
+      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
+    </item>
+    
+    <item>
+      <title>New Major Version of PL/SQL Export Utilities Available</title>
+      <link>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</guid>
+      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.
+After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&#39;t use APEX&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
+      <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
+      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)
+Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
+    </item>
+    
+    <item>
+      <title>Table API Generator v0.5.0 Available</title>
+      <link>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
+      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:
+ Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods:  Can have the dictionary column defaults Can return the whole row instead of the primary key   You can exclude columns (e.</description>
+    </item>
+    
+    <item>
+      <title>PLEX - PL/SQL Export Utilities</title>
+      <link>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</guid>
+      <description>UPDATE 2019-06-26 regarding PLEX v2.0.0: PLEX can now be installed and used without an APEX installation. However, to export an APEX app you need APEX 5.1.4 or higher installed on your system. Without APEX your PLEX package has no options for an app export because of conditional compilation. You are still able to export your schema DDL and table data. Hope this helps some folks out there &amp;ndash; Ottmar</description>
+    </item>
+    
+    <item>
+      <title>Markdown Reporter</title>
+      <link>https://ogobrecht.com/posts/2017-01-23-markdown-reporter/</link>
+      <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2017-01-23-markdown-reporter/</guid>
+      <description>On the APEX connect 2016 in Berlin I talked about my APEX Markdown plugin and fine art printing with the help of Pandoc and LaTeX. When I was preparing my slides and documenting a SQL query in a Markdown code block I asked myself:
+What, if the database is taking this Markdown code block and runs the query inside to convert it into data?
+And what, if I take this Markdown text with the data in the code blocks and post it to a small webservice which converts the data blocks into charts and the whole document into HTML or a LaTeX based PDF?</description>
+    </item>
+    
+    <item>
+      <title>Table API Generator</title>
+      <link>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</link>
+      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</guid>
+      <description>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</description>
+    </item>
+    
+  </channel>
+</rss>

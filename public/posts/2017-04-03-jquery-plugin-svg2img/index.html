@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Plugin svg2img</title>
+  <meta name="description" content="Convert inline SVGs to standalone image files without loosing styles">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">jQuery Plugin svg2img</h1><p class="item-subtitle">Convert inline SVGs to standalone image files without loosing styles</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?</p>
+<p>You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements. You can also use a browser extension like <a href="https://chrome.google.com/webstore/detail/export-svg-with-style/dkjdcaddoplepioppogpckelchefhddi">this one for Google Chrome</a>, but then you depend on the browser and the extension.</p>
+<p>There is now a declarative way with the help of a jQuery plugin, which is 100% client based:</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>There is one default option - you can redeclare it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">debug</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// write debug information to console
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+</code></pre></div><p>You can also set the debug option at runtime - try it out in your browser console directly here on the page:</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">{</span><span class="nx">debug</span><span class="o">:</span><span class="kc">true</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>Alternative you can use the link under the network chart.</p>
+<p>The plugin checks if your selector is a SVG element. If this is not the case, it searches under each selector element for all SVGs and exports it. The name(s) of the file(s) are automatically derived from the element ID (or parent element ID) or set to <code>export</code>. The current date and time is appended to the file name. For our example graph on this page the name will be something like <code>example-graph-20170403-154653.svg</code>.</p>
+<p>You can download all SVGs from one page by setting the selector to the document, body or svg - as you like it. There is no need for a <code>each()</code> call, <code>svg2img</code> works on the whole selection and is chainable:</p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;svg&#34;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&#34;border&#34;</span><span class="p">,</span><span class="s2">&#34;1px solid red&#34;</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div><p>If you want to use anchors to provide export links then it is recommended to prevent the default action like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;event.preventDefault(); $(&#39;#example-graph&#39;).svg2img();&#34;</span><span class="p"></span><span class="p">&gt;</span>SVG<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div><p>Otherwise Firefox and IE failing to save. One last thing: Safari has currently (as of this writing) problems with the underlaying <code>savAs()</code> implementation and tries to open the images in a new tab with or without success. See also this <a href="https://github.com/eligrey/FileSaver.js/issues/267">issue on GitHub</a>.</p>
+<p>UPDATE 2017-04-14: After update to macOS Sierra 10.12.4 Safari 10.1 works also - but is as slow as before - collecting CSS styles runs on my MacBook 2800ms in Safari, 20ms in Google Chrome :-(<br>
+I stopped to support other image formats then SVG since the canvas export behind the scenes was not really working in too many browsers and the core feature was and is to convert inline SVGs to standalone SVG images.</p>
+<p>The project is hosted on <a href="https://github.com/ogobrecht/jquery-plugin-svg2img">GitHub</a> and MIT licensed.</p>
+<p>Happy SVG exporting :-)<br>
+Ottmar</p>
+<div id="example-graph"></div><!--the graph container-->
+Download
+<a href="" onclick="event.preventDefault(); $('#example-graph').svg2img();">SVG image</a>
+<link  href="/assets/d3.js/d3-force-3.0.0.css" rel="stylesheet" type="text/css">
+<script src="/assets/d3.js/ResizeObserver-1.5.0.min.js"></script>
+<script src="/assets/d3.js/d3-3.5.6.min.js"></script>
+<script src="/assets/d3.js/d3-force-3.0.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="/assets/svg2img/svg2img.min.js"></script>
+<script>
+window.onload = function() {
+    window.example = netGobrechtsD3Force('example-graph')
+        .width(800)
+        .height(400)
+        .useDomParentWidth(true) //for responsive layout
+        //.zoomMode(true)
+        .lassoMode(true)
+        .wrapLabels(true)
+        .debug(true) //to enable the customization wizard
+        .render(); //sample data is provided when called without data
+        //see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
+}
+</script>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2017-04-03" itemprop="datePublished">April 3, 2017</time>, tagged with
+    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/jquery/">jQuery</a>, 
+    <a href="/tags/plugin/">Plugin</a> and 
+    <a href="/tags/svg/">SVG</a>.
+    Last changed on January 21, 2019.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/">Pitfalls with Oracle 11g XE and Docker on Mac OS</a></span>
+  <span class="right item-meta"><a href="/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/">Oracle DB 11gXE Install File Swap Check Disabler</a> &#x2192;</span>
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>
