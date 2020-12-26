@@ -6,10 +6,20 @@
     <description>Recent content in plsql on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ogobrecht.com/tags/plsql/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Version of Oracle Table API Generator Available</title>
+      <link>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</guid>
+      <description>Short before Christmas André and I released version 0.6.0 of our table API generator. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the complete changelog is available on GitHub.
+Table of Contents Bulk Processing Support for Audit Columns Support for a Row Version Column Tenant Support More Breaking Changes Conclusion  Bulk Processing When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data.</description>
+    </item>
     
     <item>
       <title>Download BLOBs with SQL*Plus</title>

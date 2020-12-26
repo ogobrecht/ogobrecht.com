@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# rename to deploy, edit connect data and make executable (chmod +x deploy)
-hugo --cleanDestinationDir && rsync -avz --delete public/ user@host:~/target-dir/
-
-exit 0

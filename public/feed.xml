@@ -10,8 +10,184 @@
 <link href="https://ogobrecht.com/index.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
 <generator uri="https://gohugo.io/" version="0.62.1">Hugo</generator>
-<updated>2020-12-25T16:50:04+01:00</updated>
+<updated>2020-12-26T19:18:30+01:00</updated>
 
+
+<entry xml:lang="en">
+<id>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</id>
+<link href="https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/" rel="alternate" type="text/html" title="New Version of Oracle Table API Generator Available" />
+<title type="html">New Version of Oracle Table API Generator Available</title>
+<summary type="html">Bulk processing, support for audit and row version columns and more</summary>
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="plsql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
+<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
+<category term="oddgen" label="oddgen" scheme="https://ogobrecht.com/tags/" />
+<published>2020-12-26T00:00:00+01:00</published>
+<updated>2020-12-26T20:00:00+01:00</updated>
+<content type="html" xml:base="https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/">
+&lt;p&gt;&lt;em&gt;Bulk processing, support for audit and row version columns and more&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Short before Christmas André and I released version 0.6.0 of our &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;table API generator&lt;/a&gt;. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#060-2020-12-20&#34;&gt;complete changelog is available on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#bulk-processing&#34;&gt;Bulk Processing&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#support-for-audit-columns&#34;&gt;Support for Audit Columns&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#support-for-a-row-version-column&#34;&gt;Support for a Row Version Column&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#tenant-support&#34;&gt;Tenant Support&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#more&#34;&gt;More&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#breaking-changes&#34;&gt;Breaking Changes&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;h2 id=&#34;bulk-processing&#34;&gt;Bulk Processing&lt;/h2&gt;
+&lt;p&gt;When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data. Imagine the following, common schema setup (also see this nice &lt;a href=&#34;https://www.youtube.com/watch?v=OF7qR5lAmiw&#34;&gt;video by Connor McDonald&lt;/a&gt;, 20 minutes):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data Schema: Holds your tables and provides table APIs for the other schemas, which have only select rights on the tables (or views) and execute rights on the table APIs&lt;/li&gt;
+&lt;li&gt;API Schema: Holds your business logic and provides business APIs to the app parsing schema&lt;/li&gt;
+&lt;li&gt;UI Schema: Has no own objects, only connect rights and is used as the parsing schema to run the application&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This setup follows the principle of the least privilege. When you need to bulk process your data in the business logic (API schema), then you have a problem without bulk processing facilities in your table APIs. You need to implement business logic in the data schema or you grant update and/or delete rights to the API schema. The first is against the separation of concerns and the second solution lowers your data security.&lt;/p&gt;
+&lt;p&gt;That is why we have now also bulk processing in the core of our generated table APIs. Here is how you can use it in your business logic:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/*&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; EXAMPLE INSERT
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;To keep the memory usage low we break our inserts into 
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;a bulk size of 1000 rows. You should adapt the bulk size
+&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;to your use case. &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt; 
+&lt;span class=&#34;k&#34;&gt;declare&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;     &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_number_bulks&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;integer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_bulk_size&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;integer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;extend&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l_bulk_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;number_bulks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;z&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l_number_bulks&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt;
+
+    &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bulk_size&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l_bulk_size&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt;
+      &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;column_1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;your_logic_here&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+      &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;column_2&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;your_logic_here&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bulk_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;commit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;number_bulks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/*&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt; EXAMPLE UPDATE &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt; 
+&lt;span class=&#34;k&#34;&gt;declare&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;   &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;l_ref_cursor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t_strong_ref_cursor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;-- optionally set bulk limit, default is 1000
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;-- data_schema.your_table_api.set_bulk_limit(500);
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;open&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l_ref_cursor&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 
+    &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;app_users&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;your_conditions_here&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;outer_bulk&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l_ref_cursor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;inner_data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;count&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt;
+      &lt;span class=&#34;c1&#34;&gt;--do your business logic here
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;      &lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;column_1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;your_logic_here&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inner_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;update_rows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l_rows_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;commit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;when&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_table_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bulk_is_complete&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;outer_bulk&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+  &lt;span class=&#34;k&#34;&gt;close&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l_ref_cursor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The bulk deletion works the same way as the bulk update - the difference is that you do not modify your data before calling the &lt;code&gt;delete_rows&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;For more examples see the docs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/bulk-processing.md&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/bulk-processing-performance.md&#34;&gt;Performance tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;support-for-audit-columns&#34;&gt;Support for Audit Columns&lt;/h2&gt;
+&lt;p&gt;Keeping the bulk processing in mind for performance reasons it is a bad idea to have triggers only to manage audit columns in a table. If you have your tables in an own schema and the business logic and the app can not directly write to the tables then it is easy to prevent triggers. Therefore the table APIs need to support that and hides the audit columns for insert or update operations. This is what our generator now supports.&lt;/p&gt;
+&lt;p&gt;You can map your specific audit column names to the four often used names &lt;code&gt;created&lt;/code&gt;, &lt;code&gt;created_by&lt;/code&gt;, &lt;code&gt;updated&lt;/code&gt; and &lt;code&gt;updated_by&lt;/code&gt; by providing a mapping string to the new parameter &lt;code&gt;p_audit_column_mappings&lt;/code&gt; - an example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- TABLE DEFINITION --
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;app_users&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_id&lt;/span&gt;          &lt;span class=&#34;nb&#34;&gt;integer&lt;/span&gt;            &lt;span class=&#34;k&#34;&gt;generated&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;always&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;identity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_first_name&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;varchar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                         &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_last_name&lt;/span&gt;   &lt;span class=&#34;n&#34;&gt;varchar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                         &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_email&lt;/span&gt;       &lt;span class=&#34;n&#34;&gt;varchar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;               &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_active_yn&lt;/span&gt;   &lt;span class=&#34;n&#34;&gt;varchar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;k&#34;&gt;default&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;au_created_on&lt;/span&gt;  &lt;span class=&#34;nb&#34;&gt;date&lt;/span&gt;                            &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;-- This is only for demo purposes.
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;au_created_by&lt;/span&gt;  &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                   &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;-- In reality we expect more
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;au_updated_at&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;timestamp&lt;/span&gt;                       &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;-- unified names and types
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;au_updated_by&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;varchar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;               &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;-- for audit columns.
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;--
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;primary&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;key&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;au_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;unique&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;au_email&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;check&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;au_active_yn&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;om_tapigen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compile_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_table_name&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;APP_USERS&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_audit_column_mappings&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;created=#PREFIX#_CREATED_ON, created_by=#PREFIX#_CREATED_BY, updated=#PREFIX#_UPDATED_AT, updated_by=#PREFIX#_UPDATED_BY&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;#PREFIX#&lt;/code&gt; in our example is optional (determined automatically by the generator) and replaced with the found column_prefix &lt;code&gt;au&lt;/code&gt;. Doing it this way you can provide always the same audit column mapping to all of your tables. I know some people hate column prefixes - but if you design your data models this way the generator can save you the work to align the mapping for each table.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-a-row-version-column&#34;&gt;Support for a Row Version Column&lt;/h2&gt;
+&lt;p&gt;The same reasons with triggers for the audit columns are valid for the support of a row version column. This can also be handled by our generator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;om_tapigen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compile_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_table_name&lt;/span&gt;                 &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;YOUR_TABLE&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_row_version_column_mapping&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;#PREFIX#_VERSION_ID=tag_global_version_sequence.nextval&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also see here the before mentioned &lt;code&gt;#PREFIX#&lt;/code&gt; substitution. The difference is that you define here only your column and for the column the SQL expression which should be used for the row version column - in this case, a sequence.&lt;/p&gt;
+&lt;p&gt;What we can not do here is to add always 1 to the previous value like it is possible in a trigger - the table API has no idea what the previous value was. So, we are a little bit limited to a SQL expression but the point is, you can let the generated API manage the row version column without having a trigger.&lt;/p&gt;
+&lt;h2 id=&#34;tenant-support&#34;&gt;Tenant Support&lt;/h2&gt;
+&lt;p&gt;This is the third new column mapping definition. For all people who have not an enterprise version with the VPD (virtual private database) functionality you can define a tenant expression for one of your columns:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;om_tapigen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compile_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_table_name&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;YOUR_TABLE&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;p_tenant_column_mapping&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;#PREFIX#_TENANT_ID=to_number(sys_context(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;my_sec_ctx&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;my_tenant_id&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For more information see the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/parameters.md#p_tenant_column_mapping-since-v060&#34;&gt;parameter docs for p_tenant_column_mapping&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;more&#34;&gt;More&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A new optional 1:1 view can be generated (new parameter &lt;code&gt;p_enable_one_to_one_view&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;All generated object names can now be customized (new parameters &lt;code&gt;p_dml_view_name&lt;/code&gt;, &lt;code&gt;p_dml_view_trigger_name&lt;/code&gt; and &lt;code&gt;p_one_to_one_view_name&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Double quoting of table and column names in the generated code can now be configured (new parameter &lt;code&gt;p_double_quote_names&lt;/code&gt;, default true)&lt;/li&gt;
+&lt;li&gt;A new helper function &lt;code&gt;get_default_row&lt;/code&gt; will be generated, when parameter &lt;code&gt;p_enable_column_defaults&lt;/code&gt; is set to true (to support the row based create_row function)&lt;/li&gt;
+&lt;li&gt;We have now unit tests driven by utPLSQL (it will be a permanent task to improve the tests with every new feature or bugfix, more about the special things of unit testing for a generator will follow in a future post)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;breaking-changes&#34;&gt;Breaking Changes&lt;/h2&gt;
+&lt;p&gt;Where there is light, there is also shadow.&lt;/p&gt;
+&lt;p&gt;All the new features like bulk processing and audit column support make it hard, if not impossible, to generate a generic change log during the row processing. Also the check, if we have a modification and omit an update if not necessary is hard to implement and not good for the performance with the evolved generator. So we skipped the mentioned functionality.&lt;/p&gt;
+&lt;p&gt;As far as we know not many people use the generic changelog. If you do, you have to stick with the previous generator version or you have to find an alternative way to do it in the future. A good way seems to be the use of the Flashback Data Archive as it is performant and available in all database editions for free - and you can load existing data into the archive (see Tims article below):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Blog post by Connor McDonald: &lt;a href=&#34;https://blogs.oracle.com/oraclemagazine/a-fresh-look-at-auditing-row-changes&#34;&gt;Triggers can provide auditing information, but there’s a future in flashback&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Blog post by Tim Hall: &lt;a href=&#34;https://oracle-base.com/articles/12c/flashback-data-archive-fda-enhancements-12cr1&#34;&gt;Flashback Data Archive (FDA) Enhancements in Oracle Database 12c Release 1 (12.1)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Video by Connor McDonald: &lt;a href=&#34;https://www.youtube.com/watch?v=qIs2UPIodQg&#34;&gt;Flashback Data Archive&lt;/a&gt; (14 minutes)&lt;/li&gt;
+&lt;li&gt;Video APEX Connect 2020 by Connor McDonald: &lt;a href=&#34;https://www.youtube.com/watch?v=gqX91080r7A&#34;&gt;Flashback – so much more&lt;/a&gt; (47 minutes)&lt;/li&gt;
+&lt;li&gt;Video AskTOM Office Hours by Chris Saxon: &lt;a href=&#34;https://www.youtube.com/watch?v=q81_UDnEpIs&#34;&gt;The Incredible Flashback Data Archive&lt;/a&gt; (53 minutes)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;A big THANK YOU to all contributors - the current version of the generator would not be possible without your feedback and help.&lt;/p&gt;
+&lt;p&gt;Be sure to test the new generator before migrating to it. We use it already in many projects and it should be pretty stable. Nevertheless, with so many changed things we cannot give you a guarantee for every edge case - by using it you accept the MIT license. Please check out the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;project page at GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/issues/new/choose&#34;&gt;open an issue&lt;/a&gt; if you encounter a problem.&lt;/p&gt;
+&lt;p&gt;A happy new year and happy coding :-)&lt;br&gt;
+Ottmar&lt;/p&gt;
+
+</content>
+</entry>
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</id>
@@ -1467,27 +1643,6 @@ Ottmar&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;StackOverflow1370021&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;display:none;&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It is worth to mention that I run the newest Chrome browser and this &amp;ldquo;feature&amp;rdquo; is still available&amp;hellip;&lt;/p&gt;
 &lt;p&gt;Happy coding :-)&lt;br&gt;
-Ottmar&lt;/p&gt;
-
-</content>
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/</id>
-<link href="https://ogobrecht.com/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/" rel="alternate" type="text/html" title="Oracle DB 11gXE Install File Swap Check Disabler" />
-<title type="html">Oracle DB 11gXE Install File Swap Check Disabler</title>
-<summary type="html">A Docker file to prepare the 11gXE install file for use in a container environment</summary>
-<category term="project" label="Open Source Project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="docker" label="Docker" scheme="https://ogobrecht.com/tags/" />
-<published>2017-06-13T00:00:00+01:00</published>
-<updated>2017-08-12T20:11:00+01:00</updated>
-<content type="html" xml:base="https://ogobrecht.com/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/">
-&lt;p&gt;&lt;em&gt;A Docker file to prepare the 11gXE install file for use in a container environment&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Many people have problems to install Oracle 11XE in a Docker environment because the install file checks the available swap space in the container. In a container environment this fails often - see &lt;a href=&#34;https://github.com/oracle/docker-images/issues/294#issuecomment-301465754&#34;&gt;here&lt;/a&gt; or &lt;a href=&#34;https://www.elastichosts.com/blog/oracle-database-installation-on-a-container-running-centos/&#34;&gt;here&lt;/a&gt;, because the swap space is optimized for the entire stack and not controlled from within the operating system of the container.&lt;/p&gt;
-&lt;p&gt;We have to disable the swap space check in the installation file. I wrote another &lt;a href=&#34;/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os&#34;&gt;blog post about this&lt;/a&gt;. The problem is here, that you need a Linux based system to do the necessary steps. Under Windows you have no chance and you have to do it by yourself because for license reasons everyone has to download his/her own copy of the install file from &lt;a href=&#34;http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html&#34;&gt;Oracle OTN&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I came up with the idea to do simply all the steps in a Docker container under the same Linux (oraclelinux:7-slim) which is later on needed with the &lt;a href=&#34;https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe&#34;&gt;official Oracle Docker file&lt;/a&gt; for an XE instance. With this solution you are able to prepare the install file more or less automatically under every operating system, which can run Docker - also under Windows. For more Details see the &lt;a href=&#34;https://github.com/ogobrecht/docker-ora11xe-swap-check-disabler&#34;&gt;project on GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Happy installing :-)&lt;br&gt;
 Ottmar&lt;/p&gt;
 
 </content>

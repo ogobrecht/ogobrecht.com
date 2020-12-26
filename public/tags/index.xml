@@ -6,17 +6,44 @@
     <description>Recent content in Tags on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ogobrecht.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>generator</title>
+      <link>https://ogobrecht.com/tags/generator/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/tags/generator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oddgen</title>
+      <link>https://ogobrecht.com/tags/oddgen/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/tags/oddgen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>oracle</title>
       <link>https://ogobrecht.com/tags/oracle/</link>
-      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/tags/oracle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plsql</title>
+      <link>https://ogobrecht.com/tags/plsql/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/tags/plsql/</guid>
       <description></description>
     </item>
     
@@ -62,15 +89,6 @@
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/tags/apex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>plsql</title>
-      <link>https://ogobrecht.com/tags/plsql/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/plsql/</guid>
       <description></description>
     </item>
     
@@ -156,29 +174,11 @@
     </item>
     
     <item>
-      <title>generator</title>
-      <link>https://ogobrecht.com/tags/generator/</link>
-      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/generator/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>npm</title>
       <link>https://ogobrecht.com/tags/npm/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/tags/npm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>oddgen</title>
-      <link>https://ogobrecht.com/tags/oddgen/</link>
-      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/oddgen/</guid>
       <description></description>
     </item>
     

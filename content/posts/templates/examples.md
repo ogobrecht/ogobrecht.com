@@ -6,6 +6,10 @@ lang: en
 publishdate: 2099-12-31
 ---
 
+## Table of Contents
+
+{{< toc "Table of Contents" >}}
+
 ## Code Figure With Shortcode
 
 {{< figure "Some description with a [link to GitHub](https://github.com) in Markdown style and \"escaped quote signs\"" >}}
@@ -48,6 +52,18 @@ From here: https://www.quora.com/How-do-I-use-German-quotation-marks-on-a-U-S-in
 
 Angle quotes are rarely used in standard German, but if you must, make sure they point inwards: »hallo« – unlike in French, where they point outwards: «bonjour».
 
+## Capitalization in Headers
+
+Just follow these simple rules.
+
+- Capitalize the first word of the title or heading.
+- Capitalize the last word of the title or heading.
+- All other words are capitalized unless they are conjunctions (and, or, but, nor, yet, so, for), articles (a, an, the), or prepositions (in, to, of, at, by, up, for, off, on).
+
+Resources:
+
+- https://www.webucator.com/how-to/how-capitalize-headings-titles.cfm
+- https://www.businesswritingblog.com/business_writing/2010/02/words-to-capitalize-in-titles-and-headings.html
 
 ## Reveal.js
 
