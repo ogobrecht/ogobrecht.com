@@ -4,7 +4,7 @@ description: Bulk processing, support for audit and row version columns and more
 tags: [oracle, plsql, generator, oddgen]
 lang: en
 publishdate: 2020-12-26
-lastmod: 2020-12-26 20:00:00
+lastmod: 2020-12-27 15:00:00
 ---
 
 Short before Christmas André and I released version 0.6.0 of our [table API generator](https://github.com/OraMUC/table-api-generator). The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the [complete changelog is available on GitHub](https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#060-2020-12-20).
@@ -19,7 +19,7 @@ When you split your app over multiple schemas for higher data security you might
 - API Schema: Holds your business logic and provides business APIs to the app parsing schema
 - UI Schema: Has no own objects, only connect rights and is used as the parsing schema to run the application
 
-This setup follows the principle of the least privilege. When you need to bulk process your data in the business logic (API schema), then you have a problem without bulk processing facilities in your table APIs. You need to implement business logic in the data schema or you grant update and/or delete rights to the API schema. The first is against the separation of concerns and the second solution lowers your data security.
+This setup follows the principle of the least privilege. When you need to bulk process your data in the business logic (API schema), then you have a problem without bulk processing facilities in your table APIs. You need to implement business logic in the data schema or you grant update and/or delete rights to the API schema. The first solution is against the separation of concerns and the second one lowers your data security and maybe prevents you from not having triggers (more about this later in the audit columns section).
 
 That is why we have now also bulk processing in the core of our generated table APIs. Here is how you can use it in your business logic:
 
@@ -95,7 +95,7 @@ For more examples see the docs:
 
 ## Support for Audit Columns
 
-Keeping the bulk processing in mind for performance reasons it is a bad idea to have triggers only to manage audit columns in a table. If you have your tables in an own schema and the business logic and the app can not directly write to the tables then it is easy to prevent triggers. Therefore the table APIs need to support that and hides the audit columns for insert or update operations. This is what our generator now supports.
+Keeping the bulk processing in mind for performance reasons it is a bad idea to have triggers only to manage audit columns in a table. If you have your tables in an own schema and the business logic and the app cannot directly write to the tables then it is easy to prevent triggers. Therefore the table APIs need to support that and hides the audit columns for insert or update operations. This is what our generator now supports.
 
 You can map your specific audit column names to the four often used names `created`, `created_by`, `updated` and `updated_by` by providing a mapping string to the new parameter `p_audit_column_mappings` - an example:
 
@@ -107,10 +107,12 @@ create table app_users (
   au_last_name   varchar2(15 char)                         ,
   au_email       varchar2(30 char)               not null  ,
   au_active_yn   varchar2(1 char)   default 'Y'  not null  ,
-  au_created_on  date                            not null  , -- This is only for demo purposes.
-  au_created_by  char(15 char)                   not null  , -- In reality we expect more
-  au_updated_at  timestamp                       not null  , -- unified names and types
-  au_updated_by  varchar2(15 char)               not null  , -- for audit columns.
+  -- This is only for demo purposes. In reality we expect
+  -- more unified names and types for audit columns.
+  au_created_on  date                            not null  ,
+  au_created_by  char(15 char)                   not null  ,
+  au_updated_at  timestamp                       not null  ,
+  au_updated_by  varchar2(15 char)               not null  ,
   --
   primary key (au_id),
   unique (au_email),
@@ -144,7 +146,7 @@ end;
 
 You can also see here the before mentioned `#PREFIX#` substitution. The difference is that you define here only your column and for the column the SQL expression which should be used for the row version column - in this case, a sequence.
 
-What we can not do here is to add always 1 to the previous value like it is possible in a trigger - the table API has no idea what the previous value was. So, we are a little bit limited to a SQL expression but the point is, you can let the generated API manage the row version column without having a trigger.
+What we cannot do here is to add always 1 to the previous value like it is possible in a trigger - the table API has no idea what the previous value was. So, we are a little bit limited to a SQL expression but the point is, you can let the generated API manage the row version column without having a trigger.
 
 ## Tenant Support
 
@@ -184,11 +186,13 @@ As far as we know not many people use the generic changelog. If you do, you have
 - Video APEX Connect 2020 by Connor McDonald: [Flashback – so much more](https://www.youtube.com/watch?v=gqX91080r7A) (47 minutes)
 - Video AskTOM Office Hours by Chris Saxon: [The Incredible Flashback Data Archive](https://www.youtube.com/watch?v=q81_UDnEpIs) (53 minutes)
 
+And the last Breaking change is, that you need at least Oracle DB 12.1 or higher. That should (hopefully) no problem for the most projects.
+
 ## Conclusion
 
 A big THANK YOU to all contributors - the current version of the generator would not be possible without your feedback and help.
 
-Be sure to test the new generator before migrating to it. We use it already in many projects and it should be pretty stable. Nevertheless, with so many changed things we cannot give you a guarantee for every edge case - by using it you accept the MIT license. Please check out the [project page at GitHub](https://github.com/OraMUC/table-api-generator) and [open an issue](https://github.com/OraMUC/table-api-generator/issues/new/choose) if you encounter a problem.
+Be sure to test the new generator before migrating to it. We use it already in some projects and it should be pretty stable. Nevertheless, with so many changed things we cannot give you a guarantee for every edge case - by using it you accept the MIT license. Please check out the [project page at GitHub](https://github.com/OraMUC/table-api-generator) and [open an issue](https://github.com/OraMUC/table-api-generator/issues/new/choose) if you encounter a problem.
 
 A happy new year and happy coding :-)<br>
 Ottmar

@@ -69,6 +69,7 @@ params:
     dokuwiki: DokuWiki
     generator: Generator
     html: HTML
+    hugo: Hugo
     jquery: jQuery
     mac: Mac
     markdown: Markdown
@@ -87,6 +88,7 @@ params:
     slides: Slides
     sqlplus: SQL*Plus
     svg: SVG
+    unit-tests: Unit Tests
     version-control: Version Control
     wallet: Wallet
 permalinks:
