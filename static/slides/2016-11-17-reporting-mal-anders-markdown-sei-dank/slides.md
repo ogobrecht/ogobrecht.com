@@ -62,57 +62,57 @@ Population Development,New York,Rio,Tokio
 
 ---
 
-<h3>Line Chart (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
+<h3>Line Chart</h3>
 
-![Line Chart](./assets/line.svg.png) <!-- .element: width="810px" -->
-
----
-
-<h3>Area Chart (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
-
-![Area Chart](./assets/area.svg.png) <!-- .element: width="810px" -->
+![Line Chart](./assets/line.svg) <!-- .element: width="810px" -->
 
 ---
 
-<h3>Area Chart Stacked (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
+<h3>Area Chart</h3>
 
-![Area Chart Stacked](./assets/area-stacked.svg.png) <!-- .element: width="810px" -->
-
----
-
-<h3>Bar Chart (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
-
-![Bar Chart](./assets/bar.svg.png) <!-- .element: width="810px" -->
+![Area Chart](./assets/area.svg) <!-- .element: width="810px" -->
 
 ---
 
-<h3>Bar Chart Stacked (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
+<h3>Area Chart Stacked</h3>
 
-![Bar Chart Stacked](./assets/bar-stacked.svg.png) <!-- .element: width="810px" -->
-
----
-
-<h3>Bar Chart Horizontal (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
-
-![Bar Chart Horizontal](./assets/barh.svg.png) <!-- .element: width="810px" -->
+![Area Chart Stacked](./assets/area-stacked.svg) <!-- .element: width="810px" -->
 
 ---
 
-<h3>Bar Chart Horizontal Stacked (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
+<h3>Bar Chart</h3>
 
-![Bar Chart Horizontal Stacked](./assets/barh-stacked.svg.png) <!-- .element: width="810px" -->
+![Bar Chart](./assets/bar.svg) <!-- .element: width="810px" -->
 
 ---
 
-<h3>Pie Chart (<a href="javascript:to_svg()" title="Show SVG's for all eight example charts">SVG</a>/<a href="javascript:to_png()" title="Show PNG's for all eight example charts">PNG</a>)</h3>
+<h3>Bar Chart Stacked</h3>
 
-![Pie Chart](./assets/pie.svg.png) <!-- .element: width="550px" -->
+![Bar Chart Stacked](./assets/bar-stacked.svg) <!-- .element: width="810px" -->
+
+---
+
+<h3>Bar Chart Horizontal</h3>
+
+![Bar Chart Horizontal](./assets/barh.svg) <!-- .element: width="810px" -->
+
+---
+
+<h3>Bar Chart Horizontal Stacked</h3>
+
+![Bar Chart Horizontal Stacked](./assets/barh-stacked.svg) <!-- .element: width="810px" -->
+
+---
+
+<h3>Pie Chart</h3>
+
+![Pie Chart](./assets/pie.svg) <!-- .element: width="550px" -->
 
 ---
 
 ### System Overview
 
-![Markdown Reporter System Overview](./assets/system-overview.png?nolink)
+![Markdown Reporter System Overview](./assets/system-overview.svg?nolink)
 
 ---
 
