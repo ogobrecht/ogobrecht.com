@@ -1,6 +1,6 @@
 ---
-title: Create Fast Insert Scripts
-description: PLEX can now create insert scripts for you
+title: Using Named Parameters for SQL Scripts
+description: Make script calls more readable
 tags: [oracle, script]
 lang: en
 publishdate: 2030-01-01

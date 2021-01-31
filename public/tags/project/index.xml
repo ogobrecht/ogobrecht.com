@@ -38,7 +38,8 @@ Normally in the business world I see minimalistic comments in the code and a ded
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</guid>
-      <description>UPDATE 2019-06-26 regarding PLEX v2.0.0: PLEX can now be installed and used without an APEX installation. However, to export an APEX app you need APEX 5.1.4 or higher installed on your system. Without APEX your PLEX package has no options for an app export because of conditional compilation. You are still able to export your schema DDL and table data. Hope this helps some folks out there &amp;ndash; Ottmar</description>
+      <description>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called BackApp and Queries_to_CSV. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:
+ Export the app definition of an APEX app (splitted files and optional single SQL file) Export all ORDS modules from the current schema Export all object DDL from the current schema Export table data into CSV files Provide basic script templates for export/import of whole app for DEV, TEST and PROD Everything in a (hopefully) nice directory structure ready to use with version control Return value is a file collection of type plex.</description>
     </item>
     
     <item>

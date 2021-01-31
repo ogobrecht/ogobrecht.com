@@ -62,7 +62,10 @@
 </span><span class="c1"></span>
 <span class="n">prompt</span> <span class="n">Step</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Error</span> <span class="n">test</span> <span class="k">in</span> <span class="n">anonymous</span> <span class="n">block</span>
 <span class="k">begin</span>
-  <span class="n">raise_application_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20000</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">Error test for SQL*Plus &lt;&gt; SQLcl comparison</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">raise_application_error</span><span class="p">(</span>
+    <span class="o">-</span><span class="mi">20000</span><span class="p">,</span> 
+    <span class="s1">&#39;</span><span class="s1">Error test for SQL*Plus &lt;&gt; SQLcl comparison</span><span class="s1">&#39;</span>
+  <span class="p">)</span><span class="p">;</span>
 <span class="k">end</span><span class="p">;</span>
 <span class="o">/</span>
 
@@ -71,7 +74,9 @@
 <span class="n">prompt</span>
 
 <span class="n">spool</span> <span class="k">off</span>
-</code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in the console and also in deployment.log) with an indication of what went wrong with our deployment:</p>
+</code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
+the console and also in deployment.log) with an indication of what went wrong
+with our deployment:</p>
 <pre><code>Example Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
@@ -81,20 +86,31 @@ begin
 ERROR at line 1:
 ORA-20000: Error test for SQL*Plus &lt;&gt; SQLcl comparison 
 ORA-06512: at line 2 
-</code></pre><p>Ok, this error message is stupid, but usually, I get some useful information here to fix my problem in the deployment script - especially when the problematic script is a bit longer&hellip;</p>
-<p>When we call this in SQLcl (latest version 19.4 on Windows) we get the following output (in the console and also the deployment.log):</p>
+</code></pre><p>Ok, this error message is stupid, but usually, I get some useful information
+here to fix my problem in the deployment script - especially when the
+problematic script is a bit longer&hellip;</p>
+<p>When we call this in SQLcl (latest version 19.4 on Windows) we get the following
+output (in the console and also the deployment.log):</p>
 <pre><code>Example Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
 Step 2: Error test in anonymous block
 </code></pre><p>Mhhh&hellip; What was going on here? Why was my script terminating in step 2?</p>
-<p>That's one reason why I like SQL*Plus a bit more than SQLcl for deployment scripts. The fast start time of SQL*Plus is another reason. Nevertheless, SQLcl is a cool command-line tool.</p>
+<p>That's one reason why I like SQL*Plus a bit more than SQLcl for deployment
+scripts. The fast start time of SQL*Plus is another reason. Nevertheless, SQLcl
+is a cool command-line tool.</p>
 <p>Happy scripting :-)<br>
 Ottmar</p>
-<p>P.S.: There is a small <a href="https://twitter.com/ogobrecht/status/1212646721127366656">Twitter discussion</a> around this&hellip;</p>
+<p>P.S.: There is a small <a href="https://twitter.com/ogobrecht/status/1212646721127366656">Twitter
+discussion</a> around
+this&hellip;</p>
 <h2 id="update-january-3-2020">UPDATE January 3, 2020</h2>
-<p><a href="https://twitter.com/thatjeffsmith/status/1213102639497515009">Jeff Smith has confirmed that this bug was fixed in SQLcl version 19.4</a>. I was using 19.4 - but on Windows. It turns out that the bug is still there - only on Windows, not Mac, not Linux&hellip;</p>
-<p>So, if you are facing this problem on Windows then you have to wait for a future release or set as a workaround the feedback on:</p>
+<p><a href="https://twitter.com/thatjeffsmith/status/1213102639497515009">Jeff Smith has confirmed that this bug was fixed in SQLcl version
+19.4</a>. I was using
+19.4 - but on Windows. It turns out that the bug is still there - only on
+Windows, not Mac, not Linux&hellip;</p>
+<p>So, if you are facing this problem on Windows then you have to wait for a future
+release or set as a workaround the feedback to on:</p>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">define</span> <span class="k">off</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">on</span>
 <span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span>
 </code></pre></div><p>Here the output on my Windows 10 laptop:</p>
@@ -117,9 +133,17 @@ ORA-06512: at line 2
            was called which causes this error to be generated.
 *Action:   Correct the problem as described in the error message or contact
            the application administrator or DBA for more information.
-</code></pre><p>If you are on Mac OS or Linux then you have to update to the latest SQLcl version 19.4 or use also the described workaround.</p>
+</code></pre><p>If you are on Mac OS or Linux then you have to update to the latest SQLcl
+version 19.4 or use also the described workaround.</p>
 <h2 id="update-july-20-2020">UPDATE July 20, 2020</h2>
-<p>The bug still exists in SQLcl 20.2 and SQL Developer 20.2 under Windows - we have to wait a bit longer&hellip;</p>
+<p>The bug still exists in SQLcl 20.2 and SQL Developer 20.2 under Windows - we
+have to wait a bit longer&hellip;</p>
+<h2 id="update-january-31-2021">UPDATE January 31, 2021</h2>
+<p>For me it is working now with SQL Developer 20.4.0 under Windows and also with
+SQLcl 20.4.1, when I have the environment variable path pointing to the JDK
+delivered within SQL Developer (<code>...\sqldeveloper\jdk\jre\bin\</code>). I had the path
+before pointing to another standalone Java 11 distribution and it was not
+working there&hellip;</p>
 <p>Again: happy scripting :-)<br>
 Ottmar</p>
 
@@ -130,7 +154,7 @@ Ottmar</p>
     <a href="/tags/oracle/">Oracle</a>, 
     <a href="/tags/script/">Script</a> and 
     <a href="/tags/sqlplus/">SQL*Plus</a>.
-    Last changed on January 3, 2020.
+    Last changed on January 31, 2021.
   </p>
   <span class="left item-meta">&#x2190; <a href="/posts/2020-01-01-download-blobs-with-sqlplus/">Download BLOBs with SQL*Plus</a></span>
   <span class="right item-meta"><a href="/posts/2020-05-25-sample-data-sets-for-oracle/">Sample Data Sets for Oracle</a> &#x2192;</span>

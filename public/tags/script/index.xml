@@ -6,10 +6,20 @@
     <description>Recent content in script on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ogobrecht.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Create Fast Insert Scripts</title>
+      <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</guid>
+      <description>Some weeks ago I released a new version of my PLEX project. I improved the ability to export table data as insert scripts. Originally PLEX was only able to export CSV data. The reason was, that I designed PLEX to quickstart version control in Oracle DB projects and the ability to export CSV data was meant to track changes in master data tables.
+It turned out that a colleague of mine wanted to have PLEX to export insert scripts for all data in all tables for the initial deployment of a new app.</description>
+    </item>
     
     <item>
       <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
@@ -47,7 +57,7 @@ Sure, but I have no SYS rights on the database in my current project to install 
       
       <guid>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
       <description>The following simplified example deployment master script is given:
-set define off verify off feedback offwhenever sqlerror exit sql.sqlcode rollbackspool deployment.logpromptprompt Example Deployment Master Scriptprompt ========================================prompt Step 1: Dummy for demonstration-- normally we call here some other scripts like-- @other-script.sqlprompt Step 2: Error test in anonymous blockbeginraise_application_error(-20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt ========================================prompt Deployment Done :-)promptspool offWhen we call this in SQL*Plus (version 19.</description>
+set define off verify off feedback offwhenever sqlerror exit sql.sqlcode rollbackspool deployment.logpromptprompt Example Deployment Master Scriptprompt ========================================prompt Step 1: Dummy for demonstration-- normally we call here some other scripts like-- @other-script.sqlprompt Step 2: Error test in anonymous blockbeginraise_application_error(-20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt ========================================prompt Deployment Done :-)promptspool offWhen we call this in SQL*Plus (version 19.</description>
     </item>
     
     <item>

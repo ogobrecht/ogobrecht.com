@@ -18,7 +18,7 @@
       
       <guid>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
       <description>The following simplified example deployment master script is given:
-set define off verify off feedback offwhenever sqlerror exit sql.sqlcode rollbackspool deployment.logpromptprompt Example Deployment Master Scriptprompt ========================================prompt Step 1: Dummy for demonstration-- normally we call here some other scripts like-- @other-script.sqlprompt Step 2: Error test in anonymous blockbeginraise_application_error(-20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt ========================================prompt Deployment Done :-)promptspool offWhen we call this in SQL*Plus (version 19.</description>
+set define off verify off feedback offwhenever sqlerror exit sql.sqlcode rollbackspool deployment.logpromptprompt Example Deployment Master Scriptprompt ========================================prompt Step 1: Dummy for demonstration-- normally we call here some other scripts like-- @other-script.sqlprompt Step 2: Error test in anonymous blockbeginraise_application_error(-20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt ========================================prompt Deployment Done :-)promptspool offWhen we call this in SQL*Plus (version 19.</description>
     </item>
     
     <item>

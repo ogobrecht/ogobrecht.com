@@ -4,10 +4,8 @@ description: Export Oracle APEX app, ORDS modules, all schema objects and table 
 tags: [project, oracle, apex, plsql, version-control]
 lang: en
 publishdate: 2018-08-26
-lastmod: 2020-01-01 20:15:00
+lastmod: 2021-01-31 20:45:00
 ---
-
-> UPDATE 2019-06-26 regarding PLEX v2.0.0: PLEX can now be installed and used without an APEX installation. However, to export an APEX app you need APEX 5.1.4 or higher installed on your system. Without APEX your PLEX package has no options for an app export because of conditional compilation. You are still able to export your schema DDL and table data. Hope this helps some folks out there -- Ottmar
 
 PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called __BackApp__ and __Queries_to_CSV__. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:
 

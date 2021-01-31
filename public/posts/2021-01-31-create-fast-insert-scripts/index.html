@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Fast Insert Scripts</title>
+  <meta name="description" content="PL/SQL Export Untilities are now able to export table data as insert scripts">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.62.1" />
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/">
+  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">Create Fast Insert Scripts</h1><p class="item-subtitle">PL/SQL Export Untilities are now able to export table data as insert scripts</p>
+</header>
+
+<div class="item-content" itemprop="articleBody">
+  <p>Some weeks ago I released a new version of my <a href="https://github.com/ogobrecht/plex">PLEX
+project</a>. I improved the ability to export
+table data as insert scripts. Originally PLEX was only able to export CSV data.
+The reason was, that I designed PLEX to quickstart version control in Oracle DB
+projects and the ability to export CSV data was meant to track changes in master
+data tables.</p>
+<p>It turned out that a colleague of mine wanted to have PLEX to export insert
+scripts for all data in all tables for the initial deployment of a new app. I
+implemented the first version but was not happy with the runtime of the scripts.
+I can hear some people argue that there are better tools than insert scripts for
+importing larger datasets - but sometimes this is the only accepted way because
+there is only SQL*Plus available to run the deployment scripts&hellip;</p>
+<p>Then I stumbled over an older post from <a href="https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/">Connor McDonald on how to create fast
+insert
+scripts</a>.
+I incorporated his performance hacks into PLEX.</p>
+<p>You can use it like so (see last parameter):</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DECLARE</span>
+  <span class="n">l_zip_file</span> <span class="nb">BLOB</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+  <span class="n">l_zip_file</span> <span class="p">:</span><span class="o">=</span> <span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span>
+    <span class="n">p_app_id</span>                   <span class="o">=</span><span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1">-- parameter only available when APEX is installed
+</span><span class="c1"></span>    <span class="n">p_include_ords_modules</span>     <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">-- parameter only available when ORDS is installed
+</span><span class="c1"></span>    <span class="n">p_include_object_ddl</span>       <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="n">p_include_data</span>             <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="n">p_data_as_of_minutes_ago</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>     <span class="c1">-- Read consistent data with the resulting timestamp (SCN). Defaults to 0.
+</span><span class="c1"></span>    <span class="n">p_data_max_rows</span>            <span class="o">=</span><span class="o">&gt;</span> <span class="mi">10000</span><span class="p">,</span> <span class="c1">-- Maximum number of rows per table. Defaults to 1000.
+</span><span class="c1"></span>    <span class="n">p_data_table_name_like</span>     <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">CAT\_%,USERS,ROLES,RIGHTS</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">p_data_table_name_not_like</span> <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">%\_HIST,LOGGER%</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">p_data_format</span>              <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">insert:10</span><span class="s1">&#39;</span>
+  <span class="p">)</span><span class="p">)</span><span class="p">;</span>
+
+  <span class="c1">-- Do something with the zip file.
+</span><span class="c1"></span>  <span class="c1">-- Your code here...
+</span><span class="c1"></span><span class="k">END</span><span class="p">;</span>
+<span class="o">/</span>
+</code></pre></div><p>The parameter p_data_format is new and can contain a comma-separated list of
+formats - currently supported formats are CSV and INSERT. An example:
+<code>csv,insert</code> will export for each table a CSV file and a SQL file with insert
+statements. For insert, you can also give the number of rows per <code>insert all</code>
+statement (defaults to 20) - example: <code>csv,insert:10</code> or <code>insert:5</code>.</p>
+<p>As you can see with the parameter <code>p_data_table_name_not_like =&gt; '%\_HIST,LOGGER%'</code> PLEX accepts lists of like filters. In our example
+<code>%\_HIST,LOGGER%</code> is translated to <code>where ... and (table_name not like '%\_HIST' escape '\' and table_name not like 'LOGGER%' escape '\')</code>. For the parameter
+<code>p_data_table_name_like =&gt; 'CAT\_%,USERS,ROLES,RIGHTS'</code> the tables are filtered
+in this way: <code>where ... and (table_name like 'CAT\_%' escape '\' or table_name like 'USERS' escape '\' or ... /*you get the idea*/)</code>.</p>
+<p>There is a good reason why the default of the parameter <code>p_data_max_rows</code> is set
+to <code>1000</code> - if you provide no table name filters then all tables are exported&hellip;</p>
+<p>The resulting insert scripts are looking like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- Script generated by PLEX version 2.4.2 - more infos here: https://github.com/ogobrecht/plex
+</span><span class="c1"></span><span class="c1">-- Performance Hacks by Connor McDonald: https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/
+</span><span class="c1"></span><span class="c1">-- For strange line end replacements a big thank to SQL*Plus: https://support.oracle.com/epmos/faces/DocumentDisplay?id=2377701.1 (SQL Failed With ORA-1756 In Sqlplus But Works In SQL Developer)
+</span><span class="c1"></span><span class="n">prompt</span> <span class="o">-</span> <span class="k">insert</span> <span class="mi">847</span> <span class="k">rows</span> <span class="k">into</span> <span class="n">USERS</span> <span class="p">(</span><span class="n">exported</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">31</span> <span class="mi">14</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">30</span><span class="p">.</span><span class="mi">703234000</span> <span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">)</span>
+<span class="k">set</span> <span class="n">define</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">off</span> <span class="n">sqlblanklines</span> <span class="k">on</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">cursor_sharing</span>          <span class="o">=</span> <span class="k">force</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">nls_numeric_characters</span>  <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">.,</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">nls_date_format</span>         <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">yyyy-mm-dd hh24:mi:ss</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">nls_timestamp_format</span>    <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">yyyy-mm-dd hh24:mi:ssxff</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">nls_timestamp_tz_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">yyyy-mm-dd hh24:mi:ssxff tzr</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">begin</span>
+<span class="k">insert</span> <span class="k">all</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ylcmsajbil</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Fojkjryntnixzfh</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">qvspjgvwmtbi@ghovilkddx.mly</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Axify</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Cofjlkwzxytdih</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">ajgttnqlds@minokpyfo.gu</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ckyqqvuqrkuktb</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Igacqwp</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">qpygabuhbrs@nsjxpgjlle.ze</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Noythhl</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Gausfu</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">ngmgsbr@duyxqzn.hmyo</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Kpewbrecnfzsi</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Nwbsnjh</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">xwlhcfaxko@uhqsibdojjp.hsm</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Qlzyizkl</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Gwnaojlvyud</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">kzndqj@nsosenf.fm</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Xpepttcemrd</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ktaqqdnqyfvc</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">uhbnzezvz@buiptt.lkrm</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ybyinr</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Vngairocujhy</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">igvfzoegbh@hsepkqiwbst.evs</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ctjixltj</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Yvsiei</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">ozpspssyw@vooiyfuf.xeh</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Lttzwsavnozxu</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Kcyjalvzrl</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">yvwowaqrpku@dyapdumb.fvi</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dual</span><span class="p">;</span>
+
+<span class="cm">/*</span><span class="cm"> S N I P </span><span class="cm">*/</span>
+
+<span class="k">insert</span> <span class="k">all</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">841</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Gpkabykoveq</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Gljhlrijqop</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">imnhrheyr@ypccyiu.ah</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">842</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Mwrfazphbvmekpw</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Kxirzfth</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">fxoatt@frlbwbn.tf</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">843</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Hzxomvkliaxl</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Mstdrrmgfmsy</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">gpeidglzwfa@hwyumsansy.fet</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">844</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Vwvwezfsd</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Xtfouojiymtlu</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">zgsdtowsvt@ywfngnijgts.ozd</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">845</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Eljntjfkxx</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Sifgii</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">gksggat@ubfmmdopqy.ly</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">846</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Ewvyjeudjb</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Anihlpdgeg</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">gietuk@ezciwejuedy.nuf</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">into</span> <span class="n">USERS</span><span class="p">(</span><span class="n">U_ID</span><span class="p">,</span><span class="n">U_FIRST_NAME</span><span class="p">,</span><span class="n">U_LAST_NAME</span><span class="p">,</span><span class="n">U_EMAIL</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">847</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Wscdamsgssmouf</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">Omtaofvlrjs</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">jrwyzftmbmo@gjylnuez.esq</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dual</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="o">/</span>
+<span class="k">commit</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">session</span> <span class="k">set</span> <span class="n">cursor_sharing</span> <span class="o">=</span> <span class="n">exact</span><span class="p">;</span>
+<span class="k">set</span> <span class="n">define</span> <span class="k">on</span>
+</code></pre></div><p>PLEX saves your NLS settings when you do the export and put it into the insert
+scripts - that means you should not have any number or date conversion errors.
+The performance hacks from Connor are the <code>alter session set cursor_sharing = force;</code> and the <code>insert all</code> things - thanks for sharing Connor :-)</p>
+<p>PLEX has many parameters to configure your export - the focus of PLEX is to
+quickstart version control in existing projects (see also <a href="/posts/2018-08-26-plex-plsql-export-utilities/">this article about
+PLEX in general</a>). If you only
+want to use it for the export of table data, then you should create a wrapper
+around it which fits your personal needs - here an example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">function</span> <span class="n">to_insert</span> <span class="p">(</span>
+  <span class="n">p_table_name</span>  <span class="n">varchar2</span><span class="p">,</span>
+  <span class="n">p_max_rows</span>    <span class="nb">integer</span> <span class="k">default</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="n">p_batch_size</span>  <span class="nb">integer</span> <span class="k">default</span> <span class="mi">20</span>
+<span class="p">)</span> <span class="k">return</span> <span class="k">clob</span> <span class="k">is</span>
+  <span class="n">l_file_collection</span> <span class="n">plex</span><span class="p">.</span><span class="n">tab_export_files</span><span class="p">;</span>
+<span class="k">begin</span>
+  <span class="n">l_file_collection</span> <span class="p">:</span><span class="o">=</span> <span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span>
+    <span class="n">p_include_data</span>          <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="n">p_data_max_rows</span>         <span class="o">=</span><span class="o">&gt;</span> <span class="n">p_max_rows</span><span class="p">,</span>
+    <span class="n">p_data_table_name_like</span>  <span class="o">=</span><span class="o">&gt;</span> <span class="n">p_table_name</span><span class="p">,</span>
+    <span class="n">p_data_format</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">insert:</span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="n">to_char</span><span class="p">(</span><span class="n">p_batch_size</span><span class="p">)</span><span class="p">,</span>
+    <span class="c1">--overwrite defaults to save work for plex:
+</span><span class="c1"></span>    <span class="n">p_include_templates</span>     <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="n">p_include_runtime_log</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="n">p_include_error_log</span>     <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span>
+  <span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">l_file_collection</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="o">/</span>
+</code></pre></div><p>Now you can have a quick export at any time like so: <code>select to_insert('USERS', 10000) from dual;</code></p>
+<p>Happy exporting and scripting<br>
+Ottmar</p>
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2021-01-31" itemprop="datePublished">January 31, 2021</time>, tagged with
+    <a href="/tags/oracle/">Oracle</a> and 
+    <a href="/tags/script/">Script</a>.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/">New Version of Oracle Table API Generator Available</a></span>
+  
+</footer>
+
+</article>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="ogobrecht/ogobrecht.com"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <h2>Ottmar’s Notes</h2>
+          <p>Mainly about Oracle APEX and PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tags/apex/">APEX</a></li>
+          <li><a href="/tags/plsql/">PL/SQL</a></li>
+          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/archive/">Post Archive</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Legal Things</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-statement/">Privacy Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>
