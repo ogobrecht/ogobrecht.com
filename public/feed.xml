@@ -10,20 +10,20 @@
 <link href="https://ogobrecht.com/index.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
 <generator uri="https://gohugo.io/" version="0.62.1">Hugo</generator>
-<updated>2021-01-31T20:53:25+01:00</updated>
+<updated>2021-02-08T21:16:43+01:00</updated>
 
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</id>
 <link href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/" rel="alternate" type="text/html" title="Create Fast Insert Scripts" />
 <title type="html">Create Fast Insert Scripts</title>
-<summary type="html">PL/SQL Export Untilities are now able to export table data as insert scripts</summary>
+<summary type="html">PL/SQL Export Utilities are now able to export table data as insert scripts</summary>
 <category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
 <category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
 <published>2021-01-31T00:00:00+01:00</published>
-<updated>2021-01-31T16:00:00+01:00</updated>
+<updated>2021-02-08T21:00:00+01:00</updated>
 <content type="html" xml:base="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/">
-&lt;p&gt;&lt;em&gt;PL/SQL Export Untilities are now able to export table data as insert scripts&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;PL/SQL Export Utilities are now able to export table data as insert scripts&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Some weeks ago I released a new version of my &lt;a href=&#34;https://github.com/ogobrecht/plex&#34;&gt;PLEX
 project&lt;/a&gt;. I improved the ability to export
 table data as insert scripts. Originally PLEX was only able to export CSV data.
