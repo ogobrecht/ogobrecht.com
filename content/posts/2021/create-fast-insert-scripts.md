@@ -62,7 +62,7 @@ As you can see with the parameter `p_data_table_name_not_like =>
 escape '\' and table_name not like 'LOGGER%' escape '\')`. For the parameter
 `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` the tables are filtered
 in this way: `where ... and (table_name like 'CAT\_%' escape '\' or table_name
-like 'USERS' escape '\' or ... /*you get the idea*/)`. 
+like 'USERS' escape '\' or ... /*you get the idea*/)`.
 
 There is a good reason why the default of the parameter `p_data_max_rows` is set
 to `1000` - if you provide no table name filters then all tables are exported...
