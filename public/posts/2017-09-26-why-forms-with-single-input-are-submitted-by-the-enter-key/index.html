@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.</p>
+
+<p>Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.</p>
 <p>The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue). The reason was that the search field was the only input item on that page.</p>
 <p>After a short Google search I found the &ldquo;root cause&rdquo; for this &ldquo;bug&rdquo;, or should I say &ldquo;feature&rdquo;? This behaviour is described in the <a href="http://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2">HTML 2.0 specification (section 8.2)</a>.</p>
 <p>To workaround this you can simply create a second input item and hide it by setting the &ldquo;HTML Form Element Attributes&rdquo; to <code>style=&quot;display:none;&quot;</code>. This was also posted by <a href="http://deneskubicek.blogspot.de/2008/06/textfield-item-submiting-page.html">Denes Kubicek</a> back in 2008.</p>
@@ -56,6 +58,7 @@
 </code></pre></div><p>It is worth to mention that I run the newest Chrome browser and this &ldquo;feature&rdquo; is still available&hellip;</p>
 <p>Happy coding :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

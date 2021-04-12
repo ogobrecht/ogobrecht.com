@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with <code>orapki</code> instead of <code>mkstore</code>:</p>
+
+<p>I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with <code>orapki</code> instead of <code>mkstore</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">orapki wallet create -wallet <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -pwd myPassword -auto_login_local
 </code></pre></div><p>You can then add new alias/user/password entries with mkstore (you need to add each alias to your tnsnames.ora):</p>
 <div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">mkstore -wrl <span class="s2">&#34;</span><span class="s2">path/to/my/wallet</span><span class="s2">&#34;</span> -createCredential myAlias myUser myPassword
@@ -98,6 +100,7 @@ tnsnames.ora
 </code></pre></div><p>Hope this helps someone else.</p>
 <p>Happy developing and scripting<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

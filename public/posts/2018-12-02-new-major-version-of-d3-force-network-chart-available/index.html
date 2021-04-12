@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <div id="example"></div><!--the graph container-->
+
+<div id="example"></div><!--the graph container-->
 <p>Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes. How can the graph react to this?</p>
 <p>The problem is that a network chart is not a simple image which can be resized according to the available space. The graph is an SVG with multiple layers to handle the zoom and pan, the lasso, a legend that needs to be in a fixed size&hellip;   As you can see, there must be a procedural solution. And for this we need a trigger, which always fires when the (possible) size of the graphs parent DOM element changes.</p>
 <p>Fortunately, there is a <a href="https://wicg.github.io/ResizeObserver/">W3C draft for a resize observer</a> and a <a href="https://github.com/que-etc/resize-observer-polyfill">polyfill</a> available.</p>
@@ -83,6 +85,7 @@ window.onload = function() {
     d3.select('#example').select('svg').classed('shadow', true);
 }
 </script>
+
 
 </div><!--articleBody-end-->
 

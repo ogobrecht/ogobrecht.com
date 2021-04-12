@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>For some years I use only the <a href="https://www.oracle.com/database/technologies/instant-client.html">Oracle Instant Client</a>. I had too often trouble with the full client installation on my corporate PCs under Windows, especially in the old Windows 32/64 bit times. The instant client can be used by download and extract one basic zip file and adding an entry to your path environment variable. If you want to use SQL*Plus and other tools you need to download two additional files - no drama, also without admin rights.</p>
+
+<p>For some years I use only the <a href="https://www.oracle.com/database/technologies/instant-client.html">Oracle Instant Client</a>. I had too often trouble with the full client installation on my corporate PCs under Windows, especially in the old Windows 32/64 bit times. The instant client can be used by download and extract one basic zip file and adding an entry to your path environment variable. If you want to use SQL*Plus and other tools you need to download two additional files - no drama, also without admin rights.</p>
 <p>When I started to store the user details in wallet files I was wondering why Oracle does not deliver the mkstore and orapki tools with the instant client. I searched for a workaround and found some posts about it - including installing the full client or other software to get the tools. But I do not want to install additional software only for two small command-line tools. I found the final hint in an <a href="https://andriydmytrenko.wordpress.com/2013/07/01/using-the-secure-external-password-store-with-instant-client/">old post from Andriy Dmytrenko</a>. Seems that the two utilities are only shell scripts that are calling some Java libraries. The question was from which location I should take the needed libraries. Since I also have <a href="https://www.oracle.com/database/technologies/appdev/sqlcl.html">SQLcl</a> on my PC I found the libs there. Below my final shell scripts for Windows - put them somewhere and have the path pointing to the directory where they are stored. If you need them for Linux you will find a way to do it by yourself:</p>
 <p>mkstore.bat:</p>
 <pre><code>@echo off
@@ -102,6 +104,7 @@ endlocal
 </code></pre><p>If you need a starter on using mkstore and orapki then Tim Hall from Oracle Base has covered you with an <a href="https://oracle-base.com/articles/10g/secure-external-password-store-10gr2">article about the secure external password store</a>.</p>
 <p>Happy password storing<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

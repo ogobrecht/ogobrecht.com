@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</p>
+
+<p>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</p>
 <p>Unfortunately there was no time in the project to create such a generator from the ground. Luckily André, a colleague of me, had started to implement such an API generator in his free time and I had only to implement the generic change log functionality - also in my free time. Our API generator open source project was born :-)</p>
 <p>Later on I needed a function to get the id from an record by the unique columns - next feature for the API generator: generate a (overloaded) function for each unique constraint on a table. Now it is a simple function call to get the id:</p>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">your_var</span> <span class="p">:</span><span class="o">=</span> <span class="n">your_table_name_api</span><span class="p">.</span><span class="n">get_pk_by_unique_cols</span><span class="p">(</span>
@@ -64,6 +66,7 @@ Business logic packages becomes invalid after table changes and API regeneration
 <p>You can find the sources and more informations on <a href="https://github.com/OraMUC/table-api-generator">GitHub</a>.</p>
 <p>Happy coding :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

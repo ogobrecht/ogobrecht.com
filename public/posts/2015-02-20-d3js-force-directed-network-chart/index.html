@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p><em>My first Oracle APEX plugin and open source project :-)</em></p>
+
+<p><em>My first Oracle APEX plugin and open source project :-)</em></p>
 <div id="example"></div><!--the graph container-->
 <p>Everything started some months ago when I stumbled over this fascinating <a href="https://bl.ocks.org/mbostock/4062045">force-directed graph</a>. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</p>
 <p>If you use the bare JavaScript files you can run it on every HTML page:</p>
@@ -97,6 +99,7 @@ window.onload = function() {
         d3.select('#example').select('svg').classed('shadow', true);
 }
 </script>
+
 
 </div><!--articleBody-end-->
 

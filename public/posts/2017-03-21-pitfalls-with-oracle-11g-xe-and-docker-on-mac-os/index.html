@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>Recently I tried to install Oracle XE into a docker container on Mac OS Sierra using the <a href="https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe">official docker file</a> from Oracle. I had no luck, because the installation failed with this error message:</p>
+
+<p>Recently I tried to install Oracle XE into a docker container on Mac OS Sierra using the <a href="https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe">official docker file</a> from Oracle. I had no luck, because the installation failed with this error message:</p>
 <blockquote>
 <p>This system does not meet the minimum requirements for swap space. Based on the amount of physical memory available on the system, Oracle Database 11g Express Edition requires 2048 MB of swap space. This system has 0 MB of swap space. Configure more swap space on the system and retry the installation.</p>
 </blockquote>
@@ -125,6 +127,7 @@ zip -r oracle-xe-11.2.0-1.0.x86_64.rpm.zip Disk1
 </code></pre></div><p>I use currently a Node.js based proxy server running directly on my Mac OS, because I need a webserver there anyway. The nice thing is, that the EPG don't need to serve the images and I also don't need to install the images into the EPG, when I upgrade to a newer APEX version. This saves me time and the EPG runs faster because of less number of requests. I will cover this topic in the next post.</p>
 <p>Happy installing :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

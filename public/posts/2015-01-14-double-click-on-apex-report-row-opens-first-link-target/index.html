@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p><em>Do you like scanning a report for certain information and then moving the mouse to the first column to click the small link for details or a edit form? Would it be nice to double click anywhere on the row to open the first link?</em></p>
+
+<p><em>Do you like scanning a report for certain information and then moving the mouse to the first column to click the small link for details or a edit form? Would it be nice to double click anywhere on the row to open the first link?</em></p>
 <p>With a little help of a dynamic action on page zero you have the solution for all your interactive and standard reports in your application. The only additional to do is, to find out the right selectors for your reports. Here some usual ones:</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//APEX 5:
 </span><span class="c1"></span><span class="nx">table</span><span class="p">.</span><span class="nx">a</span><span class="o">-</span><span class="nx">IRR</span><span class="o">-</span><span class="nx">table</span> <span class="nx">tr</span><span class="p">,</span> <span class="nx">table</span><span class="p">.</span><span class="nx">uReportStandard</span> <span class="nx">tr</span>
@@ -60,6 +62,7 @@
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">triggeringElement</span><span class="p">)</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;td:first&gt;a&#39;</span><span class="p">)</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div><p>Happy coding :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

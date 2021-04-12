@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply <a href="https://www.google.de/search?q=oracle+apex+export+split">ask Google</a>. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</p>
+
+<p>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply <a href="https://www.google.de/search?q=oracle+apex+export+split">ask Google</a>. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</p>
 <p>So why bother with a different way to export and split an APEX application?</p>
 <p>Since APEX 5.1.4 there is a new PL/SQL package APEX_EXPORT, which can be used to get a file collection of the application - one big file or the splitted ones. Unfortunately in the <a href="https://docs.oracle.com/database/apex-18.1/AEAPI/GET_APPLICATION_Function.htm#AEAPI-GUID-A8E626D6-D7DE-4E59-8F90-3666A7A41A87">API docs</a> there is (as of this writing) only one example available how to export the single file within SQL*Plus - no example to handle the splitted files.</p>
 <p>But again, why discuss this if there are already options to do it?</p>
@@ -263,6 +265,7 @@
 <p>Hope this helps someone.</p>
 <p>Happy exporting :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

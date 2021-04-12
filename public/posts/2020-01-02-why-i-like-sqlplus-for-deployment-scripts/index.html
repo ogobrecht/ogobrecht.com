@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>The following simplified example deployment master script is given:</p>
+
+<p>The following simplified example deployment master script is given:</p>
 <div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">define</span> <span class="k">off</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">off</span>
 <span class="k">whenever</span> <span class="k">sqlerror</span> <span class="n">exit</span> <span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span> <span class="k">rollback</span>
 <span class="n">spool</span> <span class="n">deployment</span><span class="p">.</span><span class="n">log</span>
@@ -146,6 +148,7 @@ before pointing to another standalone Java 11 distribution and it was not
 working there&hellip;</p>
 <p>Again: happy scripting :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

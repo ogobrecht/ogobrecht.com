@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>Maxime Tremblay has already described <a href="http://max-tremblay.blogspot.com/2018/03/datepicker-customization.html">here</a> how to customize the datepicker.</p>
+
+<p>Maxime Tremblay has already described <a href="http://max-tremblay.blogspot.com/2018/03/datepicker-customization.html">here</a> how to customize the datepicker.</p>
 <p>He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.</p>
 <p>In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called <code>Today</code> and a second one to close the datepicker which is called <code>Done</code> I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">apex</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
@@ -58,6 +60,7 @@
 <p>Just for reference: The jQuery UI datepicker widget can be tested <a href="https://jqueryui.com/datepicker/#buttonbar">here</a>. Be careful to pick the correct version of the jQuery UI API docs for your specific APEX version.</p>
 <p>Happy coding :-)<br>
 Ottmar</p>
+
 
 </div><!--articleBody-end-->
 

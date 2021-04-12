@@ -37,6 +37,7 @@
 <body>
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
+      <div class="nav-spacer"></div>
 
 <!--content-begin-->
 
@@ -47,7 +48,8 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  <p>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?</p>
+
+<p>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?</p>
 <p>You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements. You can also use a browser extension like <a href="https://chrome.google.com/webstore/detail/export-svg-with-style/dkjdcaddoplepioppogpckelchefhddi">this one for Google Chrome</a>, but then you depend on the browser and the extension.</p>
 <p>There is now a declarative way with the help of a jQuery plugin, which is 100% client based:</p>
 <div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
@@ -92,6 +94,7 @@ window.onload = function() {
         //see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
 }
 </script>
+
 
 </div><!--articleBody-end-->
 
