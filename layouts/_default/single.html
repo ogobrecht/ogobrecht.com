@@ -7,7 +7,9 @@
 </header>
 
 <div class="item-content" itemprop="articleBody">
-  {{ .Content }}
+
+{{ .Content }}
+
 </div>{{ "<!--articleBody-end-->" | safeHTML }}
 {{ if in (slice "posts") .Type }}
 <footer>

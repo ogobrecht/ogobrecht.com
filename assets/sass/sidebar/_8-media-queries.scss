@@ -5,6 +5,13 @@
         overflow-x: hidden;
     }
 
+    .nav-spacer {
+        float: right;
+        width: 50px;
+        height: 25px;
+        border: 1px solid red;
+    }
+
     .nav-button {
         display: inline-block;
         position: fixed;
@@ -44,7 +51,8 @@
         overflow-x: hidden;
     }
 
-    .nav-button {
+    .nav-button,
+    .nav-spacer {
         display: none;
     }
 
@@ -75,7 +83,8 @@
 }
 
 @media only print {
-    .nav-button {
+    .nav-button,
+    .nav-spacer {
         display: none;
     }
 
