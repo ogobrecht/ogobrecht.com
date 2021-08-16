@@ -1,17 +1,16 @@
 ---
-title: Yet another error logging tool
+title: "Yet Another Logging Tool: Console"
 description: Easy installation and a remedy for cluttered error logs
-tags: [oracle, script]
-lang: en
+tags: [project, oracle, logging, debugging]
 publishdate: 2030-01-01
 lastmod: 2030-12-31 14:00:00
 ---
 
 Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes
-Open-Source-Logging-Tool zu entwickeln...
+Logging-Tool zu entwickeln...
 
-Es gibt schon einige auf dem Markt (die letzten drei scheinen nicht mehr aktiv
-gepflegt zu werden):
+Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie
+veröffentlicht wurden:
 
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [PIT](https://github.com/j-sieben/PIT/)
@@ -19,35 +18,52 @@ gepflegt zu werden):
 - [Log4plsql](https://github.com/alangibson/log4plsql)
 - [ILO](https://sourceforge.net/projects/ilo/)
 - [BMC_DEBUG](https://sites.google.com/site/oraplsqlinst/)
+- ...
 
-Ein Grund dafür scheint zu sein, dass jeder unterschiedlich Vorstellungen oder
+Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder
 Bedürfnisse hat. Bei mir ist es so, dass ich ein Logging Tool haben wollte, was
-sehr einfach zu installieren ist und auch funktioniert, wenn man keinen Kontext
-in der Datenbank anlegen darf. Man benötigt nur die Rechte zur Erstellung von
-Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Ein
-Kontext ist optional und wird bei Vorhandensein automatisch genutzt. Apropo
-einfache Installtion - da ich alle Skripte in ein einziges Installationskript
-zusammenführe und SQLcl auch Skripte aus dem Internet laden kann, könnte man
-mein Logging-Tool in einer Minute ohne vorherigen Download auch so installieren:
-SQLcl aufrufen, im gewünschten Schema anmelden und
+sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen
+Kontext in der Datenbank anlegen darf. Man benötigt nur die Rechte zur
+Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher
+Standard. Ein Kontext ist optional und wird bei Vorhandensein automatisch
+genutzt.
+
+Apropo einfache Installation - da für Console alle Skripte in ein einziges
+Installationsskript zusammengeführt werden und SQLcl auch Skripte aus dem
+Internet laden kann, könnte man das Tool in einer Minute ohne vorherigen
+Download auch so installieren: SQLcl aufrufen, im gewünschten Schema anmelden
+und
 `@https://raw.githubusercontent.com/ogobrecht/console/main/install/create_console_objects.sql`
 aufrufen. Ein paar Sekunden später kann man schon loslegen mit dem Logging bzw.
-der Instrumentierung.
+der Instrumentierung. Möchte man es in APEX installieren und hat nur einen
+Browserzugang zu seiner Entwicklungsumgebung, dann ist das einzelne
+Installtionsskript im SQL Workshop auch sehr hilfreich und Console schnell
+installiert.
+
+Noch ein Hinweis für Eilige: Console loggt per Default nur Fehler (Level 1).
+Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren
+Seite. Möchte man aber auf einem Entwicklungssystem auch andere Levels wie
+Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für
+jede Session einzeln tun müssen, dann kann man das global einstellen: `exec
+console.conf_level(3);`. Mehr dazu im [Getting
+Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md)
+Dokument.
 
 Daneben wollte ich die neuen Möglichkeiten des Packages utl_call_stack benutzen
 um die Anzahl der Logeinträge auf ein mögliches Minimum zu reduzieren. Wer kennt
 es nicht, das Problem: Im Fehlerfall wird in jeder Unterfunktion ein Logeintrag
 erstellt, um möglichst viele Details festzuhalten. Am Ende muss man dann
 zusehen, wie so die Logtabelle zugemüllt wird und man versucht aus den vielen
-Log-Einträgen herauszufinden, wo denn nun genau der Fehler aufgetreten ist. Es
-wäre hilfreich, im Error Backtrace auch die Methodennamen zu sehen - die
-Datenbank schreibt aber nur die Package-Namen und die Zeilennummer in den
-Backtrace. Um dieses Problem zu umgehen bietet mein Logging-Tool die Möglichkeit
-anstatt in den Untermethoden einen Fehler in die Log-Tabelle zu schreiben, den
+Log-Einträgen herauszufinden, wo denn nun genau der Fehler aufgetreten ist.
+
+Es wäre hilfreich, im Error Backtrace auch die Methodennamen zu sehen - die
+Datenbank schreibt aber nur die Packagenamen und die Zeilennummer in den
+Backtrace. Um dieses Problem zu umgehen bietet Console die Möglichkeit anstatt
+in den Untermethoden einen Fehler in die Log-Tabelle zu schreiben, den
 Call-Stack mit dem Aufruf `console.error_save_stack` so lange
-zwischenzuspeichern, bis final in der Hauptmethode `console.error` aufgerufen
-wird, was dann den Fehler inklusive gespeichertem Call Stack in die Log-Tabelle
-einträgt. Zur Verdeutlichung hier ein Testpackage:
+zwischenzuspeichern, bis final in der äußersten Hauptmethode `console.error`
+aufgerufen wird, was dann den Fehler inklusive gespeichertem Call Stack in die
+Log-Tabelle einträgt. Zur Verdeutlichung hier ein Skript mit einem Testpackage:
 
 ```sql
 set define off
@@ -64,7 +80,7 @@ prompt - compile package spec
 create or replace package some_api is
   procedure do_stuff;
 end;
-{{/}}
+/
 
 prompt - compile package body
 create or replace package body some_api is
@@ -127,8 +143,8 @@ select call_stack from console_logs order by log_id desc fetch first row only;
 ```
 
 Hier die Ausgabe des obigen Skriptes - der Abschnitt "Saved Error Stack" ist die
-Besonderheit meiner Implementierung, die drei anderen Stack- und
-Trace-Abschnitte sind die Standards der Datenbank:
+Besonderheit von Console, die drei anderen Stack- und Trace-Abschnitte sind die
+Standards der Datenbank:
 
 ```bash
 TEST ERROR_SAVE_STACK
@@ -178,9 +194,29 @@ Call Stack
 Nutzt man nicht `console.error_save_stack` sondern immer nur `console.error`,
 dann erhält man im Log wenigstens immer die drei letzten Abschnitte - und das
 ohne extra Arbeit im Code. Man muss sich dafür nur `console.error` merken.
+
 Übrigens merken - ich habe mit Absicht so viele Methodennamen aus der JavaScript
 Console wiederverwendet wie möglich - damit sollte der Wechsel zwischen
 Backendcode und Frontendcode nicht so schwer fallen was die Methodennamen
-angeht.
+angeht. Eine
+[API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md)
+und ein [Getting
+Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md)
+Dokument helfen bei den ersten Schritten.
 
-...
+Bleibt noch zu erwähnen, dass Console für APEX eine sogenannte "Error Handling
+Function" mitbringt, die Fehler innerhalb der APEX-Laufzeitumgebung in die
+Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner
+Anwendung im "Application Builder" unter "Edit Application Properties > Error
+Handling > Error Handling Function" eintragen: `console.apex_error_handling`.
+
+Desweiteren gibt es noch ein Dynamic Action Plug-In, welches JavaScript-Fehler
+im Browser der Anwender per AJAX-Call in die Log-Tabelle einträgt. Damit bekommt
+man auch mit, wenn es im Frontend bei den Anwendern nicht so richtig rund
+läuft...
+
+Console ist auf [GitHub](https://github.com/ogobrecht/console) gehostet.
+
+Viel Spaß beim Loggen und Fehler suchen...
+
+Ottmar

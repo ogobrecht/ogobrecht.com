@@ -21,6 +21,7 @@
 
 </article>
 
+{{ if in (slice "en") .Language.Lang }}
 {{ if in (slice "posts") .Type }}
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
@@ -30,6 +31,7 @@
         crossorigin="anonymous"
         async>
 </script>
+{{ end }}
 {{ end }}
 
 {{ end }}

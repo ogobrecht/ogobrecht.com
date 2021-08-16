@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Params.lang | default .Site.LanguageCode | default "en" }}">
+<html lang="{{ .Language.Lang | default .Site.LanguageCode | default "en" }}">
 
 <head>
   <meta charset="utf-8">
@@ -8,11 +8,16 @@
   <title>{{ index $.Site.Params.labels .Title | default .Title | default .Site.Title | htmlEscape }}</title>
   {{ if .Description }}<meta name="description" content="{{ .Description | htmlEscape | chomp | truncate 160 }}">{{ else }}{{ "<!-- no description available -->" | safeHTML }}{{ end }}
   <meta name="author" content="{{ with .Site.Params.author.name }}{{ . }}{{ end }}">
-  {{ .Hugo.Generator }}
+  {{ hugo.Generator }}
   {{- $cssOptions := (dict "outputStyle" "compressed" "enableSourceMap" true "targetPath" "assets/styles/main.css") }}
   {{- $css := resources.Get "sass/main.scss" | toCSS $cssOptions }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
   <link rel="canonical" href="{{ .Permalink }}">
+  {{- if .IsTranslated }}
+  {{- range .Translations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
+  {{- end }}
+  {{- end }}
   <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title | htmlEscape }}" href="{{ .Site.BaseURL }}/feed.xml">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">

@@ -1,5 +1,14 @@
 baseURL: 'https://ogobrecht.com/'
-languageCode: en
+DefaultContentLanguage: en
+languages:
+  en:
+    weight: 1
+    languageName: English
+    translationHint: Comments are only available in the english version.
+  de:
+    weight: 2
+    languageName: Deutsch
+    translationHint: Diesen Beitrag gibt es auch auf deutsch.
 title: Ottmar’s Notes
 paginate: 100
 pygmentsCodefences: true

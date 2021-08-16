@@ -11,4 +11,9 @@
 {{- if ne (.PublishDate.Format "2006-01-02") (.Lastmod.Format "2006-01-02") }}
     Last changed on {{ .Lastmod.Format "January 2, 2006" }}.
 {{- end }}
+{{- if .IsTranslated }}
+  {{- range .Translations }}
+    <a href="{{ .RelPermalink }}">{{ .Param "translationHint" }}</a>
+  {{- end}}
+{{- end }}
   </p>
