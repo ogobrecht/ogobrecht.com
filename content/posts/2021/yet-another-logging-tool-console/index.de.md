@@ -1,6 +1,6 @@
 ---
-title: "Yet Another Logging Tool: Console"
-description: Easy installation and a remedy for cluttered error logs
+title: "Ein weiteres Logging-Tool: Console"
+description: Einfache Installation und ein Mittel gegen übervolle Log-Tabellen
 tags: [project, oracle, logging, debugging]
 publishdate: 2030-01-01
 lastmod: 2030-12-31 14:00:00
@@ -49,7 +49,7 @@ console.conf_level(3);`. Mehr dazu im [Getting
 Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md)
 Dokument.
 
-Daneben wollte ich die neuen Möglichkeiten des Packages utl_call_stack benutzen
+Daneben wollte ich die neuen Möglichkeiten des Packages `utl_call_stack` benutzen
 um die Anzahl der Logeinträge auf ein mögliches Minimum zu reduzieren. Wer kennt
 es nicht, das Problem: Im Fehlerfall wird in jeder Unterfunktion ein Logeintrag
 erstellt, um möglichst viele Details festzuhalten. Am Ende muss man dann
@@ -203,6 +203,14 @@ angeht. Eine
 und ein [Getting
 Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md)
 Dokument helfen bei den ersten Schritten.
+
+Console bietet auch eine einfache Möglichkeit Methodenparameter zu loggen.
+FIXME: Fertig schreiben!
+
+
+
+
+
 
 Bleibt noch zu erwähnen, dass Console für APEX eine sogenannte "Error Handling
 Function" mitbringt, die Fehler innerhalb der APEX-Laufzeitumgebung in die

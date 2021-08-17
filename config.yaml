@@ -4,11 +4,11 @@ languages:
   en:
     weight: 1
     languageName: English
-    translationHint: Comments are only available in the english version.
+    translationHint: Show content in English
   de:
     weight: 2
     languageName: Deutsch
-    translationHint: Diesen Beitrag gibt es auch auf deutsch.
+    translationHint: Inhalt in Deutsch anzeigen
 title: Ottmar’s Notes
 paginate: 100
 pygmentsCodefences: true
