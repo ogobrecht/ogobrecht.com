@@ -1,10 +1,15 @@
 ---
-title: "Ein weiteres Logging-Tool: Console"
+title: "Ein weiteres Oracle DB Logging-Tool: Console"
 description: Einfache Installation und ein Mittel gegen übervolle Log-Tabellen
 tags: [project, oracle, apex, logging, debugging]
 publishdate: 2030-01-01
 lastmod: 2030-12-31 14:00:00
 ---
+
+{{< figure "APEX Error Handling mit eingeschalteter ASCII Art" >}}
+![APEX Error Handling mit eingeschalteter ASCII Art](apex-error-handling-function.png)
+{{< /figure >}}
+
 
 Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln...
 
