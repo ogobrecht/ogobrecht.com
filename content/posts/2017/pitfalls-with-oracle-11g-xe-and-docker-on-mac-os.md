@@ -2,7 +2,6 @@
 title: Pitfalls with Oracle 11g XE and Docker on Mac OS
 description: The swap space problem and how to fix it
 tags: [docker, oracle, mac]
-lang: en
 publishdate: 2017-03-21
 lastmod: 2017-08-12 20:12:00
 ---

@@ -2,7 +2,6 @@
 title: How to use mkstore and orapki with Oracle Instant Client
 description: Create and manage wallets without full client installation
 tags: [oracle, wallet, script]
-lang: en
 publishdate: 2020-07-29
 lastmod: 2020-07-29 20:15:00
 ---

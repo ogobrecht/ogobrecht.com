@@ -2,7 +2,6 @@
 title: Postcard Comment
 description: Finally it happend - Oliver Gorwits has sent me the first postcard comment
 tags: [postcard, d3js]
-lang: en
 publishdate: 2017-12-27
 lastmod: 2017-12-27 20:00:00
 ---

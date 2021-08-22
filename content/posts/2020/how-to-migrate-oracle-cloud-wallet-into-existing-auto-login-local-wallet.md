@@ -2,7 +2,6 @@
 title: How to migrate Oracle Cloud wallet into existing auto_login_local wallet
 description: One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer
 tags: [oracle, wallet, script]
-lang: en
 publishdate: 2020-08-03
 lastmod: 2020-11-28 15:42:00
 ---

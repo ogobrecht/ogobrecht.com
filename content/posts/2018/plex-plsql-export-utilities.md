@@ -2,7 +2,6 @@
 title: PLEX - PL/SQL Export Utilities
 description: Export Oracle APEX app, ORDS modules, all schema objects and table data in one go
 tags: [project, oracle, apex, plsql, version-control]
-lang: en
 publishdate: 2018-08-26
 lastmod: 2021-01-31 20:45:00
 ---

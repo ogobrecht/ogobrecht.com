@@ -2,7 +2,6 @@
 title: Markdown Examples
 description: Include also Hugo shortcode examples
 tags: [hugo]
-lang: en
 publishdate: 2099-12-31
 ---
 

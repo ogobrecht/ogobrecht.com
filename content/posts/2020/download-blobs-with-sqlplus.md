@@ -2,7 +2,6 @@
 title: Download BLOBs with SQL*Plus
 description: New version of PL/SQL Export Utilities available
 tags: [oracle, apex, plsql, script, sqlplus, version-control]
-lang: en
 publishdate: 2020-01-01
 lastmod: 2020-10-26 16:43:00
 aliases: [/posts/2020-01-01-download_blobs_with_sqlplus/]

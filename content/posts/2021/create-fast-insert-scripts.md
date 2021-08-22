@@ -2,7 +2,6 @@
 title: Create Fast Insert Scripts
 description: PL/SQL Export Utilities are now able to export table data as insert scripts
 tags: [oracle, script]
-lang: en
 publishdate: 2021-01-31
 lastmod: 2021-02-08 21:00:00
 ---

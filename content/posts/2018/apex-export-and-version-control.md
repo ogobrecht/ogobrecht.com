@@ -2,7 +2,6 @@
 title: APEX_EXPORT and Version Control
 description: How to export the splitted APEX app definition with SQL*Plus
 tags: [oracle, apex, version-control, sqlplus]
-lang: en
 publishdate: 2018-07-25
 lastmod: 2018-07-25 20:00:00
 ---

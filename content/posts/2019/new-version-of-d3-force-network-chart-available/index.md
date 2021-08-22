@@ -2,7 +2,6 @@
 title: New Version of D3 Force Network Chart Available
 description: Links can now have a label
 tags: [oracle, apex, plugin, d3js, chart, svg]
-lang: en
 publishdate: 2019-06-09
 lastmod: 2019-06-09 16:00:00
 ---

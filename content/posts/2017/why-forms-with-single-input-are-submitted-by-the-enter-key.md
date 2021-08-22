@@ -2,7 +2,6 @@
 title: Form Behaviour - Bug or Feature?
 description: Why forms with a single input field are submitted by the enter key
 tags: [apex, html]
-lang: en
 publishdate: 2017-09-26
 lastmod: 2017-10-01 20:00:00
 ---

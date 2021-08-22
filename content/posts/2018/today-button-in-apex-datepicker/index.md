@@ -2,7 +2,6 @@
 title: Show Today Button in APEX Datepicker
 description: A short note on how to customize the jQuery UI datepicker
 tags: [oracle, apex, jquery]
-lang: en
 publishdate: 2018-07-22
 lastmod: 2018-07-22 20:00:00
 ---

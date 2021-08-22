@@ -2,7 +2,6 @@
 title: New Major Version of D3 Force Network Chart Available
 description: Better responsiveness by implementing a resize observer
 tags: [oracle, apex, plugin, d3js, chart, svg]
-lang: en
 publishdate: 2018-12-02
 lastmod: 2018-12-05 20:00:00
 ---

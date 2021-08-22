@@ -2,7 +2,6 @@
 title: Double click on APEX report row opens first link target
 description: A page zero dynamic action for your whole application
 tags: [oracle, apex]
-lang: en
 publishdate: 2015-01-14
 lastmod: 2017-08-24 20:00:00
 ---

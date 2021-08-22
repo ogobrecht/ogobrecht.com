@@ -2,7 +2,6 @@
 title: Why I Like SQL*Plus for Deployment Scripts
 description: SQLcl is eating my error messages
 tags: [oracle, script, sqlplus]
-lang: en
 publishdate: 2020-01-02
 lastmod: 2021-01-31 20:00:00
 aliases: [/posts/2020-01-02-why_i_like_sqlplus_for_deployment_scripts/]

@@ -2,7 +2,6 @@
 title: Table API Generator
 description: An Oracle PL/SQL package with SQL Developer integration
 tags: [project, oracle, plsql, generator, oddgen]
-lang: en
 publishdate: 2016-06-10
 lastmod: 2017-08-12 20:07:00
 ---

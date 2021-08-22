@@ -2,7 +2,6 @@
 title: APEX Plugin dhtmlxGantt
 description: HTML5 Gantt chart based on dhtmlx.com library
 tags: [project, oracle, apex, plugin, chart]
-lang: en
 publishdate: 2017-03-14
 lastmod: 2017-08-12 20:08:00
 ---

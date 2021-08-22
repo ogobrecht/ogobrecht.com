@@ -2,7 +2,6 @@
 title: Why a subdomain for an APEX development system is a bad idea
 description: The Internet Explorer cookie desaster
 tags: [oracle, apex]
-lang: en
 publishdate: 2015-12-12
 lastmod: 2017-08-12 20:02:00
 ---

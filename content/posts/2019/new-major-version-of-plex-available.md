@@ -2,7 +2,6 @@
 title: New Major Version of PL/SQL Export Utilities Available
 description: PLEX is now independent from an APEX installation
 tags: [oracle, apex, plsql, version-control]
-lang: en
 publishdate: 2019-06-26
 lastmod: 2019-06-26 21:49:00
 ---
