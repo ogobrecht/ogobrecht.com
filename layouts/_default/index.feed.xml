@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ .Site.LanguageCode }}">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ .Language.Lang }}">
 <title type="html">{{ .Site.Title }}</title>
 <subtitle>{{ .Site.Params.description }}</subtitle>
 <author>
@@ -8,12 +8,12 @@
 </author>
 <id>{{ .Permalink }}index.xml</id>
 <link href="{{ .Permalink }}index.xml" rel="self" type="application/atom+xml" />
-<link href="{{ .Permalink }}" rel="alternate" type="text/html" hreflang="{{ .Site.LanguageCode }}" />
+<link href="{{ .Permalink }}" rel="alternate" type="text/html" hreflang="{{ .Language.Lang }}" />
 <generator uri="https://gohugo.io/" version="{{ hugo.Version }}">Hugo</generator>
 <updated>{{ dateFormat "2006-01-02T15:04:05" now }}+01:00</updated>
 
 {{ range first .Site.Params.rssLimit (where .Site.RegularPages "Section" "in" (slice "posts") ) }}
-<entry xml:lang="{{ .Params.lang | default .Site.LanguageCode | default "en" }}">
+<entry xml:lang="{{ .Language.Lang }}">
 <id>{{ .Permalink | htmlEscape }}</id>
 <link href="{{ .Permalink }}" rel="alternate" type="text/html" title="{{ .Title | htmlEscape }}" />
 <title type="html">{{ .Title | htmlEscape }}</title>

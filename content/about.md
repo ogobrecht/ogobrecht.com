@@ -1,8 +1,5 @@
 ---
 title: About
-menu:
-  main:
-    weight: 60
 ---
 
 ## Me

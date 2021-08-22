@@ -1,8 +1,5 @@
 ---
 title: Imprint
-menu:
-  legal:
-    weight: 10
 ---
 Legal information as required by german law:
 

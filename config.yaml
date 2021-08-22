@@ -132,3 +132,16 @@ menu:
     - name: Open Source Projects
       url: /tags/project/
       weight: 40
+    - name: Post Archive
+      url: /archive/
+      weight: 50
+    - name: About
+      url: /about/
+      weight: 60
+  legal:
+    - name: Imprint
+      url: /imprint/
+      weight: 10
+    - name: Privacy Statement
+      url: /privacy-statement/
+      weight: 20

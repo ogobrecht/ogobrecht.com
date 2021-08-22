@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Language.Lang | default .Site.LanguageCode | default "en" }}">
+<html lang="{{ .Language.Lang }}">
 
 <head>
   <meta charset="utf-8">
@@ -18,7 +18,7 @@
   <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
   {{- end }}
   {{- end }}
-  <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title | htmlEscape }}" href="{{ .Site.BaseURL }}/feed.xml">
+  <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title | htmlEscape }}" href="{{ .Site.BaseURL }}feed.xml">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
