@@ -5,6 +5,7 @@ languages:
     weight: 1
     languageName: English
     translationHint: Show content in English
+    commentHint: Comments are only available in English
   de:
     weight: 2
     languageName: Deutsch
@@ -101,7 +102,7 @@ params:
     version-control: Version Control
     wallet: Wallet
 permalinks:
-  posts: '/:section/:year-:month-:day-:filename/'
+  posts: '/:section/:year-:month-:day-:slug/'
 taxonomies:
   tag: tags
 outputs:

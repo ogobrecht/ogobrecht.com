@@ -22,8 +22,8 @@
 
 </article>
 
-{{ if in (slice "en") .Language.Lang }}
 {{ if in (slice "posts") .Type }}
+{{ if in (slice "en") .Language.Lang }}
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -32,6 +32,8 @@
         crossorigin="anonymous"
         async>
 </script>
+{{ else }}
+<p class="item-meta">{{ range .Translations }}<a href="{{ .RelPermalink }}">{{ .Param "commentHint" }}</a>{{ end }}</p>
 {{ end }}
 {{ end }}
 
