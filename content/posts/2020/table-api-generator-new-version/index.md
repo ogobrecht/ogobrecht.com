@@ -194,5 +194,6 @@ A big THANK YOU to all contributors - the current version of the generator would
 
 Be sure to test the new generator before migrating to it. We use it already in some projects and it should be pretty stable. Nevertheless, with so many changed things we cannot give you a guarantee for every edge case - by using it you accept the MIT license. Please check out the [project page at GitHub](https://github.com/OraMUC/table-api-generator) and [open an issue](https://github.com/OraMUC/table-api-generator/issues/new/choose) if you encounter a problem.
 
-A happy new year and happy coding :-)<br>
+A happy new year and happy coding :-)
+
 Ottmar

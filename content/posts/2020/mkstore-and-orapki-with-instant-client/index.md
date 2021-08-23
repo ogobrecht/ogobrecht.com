@@ -71,5 +71,6 @@ endlocal
 
 If you need a starter on using mkstore and orapki then Tim Hall from Oracle Base has covered you with an [article about the secure external password store](https://oracle-base.com/articles/10g/secure-external-password-store-10gr2).
 
-Happy password storing<br>
+Happy password storing :-)
+
 Ottmar

@@ -149,5 +149,6 @@ end;
 Now you can have a quick export at any time like so: `select to_insert('USERS',
 10000) from dual;`
 
-Happy exporting and scripting\
+Happy exporting and scripting :-)
+
 Ottmar

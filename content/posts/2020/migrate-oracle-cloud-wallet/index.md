@@ -76,7 +76,7 @@ orapki wallet display -wallet . -pwd myPassword -complete
 
 The final file list in my TNS directory (without the Java KeyStore files from the cloud wallet):
 
-```
+```cmd
 cwallet.sso
 cwallet.sso.lck
 ewallet.p12
@@ -100,5 +100,6 @@ mkstore -wrl "path/to/my/wallet" -listCredential
 
 Hope this helps someone else.
 
-Happy developing and scripting<br>
+Happy developing and scripting :-)
+
 Ottmar

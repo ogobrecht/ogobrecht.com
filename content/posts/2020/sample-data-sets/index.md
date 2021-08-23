@@ -44,7 +44,8 @@ You can find the project on [GitHub](https://github.com/ogobrecht/sample-data-se
 
 Hope this helps someone else...
 
-Happy data modeling and testing<br>
+Happy data modeling and testing :-)
+
 Ottmar
 
 P.S. For those of you who are working with Oracle APEX: Have a look under SQL Workshop > Utilities > Sample Datasets

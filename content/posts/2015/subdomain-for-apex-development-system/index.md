@@ -19,7 +19,8 @@ Not to mention that Chrome and Firefox are working well...
 
 More details about IE's cookie desaster can be found on [blogs.msdn.com][2] - the relevant question for this blog entry is number three.
 
-Happy APEXing :-)<br>
+Happy APEXing :-)
+
 Ottmar
 
 [1]: http://de.slideshare.net/nielsdb/mt-ag-howtosingle-signonfuerapexanwendungen-mitkerberos

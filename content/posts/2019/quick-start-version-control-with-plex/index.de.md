@@ -10,9 +10,7 @@ lastmod: 2019-08-15 21:00:00
 
 *Viele Oracle-Projekte setzen bis heute keine Versionskontrolle ein. Die Gründe dafür sind vielfältig. Meist geht man wohl davon aus, dass die Datenbank ein sicherer Ort für den Quellcode ist. Mit einem funktionierenden Backup ist das auch richtig, man verliert aber auf jeden Fall die komplette Historie der Änderungen. Oft fehlt in laufenden Projekten auch einfach die Zeit, sich zusätzlich noch mit der Einführung einer Quellcodeversionierung zu beschäftigen, weil auf den ersten Blick kein direkter Nutzen zu sehen ist. Wer wagt unter Zeitdruck da den zweiten Blick? Dieser Artikel will die Hürde für die Einführung einer Versionsverwaltung ein wenig tiefer legen.*
 
-
 {{< toc "Inhaltsverzeichnis" >}}
-
 
 ## Hinweis DOAG
 
@@ -21,11 +19,9 @@ Dieser Artikel erschien im DOAG Red Stack Magazin 03-2019 und steht auch im [Ori
 [doag]: https://www.doag.org/formes/pubfiles/11388332/03_2019-Red_Stack_Magazin-Ottmar_Gobrecht-Schnellstart_Versionskontrolle_fur_existierende_Oracle_(APEX)Projekte.pdf
 [plex2]: /posts/2019-06-26-new-major-version-of-plex-available/
 
-
 ## Einleitung
 
 Der erste Schritt ist der wichtigste, das wissen alle, die sich schon einmal nach langem Zögern endlich auf den Weg gemacht haben - worum auch immer es ging. Das gleiche gilt für die Quellcodeversionierung. Wenn man erst einmal auf dem Weg ist fragt man sich, wie man so lange ohne auskommen konnte. Eine versionierte Quellcodebasis vergrößert die Komfortzone bei der Entwicklung und die investierte Zeit zahlt sich mehrfach wieder aus. Doch wie geht man möglichst einfach und schnell den ersten Schritt? Wie gestaltet man die Struktur eines Repositories?
-
 
 ## Workflowänderung: Dateibasiertes Arbeiten
 
@@ -34,7 +30,6 @@ Eine der wichtigsten Fragen lautet: Kann ich weiterarbeiten wie bisher? Die Antw
 Der Punkt ist hier, dass man nur dann eine verwertbare Quellcodehistorie bekommt, wenn man konsequent auf das dateibasierte Arbeiten setzt. Es kann auch einen Zwischenschritt hin zu diesem Ansatz geben. Man arbeitet weiter wie bisher und exportiert regelmäßig alle Objekte des Schemas in die Quellcodeverwaltung. Auf diesem Weg erhält man wenigstens eine gewisse geordnete Transparenz der Änderungen. Werden dann im Laufe des Projektes die Vorteile dieses Vorgehens ersichtlich, fehlt einem meist noch die Info, wer denn die jeweiligen Änderungen ausgeführt hat. Außerdem werden durch die gewonnene Transparenz schnell Wünsche geweckt wie "Wenn ich den alten Code im Repository habe, dann darf ich ja mal etwas probieren, ich kann ja notfalls zurück". Schon ist die erste Hürde genommen und die Offenheit, vielleicht doch einmal richtig damit loszulegen, da.
 
 Dass so etwas noch viel besser funktionieren kann, darauf kommen die meisten Entwickler dann selbst. Zum Beispiel das Anlegen einen Branchs (Entwicklungszweig) im lokalen Repository. Damit kann man etwas auszuprobieren ohne Gefahr zu laufen, aufgrund eines unerwartet zu lösenden Bugs die gemachten Änderungen wieder verwerfen zu müssen. Man wechselt bequem in den (parallelen) Hauptzweig, arbeitet am Bugfix, aktualisiert seinen Branch danach auf den geänderten Hauptzweig und kann dann einfach weiter ausprobieren. Das alles ohne die Gefahr Dinge zu verlieren oder andere Kollegen zu beeinflussen. Habe ich jetzt irgendjemanden abgehängt? Kein Problem, einfach loslegen - hier hilft nur Praxis.
-
 
 ## Toolvergleich: DDL-Export
 
@@ -60,20 +55,17 @@ Abbildung 1 zeigt das Ergebnis bezogen auf die Fragestellung.
 | Export APEX App       | ***Jein***  | Nein           | Nein       |
 {{< /figure >}}
 
-
 Anmerkungen zum SQL Developer:
 
 - Ist am übersichtlichsten
 - Viele Formate für Datenexport (auch CSV)
 - Umfangreich konfigurierbar
-- Export APEX App nur mit Commandline-Version SQLcl 
-
+- Export APEX App nur mit Commandline-Version SQLcl
 
 Anmerkungen zum PL/SQL Developer:
 
 - Wenig konfigurierbar
 - Enttäuscht für den Aufbau eines Quellcode-Repository
-
 
 Anmerkungen zu Toad:
 
@@ -88,7 +80,6 @@ Keines der Tools liefert uns ein fertiges, gut strukturiertes Quellcoderepositor
 Wir entwickeln die APEX-Anwendung im Browser und die Meta-Daten der Anwendung liegen im APEX-Repository der Datenbank. Ein Export der Anwendung kann auch mit dem Browser gemacht werden, dabei erhält man aber nur eine einzige große SQL-Datei mit der gesamten Applikation. Wünschenswert für ein Quellcode-Repository wäre ein Export der Einzelteile wie z.B. Pages, Shared Components, Plugins usw. Damit lässt sich dann für die Anwendung verfolgen, wie sie sich entwickelt hat und auch eine Suche im Repository nach z.B. einem bestimmten Package-Aufruf macht bei einer zerlegten APEX-Anwendung wesentlich mehr Sinn. In der Vergangenheit konnte man dafür den APEX Export-Splitter verwenden, im Grunde eine Java-Klasse, die im Lieferumfang jeder APEX-Version bis heute enthalten ist. Der Nachteil ist, dass man die so erstellte Verzeichnisstruktur nehmen muss, wie sie vom Splitter erstellt wurde, oder man verändert sie im Nachgang mit lokalen Skripten auf dem PC. Schöner wäre allerdings, die Verzeichnisstruktur schon während des Exports anpassen zu können, um alle Master-Skripte in einem zentralen Ordner des Repositories speichern zu können. 
 
 Seit APEX Version 5.1.4 gibt es zu diesem Zweck das APEX_EXPORT Package. Mit diesem kann man entweder das große Gesamtskript oder eben die zerlegte Variante exportieren. Das Rückgabeformat ist in beiden Fällen eine Collection - jede Zeile der Collection beinhaltet eine Pfadangabe für die jeweilige Exportdatei und ein CLOB-Feld mit dem Inhalt. Man könnte also in einem Export-Skript diese Collection bearbeiten und die Pfadangaben an die eigenen Bedürfnisse anpassen. Genau das macht das vom Autor des Artikels als Open Source veröffentliche Tool-Package PLEX - der Name steht für <span style="color:red;">PL</span>/SQL <span style="color:red;">Ex</span>port Utilities. Des Weiteren kann PLEX jede der genannten Fragestellungen zum DDL-Export mit ja beantworten - kein Wunder, es ist dafür entwickelt worden.
-
 
 ## Schnellstart: Package PLEX
 
@@ -128,13 +119,11 @@ SELECT backapp FROM dual;
 ```
 {{< /figure >}}
 
-
 Da PLEX boolesche Parameter besitzt, benutzen wir eine Inline-Funktion in der With-Klausel. Wer eine Datenbankversion kleiner als 12c verwendet erstellt sich eine Hilfsfunktion analog dem Beispiel. PLEX hat noch einige Parameter mehr um z.B. den APEX App Export zu konfigurieren. Weitere Details sind auf der offiziellen Projektseite unter [github.com/ogobrecht/plex](https://github.com/ogobrecht/plex) zu finden. Je nach Größe des Schemas und der APEX App kann dieser erste Aufruf zwischen wenigen Sekunden und mehreren Minuten dauern. Das liegt daran, dass im Hintergund für jedes Objekt das Package DBMS_METADATA bemüht wird, um das DDL des Objektes zu generieren. Wer an Laufzeitinfos interessiert ist, findet im Hauptverzeichnis des Exportes eine Logdatei mit Infos, was PLEX so alles gemacht hat und wie lange die jeweiligen Schritte gedauert haben. PLEX selbst existiert jetzt in einer ersten Version - Verbesserungsvorschläge oder Fehlermeldungen sind willkommen und können über die Projektseite als Issue gemeldet werden.
 
 Ab hier hängt es stark von den Bedürfnissen des jeweiligen Projektes ab, ob und wie häufig man einen DDL-Export ausführt. Der Normalweg sollte ein regelmäßiges Exportieren der APEX Anwendung sein. Alles andere sollte ab jetzt lokal bearbeitet werden und es infolge dessen kein Bedürfniss für einen Export geben. Wie schon eingangs erwähnt, mag es aber auch Situationen geben, in denen man regelmäßig alle Schema-Objekte exportiert, um die Anwendung zu dokumentieren. Dies sollte aber nur als Zwischenschritt hin zu einer dateibasierten Arbeitsweise verstanden werden. 
 
 Ein Sonderfall stellt generierter Code dar: Also zum Beispiel das Nutzen von Quick-SQL in APEX oder das Generieren von Tabellen-APIs. Hier kann man überlegen, den generierten Code mit entsprechend konfigurierten Objekt-Filtern zu exportieren. Bei APIs sollte man überlegen, ob man nicht lieber den Generator versioniert anstelle des generierten Codes - das hängt aber ganz davon ab, ob der generierte Code noch manuell verändert wird oder nicht. Jeder manuell erstellte Code sollte versioniert werden.
-
 
 ## Geschwindigkeit: Immer Skripte
 
@@ -185,9 +174,7 @@ END;
 ```
 {{< /figure >}}
 
-
 Somit haben wir jetzt eine Quellcodedatei, die für das Deployment nicht mehr geeignet ist. Schade eigentlich, denn bis eben hätten wir mit unserem Master-Skript einfach immer alle Objekt-Skripte aufrufen können und nur die Änderungen (wie z.B. unsere neue Spalte) wären wirklich ausgeführt worden - ein einfaches Deployment und eine übersichtliche Historie im Repository. Dem gegenüber steht das automatische Erstellen von Diff-Skripten, die mitunter nicht wiederanlauffähig sind und auch bei etwas komplizierteren Schema-Änderungen die Gefahr eines Datenverlustes beinhalten. Man kommt auch bei sehr teuren Tools dieser Klasse nicht umhin, die generierten Skripte auf Richtigkeit zu überprüfen und manuelle Anpassungen für etwaige Datenmigrationen auszuführen. Die Entscheidung, welchen Weg man geht, nimmt einem niemand ab. Jetzt sind wir mittendrin in der Diskussion wie man ein Deployment in das Zielsystem durchführt. Da kann dann auch PLEX nicht weiterhelfen - außer, dass das Package per se versucht, alle notwenigen Objekt-DDLs wiederanlauffähig zu extrahieren. Hier sind wir im weiten Feld der individuellen Bedürfnisse eines Projektes angekommen. Die von PLEX gelieferten Skriptbeispiele müssen auf jeden Fall an die Bedürfnisse des jeweiligen Projektes angepasst werden. Der Autor z.B. unterscheidet fast immer zwischen Skripten für das Backend und das Frontend - sowohl für den Export als auch das Deployment.
-
 
 ## Überlegung: Verzeichnisstruktur im Repository
 
@@ -226,7 +213,6 @@ Wie soll man sein Repository strukturieren? Hier ein Vorschlag, der sich im Lauf
 
 Das Repository sollte logisch aufgebaut sein und keine extrem tiefen Verzeichnisstrukturen beinhalten, um den Umgang damit zu erleichtern. Alle Master-Skripte sind vereint in einem Skript-Ordner, auch das von APEX generierte Installationsskript für das Frontend. Alle Master-Skripte sollten während der Verwendung die jeweiligen Rückmeldungen in entsprechende Log-Dateien im Unterordner logs ablegen - damit sind Exporte von Quellcode und Deployments in Zielsysteme nachvollziehbar.
 
-
 ## Ausblick: CI/CD & Schema-Migration
 
 Die skizzierte Diskussion um das Deployment lässt es schon erahnen: Einfach ein Quellcoderepository aufsetzen und man ist fertig ist nicht die Lösung. Das war nur erste Schritt zum Aufwärmen. Denn hat man erst einmal alles wohl strukturiert und per Skript lauffähig gemacht, dann kann man das Deployment auch im zweiten Schritt automatisieren. Der Inhalt dieser Diskussion sprengt aber bei weitem den Rahmen dieses Artikels, welcher ja den ersten Schritt im Fokus hat. Daher legt der Autor jedem nahe, nach diesem ersten Schritt nicht stehen zu bleiben und weitere Schritte ins Auge zu fassen. Einen sehr guten Grundlagenartikel hat z.B. Martin Fowler zum Thema verfasst - er betrachtet jede Änderung an der Datenbank als eine Migration. Zum weiteren Studium seien daher folgende Einstiegspunkte genannt:
@@ -241,5 +227,6 @@ Die skizzierte Diskussion um das Deployment lässt es schon erahnen: Einfach ein
   - [CI/CD for Database Developers – Export Database Objects into Version Control](https://learncodeshare.net/2018/07/16/ci-cd-for-database-developers-export-database-objects-into-version-control/)
 - Jeff Smith: [19.X SQLcl Teaser: LIQUIBASE](https://www.thatjeffsmith.com/archive/2019/01/19-x-sqlcl-teaser-liquibase/)
 
-Happy version controlling :-)<br>
+Happy version controlling :-)
+
 Ottmar

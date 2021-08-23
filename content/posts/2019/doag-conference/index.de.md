@@ -16,5 +16,6 @@ Wer noch im Nachgang Fragen zum Thema hat, kann mich gern direkt kontaktieren (f
 
 {{< slides "/slides/2019-11-19-schnellstart-versionskontrolle-fuer-existierende-projekte/" >}}
 
-Happy coding and version controlling :-)<br>
+Happy coding and version controlling :-)
+
 Ottmar

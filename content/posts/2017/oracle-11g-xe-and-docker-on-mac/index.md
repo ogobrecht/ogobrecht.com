@@ -150,7 +150,8 @@ alter system set dispatchers='(PROTOCOL=TCP) (SERVICE=xeXDB) (DISPATCHERS=2)' sc
 
 I use currently a Node.js based proxy server running directly on my Mac OS, because I need a webserver there anyway. The nice thing is, that the EPG don't need to serve the images and I also don't need to install the images into the EPG, when I upgrade to a newer APEX version. This saves me time and the EPG runs faster because of less number of requests. I will cover this topic in the next post.
 
-Happy installing :-)<br>
+Happy installing :-)
+
 Ottmar
 
 [1]: https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe

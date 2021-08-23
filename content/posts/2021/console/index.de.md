@@ -254,6 +254,6 @@ Desweiteren gibt es noch ein APEX Dynamic Action Plug-In, welches JavaScript-Feh
 
 Console ist auf [GitHub](https://github.com/ogobrecht/console) gehostet.
 
-Viel Spaß beim Loggen und Fehler suchen...
+Viel Spaß beim Loggen und Fehler suchen :-)
 
 Ottmar

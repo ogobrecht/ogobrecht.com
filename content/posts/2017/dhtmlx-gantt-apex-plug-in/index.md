@@ -17,7 +17,8 @@ You can find the sources and more informations on [GitHub][2] and a online demo 
 
 Maybe the plugin is helpful for someone else...
 
-Happy project planning :-)<br>
+Happy project planning :-)
+
 Ottmar
 
 [1]: https://dhtmlx.com/docs/products/dhtmlxGantt/

@@ -45,10 +45,9 @@ So I had to do it by myself. I called it PLOC (PLDoc was already used, so I skip
 
 More infos about [PLOC][ploc] itself can be found on the [project page][ploc].
 
-Happy coding and documenting :-)<br>
+Happy coding and documenting :-)
+
 Ottmar
-
-
 
 [natdocs]: https://www.naturaldocs.org/
 [oradoclet]: http://oradoclet.sourceforge.net/

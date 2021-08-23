@@ -7,6 +7,7 @@ aliases: [/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/]
 publishdate: 2016-11-17
 lastmod: 2017-08-12 20:06:00
 ---
+
 Die Folien zu meinem Vortrag:
 
 {{< slides "/slides/2016-11-17-reporting-mal-anders-markdown-sei-dank/" >}}

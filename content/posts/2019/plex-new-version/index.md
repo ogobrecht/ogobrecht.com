@@ -18,7 +18,8 @@ The other improvement is better error handling and logging. Per default you will
 - [Project on Github][github]
 - [Download latest version][download]
 
-Happy exporting :-)<br>
+Happy exporting :-)
+
 Ottmar
 
 [download]: https://github.com/ogobrecht/plex/releases/latest

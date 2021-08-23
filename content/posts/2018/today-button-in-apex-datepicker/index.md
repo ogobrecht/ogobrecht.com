@@ -27,6 +27,6 @@ body .ui-datepicker-close { display: none !important; }
 
 Just for reference: The jQuery UI datepicker widget can be tested [here](https://jqueryui.com/datepicker/#buttonbar). Be careful to pick the correct version of the jQuery UI API docs for your specific APEX version.
 
-Happy coding :-)<br>
-Ottmar
+Happy coding :-)
 
+Ottmar

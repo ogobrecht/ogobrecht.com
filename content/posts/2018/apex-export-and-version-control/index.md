@@ -46,7 +46,7 @@ The desired file structure:
 - README.md
 ```
 
-Here comes the idea: 
+Here comes the idea:
 
 - We create a script file to get the file collection, iterate over the collection and modify the content regarding our needs
 - To unload the files with the spool command in SQL*Plus we need it accessible via SQL - therefore we put the files into a global temporary table
@@ -245,6 +245,6 @@ There are better ways then to ask for a password at runtime - but that is not th
 
 Hope this helps someone.
 
-Happy exporting :-)<br>
-Ottmar
+Happy exporting :-)
 
+Ottmar

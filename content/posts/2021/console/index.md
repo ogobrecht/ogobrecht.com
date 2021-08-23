@@ -254,6 +254,6 @@ Furthermore, there is an APEX Dynamic Action Plug-In which enters JavaScript err
 
 Console is hosted on [GitHub](https://github.com/ogobrecht/console).
 
-Happy logging and debugging...
+Happy logging and debugging :-)
 
 Ottmar

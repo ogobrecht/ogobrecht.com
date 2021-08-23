@@ -75,7 +75,8 @@ That's one reason why I like SQL\*Plus a bit more than SQLcl for deployment
 scripts. The fast start time of SQL\*Plus is another reason. Nevertheless, SQLcl
 is a cool command-line tool.
 
-Happy scripting :-)<br>
+Happy scripting :-)
+
 Ottmar
 
 P.S.: There is a small [Twitter

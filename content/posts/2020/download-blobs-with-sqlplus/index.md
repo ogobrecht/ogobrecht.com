@@ -80,7 +80,8 @@ END;
 
 This function is included in the newest version of PLEX (named to_base64) - you can download PLEX [here][download].
 
-Happy scripting, exporting and version controlling :-)<br>
+Happy scripting, exporting and version controlling :-)
+
 Ottmar
 
 [download]: https://github.com/ogobrecht/plex/releases/latest

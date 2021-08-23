@@ -22,10 +22,9 @@ Short before Christmas André and I released version 0.5.0 of our [PL/SQL table 
 - Special methods for testing and dummy data generation
 - Also see the [full changelog on the project site][changelog]
 
-Happy new year and happy coding :-)<br>
+Happy new year and happy coding :-)
+
 Ottmar
-
-
 
 [tapigen]: https://github.com/OraMUC/table-api-generator
 [changelog]: https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#050-2018-12-23

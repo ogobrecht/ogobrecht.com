@@ -44,9 +44,9 @@ Really annoying - even I know the implementation behind. So, the question was: W
 
 You can find the sources and more informations on [GitHub][2] and a demo app on [apex.oracle.com][3].
 
-Happy networking :-)<br>
-Ottmar
+Happy networking :-)
 
+Ottmar
 
 [1]: https://bl.ocks.org/mbostock/4062045
 [2]: https://github.com/ogobrecht/d3-force-apex-plugin

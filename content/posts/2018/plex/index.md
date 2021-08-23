@@ -22,10 +22,7 @@ PLEX is a standalone PL/SQL package with export utilities. It was created to be 
   - You can optionally zip the file collection with the helper function `to_zip`
   - Also see the my previous post on [how to handle the apex_t_export_files type returned by the APEX_EXPORT package with SQL*Plus][prev_post]
 
-
-
-Getting Started
-----------------
+## Getting Started
 
 1. [Download the latest code][plex_download]
 1. Run the provided install script `plex_install.sql` (provides compiler flags) in your desired schema - could also be a central tools schema, don't forget `grant execute on plex to xxx`
@@ -118,7 +115,7 @@ WITH
 SELECT backapp FROM dual;
 ```
 
-ATTENTION: Exporting all database objects can take some time. I have seen huge runtime differences from 6 seconds for a small app up to several hundred seconds for big apps and/or slow databases. This is normally not the problem of PLEX. If you are interested in runtime statistics of PLEX, you can inspect the delivered `plex_runtime_log.md` in the root directory.<br>
+ATTENTION: Exporting all database objects can take some time. I have seen huge runtime differences from 6 seconds for a small app up to several hundred seconds for big apps and/or slow databases. This is normally not the problem of PLEX. If you are interested in runtime statistics of PLEX, you can inspect the delivered `plex_runtime_log.md` in the root directory.\
 Also, the possibility to export the data of your tables into CSV files does not mean that you should do this without thinking about it. The main reason for me to implement this feature was to track changes on catalog tables by regularly calling this export feature with a sensitive table filter and max rows parameter as catalog data is often relevant in business logic.
 
 If you have organized your app into multiple schemas as described in [The Pink Database Paradigm][pinkdb], you may need to export database objects from more then one schema. This is no problem for PLEX.BackApp as all parameters are optional - you can simply logon to your second or third schema and extract only the DDL for these schemas by omitting the `p_app_id` parameter and setting `p_include_object_ddl` to `true`. Then unload the DDL files into a different directory - for example `app_backend_schemaName`.
@@ -127,10 +124,7 @@ A last word: you should inspect all the exported files and scripts and check if 
 
 Feedback is welcome - simply create a [new issue][plex_issue] at the [GitHub project page][plex_project]
 
-
-
-Next Steps
------------
+## Next Steps
 
 It is up to you how you organize the version control repository and how often you export your APEX app or object DDL. I would follow the files first approach and extract the object DDL only ones to have a starting point. The APEX application needs regular exports - if you like, you can automate this.
 
@@ -167,15 +161,12 @@ There is no right or wrong in doing it this or that way - each project/team has 
 
 By the way - PLEX provides script templates and object DDL that follows the second approach: You can always have the same install/deployment script and the DDL scripts are restartable - check it out by looking in one of your exported table DDL scripts.
 
-You are now at the point where PLEX can't do anything more for you. If you like to export your object DDL scripts more often, you have to find a way to be able to protect some of your scripts against overwriting. Imagine you had to add two columns to a table and you provided a restartable alter statement for this in the existing DDL script. If you export this table script the next time with PLEX (or with dbms_metadata.get_ddl, which is used in the background), your alter statements are gone and the new columns are simply listed in the create table statement. With this script you are not be able to deploy your changes to TEST or PROD.<br>
+You are now at the point where PLEX can't do anything more for you. If you like to export your object DDL scripts more often, you have to find a way to be able to protect some of your scripts against overwriting. Imagine you had to add two columns to a table and you provided a restartable alter statement for this in the existing DDL script. If you export this table script the next time with PLEX (or with dbms_metadata.get_ddl, which is used in the background), your alter statements are gone and the new columns are simply listed in the create table statement. With this script you are not be able to deploy your changes to TEST or PROD.\
 One solution is to copy the original table script and name it e.g. `EMPLOYEES.dev.sql`. In this script you maintain the restartable alter statements. If you run PLEX.BackApp again you are overwrite save. The script `EMPLOYEES.sql` reflects your current table definition and can still be executed - it does nothing because the table is already existing. The script `EMPLOYEES.dev.sql` reflects your development history and need to be added to your custom install/deployment script.
 
 As you can see, PLEX can do only the basics for you. It is up to the developers how they manage their version control repository and how they do their deployments - there are thousends of ways to do it ...
 
-
-
-Inspirations / Further Reading
--------------------------------
+## Inspirations / Further Reading
 
 Thanks are going to:
 
@@ -187,17 +178,13 @@ Thanks are going to:
 - Samuel Nitsche for his thoughts on [There is no clean (database) development without Version Control][post-samuel]
 - Tim Hall for his article about [Generating CSV Files][article_tim]
 
-
-
-Thats It
----------
+## Thats It
 
 Hope PLEX.BackApp helps someone else.
 
-Happy coding, apexing, version controlling :-)<br>
+Happy coding, apexing, version controlling :-)
+
 Ottmar
-
-
 
 [apex_export]: https://docs.oracle.com/database/apex-18.1/AEAPI/APEX_EXPORT.htm
 [article_tim]: https://oracle-base.com/articles/9i/generating-csv-files

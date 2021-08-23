@@ -34,7 +34,6 @@ Weiterführende Links zum Thema:
   - [CI/CD for Database Developers – Export Database Objects into Version Control](https://learncodeshare.net/2018/07/16/ci-cd-for-database-developers-export-database-objects-into-version-control/)
 - Jeff Smith: [19.X SQLcl Teaser: LIQUIBASE](https://www.thatjeffsmith.com/archive/2019/01/19-x-sqlcl-teaser-liquibase/)
 
-
 Vorgestellte Tools:
 
 - [GitHub Desktop](https://desktop.github.com/)
@@ -42,5 +41,6 @@ Vorgestellte Tools:
 
 Die Hintergrundfotos der Folien stammen von unsplash.com - hier der Link zur vollständigen [Foto-Kollektion](https://unsplash.com/collections/4373998/quickstart-version-control-for-oracle-apex-projects).
 
-Happy coding and version controlling :-)<br>
+Happy coding and version controlling :-)
+
 Ottmar

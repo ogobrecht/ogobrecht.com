@@ -11,7 +11,6 @@ lastmod: 2019-08-15 21:00:00
 
 {{< toc "Inhaltsverzeichnis" >}}
 
-
 ## Note DOAG
 
 This article appeared in DOAG Red Stack magazine 03-2019 and is also available in the [original][doag]. Unlike the original, updates may occur here on my blog if relevant things change. For example, since version two of the mentioned PLEX (PL/SQL Export Utilities) project, an APEX installation is no longer a requirement. This means that also pure Oracle database projects can use PLEX - read more in [this blog entry][plex2].
@@ -19,11 +18,9 @@ This article appeared in DOAG Red Stack magazine 03-2019 and is also available i
 [doag]: https://www.doag.org/formes/pubfiles/11388332/03_2019-Red_Stack_Magazin-Ottmar_Gobrecht-Schnellstart_Versionskontrolle_fur_existierende_Oracle_(APEX)Projects.pdf
 [plex2]: /posts/2019-06-26-new-major-version-of-plex-available/
 
-
 ## Introduction
 
 The first step is the most important one, as everyone knows who has ever finally set out after much hesitation - whatever it was about. The same is true for source code versioning. Once you're on your way, you wonder how you got along for so long without it. A versioned source code base increases your comfort zone during development, and the time invested pays off several times over. But how do you take the first step as easily and quickly as possible? How to design the structure of a repository?
-
 
 ## Workflow change: file-based working
 
@@ -32,7 +29,6 @@ One of the most important questions is: Can I continue to work as before? The an
 The point here is that you can only get a usable source code history if you are consistent about working file-based. There can also be an intermediate step towards this approach. One continues to work as before and regularly exports all objects of the schema to the source code management. This way one gets at least a certain ordered transparency of the changes. If then in the course of the project the advantages of this procedure become apparent, one usually still lacks the information, who executed the respective changes. In addition, the transparency gained quickly awakens desires such as "If I have the old code in the repository, then I may try something, I can go back if necessary". The first hurdle is already taken and the openness to perhaps really get started is there.
 
 That something like this can work even better is something that most developers come up with themselves. For example, creating a branch (development branch) in the local repository. This way you can try something out without running the risk of having to discard your changes due to an unexpected bug. You can easily switch to the main (parallel) branch, work on the bugfix, update your branch to the changed main branch and then just keep trying. All this without the danger of losing things or influencing other colleagues. Have I lost anyone now? No problem, just get started - only practice helps here.
-
 
 ## Tool comparison: DDL export
 
@@ -58,20 +54,17 @@ Figure 1 shows the result related to the question.
 | Export APEX app        | ***partly***  | No             | No           |
 {{< /figure >}}
 
-
 Notes on SQL Developer:
 
 - Is the clearest
 - Many formats for data export (also CSV)
 - Extensively configurable
-- Export APEX App only with Commandline version SQLcl 
-
+- Export APEX App only with Commandline version SQLcl
 
 Notes on PL/SQL Developer:
 
 - Little configurable
 - Disappointing for building a source code repository
-
 
 Notes on Toad:
 
@@ -86,7 +79,6 @@ None of the tools provides us with a ready-made, well-structured source code rep
 We develop the APEX application in the browser and the meta-data of the application resides in the APEX repository of the database. An export of the application can also be done with the browser, but in doing so you will only get a single large SQL file with the entire application. Desirable for a source code repository would be an export of the individual parts such as pages, shared components, plugins, etc.. This would then make it possible for the application to track how it has developed and also a search in the repository for e.g. a specific package call makes much more sense with a disassembled APEX application. In the past, you could use the APEX export splitter for this, basically a Java class that comes with every APEX version to this day. The disadvantage is that you have to take the directory structure as created by the splitter or you change it afterwards with local scripts on your PC. However, it would be nicer to be able to adjust the directory structure already during the export in order to be able to store all master scripts in a central folder of the repository.
 
 Since APEX version 5.1.4 there is the APEX_EXPORT package for this purpose. With this package you can export either the whole script or the splitted version. The return format in both cases is a collection - each line of the collection contains a path specification for the respective export file and a CLOB field with the content. So you could edit this collection in an export script and adapt the path specifications to your own needs. This is exactly what the tool package PLEX, published as open source by the author of this article, does - the name stands for <span style="color:red;">PL</span>/SQL <span style="color:red;">Ex</span>port Utilities. Furthermore, PLEX can answer yes to any of the above questions about DDL export - no wonder, it was designed for that.
-
 
 ## Quickstart: Package PLEX
 
@@ -126,13 +118,11 @@ SELECT backapp FROM dual;
 ```
 {{< /figure >}}
 
-
 Since PLEX has boolean parameters, we use an inline function in the with clause. If you use a database version smaller than 12c, you can create an auxiliary function similar to the example. PLEX has some more parameters to configure e.g. the APEX App Export. More details can be found on the official project page at [github.com/ogobrecht/plex](https://github.com/ogobrecht/plex). Depending on the size of the schema and the APEX app, this initial call can take anywhere from a few seconds to several minutes. This is because in the background for each object the package DBMS_METADATA is used to generate the DDL of the object. If you are interested in runtime information, you will find a log file in the main directory of the export with information about what PLEX did and how long the respective steps took. PLEX itself now exists in a first version - suggestions for improvements or bug reports are welcome and can be reported as issues on the project page.
 
 From here on it strongly depends on the needs of the respective project if and how often you run a DDL export. The normal way should be a regular export of the APEX application. Everything else should be processed locally from now on and as a result there should be no need for an export. However, as mentioned at the beginning, there may be situations where you regularly export all schema objects in order to document the application. However, this should only be seen as an intermediate step towards a file-based way of working. 
 
 Generated code is a special case: So for example using Quick-SQL in APEX or generating table APIs. Here one can consider exporting the generated code with appropriately configured object filters. For APIs you should consider versioning the generator instead of the generated code - but this depends entirely on whether the generated code is still being manually modified or not. Any manually generated code should be versioned.
-
 
 ## Geschwindigkeit: Immer Skripte
 
@@ -183,9 +173,7 @@ END;
 ```
 {{< /figure >}}
 
-
 Thus, we now have a source code file that is no longer suitable for deployment. A pity actually, because until just now we could have simply called all object scripts with our master script and only the changes (like our new column) would really have been executed - a simple deployment and a clear history in the repository. This is contrasted with the automatic creation of diff scripts, which are sometimes not restartable and risk data loss even with slightly more complicated schema changes. One cannot avoid checking the generated scripts for correctness and making manual adjustments for any data migrations, even with very expensive tools of this class. No one takes the decision of which way to go away from you. Now we are in the middle of the discussion on how to deploy to the target system. PLEX can't help here either - except that the package per se tries to extract all necessary object DDLs in a way that they can be restarted. Here we are in the wide field of individual needs of a project. The script examples supplied by PLEX must be adapted to the needs of the respective project in any case. For example, the author almost always distinguishes between scripts for the backend and the frontend - both for export and deployment.
-
 
 ## Consideration: Directory structure in the repository
 
@@ -224,7 +212,6 @@ How should you structure your repository? Here is a suggestion that has proven t
 
 The repository should be logically structured and not contain extremely deep directory structures to make it easier to use. All master scripts are united in one script folder, also the installation script generated by APEX for the frontend. All master scripts should store their respective feedback in corresponding log files in the logs subfolder during use - this makes exports of source code and deployments to target systems traceable.
 
-
 ## Outlook: CI/CD & Schema Migration
 
 The outlined discussion of deployment already hints at it: Simply setting up a source code repository and you're done is not the solution. That was just the first step to warm up. Once you have structured everything and made it executable via script, you can automate the deployment in the second step. The content of this discussion is far beyond the scope of this article, which focuses on the first step. Therefore, the author suggests everyone not to stop after this first step and to consider further steps. Martin Fowler, for example, has written a very good basic article on the subject - he considers every change to the database as a migration. For further study, the following entry points should therefore be mentioned:
@@ -239,5 +226,6 @@ The outlined discussion of deployment already hints at it: Simply setting up a s
   - [CI/CD for Database Developers – Export Database Objects into Version Control](https://learncodeshare.net/2018/07/16/ci-cd-for-database-developers-export-database-objects-into-version-control/)
 - Jeff Smith: [19.X SQLcl Teaser: LIQUIBASE](https://www.thatjeffsmith.com/archive/2019/01/19-x-sqlcl-teaser-liquibase/)
 
-Happy version controlling :-)<br>
+Happy version controlling :-)
+
 Ottmar

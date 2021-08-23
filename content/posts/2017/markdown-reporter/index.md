@@ -6,6 +6,7 @@ slug: markdown-reporter
 publishdate: 2017-01-23
 lastmod: 2017-08-12 20:10:00
 ---
+
 On the APEX connect 2016 in Berlin I talked about my APEX Markdown plugin and fine art printing with the help of Pandoc and LaTeX. When I was preparing my slides and documenting a SQL query in a Markdown code block I asked myself:
 
 What, if the database is taking this Markdown code block and runs the query inside to convert it into data?
@@ -28,7 +29,8 @@ The HTML and PDF output is complete vector based and all used tools are open sou
 
 You can find the sources and more informations on [GitHub][5].
 
-Happy reporting :-)<br>
+Happy reporting :-)
+
 Ottmar
 
 [1]: /posts/2016-11-17-reporting-mal-anders-markdown-sei-dank

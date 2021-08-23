@@ -6,6 +6,7 @@ slug: table-api-generator
 publishdate: 2016-06-10
 lastmod: 2017-08-12 20:07:00
 ---
+
 Last year I needed for a project a simple table API, which is able to generate a generic change log - something like "show me for table xyz which column was changed when and what was the old value and what is the new one". Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.
 
 Unfortunately there was no time in the project to create such a generator from the ground. Luckily André, a colleague of me, had started to implement such an API generator in his free time and I had only to implement the generic change log functionality - also in my free time. Our API generator open source project was born :-)
@@ -34,9 +35,9 @@ The generated API packages are really thin - nothing special at all. Nevertheles
 
 You can find the sources and more informations on [GitHub][2].
 
-Happy coding :-)<br>
-Ottmar
+Happy coding :-)
 
+Ottmar
 
 [1]: https://www.oddgen.org
 [2]: https://github.com/OraMUC/table-api-generator

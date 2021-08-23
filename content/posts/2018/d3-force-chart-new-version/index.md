@@ -27,9 +27,9 @@ When setting the option `useDomParentWidth` to true together with the previous m
 
 For the full change log see the project on [GitHub][3] and for a demo the app on [apex.oracle.com][4] (which currently does not use the universal theme, new demo app is work in progress...).
 
-Happy networking :-)<br>
-Ottmar
+Happy networking :-)
 
+Ottmar
 
 [1]: https://wicg.github.io/ResizeObserver/
 [2]: https://github.com/que-etc/resize-observer-polyfill

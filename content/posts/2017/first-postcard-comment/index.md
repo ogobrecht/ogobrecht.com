@@ -6,6 +6,7 @@ slug: first-postcard-comment
 publishdate: 2017-12-27
 lastmod: 2017-12-27 20:00:00
 ---
+
 Maybe you already saw my footer and were wondering about the postcard comments. I love postcards and thought it would be nice to get postcards from people who enjoyed some of my posts or open source projects.
 
 After a while I thought no one would do this these days - it is easier to send an email than a postcard.
@@ -16,7 +17,8 @@ But just before Christmas the first postcard arrived. [Oliver Gorwits][1] from t
 
 I asked him if I am allowed to publish a picture of his postcard - for Oliver it is ok. I can only show you the back side because of copyright reasons - if you are interested in how the front side looks like, do a short internet search for `'Queen Elizabeth II of the United Kingdom', Andy Warhol, 1985` or use this [Google image link][4].
 
-Happy new year to all :-)<br>
+Happy new year to all :-)
+
 Ottmar
 
 [1]: https://github.com/ollyg

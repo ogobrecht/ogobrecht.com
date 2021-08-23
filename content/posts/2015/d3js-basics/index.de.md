@@ -10,7 +10,6 @@ lastmod: 2019-08-15 21:00:00
 
 {{< toc "Inhaltsverzeichnis" >}}
 
-
 ## Einleitung
 
 Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im [Original][doag] zur Verfügung. Im Gegensatz zu der Papierversion der DOAG haben wir natürlich auf einer Webseite alle Möglichkeiten, D3 live zu zeigen - also los, wir starten mit einer Netzwerkvisualisierung live im Browser (JavaScript muß aktiv sein, damit die Beispiele auf dieser Seite funktionieren):
@@ -24,13 +23,11 @@ Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im [Ori
 
 *D3 ist eine JavaScript Bibliothek zum Manipulieren von HTML Dokumenten auf der Basis von Daten und setzt dabei auf die Webstandards HTML, SVG und CSS. Dieser Artikel zeigt die Grundlagen von D3 und weckt das Interesse am Thema "Datenvisualisierung mit Webstandards". Vorab nur soviel: Auch D3 kennt den Begriff des Joins.*
 
-
 ## Beispiele von der D3 Homepage
 
 ![Beispiel von github.com/mbostock/d3/wiki/Gallery](/slides/2015-06-09-d3js-data-driven-documents/assets/beispiel-9.png)
 
 ![Beispiel von github.com/mbostock/d3/wiki/Gallery](/slides/2015-06-09-d3js-data-driven-documents/assets/beispiel-10.png)
-
 
 ## D3: Was ist das?
 
@@ -41,9 +38,8 @@ D3 steht für DDD = Data Driven Documents. Neben den oben gezeigten Beispielen k
 1. D3 ist eine JavaScript-Entwicklerbibliothek, welche es erlaubt, Daten mit grafischen Elementen (SVG) im Browser zu kombinieren und diese so auf vielfältige Art und Weise zu visualisieren
 2. Durch seinen Data Join Ansatz (Aufklärung folgt später) ist D3 im Verhältnis zu anderen Bibliotheken auch bei großen Datenmengen sehr schnell
 3. Aufgrund der Unterstützung von Webstandards ist D3 zukunftssicher und auch auf mobilen Geräten lauffähig
-5. D3 basiert auf HTML5 und CSS3, es benötigt also einen modernen Browser (Firefox, Chrome, Safari, IE9 aufwärts)
-4. D3 ist KEINE Chart-Engine, bei der man fertige Layouts auswählt und konfiguriert
-
+4. D3 basiert auf HTML5 und CSS3, es benötigt also einen modernen Browser (Firefox, Chrome, Safari, IE9 aufwärts)
+5. D3 ist KEINE Chart-Engine, bei der man fertige Layouts auswählt und konfiguriert
 
 ## Das Fundament: SVG
 
@@ -56,7 +52,6 @@ Elemente und Gruppen von Elementen können über Style Attribute in Ihrer Ersche
 Man kann SVG Grafiken auf mehreren Wegen in HTML einbinden: Als externe Grafik oder direkt im HTML mit dem Tag `<svg>`. Bei einer externen Grafik muß wie bei XML der Namespace definiert werden. Bei direkter Einbindung in HTML braucht man das nicht; was im Zusammenhang mit D3 den Standardfall darstellt. Bis auf die ungewohnten Tag- und Attributnamen wird einem also nicht viel auffallen, wenn man sich eine HTML-Seite mit eingebettetem SVG im DOM Inspector eines modernen Browsers anschaut. Insofern ist SVG recht pflegeleicht und man kann die gewohnten Werkzeuge des Browsers nutzen.
 
 Wer jQuery kennt, wird sich schnell in D3 zurechtfinden. D3 unterstützt auch die Methodenverkettung und die Basismethoden wie `append` und `attr` haben die gleichen Namen oder zumindest ähnliche wie z.B. `style` bei D3 und `css` bei jQuery. Listing 1 zeigt ein Beispiel, drei SVG Elemente direkt in HTML und ein Element prozedural mit D3.
-
 
 {{< figure "Listing 1: Ein einfaches SVG Beispiel" >}}
 ```html
@@ -83,7 +78,6 @@ Wer jQuery kennt, wird sich schnell in D3 zurechtfinden. D3 unterstützt auch di
 ```
 {{< /figure >}} 
 
-
 <figure>
 <svg class="shadow" id="v1" viewBox="0 0 450 120" style="width:600px; max-width:100%;">
   <rect x="0" y="0" height="120" width="160" fill="#ff6600"/>
@@ -93,16 +87,13 @@ Wer jQuery kennt, wird sich schnell in D3 zurechtfinden. D3 unterstützt auch di
 <figcaption>Abbildung 1: Das Ergebnis aus Listing 1</figcaption>
 </figure>
 
-
 Wie man in Listing 1 erkennen kann, heißt bei SVG das Attribut für die Füllfarbe `fill` und das für die Konturfarbe `stroke`. Der Bezugspunkt für das Positionieren von Elementen ist die linke obere Ecke des SVG Elementes. Das gilt auch beim Rechteck-Element. Beim Kreis und der Ellipse ist der Bezugspunkt hingegen die Mitte. Da wir hier live im Browser arbeiten: Einfach mal die Konsole öffnen und mit einer veränderten Version des Skriptes herumprobieren ;-)
-
 
 ## Der Unterschied: Selectors versus Selections
 
 In JavaScript kann mit den aus CSS bekannten Selektoren Elemente im DOM auswählen. Möchte man dann Änderungen an den Elementen vornehmen, muß man mit einer Schleife über alle Elemente iterieren. D3 verfolgt einen anderen Ansatz, wie man schon an der Bezeichnung erkennen kann - hier wird von [Selections][select] gesprochen. Jede Selection ist ein Array, auch wenn es nur ein oder gar kein Element enthält. Wenn man das Array dann mit einer Methode aufruft, iteriert D3, wie übrigens jQuery auch, automatisch über alle Elemente. Listing 2 zeigt den Vergleich:
 
 [select]: http://bost.ocks.org/mike/selection/
-
 
 {{< figure "Listing 2: JavaScript versus D3" >}}
 ```js
@@ -117,7 +108,6 @@ for (var i = 0; i < p.length; i++) {
 d3.selectAll('p').style('color','red');
 ```
 {{< /figure >}}
-
 
 ## Die D3 Mengenlehre: Wie man Daten an das DOM bindet
 
@@ -246,13 +236,11 @@ v4.circles.transition()
 
 Die Konsequenz aus dem Vorgehen von D3 ist, dass man immer erst eine Selection erstellt, auch wenn man weiß, das im DOM keine Elemente vorhanden sind. An die Selection werden die Daten gebunden und im Falle einer statischen Visualisierung reicht es dann aus, über die Enter Selection die DOM Elemente zu erstellen. Im Falle von dynamischen Visualisierungen spielt dieses Vorgehen sein Stärken aus. Ändern sich nicht alle Daten, muß D3 nur die neuen Elemente im DOM anlegen, alte entfernen, und vorhandene können aktualisiert werden. Dies spart Resourcen im Browser, da nur die nötigste Arbeit zu tun ist, anstatt alle Elemente aus dem DOM zu entfernen, um sie dann wieder neu anzulegen. Außerdem speichert sich D3 in den Selections die Referenzen auf die DOM-Elemente, dadurch muß für weitere Updates des DOM keine weitere Elementsuche auf dem DOM ausgeführt werden. Nun ist es gelüftet, das Geheimnis hinter der Geschwindigkeit - D3 verhindert ganz einfach unnötige Arbeit für den Browser, womit Rechenkapazität für das Bearbeiten größerer Datenmengen frei wird.
 
-
 ## Wiederverwendung von Chart Code
 
 Der Schwerpunkt von D3 liegt nicht auf dem Ausliefern von fertigen Chartfunktionen, in die man einfach seine Daten kippt. D3 konzentriert sich auf grundlegende, immer wieder benötigte Dinge und bietet dafür generisch verwendbare Hilfsfunktionen an. Man muss zwar Arbeit in seine Charts stecken, hat aber durch den generischen Ansatz der Basisfunktionen praktisch keine Einschränkungen bei der Umsetzung, wie man an den vielen Beispielen im Internet sehen kann.
 
 Man kommt am Anfang mit diesen Beispielen schnell zu ansehnlichen Ergebnissen. Spätestens wenn man mit dem gleichen Code einen zweiten Chart auf der selben HTML-Seite einbauen möchte, sieht man jedoch die Grenzen: Globale Variablen und Funktionen sind schnell redeklariert und ein zweiter Chart stört die Funktion des ersten. Hier ist es dann an der Zeit, über Kapselung und Wiederverwendung von Chart-Code zu sprechen. Dazu muß man wissen, wie JavaScript mit Variablen und Funktionen umgeht. Das Stichwort hier sind Closures.
-
 
 ## Exkurs: Closures in JavaScript
 
@@ -297,7 +285,6 @@ Listing 5 zeigt die Prinzipien. Abbildung 5 zeigt das Ergebnis aus Listing 5 und
 </figure>
 
 Wenn man nun noch wie in Listing 5 bei diesen Get- und Set-Funktionen wiederum die Funktion selbst zurückliefert, dann hat man die Basis für eine Methodenverkettung geschaffen. Wie man sieht, lohnt es sich, ein wenig Arbeit in eine kleine API zu stecken - als Gegenleistung bekommt man universell einsatzbare Charts, die je nach Gegebenheit initialisiert und zur Laufzeit angepasst werden können, um z.B. auf Userinteraktionen zu reagieren.
-
 
 ## Die Königsklasse: Physik-Simulationen
 
@@ -394,7 +381,6 @@ Als letzter Schritt wird noch die eigentliche physikalische Berechnung gestartet
 
 Wie man sieht, muß man oft nur minimal Code erstellen, um Charts an seine eigenen Bedürfnisse anzupassen. Und sollte man doch mal etwas komplizierteres benötigen, so kann man davon ausgehen, im Internet viele Beispiele für die gleiche oder eine ähnliche Problemstellung zu finden.
 
-
 ## Netzwerken: Ein Plugin (nicht nur) für APEX
 
 Wer sich dafür interessiert, was man noch so alles machen muss, um vom eben gezeigten Minimalbeispiel zu der großen Lösung aus dem Artikelanfang zu kommen, findet eine vollständige Implementierung eines Netzwerkcharts als [APEX-Plugin auf GitHub][8]. Dazu gibt es auch eine [Demo-App auf apex.oracle.com][9]. Allen Nicht-APEX-Entwicklern sei gesagt, dass trotz seines Namens nicht zwingend APEX benötigt wird. Wie im Artikel empfohlen existiert eine vollständige JavaScript API. Darüberhinaus gibt es einen interaktiven Customization Wizard und die Chartfunktion stellt bei nicht vorhandenen Daten selbstständig Beispieldaten zur Verfügung. Mit diesen Voraussetzungen kann man nach dem Einbinden der benötigten Source-Dateien sofort loslegen, Parameter verändern und live die Auswirkungen testen.
@@ -422,7 +408,8 @@ Wer keine Lust auf selber machen hat: [nvd3.org][14], [c3js.org][15] (Abstraktio
 [15]: http://c3js.org/
 [16]: https://apex.world/ords/f?p=100:700
 
-Happy coding :-)<br>
+Happy coding :-)
+
 Ottmar
 
 <link  href="/assets/d3.js/d3-force-3.0.0.css" rel="stylesheet" type="text/css">

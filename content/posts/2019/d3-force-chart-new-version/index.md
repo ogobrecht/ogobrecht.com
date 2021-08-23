@@ -17,7 +17,8 @@ The most visible one in the new version 3.1 is the ability to add labels to link
 
 There are also new helper methods and one new option - for the full change log see the project on [GitHub][1] and for online demos either the [standalone version in the docs][2] or the APEX plug-in version on [apex.oracle.com][3].
 
-Happy networking :-)<br>
+Happy networking :-)
+
 Ottmar
 
 [1]: https://github.com/ogobrecht/d3-force-apex-plugin#changelog
