@@ -1,7 +1,7 @@
 ---
-title: "Yet Another Oracle DB Logging Tool: Console"
+title: "Yet another Oracle DB logging tool: Console"
 description: Easy installation and a remedy for cluttered error logs
-tags: [project, oracle, apex, logging, debugging, instrumentation]
+tags: [Open source project, Oracle, APEX, Log, Debug, Instrumentation]
 slug: yet-another-oracle-db-logging-tool-console
 publishdate: 2021-08-23
 lastmod: 2021-08-23 11:00:00
@@ -247,6 +247,8 @@ procedure error (
 The error procedure has an overload in the form of a function that returns the log ID. Thus one can extend the logging also with own data in own tables e.g. for a downstream check process in case of specific errors. This is also the purpose of the `p_permanent` parameter, which ensures that the cleanup job or the `console.purge` and `console.purge_all` procedures do not delete the correspondingly marked log entries and that these are permanently available. All other log methods (warn, info, log, debug, trace) are implemented in the same way and with the same parameters - but some have different default values. For the error method the call stack is written, for the trace method all environments.
 
 The parameters `p_user_agent`, `p_user_scope`, `p_user_error_code` and `p_user_call_stack` are intended to also capture external log events and to be able to overwrite the automatically determined values of the PL/SQL environment. As an example an external load process in a data warehouse or error messages from the JavaScript frontend of an application can be mentioned. With a little imagination, everyone will come up with their own use cases here...
+
+## APEX Error Handling Function
 
 It remains to mention that Console for APEX comes along with a so-called "Error Handling Function" that can enter errors within the APEX runtime environment into the log table. If you want to use this, you have to enter this function in your application in the "Application Builder" under "Edit Application Properties > Error Handling > Error Handling Function": `console.apex_error_handling`.
 

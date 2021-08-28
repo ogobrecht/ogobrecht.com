@@ -1,7 +1,7 @@
 ---
 title: D3.js - Data Driven Documents
 description: DOAG APEX connect 2015, Düsseldorf
-tags: [oracle, apex, doag, slides, d3js, svg]
+tags: [Oracle, APEX, DOAG, slides, D3.js, SVG]
 slug: d3js-data-driven-documents
 aliases: [/posts/2015-06-09-d3js-data-driven-documents/]
 publishdate: 2015-06-09

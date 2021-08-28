@@ -1,7 +1,7 @@
 ---
 title: D3.js Force-Directed Network Chart
 description: A JavaScript standalone implementation and Oracle APEX region type plugin
-tags: [project, oracle, apex, plugin, d3js, chart, svg]
+tags: [Open source project, Oracle, APEX, Plug-in, D3.js, Chart, SVG]
 slug: d3js-force-directed-network-chart
 publishdate: 2015-02-20
 lastmod: 2018-12-04 20:00:00

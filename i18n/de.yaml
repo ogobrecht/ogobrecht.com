@@ -1,0 +1,10 @@
+- id: home
+  translation: "Start"
+- id: contact
+  translation: "Kontakt"
+- id: legal
+  translation: "Rechtliche Dinge"
+- id: imprint
+  translation: "Impressum"
+- id: posts_tagged_with
+  translation: "Beiträge getaggt mit"

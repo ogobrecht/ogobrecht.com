@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ index $.Site.Params.labels .Title | default .Title | default .Site.Title | htmlEscape }}</title>
+  <title>{{ .Title | default .Site.Title | htmlEscape }}</title>
   {{ if .Description }}<meta name="description" content="{{ .Description | htmlEscape | chomp | truncate 160 }}">{{ else }}{{ "<!-- no description available -->" | safeHTML }}{{ end }}
   <meta name="author" content="{{ with .Site.Params.author.name }}{{ . }}{{ end }}">
   {{ hugo.Generator }}
@@ -58,7 +58,7 @@
   <div class="sidebar">
     <div class="wrapper">
       <header>
-        <a href="{{ "/" | relURL }}">
+        <a href="{{ "/" | relLangURL }}">
           <h2>{{ .Site.Title | markdownify }}</h2>
           <p>{{ .Site.Params.description | markdownify }}</p>
         </a>
@@ -67,20 +67,20 @@
         <ul>
           {{- $currentPage := . -}}
           {{- range .Site.Menus.main }}
-          <li><a{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="active"{{ end }} href="{{ .URL }}">{{ .Name }}</a></li>
+          <li><a{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="active"{{ end }} href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
           {{- end }}
         </ul>
-        <h3>Contact</h3>
+        <h3>{{ i18n "contact" }}</h3>
         <ul>
           <li><a href="mailto:{{ $.Site.Params.author.email }}">Email</a></li>
           {{- range sort .Site.Params.author.socialMedia "weight" }}
           <li><a href="{{ .url }}">{{ .name }}</a></li>
           {{- end }}
         </ul>
-        <h3>Legal Things</h3>
+        <h3>{{ i18n "legal" }}</h3>
         <ul>
           {{- range .Site.Menus.legal }}
-          <li><a{{ if $currentPage.IsMenuCurrent "legal" . }} class="active"{{ end }} href="{{ .URL }}">{{ .Name }}</a></li>
+          <li><a{{ if $currentPage.IsMenuCurrent "legal" . }} class="active"{{ end }} href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
           {{- end }}
         </ul>
       </nav>

@@ -1,7 +1,7 @@
 ---
 title: APEX Fine Art Printing, Markdown Überall
 description: DOAG APEX connect 2016, Berlin
-tags: [oracle, apex, doag, slides, markdown]
+tags: [Oracle, APEX, DOAG, slides, Markdown]
 slug: apex-fine-art-printing-markdown-ueberall
 aliases: [/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/]
 publishdate: 2016-04-26

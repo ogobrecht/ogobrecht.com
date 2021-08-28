@@ -1,7 +1,7 @@
 ---
 title: HydeBar
 description: A Jekyll Sidebar Template
-tags: [project, generator, html]
+tags: [Open source project, Generator, HTML]
 slug: hydebar
 publishdate: 2017-11-29
 lastmod: 2017-12-01 20:00:00

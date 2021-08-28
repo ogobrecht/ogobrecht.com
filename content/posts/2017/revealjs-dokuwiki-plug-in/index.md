@@ -1,7 +1,7 @@
 ---
 title: DokuWiki Plugin Reveal.js
 description: My contributions to an existing DokuWiki slideshow plugin
-tags: [project, dokuwiki, plugin, revealjs, php]
+tags: [Open source project, DokuWIki, Plug-in, Reveal.js, PHP]
 slug: dokuwiki-plugin-revealjs
 publishdate: 2017-03-05
 lastmod: 2017-08-12 20:09:00

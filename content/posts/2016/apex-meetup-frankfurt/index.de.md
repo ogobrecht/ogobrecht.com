@@ -1,7 +1,7 @@
 ---
 title: APEX Meetup 17.06.2016, Frankfurt
 description: Markdown und Table API Generator
-tags: [oracle, apex, slides, markdown, generator]
+tags: [Oracle, APEX, slides, Markdown, Generator]
 slug: apex-meetup-frankfurt
 aliases: [/posts/2016-06-17-apex-meetup-frankfurt/]
 publishdate: 2016-06-17

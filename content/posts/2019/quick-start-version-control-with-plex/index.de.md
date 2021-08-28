@@ -1,7 +1,7 @@
 ---
 title: Schnellstart - Versionskontrolle für existierende Oracle-Projekte
 description: DOAG Red Stack Magazin 03-2019
-tags: [oracle, apex, version-control, doag]
+tags: [Oracle, APEX, Version control, DOAG]
 slug: schnellstart-versionskontrolle-fuer-oracle-projekte
 aliases: [/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/]
 publishdate: 2019-07-20

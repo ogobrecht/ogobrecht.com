@@ -1,7 +1,7 @@
 ---
 title: Markdown for Oracle APEX
 description: A dynamic action type plugin
-tags: [project, oracle, apex, plugin, markdown]
+tags: [Open source project, Oracle, APEX, Plug-in, Markdown]
 slug: markdown-for-oracle-apex
 publishdate: 2016-01-01
 lastmod: 2017-08-12 20:05:00

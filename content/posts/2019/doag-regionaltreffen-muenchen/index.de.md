@@ -1,7 +1,7 @@
 ---
 title: DOAG Regionaltreffen 11. März 2019, München
 description: "Vortrag: Schnellstart - Versionskontrolle für existierende (APEX-)Projekte"
-tags: [oracle, apex, version-control, slides, doag]
+tags: [Oracle, APEX, Version control, slides, DOAG]
 slug: doag-regionaltreffen-muenchen
 aliases: [/posts/2019-03-11-doag-regionaltreffen-muenchen/]
 publishdate: 2019-03-11

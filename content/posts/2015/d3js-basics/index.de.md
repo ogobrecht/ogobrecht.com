@@ -1,7 +1,7 @@
 ---
 title: D3.js Grundlagen
 description: DOAG/SOUG News 02-2015
-tags: [oracle, apex, doag, d3js, svg]
+tags: [Oracle, APEX, DOAG, D3.js, SVG]
 slug: d3js-grundlagen
 aliases: [/posts/2015-03-01-d3js-grundlagen/]
 publishdate: 2015-03-01

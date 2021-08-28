@@ -1,7 +1,7 @@
 ---
 title: New Version of Oracle Table API Generator Available
 description: Bulk processing, support for audit and row version columns and more
-tags: [oracle, plsql, generator, oddgen]
+tags: [Oracle, PL/SQL, Generator, oddgen]
 slug: new-version-of-oracle-table-api-generator-available
 publishdate: 2020-12-26
 lastmod: 2020-12-27 15:00:00

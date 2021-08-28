@@ -3,7 +3,8 @@
 <section class="index">
 
 <header class="item-header">
-  <h1 class="item-title">Posts tagged with “{{ index $.Site.Params.labels .Title | default .Title }}”</h1>
+  <h1 class="item-title">{{ i18n "posts_tagged_with" }} {{ .Title }}</h1>
+  {{ partial "translations.html" . }}
 </header>
 
 <div class="item-content">

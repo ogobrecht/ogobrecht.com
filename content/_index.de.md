@@ -1,6 +1,6 @@
 ---
-title: Home
-description: The last five posts and a list of all tags
+title: Startseite
+description: Die letzten fünf Beiträgen und einer Liste aller Tags
 ---
 
 {{< list-section "posts" 5 >}}

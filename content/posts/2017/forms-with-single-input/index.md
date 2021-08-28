@@ -1,7 +1,7 @@
 ---
 title: Form Behaviour - Bug or Feature?
 description: Why forms with a single input field are submitted by the enter key
-tags: [apex, html]
+tags: [APEX, HTML]
 slug: why-forms-with-single-input-are-submitted-by-the-enter-key
 publishdate: 2017-09-26
 lastmod: 2017-10-01 20:00:00

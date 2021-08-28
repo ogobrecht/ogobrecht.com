@@ -4,7 +4,7 @@
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">{{ .Title }}</h1>
   {{- if in (slice "posts") .Type }}{{ with .Page.Description }}<p class="item-subtitle">{{.}}</p>{{ end }}{{ end }}
-  {{- if .IsTranslated }}<p class="item-meta">{{ range .Translations }}<a href="{{ .RelPermalink }}">{{ .Param "translationHint" }}</a>{{ end }}</p>{{ end }}
+  {{ partial "translations.html" . }}
 </header>
 
 <div class="item-content" itemprop="articleBody">

@@ -1,7 +1,7 @@
 ---
 title: Table API Generator v0.5.0 Available
 description: Long changelog and took a long time 
-tags: [oracle, plsql, generator, oddgen]
+tags: [Oracle, PL/SQL, Generator, oddgen]
 slug: table-api-generator-v0.5.0-available
 publishdate: 2018-12-26
 lastmod: 2018-12-26 20:00:00

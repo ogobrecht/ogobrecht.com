@@ -1,7 +1,7 @@
 ---
 title: Sample Data Sets for Oracle
 description: A collection of common data sets for testing purposes
-tags: [project, oracle, script]
+tags: [Open source project, Oracle, Script]
 slug: sample-data-sets-for-oracle
 publishdate: 2020-05-25
 lastmod: 2020-05-25 14:00:00

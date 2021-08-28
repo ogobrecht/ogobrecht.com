@@ -1,7 +1,7 @@
 ---
 title: Markdown Reporter
 description: Write your reports with Markdown, get HTML or LaTeX PDFs
-tags: [project, oracle, plsql, nodejs, pandoc, python, matplotlib]
+tags: [Open source project, Oracle, PL/SQL, Node.js, Pandoc, Python, Matplotlib]
 slug: markdown-reporter
 publishdate: 2017-01-23
 lastmod: 2017-08-12 20:10:00

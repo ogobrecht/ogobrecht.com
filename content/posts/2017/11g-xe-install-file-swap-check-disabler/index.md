@@ -1,7 +1,7 @@
 ---
 title: Oracle DB 11gXE Install File Swap Check Disabler
 description: A Docker file to prepare the 11gXE install file for use in a container environment
-tags: [project, oracle, docker]
+tags: [Open source project, Oracle, Docker]
 slug: ora11xe-install-file-swap-check-disabler
 publishdate: 2017-06-13
 lastmod: 2017-08-12 20:11:00

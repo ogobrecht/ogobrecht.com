@@ -1,9 +1,12 @@
 {{ define "main" }}
 <section class="index">
-  <header class="item-header">
-    <h1 class="item-title">Sorry, page not found :-(</h1>
-  </header>
-  <div class="item-content">
+
+<header class="item-header">
+  <h1 class="item-title">Sorry, page not found :-(</h1>
+  {{ partial "translations.html" . }}
+</header>
+
+<div class="item-content">
 
 <p>The page you are looking for does not exist. Here is a list of the available posts in chronological order - please also note the navigation (<a href="/">back to home</a>):</p>
 
@@ -17,6 +20,7 @@
 </ul>
 {{ end }}
 
-  </div>
+</div>
+
 </section>
 {{ end }}
