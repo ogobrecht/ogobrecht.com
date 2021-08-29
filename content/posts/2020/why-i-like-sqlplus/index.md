@@ -79,7 +79,7 @@ Happy scripting :-)
 
 Ottmar
 
-P.S.: There is a small [Twitter
+PS: There is a small [Twitter
 discussion](https://twitter.com/ogobrecht/status/1212646721127366656) around
 this...
 

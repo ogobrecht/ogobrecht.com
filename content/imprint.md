@@ -1,15 +1,14 @@
 ---
 title: Imprint
 ---
-Legal information as required by german law:
 
-ogobrecht.com is maintained by
+Responsible for the content of this website:
 
-Ottmar Gobrecht<br>
-Knappertsbuschstraße 19<br>
-81927 München (Germany)<br>
+Ottmar Gobrecht\
+Knappertsbuschstraße 19\
+81927 München (Germany)\
 {{< author-email >}}
 
-For the german law I have to put the [privacy statement on a different page](/privacy-statement/).
+[Privacy statement](/privacy-statement/)
 
-More [about me and this site](/about/).
+[About me and this website](/about/)

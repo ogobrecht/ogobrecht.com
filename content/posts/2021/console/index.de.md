@@ -1,15 +1,17 @@
 ---
 title: "Ein weiteres Oracle DB Logging-Tool: Console"
 description: Einfache Installation und ein Mittel gegen übervolle Log-Tabellen
-tags: [Open-Source-Projekt, Oracle, APEX, PL/SQL, Log, Debug, Instrumentierung]
+tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: "ein-weiteres-oracle-db-logging-tool-console"
 publishdate: 2021-08-23
 lastmod: 2021-08-23 11:00:00
 ---
 
-{{< figure "APEX Error Handling mit eingeschalteter ASCII Art" >}}
-![APEX Error Handling mit eingeschalteter ASCII Art](apex-error-handling-function.png)
+{{< figure "Foto von Pete Nuij auf unsplash.com" >}}
+![Fliegende Eule](pete-nuij-m-AqW5QCxNQ-unsplash.jpg)
 {{< /figure >}}
+
+{{< toc >}}
 
 Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln...
 
@@ -171,7 +173,7 @@ Nutzt man nicht `console.error_save_stack` sondern immer nur `console.error`, da
 
 ## Methodennamen angelehnt an JavaScript Console
 
-Es wurden mit Absicht so viele Methodennamen aus der JavaScript Console wiederverwendet wie möglich - damit sollte der Wechsel zwischen Backendcode und Frontendcode nicht so schwer fallen was die Methodennamen angeht. Eine [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md) und ein [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument helfen bei den ersten Schritten.
+Ich habe mit Absicht so viele Methodennamen aus der JavaScript Console wiederverwendet wie möglich - damit sollte der Wechsel zwischen Backendcode und Frontendcode nicht so schwer fallen was die Methodennamen angeht. Eine [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md) und ein [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument helfen bei den ersten Schritten.
 
 ## Einfaches loggen von Methodenparametern
 
@@ -261,13 +263,17 @@ procedure error (
 
 ## Erweiterbare Logs durch überladene Log-Methoden
 
-Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID zurückliefert. Somit kann man das Logging auch mit eigenen Daten in eigenen Tabellen erweitern z.B. für einen nachgelagerten Prüfprozess im Falle von spezifischen Fehlern. Dafür ist dann auch der Parameter `p_permanent` gedacht, der dafür sorgt, das der Aufräumjob oder die Prozeduren `console.purge` und `console.purge_all` die entsprechend markierten Log-Einträge nicht löscht und diese permanent zur Verfügung stehen. Alle anderen Log-Methoden (warn, info, log, debug, trace) sind in gleicher Weise und mit den gleichen Parametern implementiert - haben aber teilweise andere Standardwerte. Bei der Error-Methode wird der Call-Stack geschrieben, bei der Trace-Methode  alle Umgebungen.
+Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID zurückliefert. Somit kann man das Logging auch mit eigenen Daten in eigenen Tabellen erweitern z.B. für einen nachgelagerten Freigabeprozess im Falle von spezifischen Fehlern. Dafür ist dann auch der Parameter `p_permanent` gedacht, der dafür sorgt, das der Aufräumjob oder die Prozeduren `console.purge` und `console.purge_all` die entsprechend markierten Log-Einträge nicht löscht und diese permanent zur Verfügung stehen. Alle anderen Log-Methoden (warn, info, log, debug, trace) sind in gleicher Weise und mit den gleichen Parametern implementiert - haben aber teilweise andere Standardwerte. Bei der Error-Methode wird der Call-Stack geschrieben, bei der Trace-Methode  alle Umgebungen.
 
 Die Parameter `p_user_agent`, `p_user_scope`, `p_user_error_code` und `p_user_call_stack` sind dafür gedacht, auch externe Log-Ereignisse erfassen und die automatisch ermittelten Werte der PL/SQL-Umgebung überschreiben zu können. Als Beispiel sei ein externer Ladeprozess in einem Data-Warhouse genannt oder Fehlermeldungen aus dem JavaScript-Frontend einer Anwendung. Mit ein wenig Phantasie werden hier jedem eigene Anwendungsfälle in den Sinn kommen...
 
 ## APEX Error Handling Function
 
 Für APEX bringt Console eine sogenannte "Error Handling Function" mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im "Application Builder" unter "Edit Application Properties > Error Handling > Error Handling Function" eintragen: `console.apex_error_handling`.
+
+{{< figure "APEX Error Handling mit eingeschalteter ASCII Art" >}}
+![APEX Error Handling mit eingeschalteter ASCII Art](apex-error-handling-function.png)
+{{< /figure >}}
 
 ## APEX Plug-In für die Erfassung von Frontend-Fehlern
 

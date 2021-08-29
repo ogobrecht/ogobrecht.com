@@ -9,7 +9,7 @@ lastmod: 2019-08-15 21:00:00
 
 *Many Oracle projects still do not use version control. The reasons for this are manifold. Mostly it is assumed that the database is a safe place for the source code. With a working backup this is also correct, but in any case one loses the complete history of changes. Often in running projects there is not enough time to deal with the introduction of source code versioning, because at first sight there is no direct benefit to be seen. Who dares to take a second look under time pressure? This article wants to lower the hurdle for the introduction of a version management a little bit.*
 
-{{< toc "Inhaltsverzeichnis" >}}
+{{< toc >}}
 
 ## Note DOAG
 

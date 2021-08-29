@@ -2,15 +2,14 @@
 title: Impressum
 slug: impressum
 ---
-Legal information as required by german law:
 
-ogobrecht.com is maintained by
+Verantwortlich für den Inhalt dieser Webseite:
 
-Ottmar Gobrecht<br>
-Knappertsbuschstraße 19<br>
-81927 München (Germany)<br>
+Ottmar Gobrecht\
+Knappertsbuschstraße 19\
+81927 München (Germany)\
 {{< author-email >}}
 
-For the german law I have to put the [privacy statement on a different page](/privacy-statement/).
+[Datenschutz-Erklärung](/de/datenschutz-erklaerung/)
 
-More [about me and this site](/about/).
+[Über mich und diese Website](/de/ueber/)

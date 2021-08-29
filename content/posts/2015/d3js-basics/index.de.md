@@ -8,7 +8,7 @@ publishdate: 2015-03-01
 lastmod: 2019-08-15 21:00:00
 ---
 
-{{< toc "Inhaltsverzeichnis" >}}
+{{< toc >}}
 
 ## Einleitung
 

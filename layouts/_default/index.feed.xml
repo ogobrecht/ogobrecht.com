@@ -7,7 +7,7 @@
   {{ with .Site.Params.author.url }}<uri>{{ . | absURL | htmlEscape }}</uri>{{ end }}
 </author>
 <id>{{ .Permalink }}index.xml</id>
-<link href="{{ .Permalink }}index.xml" rel="self" type="application/atom+xml" />
+<link href="{{ .Permalink }}feed.xml" rel="self" type="application/atom+xml" />
 <link href="{{ .Permalink }}" rel="alternate" type="text/html" hreflang="{{ .Language.Lang }}" />
 <generator uri="https://gohugo.io/" version="{{ hugo.Version }}">Hugo</generator>
 <updated>{{ dateFormat "2006-01-02T15:04:05" now }}+01:00</updated>

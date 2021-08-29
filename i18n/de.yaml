@@ -1,10 +1,12 @@
 - id: home
-  translation: "Start"
+  translation: Start
 - id: contact
-  translation: "Kontakt"
+  translation: Kontakt
 - id: legal
-  translation: "Rechtliche Dinge"
+  translation: Rechtliche Dinge
 - id: imprint
-  translation: "Impressum"
+  translation: Impressum
 - id: posts_tagged_with
-  translation: "Beiträge getaggt mit"
+  translation: Beiträge getaggt mit
+- id: toc 
+  translation: Inhaltsverzeichnis

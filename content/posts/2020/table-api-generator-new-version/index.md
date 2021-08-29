@@ -9,7 +9,7 @@ lastmod: 2020-12-27 15:00:00
 
 Short before Christmas André and I released version 0.6.0 of our [table API generator](https://github.com/OraMUC/table-api-generator). The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the [complete changelog is available on GitHub](https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#060-2020-12-20).
 
-{{< toc "Table of Contents" >}}
+{{< toc >}}
 
 ## Bulk Processing
 

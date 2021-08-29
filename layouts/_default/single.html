@@ -9,6 +9,13 @@
 
 <div class="item-content" itemprop="articleBody">
 
+{{- if .Params.featured_image }}
+<figure>
+  <img src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt }}">
+  <figcaption>{{ .Params.featured_image_caption }}</figcaption>
+</figure>
+{{- end }}
+
 {{ .Content }}
 
 </div>{{ "<!--articleBody-end-->" | safeHTML }}
@@ -22,8 +29,9 @@
 
 </article>
 
-{{ if in (slice "posts") .Type }}
-{{ if in (slice "en") .Language.Lang }}
+{{- if in (slice "posts") .Type }}
+{{- if in (slice "en") .Language.Lang }}
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -32,9 +40,9 @@
         crossorigin="anonymous"
         async>
 </script>
-{{ else }}
-<p class="item-meta">{{ range .Translations }}<a href="{{ .RelPermalink }}">{{ .Param "commentHint" }}</a>{{ end }}</p>
-{{ end }}
-{{ end }}
+{{- else }}
+<p class="item-meta">{{ range .Translations }}<a href="{{ .RelPermalink }}#comments">{{ .Param "commentHint" }}</a>{{ end }}</p>
+{{- end }}
+{{- end }}
 
-{{ end }}
+{{- end }}

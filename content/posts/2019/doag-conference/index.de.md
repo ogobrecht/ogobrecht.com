@@ -1,7 +1,7 @@
 ---
 title: DOAG Konferenz 2019
 description: "Vortrag: Schnellstart - Versionskontrolle für existierende Oracle Projekte"
-tags: [Oracle, APEX, Version control, slides, DOAG]
+tags: [Oracle, APEX, Version control, Slides, DOAG]
 slug: doag-konferenz
 aliases: [/posts/2019-11-19-doag-konferenz/]
 publishdate: 2019-11-19

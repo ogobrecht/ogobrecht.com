@@ -1,7 +1,7 @@
 ---
 title: PLOC - Convert PL/SQL Code into Markdown Docs
 description: Another way to document PL/SQL business logic
-tags: [Open source project, Oracle, PL/SQL, Generator, Converter, docs, npm]
+tags: [Open source project, Oracle, PL/SQL, Generator, Converter, Markdown, npm]
 slug: ploc-plsql-code-to-doc-converter
 publishdate: 2019-01-10
 lastmod: 2019-01-11 20:02:00

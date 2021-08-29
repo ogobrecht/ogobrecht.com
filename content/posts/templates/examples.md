@@ -7,7 +7,7 @@ publishdate: 2099-12-31
 
 ## Table of Contents
 
-{{< toc "Table of Contents" >}}
+{{< toc >}}
 
 ## Code Figure With Shortcode
 

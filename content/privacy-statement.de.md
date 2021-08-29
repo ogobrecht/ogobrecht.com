@@ -2,9 +2,9 @@
 title: Datenschutz-Erklärung
 slug: datenschutz-erklaerung
 ---
-I don't use any user tracking. This site is hosted on the infrastructure of strato.de and I have only access to the standard web server logs. The used commenting system is based on GitHub issues (no tracking, no ads).
 
-For the german law I have to put the [imprint on a different page](/imprint/).
+Ich verwende kein User-Tracking. Diese Seite wird auf der Infrastruktur von strato.de gehostet und ich habe nur Zugriff auf die Standard-Webserver-Logs. Das verwendete Kommentarsystem basiert auf GitHub-Issues (kein Tracking, keine Werbung).
 
-More [about me and this site](/about/).
+[Impressum](/de/impressum/)
 
+[Über mich und diese Website](/de/ueber/)

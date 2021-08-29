@@ -1,7 +1,7 @@
 ---
 title: DokuWiki Plugin Reveal.js
 description: My contributions to an existing DokuWiki slideshow plugin
-tags: [Open source project, DokuWIki, Plug-in, Reveal.js, PHP]
+tags: [Open source project, DokuWiki, Plug-in, Reveal.js, PHP]
 slug: dokuwiki-plugin-revealjs
 publishdate: 2017-03-05
 lastmod: 2017-08-12 20:09:00
@@ -17,7 +17,7 @@ Happy presenting :-)
 
 Ottmar
 
-P.S.: In the meantime I switched complete to Markdown and [Jekyll][5], a static site generator - but this is another story for another post ...
+PS: In the meantime I switched complete to Markdown and [Jekyll][5], a static site generator - but this is another story for another post ...
 
 [1]: https://www.dokuwiki.org
 [2]: http://pandoc.org

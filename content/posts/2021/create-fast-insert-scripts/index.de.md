@@ -6,17 +6,17 @@ slug: create-fast-insert-scripts
 publishdate: 2021-01-31
 lastmod: 2021-02-08 21:00:00
 featured_image: indira-tjokorda-Y-VYK0SDLxs-unsplash.jpg
-featured_image_alt: Athletes with inline skates
-featured_image_caption: Photo by Indira Tjokorda on unsplash.com
+featured_image_alt: Sportler auf Inlineskates
+featured_image_caption: Foto von Indira Tjokorda auf unsplash.com
 ---
 
-A few weeks ago I released a new version of my [PLEX project](https://github.com/ogobrecht/plex). I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.
+Vor einigen Wochen habe ich eine neue Version meines [PLEX-Projekts](https://github.com/ogobrecht/plex) veröffentlicht. Ich habe die Möglichkeit verbessert, Tabellendaten als Insert-Skripte zu exportieren. Bisher war PLEX nur in der Lage, CSV-Daten zu exportieren. Der Grund dafür war, dass ich PLEX ursprünglich entwickelt habe, um die Einführung einer Versionskontrolle in Oracle-DB-Projekten zu beschleunigen, und die Möglichkeit CSV-Daten zu exportieren war dazu gedacht, Änderungen in Stammdatentabellen zu verfolgen.
 
-It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application. I implemented an initial version, but was not happy with the runtime of the insert scripts. I now hear some people arguing that there are better tools than insert scripts for importing larger amounts of data - but sometimes this is the only accepted way because only SQL*Plus is available to run the deployment scripts....
+Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert. Ich habe eine erste Version implementiert, war aber mit der Laufzeit der Insert-Skripte nicht zufrieden. Ich höre jetzt einige Leute argumentieren, dass es bessere Tools als Insert-Skripte für den Import größerer Datenmengen gibt - aber manchmal ist dies der einzige akzeptierte Weg, weil nur SQL*Plus zur Ausführung der Deployment-Skripte zur Verfügung steht...
 
-Then I stumbled across an older post by [Connor McDonald on creating fast insert scripts] (https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/). I have integrated his performance hacks into PLEX.
+Dann bin ich über einen älteren Beitrag von [Connor McDonald über die Erstellung schneller Insert-Skripte] (https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/) gestolpert. Ich habe seine Performance-Hacks in PLEX integriert.
 
-You can use them as follows (see last parameter):
+Ihr könnt sie wie folgt verwenden (siehe letzter Parameter):
 
 ```sql
 DECLARE
@@ -40,13 +40,13 @@ END;
 /
 ```
 
-The `p_data_format` parameter is new and can contain a comma-separated list of formats - currently the CSV and INSERT formats are supported. An example: `csv,insert` exports for each table a CSV file and a SQL file with insert statements. For insert you can also specify the number of rows per `insert all` statement (default value is 20) - example: `csv,insert:10` or `insert:5`.
+Der Parameter `p_data_format` ist neu und kann eine durch Komma getrennte Liste von Formaten enthalten - derzeit werden die Formate CSV und INSERT unterstützt. Ein Beispiel: `csv,insert` exportiert für jede Tabelle eine CSV-Datei und eine SQL-Datei mit Insert-Anweisungen. Für insert kann man auch  die Anzahl der Zeilen pro `insert all`-Anweisung angeben (Standardwert ist 20) - Beispiel: `csv,insert:10` oder `insert:5`.
 
-As you can see from the `p_data_table_name_not_like => '%\_HIST,LOGGER%'` parameter, PLEX also accepts lists with like filters. In our example `%\_HIST,LOGGER%` is converted to `where ... and (table_name not like '%\_HIST' escape '\' and table_name not like 'LOGGER%' escape '\')`. For the parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` the tables are filtered as follows: `where ... and (table_name like 'CAT\_%' escape '\' or table_name like 'USERS' escape '\' or ... )`.
+Wie Ihr an dem Parameter `p_data_table_name_not_like => '%\_HIST,LOGGER%'` sehen könnt, akzeptiert PLEX auch Listen mit Like-Filtern. In unserem Beispiel wird `%\_HIST,LOGGER%` in `where ... and (table_name not like '%\_HIST' escape '\' and table_name not like 'LOGGER%' escape '\')` übersetzt. Für den Parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` werden die Tabellen folgendermaßen gefiltert: `where ... and (table_name like 'CAT\_%' escape '\' or table_name like 'USERS' escape '\' or ... )`.
 
-There is a good reason why the default `p_data_max_rows` parameter is set to `1000` - if you don't specify table name filters, all tables will be exported...
+Es gibt einen guten Grund, warum die Voreinstellung des Parameters `p_data_max_rows` auf `1000` gesetzt ist - wenn Ihr keine Tabellennamenfilter angebt, werden alle Tabellen exportiert...
 
-The resulting insert scripts look like this:
+Die resultierenden Insert-Skripte sehen wie folgt aus:
 
 ```sql
 -- Script generated by PLEX version 2.4.2 - more infos here: https://github.com/ogobrecht/plex
@@ -91,9 +91,9 @@ alter session set cursor_sharing = exact;
 set define on
 ```
 
-PLEX saves the NLS settings of the current session and makes sure that the insert scripts run with the same settings - this means that you should not get any number or date conversion errors. The performance hacks from Connor are `alter session set cursor_sharing = force;` and `insert all` - thanks for pointing that out Connor :-)
+PLEX speichert die NLS-Einstellungen der aktuellen Session und sorgt dafür, dass die Insert-Skripte mit den gleichen Einstellungen laufen - das bedeutet, dass Ihr keine Fehler bei der Zahlen- oder Datumsumwandlung bekommen solltet. Die Performance-Hacks von Connor sind `alter session set cursor_sharing = force;` und `insert all` - danke für den Hinweis Connor :-)
 
-PLEX has many parameters to configure the export - the focus of PLEX is to quickly introduce version control to existing projects (see also [this article about PLEX in general](/posts/2018-08-26-plex-plsql-export-utilities/)). If you want to use PLEX only for exporting table data, then you should create a wrapper function for it that suits your personal needs - here is an example:
+PLEX hat viele Parameter, um den Export zu konfigurieren - der Fokus von PLEX liegt auf der schnellen Einführung einer Versionskontrolle in bestehenden Projekten (siehe auch [diesen Artikel über PLEX im Allgemeinen](/posts/2018-08-26-plex-plsql-export-utilities/)). Wenn Ihr PLEX nur für den Export von Tabellendaten verwenden wollt, dann solltet Ihr Euch eine Wrapper-Funktion dafür erstellen, die Euren persönlichen Bedürfnissen entspricht - hier ein Beispiel:
 
 ```sql
 create or replace function to_insert (
@@ -118,8 +118,8 @@ end;
 /
 ```
 
-Now you can always do a quick export like this: `select to_insert('USERS', 10000) from dual;`
+Jetzt könnt Ihr jederzeit einen schnellen Export wie folgt durchführen: `select to_insert('USERS', 10000) from dual;`
 
-Happy exporting and scripting :-)
+Viel Spaß beim Exportieren und Skripten :-)
 
 Ottmar

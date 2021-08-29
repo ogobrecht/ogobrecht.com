@@ -1,7 +1,7 @@
 ---
 title: Reporting mal anders, Markdown sei Dank
 description: DOAG Konferenz 2016, Nürnberg
-tags: [Oracle, APEX, DOAG, slides, Markdown, Chart]
+tags: [Oracle, APEX, DOAG, Slides, Markdown, Chart]
 slug: reporting-mal-anders-markdown-sei-dank
 aliases: [/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/]
 publishdate: 2016-11-17

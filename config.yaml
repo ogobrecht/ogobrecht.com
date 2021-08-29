@@ -54,8 +54,8 @@ languages:
         - name: PL/SQL
           url: /tags/pl/sql/
           weight: 30
-        - name: Open Source Projekte
-          url: /tags/open-source-projekt/
+        - name: Open-Source-Projekte
+          url: /tags/open-source-project/
           weight: 40
         - name: Beitragsarchiv
           url: /archiv/
@@ -115,6 +115,7 @@ params:
   author:
     name: Ottmar Gobrecht
     email: ottmar.gobrecht@gmail.com
+    twitter: "@ogobrecht"
     url: /about/
     socialMedia:
       - name: GitHub

@@ -16,6 +16,6 @@ I'm a bit active in open source development - you can find my projects on [GitHu
 
 In recent years, I have often been pleased to find solutions, information and open source code that others have provided on their blogs and community sites. Writing down my own experiences and making my code available in the form of open source projects is my way of giving something back from what I have received before.
 
-## This Site
+## This Webite
 
 This website was created using [Hugo](https://gohugo.io/) (a static site generator) and my own template. The sources are [available on GitHub](https://github.com/ogobrecht/ogobrecht.com).

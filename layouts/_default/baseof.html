@@ -7,18 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title | default .Site.Title | htmlEscape }}</title>
   {{ if .Description }}<meta name="description" content="{{ .Description | htmlEscape | chomp | truncate 160 }}">{{ else }}{{ "<!-- no description available -->" | safeHTML }}{{ end }}
-  <meta name="author" content="{{ with .Site.Params.author.name }}{{ . }}{{ end }}">
+  <meta name="author" content="{{ .Site.Params.author.name }}">
   {{ hugo.Generator }}
   {{- $cssOptions := (dict "outputStyle" "compressed" "enableSourceMap" true "targetPath" "assets/styles/main.css") }}
   {{- $css := resources.Get "sass/main.scss" | toCSS $cssOptions }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
   <link rel="canonical" href="{{ .Permalink }}">
-  {{- if .IsTranslated }}
-  {{- range .Translations }}
-  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
-  {{- end }}
-  {{- end }}
-  <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title | htmlEscape }}" href="{{ .Site.BaseURL }}feed.xml">
+  {{- if .IsTranslated }}{{- range .Translations }}
+  <link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Language.Lang }}" title="{{ .Language.LanguageName }}">
+  {{- end }}{{- end }}
+  <link rel="alternate" href="{{ "/" | absLangURL }}feed.xml" type="application/atom+xml" title="{{ .Site.Title | htmlEscape }}">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -38,6 +36,23 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  {{- if in (slice "posts") .Type }}
+  {{- if .Params.featured_image }}
+  <meta name="twitter:card" content="summary_large_image">
+  {{- else }}
+  <meta name="twitter:card" content="summary">
+  {{- end }}
+  <meta name="twitter:site" content="{{ .Site.Params.author.twitter }}">
+  <meta name="twitter:title" content="{{ .Title | htmlEscape }}">
+  <meta name="twitter:description" content="{{ .Description | htmlEscape | chomp | truncate 160 }}">
+  {{- if .Params.featured_image }}
+  <meta name="twitter:image" content="{{ .Params.featured_image }}">
+  <meta name="twitter:image:alt" content="{{ .Params.featured_image_alt }}">
+  {{- else }}
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
+  {{- end }}
+  {{- end }}
   {{ `<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->` | safeHTML }}
 </head>
 

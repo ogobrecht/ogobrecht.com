@@ -1,11 +1,13 @@
 - id: home
-  translation: "Home"
+  translation: Home
 - id: contact
-  translation: "Contact"
+  translation: Contact
 - id: legal
-  translation: "Legal Things"
+  translation: Legal Things
 - id: imprint
-  translation: "Imprint"
+  translation: Imprint
 - id: posts_tagged_with
-  translation: "Posts tagged with"
+  translation: Posts tagged with
+- id: toc 
+  translation: Table of Contents
   

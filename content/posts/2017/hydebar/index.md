@@ -9,7 +9,7 @@ lastmod: 2017-12-01 20:00:00
 
 Earlier this year I wrote at the end of [this post][1]:
 
-> P.S.: In the meantime I switched complete to Markdown and [Jekyll][2], a static site generator - but this is another story for another post ...
+> PS: In the meantime I switched complete to Markdown and [Jekyll][2], a static site generator - but this is another story for another post ...
 
 As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the [JSDoc theme Minami][3] and the [Liquid docs site][4] - both with nice sidebars. I wanted to have such a nice sidebar for my dev blog and began to look deeper how it was implemented. To my surprise the sidebar from the JSDoc theme Minami was complete CSS driven - cool.
 
