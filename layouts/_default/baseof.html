@@ -80,9 +80,9 @@
       </header>
       <nav>
         <ul>
-          {{- $currentPage := . -}}
+          {{- $currentPage := . }}
           {{- range .Site.Menus.main }}
-          <li><a{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="active"{{ end }} href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+          <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
           {{- end }}
         </ul>
         <h3>{{ i18n "contact" }}</h3>
@@ -95,7 +95,7 @@
         <h3>{{ i18n "legal" }}</h3>
         <ul>
           {{- range .Site.Menus.legal }}
-          <li><a{{ if $currentPage.IsMenuCurrent "legal" . }} class="active"{{ end }} href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+          <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
           {{- end }}
         </ul>
       </nav>
