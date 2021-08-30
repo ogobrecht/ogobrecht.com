@@ -1,10 +1,10 @@
 ---
 title: Create Fast Insert Scripts
 description: PL/SQL Export Utilities are now able to export table data as insert scripts
-tags: [Oracle, Script]
+tags: [Oracle, Script, Generator]
 slug: create-fast-insert-scripts
 publishdate: 2021-01-31
-lastmod: 2021-02-08 21:00:00
+lastmod: 2021-08-30 13:00:00
 featured_image: indira-tjokorda-Y-VYK0SDLxs-unsplash.jpg
 featured_image_alt: Sportler auf Inlineskates
 featured_image_caption: Foto von Indira Tjokorda auf unsplash.com
@@ -14,7 +14,7 @@ Vor einigen Wochen habe ich eine neue Version meines [PLEX-Projekts](https://git
 
 Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert. Ich habe eine erste Version implementiert, war aber mit der Laufzeit der Insert-Skripte nicht zufrieden. Ich höre jetzt einige Leute argumentieren, dass es bessere Tools als Insert-Skripte für den Import größerer Datenmengen gibt - aber manchmal ist dies der einzige akzeptierte Weg, weil nur SQL*Plus zur Ausführung der Deployment-Skripte zur Verfügung steht...
 
-Dann bin ich über einen älteren Beitrag von [Connor McDonald über die Erstellung schneller Insert-Skripte] (https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/) gestolpert. Ich habe seine Performance-Hacks in PLEX integriert.
+Dann bin ich über einen älteren Beitrag von [Connor McDonald über die Erstellung schneller Insert-Skripte](https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/) gestolpert. Ich habe seine Performance-Hacks in PLEX integriert.
 
 Ihr könnt sie wie folgt verwenden (siehe letzter Parameter):
 
@@ -42,7 +42,25 @@ END;
 
 Der Parameter `p_data_format` ist neu und kann eine durch Komma getrennte Liste von Formaten enthalten - derzeit werden die Formate CSV und INSERT unterstützt. Ein Beispiel: `csv,insert` exportiert für jede Tabelle eine CSV-Datei und eine SQL-Datei mit Insert-Anweisungen. Für insert kann man auch  die Anzahl der Zeilen pro `insert all`-Anweisung angeben (Standardwert ist 20) - Beispiel: `csv,insert:10` oder `insert:5`.
 
-Wie Ihr an dem Parameter `p_data_table_name_not_like => '%\_HIST,LOGGER%'` sehen könnt, akzeptiert PLEX auch Listen mit Like-Filtern. In unserem Beispiel wird `%\_HIST,LOGGER%` in `where ... and (table_name not like '%\_HIST' escape '\' and table_name not like 'LOGGER%' escape '\')` übersetzt. Für den Parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` werden die Tabellen folgendermaßen gefiltert: `where ... and (table_name like 'CAT\_%' escape '\' or table_name like 'USERS' escape '\' or ... )`.
+Wie Ihr an dem Parameter `p_data_table_name_not_like => '%\_HIST,LOGGER%'` sehen könnt, akzeptiert PLEX auch Listen mit Like-Filtern. In unserem Beispiel wird `%\_HIST,LOGGER%` übersetzt in:
+
+```sql
+where ... 
+  and (    table_name not like '%\_HIST' escape '\' 
+       and table_name not like 'LOGGER%' escape '\'
+       and ...
+      )
+```
+
+Für den Parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` werden die Tabellen folgendermaßen gefiltert:
+
+```sql
+where ... 
+  and (   table_name like 'CAT\_%' escape '\' 
+       or table_name like 'USERS'  escape '\' 
+       or ...
+      )
+```
 
 Es gibt einen guten Grund, warum die Voreinstellung des Parameters `p_data_max_rows` auf `1000` gesetzt ist - wenn Ihr keine Tabellennamenfilter angebt, werden alle Tabellen exportiert...
 

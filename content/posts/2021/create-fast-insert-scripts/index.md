@@ -1,10 +1,10 @@
 ---
 title: Create Fast Insert Scripts
 description: PL/SQL Export Utilities are now able to export table data as insert scripts
-tags: [Oracle, Script]
+tags: [Oracle, Script, Generator]
 slug: create-fast-insert-scripts
 publishdate: 2021-01-31
-lastmod: 2021-02-08 21:00:00
+lastmod: 2021-08-30 13:00:00
 featured_image: indira-tjokorda-Y-VYK0SDLxs-unsplash.jpg
 featured_image_alt: Athletes with inline skates
 featured_image_caption: Photo by Indira Tjokorda on unsplash.com
@@ -14,7 +14,7 @@ A few weeks ago I released a new version of my [PLEX project](https://github.com
 
 It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application. I implemented an initial version, but was not happy with the runtime of the insert scripts. I now hear some people arguing that there are better tools than insert scripts for importing larger amounts of data - but sometimes this is the only accepted way because only SQL*Plus is available to run the deployment scripts....
 
-Then I stumbled across an older post by [Connor McDonald on creating fast insert scripts] (https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/). I have integrated his performance hacks into PLEX.
+Then I stumbled across an older post by [Connor McDonald on creating fast insert scripts](https://connor-mcdonald.com/2019/05/17/hacking-together-faster-inserts/). I have integrated his performance hacks into PLEX.
 
 You can use them as follows (see last parameter):
 
@@ -42,7 +42,25 @@ END;
 
 The `p_data_format` parameter is new and can contain a comma-separated list of formats - currently the CSV and INSERT formats are supported. An example: `csv,insert` exports for each table a CSV file and a SQL file with insert statements. For insert you can also specify the number of rows per `insert all` statement (default value is 20) - example: `csv,insert:10` or `insert:5`.
 
-As you can see from the `p_data_table_name_not_like => '%\_HIST,LOGGER%'` parameter, PLEX also accepts lists with like filters. In our example `%\_HIST,LOGGER%` is converted to `where ... and (table_name not like '%\_HIST' escape '\' and table_name not like 'LOGGER%' escape '\')`. For the parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` the tables are filtered as follows: `where ... and (table_name like 'CAT\_%' escape '\' or table_name like 'USERS' escape '\' or ... )`.
+As you can see from the `p_data_table_name_not_like => '%\_HIST,LOGGER%'` parameter, PLEX also accepts lists with like filters. In our example `%\_HIST,LOGGER%` is translated to:
+
+```sql
+where ... 
+  and (    table_name not like '%\_HIST' escape '\' 
+       and table_name not like 'LOGGER%' escape '\'
+       and ...
+      )
+```
+
+For the parameter `p_data_table_name_like => 'CAT\_%,USERS,ROLES,RIGHTS'` the tables are filtered as follows:
+
+```sql
+where ... 
+  and (   table_name like 'CAT\_%' escape '\' 
+       or table_name like 'USERS'  escape '\' 
+       or ...
+      )
+```
 
 There is a good reason why the default `p_data_max_rows` parameter is set to `1000` - if you don't specify table name filters, all tables will be exported...
 

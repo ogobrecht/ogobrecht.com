@@ -267,6 +267,82 @@ The error procedure has an overload in the form of a function that returns the l
 
 The parameters `p_user_agent`, `p_user_scope`, `p_user_error_code` and `p_user_call_stack` are meant to be able to capture external log events as well and to overwrite the automatically determined values of the PL/SQL environment. As an example an external load process in a data warehouse or error messages from the JavaScript frontend of an application can be mentioned. With a little bit of imagination, everyone's own use cases will come to mind here...
 
+## Assert, format and other helpers
+
+Of course, there are some helper methods that make the developer's life more pleasant. First of all, the assert procedure should be mentioned. Everybody should know this recurring pattern:
+
+```sql
+if not x < y then
+  raise_application_error(-20999, 'X should be less than Y');
+else
+  -- your code here
+end if;
+```
+
+It gets especially ugly when you have to check multiple conditions. The whole thing can also be formulated as a one-liner:
+
+```sql
+console.assert(x < y, 'x should be less then y');
+```
+
+If you want to enrich texts with dynamic information, then you are quickly in concatenation hell:
+
+```sql
+console.assert(
+  x < y,
+  'x should be less then y (x=' 
+  || to_char(x)
+  || ', y='
+  || to_char(y)
+  || ')'
+);
+```
+
+Here the `format` function can help you:
+
+```sql
+console.assert(
+  x < y, 
+  console.format(
+    'x should be less then y (x=%s, y=%s)',
+    to_char(x),
+    to_char(y)
+  )
+);
+```
+
+`format` accepts up to 10 parameters and works according to the following rules:
+
+1. replace all occurrences of `%0` ... `%9` with the corresponding parameters `p0` ... `p9`
+2. replace `%n` with new lines (line feed character)
+3. replace all occurrences of `%s` in positional order with the corresponding parameters with sys.utl_lms.format_message - see also the [Oracle docs](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_LMS.html#GUID-88FFBFB6-FCA4-4951-884B-B0275BD5DF44)
+
+I personally am very reluctant to type `dbms_output.put_line`. Console does write to a log table with all the log methods, but actually the word console suggests that we can also write directly to the server output, right? For that we have the procedure `print`:
+
+```sql
+console.print('A message');
+```
+
+Then there are the short forms of `console.print(console.format(...))` and `console.assert([boolean expression], console.format(...))`:
+
+```sql
+console.printf(
+  'A %s message with a %n second line of text',
+  'dynamic'
+);
+
+console.assertf(
+  x < y, 
+  'x should be less then y (x=%s, y=%s)',
+  to_char(x),
+  to_char(y)
+);
+```
+
+Also often needed is a fast, cached clob concatenation - that's where Console can help with [clob_append](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_append) & [clob_flush_cache](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_flush_cache).
+
+More can be found in the [API overview](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
+
 ## APEX Error Handling Function
 
 For APEX, Console comes with a so-called "Error Handling Function", which can enter errors within the APEX runtime environment into the log table. If you want to use this, you have to enter this function in your application in the "Application Builder" under "Edit Application Properties > Error Handling > Error Handling Function": `console.apex_error_handling`.
@@ -280,6 +356,19 @@ For APEX, Console comes with a so-called "Error Handling Function", which can en
 Furthermore, there is an APEX Dynamic Action Plug-In, which enters JavaScript errors in the user's browser into the log table via AJAX call. With this plug-in you can also see, if the frontend is not running smoothly...
 
 If you want to use it, you can find it in the folder `install/apex_plugin.sql`.
+
+## Sources of inspiration
+
+I am not alone in the world and without the others not much goes in software development. Here are a few links to sites or projects that inspired me on the way to my own logging tool:
+
+- [JavaScript Console API](https://developers.google.com/web/tools/chrome-devtools/console/api)
+- [Logger](https://github.com/OraOpenSource/Logger)
+- [Instrumentation for PLSQL](https://github.com/connormcd/instrumentation)
+- [PIT](https://github.com/j-sieben/PIT/)
+
+Special thanks to [Dietmar Aust](https://twitter.com/daust_de), who gave me time and ideas with a discussion session at an early stage.
+
+## Project homepage
 
 Console is hosted on [GitHub](https://github.com/ogobrecht/console).
 

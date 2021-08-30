@@ -267,6 +267,82 @@ Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID z
 
 Die Parameter `p_user_agent`, `p_user_scope`, `p_user_error_code` und `p_user_call_stack` sind dafür gedacht, auch externe Log-Ereignisse erfassen und die automatisch ermittelten Werte der PL/SQL-Umgebung überschreiben zu können. Als Beispiel sei ein externer Ladeprozess in einem Data-Warhouse genannt oder Fehlermeldungen aus dem JavaScript-Frontend einer Anwendung. Mit ein wenig Phantasie werden hier jedem eigene Anwendungsfälle in den Sinn kommen...
 
+## Assert, format und andere Helferlein
+
+Selbstverständlich gibt es einige Hilfsmethoden, die das Entwicklerleben angenehmer machen. Zuerst sei die Assert-Prozedur genannt. Dieses immer wiederkehrende Muster sollte jeder kennen:
+
+```sql
+if not x < y then
+  raise_application_error(-20999, 'x should be less then y');
+else
+  -- your code here
+end if;
+```
+
+Besonders hässlich wird es, wenn man mehrere Bedingungen prüfen muss. Das ganze kann man auch als Einzeiler formulieren:
+
+```sql
+console.assert(x < y, 'x should be less then x');
+```
+
+Möchte man Texte mit dynamischen Informationen anreichern, dann ist man schnell in der Verknüpfungshölle:
+
+```sql
+console.assert(
+  x < y, 
+  'x should be less then y (x='
+  || to_char(x)
+  || ', y='
+  || to_char(y)
+  || ')'
+);
+```
+
+Hier kann einem dann die `format` Funktion helfen:
+
+```sql
+console.assert(
+  x < y, 
+  console.format(
+    'X should be less then Y (x=%s, y=%s)',
+    to_char(x),
+    to_char(y)
+  )
+);
+```
+
+`format` akzeptiert bis zu 10 Parameter und arbeitet nach folgenden Regeln:
+
+1. Ersetze alle Vorkommen von `%0` .. `%9` mit den entsprechenden Parameter `p0` ... `p9`
+2. Ersetze `%n` durch neue Zeilen (Zeilenvorschubzeichen)
+3. Ersetze alle Vorkommen von `%s` in positioneller Reihenfolge durch die entsprechenden Parameter mit sys.utl_lms.format_message - siehe auch die [Oracle docs](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_LMS.html#GUID-88FFBFB6-FCA4-4951-884B-B0275BD5DF44)
+
+Ich persönlich tippe sehr ungern `dbms_output.put_line`. Console schreibt zwar mit allen Log-Methoden in eine Log-Tabelle, aber eigentlich legt das Wort Console ja nahe, dass wir auch direkt in den Serveroutput schreiben können, oder? Dafür gibt es dann die Prozedur `print`:
+
+```sql
+console.print('A message');
+```
+
+Dann gibt es noch die Kurzformen von `console.print(console.format(...))` und `console.assert([boolean expression], console.format(...))`:
+
+```sql
+console.printf(
+  'A %s message with a %n second line of text',
+  'dynamic'
+);
+
+console.assertf(
+  x < y, 
+  'x should be less then y (x=%s, y=%s)',
+  to_char(x),
+  to_char(y)
+);
+```
+
+Auch häufig gebraucht wird eine schnelle, gecachte Clob-Verknüpfung - da kann dann Console mit [clob_append](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_append) & [clob_flush_cache](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_flush_cache) helfen.
+
+Mehr gibt es in der [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
+
 ## APEX Error Handling Function
 
 Für APEX bringt Console eine sogenannte "Error Handling Function" mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im "Application Builder" unter "Edit Application Properties > Error Handling > Error Handling Function" eintragen: `console.apex_error_handling`.
@@ -280,6 +356,19 @@ Für APEX bringt Console eine sogenannte "Error Handling Function" mit, die Fehl
 Desweiteren gibt es noch ein APEX Dynamic Action Plug-In, welches JavaScript-Fehler im Browser der Anwender per AJAX-Call in die Log-Tabelle einträgt. Damit bekommt man auch mit, wenn es im Frontend bei den Anwendern nicht so richtig rund läuft...
 
 Wer es nutzen möchte findet es im Ordner `install/apex_plugin.sql`.
+
+## Inspirationsquellen
+
+Ich bin nicht allein auf der Welt und ohne die Anderen geht auch bei der Softwareentwicklung nicht viel. Hier ein paar Links zu Seiten oder Projekten, die mich auf dem Weg zu einem eigenen Logging-Tool inspiriert haben:
+
+- [JavaScript Console API](https://developers.google.com/web/tools/chrome-devtools/console/api)
+- [Logger](https://github.com/OraOpenSource/Logger)
+- [Instrumentation for PLSQL](https://github.com/connormcd/instrumentation)
+- [PIT](https://github.com/j-sieben/PIT/)
+
+Ein besonderer Dank geht an [Dietmar Aust](https://twitter.com/daust_de), der mir in einer frühen Phase Zeit und Ideen mit einer Diskussionssitzung geschenkt hat.
+
+## Projekt-Homepage
 
 Console ist auf [GitHub](https://github.com/ogobrecht/console) gehostet.
 
