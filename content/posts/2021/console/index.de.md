@@ -1,6 +1,6 @@
 ---
 title: "Ein weiteres Oracle DB Logging-Tool: Console"
-description: Einfache Installation und ein Mittel gegen übervolle Log-Tabellen
+description: Einfach zu installieren und ein Mittel gegen übervolle Log-Tabellen
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: "ein-weiteres-oracle-db-logging-tool-console"
 publishdate: 2021-08-23
