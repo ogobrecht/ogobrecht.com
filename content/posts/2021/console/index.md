@@ -1,10 +1,10 @@
 ---
 title: "Yet another Oracle DB logging tool: Console"
-description: Easy installation and a remedy for cluttered error logs
+description: Easy to install and works without context and without special rights to administrative views
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: yet-another-oracle-db-logging-tool-console
-publishdate: 2021-08-23
-lastmod: 2021-08-23 11:00:00
+publishdate: 2021-10-03
+lastmod: 2021-10-03 11:00:00
 ---
 
 {{< figure "Photo by Pete Nuij on unsplash.com" >}}
@@ -13,9 +13,7 @@ lastmod: 2021-08-23 11:00:00
 
 {{< toc >}}
 
-It looks like it is a hobby of PL/SQL developers to develop their own logging tool...
-
-There are already some free tools on the market and probably many that have never been released:
+It looks like it is a hobby of PL/SQL developers to develop their own logging tool. There are already some free tools on the market and probably many that have never been released:
 
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [PIT](https://github.com/j-sieben/PIT/)
@@ -27,9 +25,9 @@ There are already some free tools on the market and probably many that have neve
 
 One reason seems to be that everyone has different ideas or needs.
 
-## Easy installation without context possible
+## Easy installation without context and without special rights to administrative views
 
-In my case, I wanted a logging tool, which is very easy to install and works even if you are not allowed to create a context in the database. You only need the permissions to create tables and packages and a cleanup job - pretty standard. A context is optional and will be used automatically if present.
+In my case I wanted a logging tool, which is very easy to install and works even if you are not allowed to create a context in the database and also have no special read permissions for administrative views like v$session. You only need the rights to create tables and packages and a cleanup job - pretty standard. Nevertheless, it is possible to move individual users/sessions to a higher log level for debugging purposes. As this is solved via client identifier, this will also work in an environment without fixed session ID like e.g. APEX. If no client identifier is set in an environment, then Console simply assigns one itself. Console reads its configuration from a table with only one line supported by the result cache. This ensures a resource-saving execution. Also the check whether a log message is really written to the log table based on the current log level is highly optimized to keep the overhead as low as possible in production environments.
 
 ## A single install script
 
@@ -37,7 +35,7 @@ For Console, all scripts are merged into a single install script. Since SQLcl ca
 
 ## Production safe without further configuration
 
-By default, Console logs only errors (Level 1). This means that you are on the safe side on production systems without any further configuration. But if you want to enable other levels like warning (2), info (3), debug (4) or trace (5) on a development system and don't want to do this for each session individually, you can set it globally: `exec console.conf_level(3);`. More on this in the [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) document.
+By default, Console logs only errors (Level 1). This means that you are on the safe side on production systems without any further configuration. But if you want to enable other levels like warning (2), info (3), debug (4) or trace (5) on a development system and don't want to do this for each session individually, you can set it globally: `exec console.conf(p_level => 3);`. More on this in the [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) document.
 
 ## Reduced amount of log entries through saved call stack
 
@@ -365,6 +363,7 @@ I am not alone in the world and without the others not much goes in software dev
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [Instrumentation for PLSQL](https://github.com/connormcd/instrumentation)
 - [PIT](https://github.com/j-sieben/PIT/)
+- [Oracle Magazine - Sophisticated Call Stack Analysis](https://blogs.oracle.com/oraclemagazine/post/sophisticated-call-stack-analysis)
 
 Special thanks to [Dietmar Aust](https://twitter.com/daust_de), who gave me time and ideas with a discussion session at an early stage.
 

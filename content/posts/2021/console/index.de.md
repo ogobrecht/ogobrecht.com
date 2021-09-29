@@ -1,10 +1,10 @@
 ---
 title: "Ein weiteres Oracle DB Logging-Tool: Console"
-description: Einfach zu installieren und ein Mittel gegen übervolle Log-Tabellen
+description: Einfach zu installieren und funktioniert ohne Kontext und ohne besondere Rechte auf administrative Views
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: "ein-weiteres-oracle-db-logging-tool-console"
-publishdate: 2021-08-23
-lastmod: 2021-08-23 11:00:00
+publishdate: 2021-10-03
+lastmod: 2021-10-03 11:00:00
 ---
 
 {{< figure "Foto von Pete Nuij auf unsplash.com" >}}
@@ -13,9 +13,7 @@ lastmod: 2021-08-23 11:00:00
 
 {{< toc >}}
 
-Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln...
-
-Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie veröffentlicht wurden:
+Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln. Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie veröffentlicht wurden:
 
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [PIT](https://github.com/j-sieben/PIT/)
@@ -27,9 +25,9 @@ Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie
 
 Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder Bedürfnisse hat.
 
-## Einfache Installation ohne Kontext möglich
+## Einfache Installation ohne Kontext und besondere Rechte auf administrative Views
 
-Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Ein Kontext ist optional und wird bei Vorhandensein automatisch genutzt.
+Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf und auch keine besonderen Leserechte für administrative Views wie z.B. v$session hat. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Trotzdem ist es möglich, einzelne Nutzer/Sessions für Debugging-Zwecke in einen höheren Log-Level zu versetzen. Da das über den Client-Identifier gelöst ist, funktioniert das auch in einer Umgebung ohne feste Session-ID wie z.B. APEX. Sollte in einer Umgebung kein Client-Identifier gesetzt sein, dann vergibt Console einfach selber einen. Seine Konfiguration liest Console aus einer Tabelle mit nur einer Zeile unterstützt durch den Result-Cache. Das stellt eine resourcenschonende Ausführung sicher. Auch die Prüfung, ob eine Log-Message aufgrund des aktuellen Log-Levels wirklich in die Log-Tabelle geschrieben wird ist hochoptimiert, um in Produktionsumgebungen den Overhead so gering wie möglich zu halten.
 
 ## Ein einziges Installtionsskript
 
@@ -37,7 +35,7 @@ Für Console werden alle Skripte in ein einziges Installationsskript zusammengef
 
 ## Produktionssicher ohne weitere Konfiguration
 
-Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren Seite. Möchte man aber auf einem Entwicklungssystem auch andere Level wie Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für jede Session einzeln tun müssen, dann kann man das global einstellen: `exec console.conf_level(3);`. Mehr dazu im [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument.
+Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren Seite. Möchte man aber auf einem Entwicklungssystem auch andere Level wie Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für jede Session einzeln tun müssen, dann kann man das global einstellen: `exec console.conf(p_level => 3);`. Mehr dazu im [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument.
 
 ## Reduzierte Menge Logeinträge durch gespeicherten Call Stack
 
@@ -267,6 +265,10 @@ Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID z
 
 Die Parameter `p_user_agent`, `p_user_scope`, `p_user_error_code` und `p_user_call_stack` sind dafür gedacht, auch externe Log-Ereignisse erfassen und die automatisch ermittelten Werte der PL/SQL-Umgebung überschreiben zu können. Als Beispiel sei ein externer Ladeprozess in einem Data-Warhouse genannt oder Fehlermeldungen aus dem JavaScript-Frontend einer Anwendung. Mit ein wenig Phantasie werden hier jedem eigene Anwendungsfälle in den Sinn kommen...
 
+## Zeit messen und Dinge zählen
+
+FIXME: fertig schreiben
+
 ## Assert, format und andere Helferlein
 
 Selbstverständlich gibt es einige Hilfsmethoden, die das Entwicklerleben angenehmer machen. Zuerst sei die Assert-Prozedur genannt. Dieses immer wiederkehrende Muster sollte jeder kennen:
@@ -365,6 +367,7 @@ Ich bin nicht allein auf der Welt und ohne die Anderen geht auch bei der Softwar
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [Instrumentation for PLSQL](https://github.com/connormcd/instrumentation)
 - [PIT](https://github.com/j-sieben/PIT/)
+- [Oracle Magazine - Sophisticated Call Stack Analysis](https://blogs.oracle.com/oraclemagazine/post/sophisticated-call-stack-analysis)
 
 Ein besonderer Dank geht an [Dietmar Aust](https://twitter.com/daust_de), der mir in einer frühen Phase Zeit und Ideen mit einer Diskussionssitzung geschenkt hat.
 
