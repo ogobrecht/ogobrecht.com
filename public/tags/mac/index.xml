@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mac on Ottmar’s Notes</title>
+    <title>Mac on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/mac/</link>
-    <description>Recent content in mac on Ottmar’s Notes</description>
+    <description>Recent content in Mac on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pitfalls with Oracle 11g XE and Docker on Mac OS</title>
       <link>https://ogobrecht.com/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/</link>

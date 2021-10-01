@@ -8,10 +8,10 @@
   <title>Table API Generator</title>
   <meta name="description" content="An Oracle PL/SQL package with SQL Developer integration">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2016-06-10-table-api-generator/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Table API Generator">
+  <meta name="twitter:description" content="An Oracle PL/SQL package with SQL Developer integration">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">Table API Generator</h1><p class="item-subtitle">An Oracle PL/SQL package with SQL Developer integration</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -52,40 +60,39 @@
 <p>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</p>
 <p>Unfortunately there was no time in the project to create such a generator from the ground. Luckily André, a colleague of me, had started to implement such an API generator in his free time and I had only to implement the generic change log functionality - also in my free time. Our API generator open source project was born :-)</p>
 <p>Later on I needed a function to get the id from an record by the unique columns - next feature for the API generator: generate a (overloaded) function for each unique constraint on a table. Now it is a simple function call to get the id:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">your_var</span> <span class="p">:</span><span class="o">=</span> <span class="n">your_table_name_api</span><span class="p">.</span><span class="n">get_pk_by_unique_cols</span><span class="p">(</span>
-    <span class="n">p_column_name_1</span> <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">xyz</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="n">p_column_name_2</span> <span class="o">=</span><span class="o">&gt;</span> <span class="mi">123</span><span class="p">,</span>
-    <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">)</span><span class="p">;</span>
-</code></pre></div><p>The API is also handling the case, when no data is found and everything without the need to look in the dictionary for the unique columns of that table or to write boilerplate code and possibly forget one column.</p>
-<p>The next thing for APEX was &ldquo;For tabular forms you can't use APIs&rdquo;. We came up with the idea to generate a view for each table with an instead of trigger for inserts, updates and deletions. The trigger is simply calling the API. Now you can use APEX own &ldquo;automatic row processing&rdquo; and the generic logging together.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">your_var</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_table_name_api</span><span class="p">.</span><span class="n">get_pk_by_unique_cols</span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">p_column_name_1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;xyz&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_column_name_2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="p">...);</span><span class="w">
+</span></code></pre></div><p>The API is also handling the case, when no data is found and everything without the need to look in the dictionary for the unique columns of that table or to write boilerplate code and possibly forget one column.</p>
+<p>The next thing for APEX was &ldquo;For tabular forms you can&rsquo;t use APIs&rdquo;. We came up with the idea to generate a view for each table with an instead of trigger for inserts, updates and deletions. The trigger is simply calling the API. Now you can use APEX own &ldquo;automatic row processing&rdquo; and the generic logging together.</p>
 <p>In my holiday this spring I stumbled over a tweet from Phillip Salvisberg about his <a href="https://www.oddgen.org">oddgen project</a>, a SQL Developer extension to invoke dictionary-driven code generators. I was thrilled, we can have a SQL Developer integration by writing a small PL/SQL wrapper for oddgen. I finished the integration in my holiday, I could not wait.</p>
 <p>Over the time we found out, that the generation of the thin API wrappers for our tables saves us time and makes our code more stable and readable because of the saved boilerplate code.<br>
 Business logic packages becomes invalid after table changes and API regeneration. This is good, because you can see, which API calls are now invalid. If you have simple insert or update statements you might oversee some places, where the statement is still valid for example with an added table column, but in fact does the wrong insert or update.</p>
-<p>And the last thing, what is now possible: Security - separate the data from the user interface. Simply grant execute rights on the API and business logic packages to the UI schema and disable the deletion of rows in your API packages when you don't need it. No user will be able to drop or truncate your tables, because there are no tables in the UI schema.</p>
+<p>And the last thing, what is now possible: Security - separate the data from the user interface. Simply grant execute rights on the API and business logic packages to the UI schema and disable the deletion of rows in your API packages when you don&rsquo;t need it. No user will be able to drop or truncate your tables, because there are no tables in the UI schema.</p>
 <p>The generated API packages are really thin - nothing special at all. Nevertheless they are powerful time savers.</p>
 <p>You can find the sources and more informations on <a href="https://github.com/OraMUC/table-api-generator">GitHub</a>.</p>
-<p>Happy coding :-)<br>
-Ottmar</p>
+<p>Happy coding :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
 
 <footer>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2016-06-10" itemprop="datePublished">June 10, 2016</time>, tagged with
-    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/open-source-project/">Open source project</a>, 
     <a href="/tags/oracle/">Oracle</a>, 
-    <a href="/tags/plsql/">PL/SQL</a>, 
+    <a href="/tags/pl/sql/">PL/SQL</a>, 
     <a href="/tags/generator/">Generator</a> and 
     <a href="/tags/oddgen/">oddgen</a>.
     Last changed on August 12, 2017.
   </p>
-  <span class="left item-meta">&#x2190; <a href="/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/">APEX Fine Art Printing, Markdown Überall</a></span>
-  <span class="right item-meta"><a href="/posts/2016-06-17-apex-meetup-frankfurt/">APEX Meetup 17.06.2016, Frankfurt</a> &#x2192;</span>
+  <span class="left item-meta">&#x2190; <a href="/posts/2016-01-01-markdown-for-oracle-apex/">Markdown for Oracle APEX</a></span>
+  <span class="right item-meta"><a href="/posts/2017-01-23-markdown-reporter/">Markdown Reporter</a> &#x2192;</span>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -94,9 +101,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -116,8 +120,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

@@ -13,6 +13,8 @@ lastmod: 2021-10-03 11:00:00
 
 {{< toc >}}
 
+## Einleitung
+
 Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln. Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie veröffentlicht wurden:
 
 - [Logger](https://github.com/OraOpenSource/Logger)
@@ -23,11 +25,7 @@ Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Loggi
 - [BMC_DEBUG](https://sites.google.com/site/oraplsqlinst/)
 - ...
 
-Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder Bedürfnisse hat.
-
-## Einfache Installation ohne Kontext und besondere Rechte auf administrative Views
-
-Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf und auch keine besonderen Leserechte für administrative Views wie z.B. v$session hat. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Trotzdem ist es möglich, einzelne Nutzer/Sessions für Debugging-Zwecke in einen höheren Log-Level zu versetzen. Da das über den Client-Identifier gelöst ist, funktioniert das auch in einer Umgebung ohne feste Session-ID wie z.B. APEX. Sollte in einer Umgebung kein Client-Identifier gesetzt sein, dann vergibt Console einfach selber einen. Seine Konfiguration liest Console aus einer Tabelle mit nur einer Zeile unterstützt durch den Result-Cache. Das stellt eine resourcenschonende Ausführung sicher. Auch die Prüfung, ob eine Log-Message aufgrund des aktuellen Log-Levels wirklich in die Log-Tabelle geschrieben wird ist hochoptimiert, um in Produktionsumgebungen den Overhead so gering wie möglich zu halten.
+Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder Bedürfnisse hat. Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf und auch keine besonderen Leserechte für administrative Views wie z.B. v$session hat. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Trotzdem ist es möglich, einzelne Nutzer/Sessions für Debugging-Zwecke in einen höheren Log-Level zu versetzen. Da das über den Client-Identifier gelöst ist, funktioniert das auch in einer Umgebung ohne feste Session-ID wie z.B. APEX. Sollte in einer Umgebung kein Client-Identifier gesetzt sein, dann vergibt Console einfach selber einen. Seine Konfiguration liest Console aus einer Tabelle mit nur einer Zeile unterstützt durch den Result-Cache. Das stellt eine resourcenschonende Ausführung sicher. Auch die Prüfung, ob eine Log-Message aufgrund des aktuellen Log-Levels wirklich in die Log-Tabelle geschrieben wird ist hochoptimiert, um in Produktionsumgebungen den Overhead so gering wie möglich zu halten.
 
 ## Ein einziges Installtionsskript
 
@@ -39,7 +37,7 @@ Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsyste
 
 ## Reduzierte Menge Logeinträge durch gespeicherten Call Stack
 
-Console nutzt die Möglichkeiten des Packages `utl_call_stack` um die Anzahl der Logeinträge auf ein mögliches Minimum zu reduzieren. Wer kennt es nicht, das Problem: Im Fehlerfall wird in jeder Unterfunktion ein Logeintrag erstellt, um möglichst viele Details festzuhalten. Am Ende muss man dann zusehen, wie so die Logtabelle zugemüllt wird und man versucht aus den vielen Log-Einträgen herauszufinden, wo denn nun genau der Fehler aufgetreten ist.
+Console nutzt die Möglichkeiten des Packages `sys.utl_call_stack` um die Anzahl der Logeinträge auf ein mögliches Minimum zu reduzieren. Wer kennt es nicht, das Problem: Im Fehlerfall wird in jeder Unterfunktion ein Logeintrag erstellt, um möglichst viele Details festzuhalten. Am Ende muss man dann zusehen, wie so die Logtabelle zugemüllt wird und man versucht aus den vielen Log-Einträgen herauszufinden, wo denn nun genau der Fehler aufgetreten ist.
 
 Es wäre hilfreich, im Error Backtrace auch die Methodennamen zu sehen - die Datenbank schreibt aber nur die Packagenamen und die Zeilennummer in den Backtrace. Um dieses Problem zu umgehen bietet Console die Möglichkeit anstatt in den Untermethoden einen Fehler in die Log-Tabelle zu schreiben, den Call-Stack mit dem Aufruf `console.error_save_stack` so lange zwischenzuspeichern, bis final in der äußersten Hauptmethode `console.error` aufgerufen wird, was dann den Fehler inklusive gespeichertem Call Stack in die Log-Tabelle einträgt. Zur Verdeutlichung hier ein Skript mit einem Testpackage:
 
@@ -215,7 +213,7 @@ end demo_proc;
 
 In der Ausnahmebehandlung kann man schön erkennen, dass man immer die gleiche Prozedur `console.add_param` aufruft und den Namen und den Wert übergibt. Die Parameter werden in einem Array im Console-Package zwischengespeichert (gekürzt auf maximal 2000 Zeichen) und beim nächsten Aufruf einer Log-Methode (error, warn, info, log, debug oder trace) übernommen. Möchte man nicht, dass die Parameter gekürzt werden, so steht es einem frei den Parameter direkt in die Log-Nachricht zu schreiben - diese ist vom Typ Clob und unterliegt somit keiner Größenbeschränkung.
 
-Hier ein Beispiel-Aufuf der obigen Prozedur:
+Hier ein Beispiel-Aufruf der obigen Prozedur:
 
 ```sql
 begin
@@ -261,17 +259,115 @@ procedure error (
 
 ## Erweiterbare Logs durch überladene Log-Methoden
 
-Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID zurückliefert. Somit kann man das Logging auch mit eigenen Daten in eigenen Tabellen erweitern z.B. für einen nachgelagerten Freigabeprozess im Falle von spezifischen Fehlern. Dafür ist dann auch der Parameter `p_permanent` gedacht, der dafür sorgt, das der Aufräumjob oder die Prozeduren `console.purge` und `console.purge_all` die entsprechend markierten Log-Einträge nicht löscht und diese permanent zur Verfügung stehen. Alle anderen Log-Methoden (warn, info, log, debug, trace) sind in gleicher Weise und mit den gleichen Parametern implementiert - haben aber teilweise andere Standardwerte. Bei der Error-Methode wird der Call-Stack geschrieben, bei der Trace-Methode  alle Umgebungen.
+Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID zurückliefert. Somit kann man das Logging auch mit eigenen Daten in eigenen Tabellen erweitern z.B. für einen nachgelagerten Freigabeprozess im Falle von spezifischen Fehlern. Dafür ist dann auch der Parameter `p_permanent` gedacht, der dafür sorgt, das der Aufräumjob oder die Prozeduren `console.purge` und `console.purge_all` die entsprechend markierten Log-Einträge nicht löscht und diese permanent zur Verfügung stehen. Alle anderen Log-Methoden (warn, info, log, debug, trace) sind in gleicher Weise und mit den gleichen Parametern implementiert - haben aber teilweise andere Standardwerte. Bei der Error-Methode wird der Call-Stack geschrieben, bei der Trace-Methode alle vier Umgebungsdetails.
 
 Die Parameter `p_user_agent`, `p_user_scope`, `p_user_error_code` und `p_user_call_stack` sind dafür gedacht, auch externe Log-Ereignisse erfassen und die automatisch ermittelten Werte der PL/SQL-Umgebung überschreiben zu können. Als Beispiel sei ein externer Ladeprozess in einem Data-Warhouse genannt oder Fehlermeldungen aus dem JavaScript-Frontend einer Anwendung. Mit ein wenig Phantasie werden hier jedem eigene Anwendungsfälle in den Sinn kommen...
 
 ## Zeit messen und Dinge zählen
 
-FIXME: fertig schreiben
+Ausführungszeiten messen und Dinge zählen sind sehr häufig gebrauchte Funktionen. Console kann hier helfen, nicht zu viele Hilfsvariablen erstellen zu müssen und den Code kurz und knapp zu halten. Dazu bietet es die Prozeduren `time`, `count` und weitere Helfer an. Man kann bequem mehrere Timer oder Counter parallel betreiben - sie werden jeweils über ein optionales Label identifiziert. Lässt man das Label weg, dann wird intern das Label `default`. Am besten verdeutlicht das wohl ein wenig Beispielcode:
+
+```sql
+begin
+  --basic usage
+  console.time;
+  sys.dbms_session.sleep(0.1);
+  console.time_end; -- without optional label and message
+
+  console.time('myTimer');
+  sys.dbms_session.sleep(0.1);
+  console.time_current('myTimer'); -- without optional message
+
+  sys.dbms_session.sleep(0.1);
+  console.time_current('myTimer', 'end of step two');
+
+  sys.dbms_session.sleep(0.1);
+  console.time_end('myTimer', 'end of step three');
+end;
+/
+```
+
+Dies führt zu folgenden Lognachrichten in der Tabelle console_logs, wenn der aktuelle Log-Level 3 (info) oder höher ist:
+
+- default: 00:00:00.102508
+- myTimer: 00:00:00.108048
+- myTimer: 00:00:00.212045 - end of step two
+- myTimer: 00:00:00.316084 - end of step three
+
+Manchmal möchte man aber keine vorgefertigten Logeinträge haben oder benötigt die verstrichene Zeit, um sie in Scripten in den Serveroutput zu schreiben. Hierfür gibt die im Code verwendeten Prozeduren `time_current` und `time_end` auch in Form von überladenen Funktionen. Mit denen kann man dann machen, was man möchte:
+
+```sql
+set serveroutput on
+
+begin
+  console.time;
+
+  --console.print is an alias for sys.dbms_output.put_line
+  console.print('Processing step one...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_current);
+
+  console.print('Processing step two...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_current);
+
+  console.print('Processing step three...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_end);
+end;
+/
+```
+
+Das führt dann in etwa zu so einem Serveroutput:
+
+```
+Processing step one...
+Elapsed: 00:00:00.105398
+Processing step two...
+Elapsed: 00:00:00.209267
+Processing step three...
+Elapsed: 00:00:00.313301
+```
+
+Zum Zählen von Dingen oder Vorgängen gibt es die gleichen Prozeduren und Funktionen wie für die Zeitmessungen - nur eben mit dem prefix `count` anstelle von `time` (wir verwenden im Beispiel die Variante ohne Label):
+
+```sql
+set serveroutput on
+
+begin
+  console.print('Counting nonsense...');
+
+  for i in 1 .. 1000 loop
+    if mod(i, 3) = 0 then
+      console.count;
+    end if;
+  end loop;
+  console.print('Current value: ' || console.count_current );
+
+  console.count_reset;
+
+  for i in 1 .. 10 loop
+    console.count;
+  end loop;
+  console.print('Final value: ' || console.count_end );
+end;
+/
+```
+
+Das ergibt dann einen Serveroutput wie folgt:
+
+```
+Counting nonsense...
+Current value: 333
+Final value: 10
+```
+
+Die im Beispiel verwendete Prozedur `count_reset` gibt es auch für Timer und heißt dort `time_reset`. Die jeweiligen `*_end`-Methoden löschen den Eintrag aus der im Console-Package verwalteten Liste von Timern/Countern.
+
 
 ## Assert, format und andere Helferlein
 
-Selbstverständlich gibt es einige Hilfsmethoden, die das Entwicklerleben angenehmer machen. Zuerst sei die Assert-Prozedur genannt. Dieses immer wiederkehrende Muster sollte jeder kennen:
+Es gibt noch weitere Hilfsmethoden, die das Entwicklerleben angenehmer machen. Zuerst sei die Assert-Prozedur genannt. Dieses immer wiederkehrende Muster sollte jeder kennen:
 
 ```sql
 if not x < y then

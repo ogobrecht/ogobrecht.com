@@ -5,14 +5,18 @@
     <link>https://ogobrecht.com/tags/</link>
     <description>Recent content in Tags on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generator</title>
+      <link>https://ogobrecht.com/tags/generator/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/tags/generator/</guid>
+      <description></description>
+    </item>
     
     <item>
-      <title>oracle</title>
+      <title>Oracle</title>
       <link>https://ogobrecht.com/tags/oracle/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
@@ -21,20 +25,11 @@
     </item>
     
     <item>
-      <title>script</title>
+      <title>Script</title>
       <link>https://ogobrecht.com/tags/script/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/tags/script/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>generator</title>
-      <link>https://ogobrecht.com/tags/generator/</link>
-      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/generator/</guid>
       <description></description>
     </item>
     
@@ -48,16 +43,7 @@
     </item>
     
     <item>
-      <title>plsql</title>
-      <link>https://ogobrecht.com/tags/plsql/</link>
-      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/plsql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>wallet</title>
+      <title>Wallet</title>
       <link>https://ogobrecht.com/tags/wallet/</link>
       <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
       
@@ -66,16 +52,16 @@
     </item>
     
     <item>
-      <title>project</title>
-      <link>https://ogobrecht.com/tags/project/</link>
+      <title>Open source project</title>
+      <link>https://ogobrecht.com/tags/open-source-project/</link>
       <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/project/</guid>
+      <guid>https://ogobrecht.com/tags/open-source-project/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>sqlplus</title>
+      <title>SQL*Plus</title>
       <link>https://ogobrecht.com/tags/sqlplus/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -84,7 +70,7 @@
     </item>
     
     <item>
-      <title>apex</title>
+      <title>APEX</title>
       <link>https://ogobrecht.com/tags/apex/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -93,7 +79,7 @@
     </item>
     
     <item>
-      <title>version-control</title>
+      <title>Version control</title>
       <link>https://ogobrecht.com/tags/version-control/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -102,25 +88,16 @@
     </item>
     
     <item>
-      <title>doag</title>
+      <title>DOAG</title>
       <link>https://ogobrecht.com/tags/doag/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/tags/doag/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>slides</title>
-      <link>https://ogobrecht.com/tags/slides/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/slides/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>chart</title>
+      <title>Chart</title>
       <link>https://ogobrecht.com/tags/chart/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -129,25 +106,25 @@
     </item>
     
     <item>
-      <title>d3js</title>
-      <link>https://ogobrecht.com/tags/d3js/</link>
+      <title>D3.js</title>
+      <link>https://ogobrecht.com/tags/d3.js/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/d3js/</guid>
+      <guid>https://ogobrecht.com/tags/d3.js/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>plugin</title>
-      <link>https://ogobrecht.com/tags/plugin/</link>
+      <title>Plug-in</title>
+      <link>https://ogobrecht.com/tags/plug-in/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/plugin/</guid>
+      <guid>https://ogobrecht.com/tags/plug-in/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>svg</title>
+      <title>SVG</title>
       <link>https://ogobrecht.com/tags/svg/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -156,7 +133,7 @@
     </item>
     
     <item>
-      <title>converter</title>
+      <title>Converter</title>
       <link>https://ogobrecht.com/tags/converter/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -165,11 +142,11 @@
     </item>
     
     <item>
-      <title>docs</title>
-      <link>https://ogobrecht.com/tags/docs/</link>
+      <title>Markdown</title>
+      <link>https://ogobrecht.com/tags/markdown/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/docs/</guid>
+      <guid>https://ogobrecht.com/tags/markdown/</guid>
       <description></description>
     </item>
     
@@ -183,7 +160,7 @@
     </item>
     
     <item>
-      <title>jquery</title>
+      <title>jQuery</title>
       <link>https://ogobrecht.com/tags/jquery/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
       
@@ -192,16 +169,7 @@
     </item>
     
     <item>
-      <title>postcard</title>
-      <link>https://ogobrecht.com/tags/postcard/</link>
-      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/tags/postcard/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>html</title>
+      <title>HTML</title>
       <link>https://ogobrecht.com/tags/html/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
       
@@ -210,7 +178,7 @@
     </item>
     
     <item>
-      <title>docker</title>
+      <title>Docker</title>
       <link>https://ogobrecht.com/tags/docker/</link>
       <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
       
@@ -219,7 +187,7 @@
     </item>
     
     <item>
-      <title>mac</title>
+      <title>Mac</title>
       <link>https://ogobrecht.com/tags/mac/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
@@ -228,7 +196,7 @@
     </item>
     
     <item>
-      <title>dokuwiki</title>
+      <title>DokuWiki</title>
       <link>https://ogobrecht.com/tags/dokuwiki/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
@@ -237,7 +205,7 @@
     </item>
     
     <item>
-      <title>php</title>
+      <title>PHP</title>
       <link>https://ogobrecht.com/tags/php/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
@@ -246,16 +214,16 @@
     </item>
     
     <item>
-      <title>revealjs</title>
-      <link>https://ogobrecht.com/tags/revealjs/</link>
+      <title>Reveal.js</title>
+      <link>https://ogobrecht.com/tags/reveal.js/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/revealjs/</guid>
+      <guid>https://ogobrecht.com/tags/reveal.js/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>matplotlib</title>
+      <title>Matplotlib</title>
       <link>https://ogobrecht.com/tags/matplotlib/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
@@ -264,16 +232,16 @@
     </item>
     
     <item>
-      <title>nodejs</title>
-      <link>https://ogobrecht.com/tags/nodejs/</link>
+      <title>Node.js</title>
+      <link>https://ogobrecht.com/tags/node.js/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/nodejs/</guid>
+      <guid>https://ogobrecht.com/tags/node.js/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>pandoc</title>
+      <title>Pandoc</title>
       <link>https://ogobrecht.com/tags/pandoc/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
@@ -282,7 +250,7 @@
     </item>
     
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>https://ogobrecht.com/tags/python/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate>
       
@@ -291,11 +259,11 @@
     </item>
     
     <item>
-      <title>markdown</title>
-      <link>https://ogobrecht.com/tags/markdown/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      <title>PL/SQL</title>
+      <link>https://ogobrecht.com/tags/pl/sql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/tags/markdown/</guid>
+      <guid>https://ogobrecht.com/tags/pl/sql/</guid>
       <description></description>
     </item>
     

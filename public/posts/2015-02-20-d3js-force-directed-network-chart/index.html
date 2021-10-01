@@ -8,10 +8,10 @@
   <title>D3.js Force-Directed Network Chart</title>
   <meta name="description" content="A JavaScript standalone implementation and Oracle APEX region type plugin">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="D3.js Force-Directed Network Chart">
+  <meta name="twitter:description" content="A JavaScript standalone implementation and Oracle APEX region type plugin">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">D3.js Force-Directed Network Chart</h1><p class="item-subtitle">A JavaScript standalone implementation and Oracle APEX region type plugin</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -53,13 +61,13 @@
 <div id="example"></div><!--the graph container-->
 <p>Everything started some months ago when I stumbled over this fascinating <a href="https://bl.ocks.org/mbostock/4062045">force-directed graph</a>. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</p>
 <p>If you use the bare JavaScript files you can run it on every HTML page:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;example&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span><span class="c">&lt;!--</span><span class="c">the graph container</span><span class="c">--&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span>  <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/ResizeObserver-1.5.0.min.js&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-3.5.6.min.js&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.min.js&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p"></span><span class="p">&gt;</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;example&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="c">&lt;!--the graph container--&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span>  <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/ResizeObserver-1.5.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-3.5.6.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nb">window</span><span class="p">.</span><span class="nx">example</span> <span class="o">=</span> <span class="nx">netGobrechtsD3Force</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
         <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
         <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
@@ -69,15 +77,15 @@
         <span class="p">.</span><span class="nx">wrapLabels</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
         <span class="p">.</span><span class="nx">showBorder</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
         <span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">//to enable the customization wizard
-</span><span class="c1"></span>        <span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">//sample data is provided when called without data
+</span><span class="c1"></span>        <span class="p">.</span><span class="nx">render</span><span class="p">();</span> <span class="c1">//sample data is provided when called without data
 </span><span class="c1"></span>        <span class="c1">//see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
 </span><span class="c1"></span><span class="p">}</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></div><p>I found myself often fiddling around with the parameters of the physical simulation - change config, reload page, not amused, change config&hellip;</p>
 <p>Really annoying - even I know the implementation behind. So, the question was: What can I do for an easy configuration. My answer was after a while of thinking and trying out: A customization wizard with a live preview of the changes. The link to enter the wizard is shown when the debug mode is switched on or in APEX when the developer bar is shown - try it out in the example graph above.</p>
 <p>You can find the sources and more informations on <a href="https://github.com/ogobrecht/d3-force-apex-plugin">GitHub</a> and a demo app on <a href="https://apex.oracle.com/pls/apex/f?p=18290:1">apex.oracle.com</a>.</p>
-<p>Happy networking :-)<br>
-Ottmar</p>
+<p>Happy networking :-)</p>
+<p>Ottmar</p>
 <link  href="/assets/d3.js/d3-force-3.0.0.css" rel="stylesheet" type="text/css">
 <script src="/assets/d3.js/ResizeObserver-1.5.0.min.js"></script>
 <script src="/assets/d3.js/d3-3.5.6.min.js"></script>
@@ -105,22 +113,21 @@ window.onload = function() {
 
 <footer>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2015-02-20" itemprop="datePublished">February 20, 2015</time>, tagged with
-    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/open-source-project/">Open source project</a>, 
     <a href="/tags/oracle/">Oracle</a>, 
     <a href="/tags/apex/">APEX</a>, 
-    <a href="/tags/plugin/">Plugin</a>, 
-    <a href="/tags/d3js/">D3.js</a>, 
+    <a href="/tags/plug-in/">Plug-in</a>, 
+    <a href="/tags/d3.js/">D3.js</a>, 
     <a href="/tags/chart/">Chart</a> and 
     <a href="/tags/svg/">SVG</a>.
     Last changed on December 4, 2018.
   </p>
   <span class="left item-meta">&#x2190; <a href="/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/">Double click on APEX report row opens first link target</a></span>
-  <span class="right item-meta"><a href="/posts/2015-03-01-d3js-grundlagen/">D3.js Grundlagen</a> &#x2192;</span>
+  <span class="right item-meta"><a href="/posts/2015-12-12-why-a-subdomain-for-an-apex-development-system-is-a-bad-idea/">Why a subdomain for an APEX development system is a bad idea</a> &#x2192;</span>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -129,9 +136,6 @@ window.onload = function() {
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -151,8 +155,8 @@ window.onload = function() {
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

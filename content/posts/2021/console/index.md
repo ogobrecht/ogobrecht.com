@@ -13,6 +13,8 @@ lastmod: 2021-10-03 11:00:00
 
 {{< toc >}}
 
+## Introduction
+
 It looks like it is a hobby of PL/SQL developers to develop their own logging tool. There are already some free tools on the market and probably many that have never been released:
 
 - [Logger](https://github.com/OraOpenSource/Logger)
@@ -23,11 +25,7 @@ It looks like it is a hobby of PL/SQL developers to develop their own logging to
 - [BMC_DEBUG](https://sites.google.com/site/oraplsqlinst/)
 - ...
 
-One reason seems to be that everyone has different ideas or needs.
-
-## Easy installation without context and without special rights to administrative views
-
-In my case I wanted a logging tool, which is very easy to install and works even if you are not allowed to create a context in the database and also have no special read permissions for administrative views like v$session. You only need the rights to create tables and packages and a cleanup job - pretty standard. Nevertheless, it is possible to move individual users/sessions to a higher log level for debugging purposes. As this is solved via client identifier, this will also work in an environment without fixed session ID like e.g. APEX. If no client identifier is set in an environment, then Console simply assigns one itself. Console reads its configuration from a table with only one line supported by the result cache. This ensures a resource-saving execution. Also the check whether a log message is really written to the log table based on the current log level is highly optimized to keep the overhead as low as possible in production environments.
+One reason seems to be that everyone has different ideas or needs. In my case I wanted a logging tool, which is very easy to install and works even if you are not allowed to create a context in the database and also have no special read permissions for administrative views like v$session. You only need the rights to create tables and packages and a cleanup job - pretty standard. Nevertheless, it is possible to move individual users/sessions to a higher log level for debugging purposes. As this is solved via client identifier, this will also work in an environment without fixed session ID like e.g. APEX. If no client identifier is set in an environment, then Console simply assigns one itself. Console reads its configuration from a table with only one line supported by the result cache. This ensures a resource-saving execution. Also the check whether a log message is really written to the log table based on the current log level is highly optimized to keep the overhead as low as possible in production environments.
 
 ## A single install script
 
@@ -261,13 +259,114 @@ procedure error (
 
 ## Extensible logs through overloaded log methods
 
-The error procedure has an overload in the form of a function that returns the log ID. Thus one can extend the logging also with own data in own tables e.g. for a downstream release process in case of specific errors. This is also the purpose of the `p_permanent` parameter, which ensures that the cleanup job or the `console.purge` and `console.purge_all` procedures do not delete the correspondingly marked log entries and that these are permanently available. All other log methods (warn, info, log, debug, trace) are implemented in the same way and with the same parameters - but some have different default values. For the error method the call stack is written, for the trace method all environments.
+The error procedure has an overload in the form of a function that returns the log ID. Thus one can extend the logging also with own data in own tables e.g. for a downstream release process in case of specific errors. This is also the purpose of the `p_permanent` parameter, which ensures that the cleanup job or the `console.purge` and `console.purge_all` procedures do not delete the correspondingly marked log entries and that these are permanently available. All other log methods (warn, info, log, debug, trace) are implemented in the same way and with the same parameters - but some have different default values. For the error method the call stack is written, for the trace method all four environment details.
 
-The parameters `p_user_agent`, `p_user_scope`, `p_user_error_code` and `p_user_call_stack` are meant to be able to capture external log events as well and to overwrite the automatically determined values of the PL/SQL environment. As an example an external load process in a data warehouse or error messages from the JavaScript frontend of an application can be mentioned. With a little bit of imagination, everyone's own use cases will come to mind here...
+The parameters `p_user_agent`, `p_user_scope`, `p_user_error_code` and `p_user_call_stack` are intended to be able to capture external log events as well and to overwrite the automatically determined values of the PL/SQL environment. As an example an external load process in a data warehouse or error messages from the JavaScript frontend of an application can be mentioned. With a little imagination, everyone will come up with their own use cases here...
+
+## Measure time and count things
+
+Measuring execution times and counting things are very common functions. Console can help here to not have to create too many helper variables and keep the code short and sweet. For this purpose it offers the procedures `time`, `count` and other helpers. You can easily run several timers or counters in parallel - they are each identified by an optional label. If you omit the label, then internally the label is `default`. The best way to illustrate this is a bit of sample code:
+
+```sql
+begin
+  --basic usage
+  console.time;
+  sys.dbms_session.sleep(0.1);
+  console.time_end; -- without optional label and message
+
+  console.time('myTimer');
+  sys.dbms_session.sleep(0.1);
+  console.time_current('myTimer'); -- without optional message
+
+  sys.dbms_session.sleep(0.1);
+  console.time_current('myTimer', 'end of step two');
+
+  sys.dbms_session.sleep(0.1);
+  console.time_end('myTimer', 'end of step three');
+end;
+/
+```
+
+This will result in the following log messages in the console_logs table if the current log level is 3 (info) or higher:
+
+- default: 00:00:00.102508
+- myTimer: 00:00:00.108048
+- myTimer: 00:00:00.212045 - end of step two
+- myTimer: 00:00:00.316084 - end of step three
+
+But sometimes you don\`t want to have prefabricated log entries or you need the elapsed time to write them in scripts to the server output. For this purpose the procedures `time_current` and `time_end` used in the code are also available as overloaded functions. With these you can do what you want:
+
+```sql
+set serveroutput on
+
+begin
+  console.time;
+
+  --console.print is an alias for sys.dbms_output.put_line
+  console.print('Processing step one...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_current);
+
+  console.print('Processing step two...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_current);
+
+  console.print('Processing step three...');
+  sys.dbms_session.sleep(0.1);
+  console.print('Elapsed: ' || console.time_end);
+end;
+/
+```
+
+This then leads to something like this server output:
+
+```
+Processing step one...
+Elapsed: 00:00:00.105398
+Processing step two...
+Elapsed: 00:00:00.209267
+Processing step three...
+Elapsed: 00:00:00.313301
+```
+
+For counting things or processes there are the same procedures and functions as for time measurements - only with the prefix `count` instead of `time` (we use the variant without label in the example):
+
+```sql
+set serveroutput on
+
+begin
+  console.print('Counting nonsense...');
+
+  for i in 1 .. 1000 loop
+    if mod(i, 3) = 0 then
+      console.count;
+    end if;
+  end loop;
+  console.print('Current value: ' || console.count_current );
+
+  console.count_reset;
+
+  for i in 1 .. 10 loop
+    console.count;
+  end loop;
+  console.print('Final value: ' || console.count_end );
+end;
+/
+```
+
+This then results in a server output as follows:
+
+```
+Counting nonsense...
+Current value: 333
+Final value: 10
+```
+
+The `count_reset` procedure used in the example also exists for timers and is called `time_reset` there. The respective `*_end` methods delete the entry from the list of timers/counters managed in the console package.
 
 ## Assert, format and other helpers
 
-Of course, there are some helper methods that make the developer's life more pleasant. First of all, the assert procedure should be mentioned. Everybody should know this recurring pattern:
+There are other auxiliary methods that make the developer's life more pleasant. First of all, the assert procedure should be mentioned. Everyone should know this recurring pattern:
 
 ```sql
 if not x < y then
@@ -315,7 +414,7 @@ console.assert(
 2. replace `%n` with new lines (line feed character)
 3. replace all occurrences of `%s` in positional order with the corresponding parameters with sys.utl_lms.format_message - see also the [Oracle docs](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_LMS.html#GUID-88FFBFB6-FCA4-4951-884B-B0275BD5DF44)
 
-I personally am very reluctant to type `dbms_output.put_line`. Console does write to a log table with all the log methods, but actually the word console suggests that we can also write directly to the server output, right? For that we have the procedure `print`:
+I personally am very reluctant to type `sys.dbms_output.put_line`. Console does write to a log table with all the log methods, but actually the word console suggests that we can also write directly to the server output, right? For that we have the procedure `print`:
 
 ```sql
 console.print('A message');

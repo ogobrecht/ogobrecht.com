@@ -8,10 +8,10 @@
   <title>Double click on APEX report row opens first link target</title>
   <meta name="description" content="A page zero dynamic action for your whole application">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Double click on APEX report row opens first link target">
+  <meta name="twitter:description" content="A page zero dynamic action for your whole application">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,13 +51,15 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">Double click on APEX report row opens first link target</h1><p class="item-subtitle">A page zero dynamic action for your whole application</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
 
 <p><em>Do you like scanning a report for certain information and then moving the mouse to the first column to click the small link for details or a edit form? Would it be nice to double click anywhere on the row to open the first link?</em></p>
 <p>With a little help of a dynamic action on page zero you have the solution for all your interactive and standard reports in your application. The only additional to do is, to find out the right selectors for your reports. Here some usual ones:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//APEX 5:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">//APEX 5:
 </span><span class="c1"></span><span class="nx">table</span><span class="p">.</span><span class="nx">a</span><span class="o">-</span><span class="nx">IRR</span><span class="o">-</span><span class="nx">table</span> <span class="nx">tr</span><span class="p">,</span> <span class="nx">table</span><span class="p">.</span><span class="nx">uReportStandard</span> <span class="nx">tr</span>
 
 <span class="c1">//APEX 4:
@@ -59,9 +67,9 @@
 </code></pre></div><p>I give you no guarantee that this will also working with your theme. Please ask your browsers developer tools and inspect your report layouts ;-)</p>
 <p>Create a dynamic action for a double click on a jQuery selector (see examples above) and set the event scope to dynamic.</p>
 <p>The dynamic action needs to execute JavaScript:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">triggeringElement</span><span class="p">)</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;td:first&gt;a&#39;</span><span class="p">)</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-</code></pre></div><p>Happy coding :-)<br>
-Ottmar</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">triggeringElement</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;td:first&gt;a&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">click</span><span class="p">();</span>
+</code></pre></div><p>Happy coding :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
@@ -69,7 +77,7 @@ Ottmar</p>
 <footer>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2015-01-14" itemprop="datePublished">January 14, 2015</time>, tagged with
     <a href="/tags/oracle/">Oracle</a> and 
-    <a href="/tags/apex/">APEX</a>.
+    <a href="/tags/apex/">apex</a>.
     Last changed on August 24, 2017.
   </p>
   
@@ -77,8 +85,7 @@ Ottmar</p>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -87,9 +94,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -109,8 +113,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

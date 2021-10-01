@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>html on Ottmar’s Notes</title>
+    <title>HTML on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/html/</link>
-    <description>Recent content in html on Ottmar’s Notes</description>
+    <description>Recent content in HTML on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/html/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HydeBar</title>
       <link>https://ogobrecht.com/posts/2017-11-29-hydebar/</link>
@@ -18,7 +13,7 @@
       
       <guid>https://ogobrecht.com/posts/2017-11-29-hydebar/</guid>
       <description>Earlier this year I wrote at the end of this post:
- P.S.: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;
+ PS: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;
  As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the JSDoc theme Minami and the Liquid docs site - both with nice sidebars.</description>
     </item>
     

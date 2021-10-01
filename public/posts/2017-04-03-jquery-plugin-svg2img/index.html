@@ -8,10 +8,10 @@
   <title>jQuery Plugin svg2img</title>
   <meta name="description" content="Convert inline SVGs to standalone image files without loosing styles">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="jQuery Plugin svg2img">
+  <meta name="twitter:description" content="Convert inline SVGs to standalone image files without loosing styles">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">jQuery Plugin svg2img</h1><p class="item-subtitle">Convert inline SVGs to standalone image files without loosing styles</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -52,25 +60,25 @@
 <p>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?</p>
 <p>You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements. You can also use a browser extension like <a href="https://chrome.google.com/webstore/detail/export-svg-with-style/dkjdcaddoplepioppogpckelchefhddi">this one for Google Chrome</a>, but then you depend on the browser and the extension.</p>
 <p>There is now a declarative way with the help of a jQuery plugin, which is 100% client based:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">).</span><span class="nx">svg2img</span><span class="p">();</span>
 </code></pre></div><p>There is one default option - you can redeclare it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">debug</span><span class="o">:</span> <span class="kc">false</span> <span class="c1">// write debug information to console
-</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+</span><span class="c1"></span><span class="p">};</span>
 </code></pre></div><p>You can also set the debug option at runtime - try it out in your browser console directly here on the page:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">{</span><span class="nx">debug</span><span class="o">:</span><span class="kc">true</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#example-graph&#39;</span><span class="p">).</span><span class="nx">svg2img</span><span class="p">({</span><span class="nx">debug</span><span class="o">:</span><span class="kc">true</span><span class="p">});</span>
 </code></pre></div><p>Alternative you can use the link under the network chart.</p>
 <p>The plugin checks if your selector is a SVG element. If this is not the case, it searches under each selector element for all SVGs and exports it. The name(s) of the file(s) are automatically derived from the element ID (or parent element ID) or set to <code>export</code>. The current date and time is appended to the file name. For our example graph on this page the name will be something like <code>example-graph-20170403-154653.svg</code>.</p>
 <p>You can download all SVGs from one page by setting the selector to the document, body or svg - as you like it. There is no need for a <code>each()</code> call, <code>svg2img</code> works on the whole selection and is chainable:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;svg&#34;</span><span class="p">)</span><span class="p">.</span><span class="nx">svg2img</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&#34;border&#34;</span><span class="p">,</span><span class="s2">&#34;1px solid red&#34;</span><span class="p">)</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;svg&#34;</span><span class="p">).</span><span class="nx">svg2img</span><span class="p">().</span><span class="nx">css</span><span class="p">(</span><span class="s2">&#34;border&#34;</span><span class="p">,</span><span class="s2">&#34;1px solid red&#34;</span><span class="p">);</span>
 </code></pre></div><p>If you want to use anchors to provide export links then it is recommended to prevent the default action like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;event.preventDefault(); $(&#39;#example-graph&#39;).svg2img();&#34;</span><span class="p"></span><span class="p">&gt;</span>SVG<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;event.preventDefault(); $(&#39;#example-graph&#39;).svg2img();&#34;</span><span class="p">&gt;</span>SVG<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </code></pre></div><p>Otherwise Firefox and IE failing to save. One last thing: Safari has currently (as of this writing) problems with the underlaying <code>savAs()</code> implementation and tries to open the images in a new tab with or without success. See also this <a href="https://github.com/eligrey/FileSaver.js/issues/267">issue on GitHub</a>.</p>
 <p>UPDATE 2017-04-14: After update to macOS Sierra 10.12.4 Safari 10.1 works also - but is as slow as before - collecting CSS styles runs on my MacBook 2800ms in Safari, 20ms in Google Chrome :-(<br>
 I stopped to support other image formats then SVG since the canvas export behind the scenes was not really working in too many browsers and the core feature was and is to convert inline SVGs to standalone SVG images.</p>
 <p>The project is hosted on <a href="https://github.com/ogobrecht/jquery-plugin-svg2img">GitHub</a> and MIT licensed.</p>
-<p>Happy SVG exporting :-)<br>
-Ottmar</p>
+<p>Happy SVG exporting :-)</p>
+<p>Ottmar</p>
 <div id="example-graph"></div><!--the graph container-->
 Download
 <a href="" onclick="event.preventDefault(); $('#example-graph').svg2img();">SVG image</a>
@@ -100,9 +108,9 @@ window.onload = function() {
 
 <footer>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2017-04-03" itemprop="datePublished">April 3, 2017</time>, tagged with
-    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/open-source-project/">Open source project</a>, 
     <a href="/tags/jquery/">jQuery</a>, 
-    <a href="/tags/plugin/">Plugin</a> and 
+    <a href="/tags/plug-in/">Plug-in</a> and 
     <a href="/tags/svg/">SVG</a>.
     Last changed on January 21, 2019.
   </p>
@@ -111,8 +119,7 @@ window.onload = function() {
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -121,9 +128,6 @@ window.onload = function() {
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -143,8 +147,8 @@ window.onload = function() {
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>markdown on Ottmar’s Notes</title>
+    <title>Markdown on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/markdown/</link>
-    <description>Recent content in markdown on Ottmar’s Notes</description>
+    <description>Recent content in Markdown on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 17 Nov 2016 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Reporting mal anders, Markdown sei Dank</title>
-      <link>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
+      <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
-Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
-    </item>
-    
-    <item>
-      <title>APEX Meetup 17.06.2016, Frankfurt</title>
-      <link>https://ogobrecht.com/posts/2016-06-17-apex-meetup-frankfurt/</link>
-      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-06-17-apex-meetup-frankfurt/</guid>
-      <description>Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum Table API Generator dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema APEX Fine Art Printing, Markdown Überall gezeigt.
-Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt.</description>
-    </item>
-    
-    <item>
-      <title>APEX Fine Art Printing, Markdown Überall</title>
-      <link>https://ogobrecht.com/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</link>
-      <pubDate>Tue, 26 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+      <guid>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
+      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)
+Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
     </item>
     
     <item>

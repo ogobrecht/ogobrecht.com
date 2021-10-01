@@ -5,12 +5,7 @@
     <link>https://ogobrecht.com/tags/oddgen/</link>
     <description>Recent content in oddgen on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of Oracle Table API Generator Available</title>
       <link>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>

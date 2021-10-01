@@ -8,10 +8,10 @@
   <title>Form Behaviour - Bug or Feature?</title>
   <meta name="description" content="Why forms with a single input field are submitted by the enter key">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Form Behaviour - Bug or Feature?">
+  <meta name="twitter:description" content="Why forms with a single input field are submitted by the enter key">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">Form Behaviour - Bug or Feature?</h1><p class="item-subtitle">Why forms with a single input field are submitted by the enter key</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -54,10 +62,10 @@
 <p>After a short Google search I found the &ldquo;root cause&rdquo; for this &ldquo;bug&rdquo;, or should I say &ldquo;feature&rdquo;? This behaviour is described in the <a href="http://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2">HTML 2.0 specification (section 8.2)</a>.</p>
 <p>To workaround this you can simply create a second input item and hide it by setting the &ldquo;HTML Form Element Attributes&rdquo; to <code>style=&quot;display:none;&quot;</code>. This was also posted by <a href="http://deneskubicek.blogspot.de/2008/06/textfield-item-submiting-page.html">Denes Kubicek</a> back in 2008.</p>
 <p>I like the idea of one of the <a href="https://stackoverflow.com/questions/1370021/why-does-forms-with-single-input-field-submit-upon-pressing-enter-key-in-input">Stack Overflow comments</a> to put anywhere into the form (in APEX in fact the whole page, e.g. the header or footer of a region) this HTML snippet and not to create an &ldquo;useless&rdquo; page item:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;StackOverflow1370021&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;display:none;&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;StackOverflow1370021&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;display:none;&#34;</span> <span class="p">/&gt;</span>
 </code></pre></div><p>It is worth to mention that I run the newest Chrome browser and this &ldquo;feature&rdquo; is still available&hellip;</p>
-<p>Happy coding :-)<br>
-Ottmar</p>
+<p>Happy coding :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
@@ -73,8 +81,7 @@ Ottmar</p>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -83,9 +90,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -105,8 +109,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

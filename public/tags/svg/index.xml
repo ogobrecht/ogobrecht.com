@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>svg on Ottmar’s Notes</title>
+    <title>SVG on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/svg/</link>
-    <description>Recent content in svg on Ottmar’s Notes</description>
+    <description>Recent content in SVG on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/svg/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/svg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of D3 Force Network Chart Available</title>
       <link>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
@@ -39,27 +34,6 @@ The most visible one in the new version 3.1 is the ability to add labels to link
       <guid>https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/</guid>
       <description>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?
 You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements.</description>
-    </item>
-    
-    <item>
-      <title>D3.js - Data Driven Documents</title>
-      <link>https://ogobrecht.com/posts/2015-06-09-d3js-data-driven-documents/</link>
-      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2015-06-09-d3js-data-driven-documents/</guid>
-      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
-    </item>
-    
-    <item>
-      <title>D3.js Grundlagen</title>
-      <link>https://ogobrecht.com/posts/2015-03-01-d3js-grundlagen/</link>
-      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2015-03-01-d3js-grundlagen/</guid>
-      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit  Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
     </item>
     
     <item>

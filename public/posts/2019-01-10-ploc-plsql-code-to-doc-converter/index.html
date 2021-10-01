@@ -8,10 +8,10 @@
   <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
   <meta name="description" content="Another way to document PL/SQL business logic">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="PLOC - Convert PL/SQL Code into Markdown Docs">
+  <meta name="twitter:description" content="Another way to document PL/SQL business logic">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,13 +51,15 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">PLOC - Convert PL/SQL Code into Markdown Docs</h1><p class="item-subtitle">Another way to document PL/SQL business logic</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
 
 <p>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)</p>
-<p>Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code. As you can imagine, the latter is sometimes - let's say &ldquo;out of date&rdquo;, if it exists at all &hellip;</p>
-<p>I don't want to discuss the reasons for this here - you all know several ones. And I also do not have a general solution for code documentation. But I have some ideas what is important for me:</p>
+<p>Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code. As you can imagine, the latter is sometimes - let&rsquo;s say &ldquo;out of date&rdquo;, if it exists at all &hellip;</p>
+<p>I don&rsquo;t want to discuss the reasons for this here - you all know several ones. And I also do not have a general solution for code documentation. But I have some ideas what is important for me:</p>
 <ul>
 <li>The base of a good PL/SQL code documentation is a good code structure
 <ul>
@@ -69,7 +77,7 @@
 <li>I want to use Markdown for the comments - this allows me to write also bigger text parts and code examples</li>
 </ul>
 </li>
-<li>I don't want to describe all parameters in a JavaDoc manner
+<li>I don&rsquo;t want to describe all parameters in a JavaDoc manner
 <ul>
 <li>PL/SQL is strong typed, everything I need to know is visible in the signature of a function or procedure</li>
 <li>Replicating the parameters for documentation is error prone and does not follow the DRY principles</li>
@@ -97,30 +105,29 @@
 <p>Only the last one is able to generate Markdown docs, but the input has to be in JavaDoc. All the others can produce HTML output and often some other formats like RTF, Word or PDF. Natural Docs has a Markdown like simple text syntax, but also no Markdown output. Some of the tools can automatically document a whole schema - that is not the focus of PLOC. Most comparable is the intention of PL/SQL to Markdown  Documenter.</p>
 <p>So I had to do it by myself. I called it PLOC (PLDoc was already used, so I skipped the D&hellip;) and it is implemented in JavaScript as a npm package and currently used by me for the following two projects: <a href="https://github.com/ogobrecht/plex">PL/SQL Export Utilities</a> and <a href="https://github.com/OraMUC/table-api-generator">Oracle Table API Generator</a>. It is very lightweight - the main code without the CLI has currently less characters as the Markdown source of this blog post. Maybe it is also useful for you. If not, have a look at the other mentioned projects.</p>
 <p>More infos about <a href="https://github.com/ogobrecht/ploc">PLOC</a> itself can be found on the <a href="https://github.com/ogobrecht/ploc">project page</a>.</p>
-<p>Happy coding and documenting :-)<br>
-Ottmar</p>
+<p>Happy coding and documenting :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
 
 <footer>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2019-01-10" itemprop="datePublished">January 10, 2019</time>, tagged with
-    <a href="/tags/project/">Open Source Project</a>, 
+    <a href="/tags/open-source-project/">Open source project</a>, 
     <a href="/tags/oracle/">Oracle</a>, 
-    <a href="/tags/plsql/">PL/SQL</a>, 
+    <a href="/tags/pl/sql/">PL/SQL</a>, 
     <a href="/tags/generator/">Generator</a>, 
     <a href="/tags/converter/">Converter</a>, 
-    <a href="/tags/docs/">Docs</a> and 
+    <a href="/tags/markdown/">Markdown</a> and 
     <a href="/tags/npm/">npm</a>.
     Last changed on January 11, 2019.
   </p>
   <span class="left item-meta">&#x2190; <a href="/posts/2018-12-26-table-api-generator-v0.5.0-available/">Table API Generator v0.5.0 Available</a></span>
-  <span class="right item-meta"><a href="/posts/2019-03-11-doag-regionaltreffen-muenchen/">DOAG Regionaltreffen 11. März 2019, München</a> &#x2192;</span>
+  <span class="right item-meta"><a href="/posts/2019-06-09-new-version-of-d3-force-network-chart-available/">New Version of D3 Force Network Chart Available</a> &#x2192;</span>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -129,9 +136,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -151,8 +155,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

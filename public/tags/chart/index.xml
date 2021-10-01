@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>chart on Ottmar’s Notes</title>
+    <title>Chart on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/chart/</link>
-    <description>Recent content in chart on Ottmar’s Notes</description>
+    <description>Recent content in Chart on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/chart/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 09 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/chart/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of D3 Force Network Chart Available</title>
       <link>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
@@ -39,19 +34,6 @@ The most visible one in the new version 3.1 is the ability to add labels to link
       <guid>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
       <description>Some weeks ago I was asked, if I can create a plugin for the Gantt chart library from dhtmlx.com. I had a look at the library and I thought that it should be possible.
 Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality.</description>
-    </item>
-    
-    <item>
-      <title>Reporting mal anders, Markdown sei Dank</title>
-      <link>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
-Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
     </item>
     
     <item>

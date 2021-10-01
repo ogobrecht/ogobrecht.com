@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chart on Ottmar’s Notizen</title>
+    <link>https://ogobrecht.com/de/tags/chart/</link>
+    <description>Recent content in Chart on Ottmar’s Notizen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 17 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/chart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reporting mal anders, Markdown sei Dank</title>
+      <link>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
+      <description>Die Folien zu meinem Vortrag:
+Open HTML presentation in a new window/tab
+You need a modern browser with activated JavaScript. Navigation tips:
+N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
+Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
+    </item>
+    
+  </channel>
+</rss>

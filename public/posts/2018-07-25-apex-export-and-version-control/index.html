@@ -8,10 +8,10 @@
   <title>APEX_EXPORT and Version Control</title>
   <meta name="description" content="How to export the splitted APEX app definition with SQL*Plus">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="APEX_EXPORT and Version Control">
+  <meta name="twitter:description" content="How to export the splitted APEX app definition with SQL*Plus">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">APEX_EXPORT and Version Control</h1><p class="item-subtitle">How to export the splitted APEX app definition with SQL*Plus</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -81,190 +89,190 @@
 <li>We also need to create host commands for the needed directories because the spool command does NOT create missing directories</li>
 <li>We spool our progress to a log file for later reference</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- file: export_frontend.sql
-</span><span class="c1"></span>
-<span class="k">set</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">off</span> <span class="n">heading</span> <span class="k">off</span> 
-<span class="k">set</span> <span class="n">trimout</span> <span class="k">on</span> <span class="n">trimspool</span> <span class="k">on</span> <span class="n">pagesize</span> <span class="mi">0</span> <span class="n">linesize</span> <span class="mi">5000</span> <span class="n">long</span> <span class="mi">100000000</span> <span class="n">longchunksize</span> <span class="mi">32767</span>
-<span class="k">whenever</span> <span class="k">sqlerror</span> <span class="n">exit</span> <span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span> <span class="k">rollback</span>
-
-
-<span class="c1">-- https://blogs.oracle.com/opal/sqlplus-101-substitution-variables
-</span><span class="c1"></span><span class="n">define</span> <span class="n">logfile</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="s2">logs/export_frontend_from_&amp;2._&amp;3._&amp;4..log</span><span class="s2">&#34;</span>
-<span class="n">spool</span> <span class="s2">&#34;</span><span class="s2">&amp;logfile.</span><span class="s2">&#34;</span> <span class="k">replace</span>
-
-
-<span class="n">prompt</span>
-<span class="n">prompt</span> <span class="k">Start</span> <span class="n">frontend</span> <span class="n">export</span> <span class="k">for</span> <span class="n">app</span> <span class="o">&amp;</span><span class="mi">1</span><span class="p">.</span> <span class="k">on</span> <span class="o">&amp;</span><span class="mi">2</span><span class="p">.</span>
-<span class="n">prompt</span> <span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span>
-<span class="n">prompt</span> <span class="k">Create</span> <span class="k">global</span> <span class="k">temporary</span> <span class="k">table</span> <span class="n">temp_export_files</span> <span class="k">if</span> <span class="k">not</span> <span class="n">exist</span>
-<span class="k">BEGIN</span>
-  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="s1">&#39;</span><span class="s1">TEMP_EXPORT_FILES</span><span class="s1">&#39;</span> <span class="k">AS</span> <span class="n">object_name</span> <span class="k">FROM</span> <span class="n">dual</span> 
-            <span class="n">MINUS</span>
-            <span class="k">SELECT</span> <span class="n">object_name</span> <span class="k">FROM</span> <span class="n">user_objects</span><span class="p">)</span> <span class="n">LOOP</span>
-    <span class="k">EXECUTE</span> <span class="k">IMMEDIATE</span> <span class="n">q</span><span class="s1">&#39;</span><span class="s1">[
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- file: export_frontend.sql
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">heading</span><span class="w"> </span><span class="k">off</span><span class="w"> 
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">trimout</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">trimspool</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">pagesize</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">linesize</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="n">long</span><span class="w"> </span><span class="mi">100000000</span><span class="w"> </span><span class="n">longchunksize</span><span class="w"> </span><span class="mi">32767</span><span class="w">
+</span><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- https://blogs.oracle.com/opal/sqlplus-101-substitution-variables
+</span><span class="c1"></span><span class="n">define</span><span class="w"> </span><span class="n">logfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;logs/export_frontend_from_&amp;2._&amp;3._&amp;4..log&#34;</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="s2">&#34;&amp;logfile.&#34;</span><span class="w"> </span><span class="k">replace</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Start</span><span class="w"> </span><span class="n">frontend</span><span class="w"> </span><span class="n">export</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">2</span><span class="p">.</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">==================================================</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Create</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="k">temporary</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">temp_export_files</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">exist</span><span class="w">
+</span><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;TEMP_EXPORT_FILES&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">object_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="w"> 
+</span><span class="w">            </span><span class="n">MINUS</span><span class="w">
+</span><span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">object_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_objects</span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span><span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">q</span><span class="s1">&#39;[
 </span><span class="s1">--------------------------------------------------------------------------------
 </span><span class="s1">CREATE GLOBAL TEMPORARY TABLE temp_export_files (
 </span><span class="s1">  name       VARCHAR2(255),
 </span><span class="s1">  contents   CLOB
 </span><span class="s1">) ON COMMIT DELETE ROWS
 </span><span class="s1">--------------------------------------------------------------------------------
-</span><span class="s1">    ]</span><span class="s1">&#39;</span><span class="p">;</span>
-  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-<span class="k">END</span><span class="p">;</span>
-<span class="o">/</span>
-
-
-<span class="n">prompt</span> <span class="k">Do</span> <span class="n">the</span> <span class="n">frontend</span> <span class="n">export</span><span class="p">,</span> <span class="n">relocate</span> <span class="n">files</span> <span class="k">and</span> <span class="n">save</span> <span class="k">to</span> <span class="k">temporary</span> <span class="k">table</span>
-<span class="k">DECLARE</span>
-  <span class="n">l_app_id</span>  <span class="n">pls_integer</span> <span class="p">:</span><span class="o">=</span> <span class="o">&amp;</span><span class="mi">1</span><span class="p">.</span><span class="p">;</span>
-  <span class="n">l_files</span>   <span class="n">apex_t_export_files</span><span class="p">;</span>
-<span class="k">BEGIN</span>
-  <span class="n">l_files</span>   <span class="p">:</span><span class="o">=</span> <span class="n">apex_export</span><span class="p">.</span><span class="n">get_application</span><span class="p">(</span>
-    <span class="n">p_application_id</span>          <span class="o">=</span><span class="o">&gt;</span> <span class="n">l_app_id</span><span class="p">,</span>
-    <span class="n">p_split</span>                   <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_date</span>               <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_ir_public_reports</span>  <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_ir_private_reports</span> <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
-    <span class="n">p_with_ir_notifications</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
-    <span class="n">p_with_translations</span>       <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_pkg_app_mapping</span>    <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
-    <span class="n">p_with_original_ids</span>       <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_no_subscriptions</span>   <span class="o">=</span><span class="o">&gt;</span> <span class="k">false</span><span class="p">,</span>
-    <span class="n">p_with_comments</span>           <span class="o">=</span><span class="o">&gt;</span> <span class="k">true</span><span class="p">,</span>
-    <span class="n">p_with_supporting_objects</span> <span class="o">=</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="s1">Y</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="mi">1</span><span class="p">.</span><span class="p">.</span><span class="n">l_files</span><span class="p">.</span><span class="k">count</span> <span class="n">LOOP</span>
-    <span class="c1">-- relocate files to own project structure
-</span><span class="c1"></span>    <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> 
-      <span class="s1">&#39;</span><span class="s1">f</span><span class="s1">&#39;</span><span class="o">|</span><span class="o">|</span><span class="n">l_app_id</span><span class="o">|</span><span class="o">|</span><span class="s1">&#39;</span><span class="s1">/application/</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;</span><span class="s1">../app_frontend/</span><span class="s1">&#39;</span>
-    <span class="p">)</span><span class="p">;</span>
-    <span class="c1">-- correct prompts for relocation
-</span><span class="c1"></span>    <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span> 
-      <span class="s1">&#39;</span><span class="s1">prompt --application/</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;</span><span class="s1">prompt --app_frontend/</span><span class="s1">&#39;</span>
-    <span class="p">)</span><span class="p">;</span>
-    <span class="c1">-- special handling for install file
-</span><span class="c1"></span>    <span class="k">IF</span> <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s1">f</span><span class="s1">&#39;</span><span class="o">|</span><span class="o">|</span><span class="n">l_app_id</span><span class="o">|</span><span class="o">|</span><span class="s1">&#39;</span><span class="s1">/install.sql</span><span class="s1">&#39;</span> <span class="k">THEN</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;</span><span class="s1">install_frontend.sql</span><span class="s1">&#39;</span><span class="p">;</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span> <span class="p">:</span><span class="o">=</span> <span class="k">replace</span><span class="p">(</span>
-        <span class="k">replace</span><span class="p">(</span>
-          <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span>
-          <span class="s1">&#39;</span><span class="s1">@application/</span><span class="s1">&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;</span><span class="s1">@../app_frontend/</span><span class="s1">&#39;</span>
-        <span class="p">)</span><span class="p">,</span>
-        <span class="s1">&#39;</span><span class="s1">prompt --install</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;</span><span class="s1">prompt --install_frontend</span><span class="s1">&#39;</span>
-      <span class="p">)</span><span class="p">;</span>
-    <span class="k">END</span> <span class="k">IF</span><span class="p">;</span>
-  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-  <span class="n">FORALL</span> <span class="n">i</span> <span class="k">IN</span> <span class="mi">1</span><span class="p">.</span><span class="p">.</span><span class="n">l_files</span><span class="p">.</span><span class="k">count</span>
-    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">temp_export_files</span> <span class="k">VALUES</span> <span class="p">(</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
-      <span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">.</span><span class="n">contents</span>
-    <span class="p">)</span><span class="p">;</span>
-<span class="k">END</span><span class="p">;</span>
-<span class="o">/</span>
-
-
-<span class="n">prompt</span> <span class="k">Create</span> <span class="n">intermediate</span> <span class="n">script</span> <span class="n">file</span> <span class="k">to</span> <span class="n">unload</span> <span class="n">the</span> <span class="k">table</span> <span class="n">content</span> <span class="k">into</span> <span class="n">files</span>
-<span class="n">spool</span> <span class="k">off</span>
-<span class="k">set</span> <span class="n">termout</span> <span class="k">off</span> <span class="n">serveroutput</span> <span class="k">on</span>
-<span class="n">spool</span> <span class="s2">&#34;</span><span class="s2">logs/temp_export_files.sql</span><span class="s2">&#34;</span>
-<span class="k">BEGIN</span>
-  <span class="c1">-- create host commands for the needed directories (spool does NOT create missing directories)
-</span><span class="c1"></span>  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="p">(</span>
-    <span class="k">WITH</span> <span class="n">t1</span> <span class="k">AS</span> <span class="p">(</span>
-      <span class="k">SELECT</span> <span class="n">regexp_substr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s1">^((\w|\.)+\/)+</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">dir</span>
-        <span class="k">FROM</span> <span class="n">temp_export_files</span>
-    <span class="p">)</span>
-    <span class="k">SELECT</span> <span class="k">DISTINCT</span>
-            <span class="n">dir</span><span class="p">,</span>
-            <span class="c1">-- This is for Windows to create a directory and suppress warning if it exist.
-</span><span class="c1"></span>            <span class="c1">-- Align the command to your operating system:
-</span><span class="c1"></span>            <span class="s1">&#39;</span><span class="s1">host mkdir &#34;</span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="k">replace</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">/</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s1">\</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">|</span><span class="o">|</span> <span class="s1">&#39;</span><span class="s1">&#34; 2&gt;NUL</span><span class="s1">&#39;</span> <span class="k">AS</span> <span class="n">mkdir</span>
-      <span class="k">FROM</span> <span class="n">t1</span>
-      <span class="k">WHERE</span> <span class="n">dir</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
-  <span class="p">)</span> <span class="n">LOOP</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">set termout on</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool &#34;&amp;logfile.&#34; append</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">prompt --create directory if not exist: </span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="n">i</span><span class="p">.</span><span class="n">dir</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool off</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">set termout off</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">mkdir</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">-----</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-
-  <span class="c1">-- create the spool calls for unload the files
-</span><span class="c1"></span>  <span class="k">FOR</span> <span class="n">i</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">temp_export_files</span><span class="p">)</span> <span class="n">LOOP</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">set termout on</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool &#34;&amp;logfile.&#34; append</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">prompt --</span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool off</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">set termout off</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool &#34;</span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="n">i</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span><span class="o">|</span> <span class="s1">&#39;</span><span class="s1">&#34;</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">select contents from temp_export_files where name = </span><span class="s1">&#39;&#39;</span><span class="s1">&#39;</span> <span class="o">|</span><span class="o">|</span> <span class="n">i</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span><span class="o">|</span> <span class="s1">&#39;</span><span class="s1">&#39;&#39;</span><span class="s1">;</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">spool off</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">-----</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
-  <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-<span class="k">END</span><span class="p">;</span>
-<span class="o">/</span>
-<span class="n">spool</span> <span class="k">off</span>
-<span class="k">set</span> <span class="n">termout</span> <span class="k">on</span> <span class="n">serveroutput</span> <span class="k">off</span>
-<span class="n">spool</span> <span class="s2">&#34;</span><span class="s2">&amp;logfile.</span><span class="s2">&#34;</span> <span class="n">append</span>
-
-
-<span class="n">prompt</span> <span class="k">Call</span> <span class="n">the</span> <span class="n">intermediate</span> <span class="n">script</span> <span class="n">file</span> <span class="k">to</span> <span class="n">save</span> <span class="n">the</span> <span class="n">files</span>
-<span class="n">spool</span> <span class="k">off</span>
-<span class="o">@</span><span class="n">logs</span><span class="o">/</span><span class="n">temp_export_files</span><span class="p">.</span><span class="k">sql</span>
-<span class="k">set</span> <span class="n">termout</span> <span class="k">on</span> <span class="n">serveroutput</span> <span class="k">off</span>
-<span class="n">spool</span> <span class="s2">&#34;</span><span class="s2">&amp;logfile.</span><span class="s2">&#34;</span> <span class="n">append</span>
-
-
-<span class="n">prompt</span> <span class="k">Delete</span> <span class="n">files</span> <span class="k">from</span> <span class="n">the</span> <span class="k">global</span> <span class="k">temporary</span> <span class="k">table</span>
-<span class="k">COMMIT</span><span class="p">;</span>
-
-
-<span class="n">prompt</span> <span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span>
-<span class="n">prompt</span> <span class="n">Export</span> <span class="n">DONE</span> <span class="p">:</span><span class="o">-</span><span class="p">)</span> 
-<span class="n">prompt</span>
-</code></pre></div><p>To run this script file on your operating system, you need a shell script to call it. Here is an example for Windows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bat" data-lang="bat"><span class="c1">rem file: export_frontend.bat</span>
+</span><span class="s1">    ]&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">/</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Do</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">frontend</span><span class="w"> </span><span class="n">export</span><span class="p">,</span><span class="w"> </span><span class="n">relocate</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">temporary</span><span class="w"> </span><span class="k">table</span><span class="w">
+</span><span class="w"></span><span class="k">DECLARE</span><span class="w">
+</span><span class="w">  </span><span class="n">l_app_id</span><span class="w">  </span><span class="n">pls_integer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">1</span><span class="p">.;</span><span class="w">
+</span><span class="w">  </span><span class="n">l_files</span><span class="w">   </span><span class="n">apex_t_export_files</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span><span class="w">  </span><span class="n">l_files</span><span class="w">   </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">apex_export</span><span class="p">.</span><span class="n">get_application</span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">p_application_id</span><span class="w">          </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">l_app_id</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_split</span><span class="w">                   </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_date</span><span class="w">               </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_ir_public_reports</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_ir_private_reports</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_ir_notifications</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_translations</span><span class="w">       </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_pkg_app_mapping</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_original_ids</span><span class="w">       </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_no_subscriptions</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_comments</span><span class="w">           </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">p_with_supporting_objects</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="mi">1</span><span class="p">..</span><span class="n">l_files</span><span class="p">.</span><span class="k">count</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span><span class="w">    </span><span class="c1">-- relocate files to own project structure
+</span><span class="c1"></span><span class="w">    </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="k">replace</span><span class="p">(</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">name</span><span class="p">,</span><span class="w"> 
+</span><span class="w">      </span><span class="s1">&#39;f&#39;</span><span class="o">||</span><span class="n">l_app_id</span><span class="o">||</span><span class="s1">&#39;/application/&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">      </span><span class="s1">&#39;../app_frontend/&#39;</span><span class="w">
+</span><span class="w">    </span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="c1">-- correct prompts for relocation
+</span><span class="c1"></span><span class="w">    </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">contents</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="k">replace</span><span class="p">(</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">contents</span><span class="p">,</span><span class="w"> 
+</span><span class="w">      </span><span class="s1">&#39;prompt --application/&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">      </span><span class="s1">&#39;prompt --app_frontend/&#39;</span><span class="w">
+</span><span class="w">    </span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="c1">-- special handling for install file
+</span><span class="c1"></span><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;f&#39;</span><span class="o">||</span><span class="n">l_app_id</span><span class="o">||</span><span class="s1">&#39;/install.sql&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">name</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;install_frontend.sql&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">contents</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="k">replace</span><span class="p">(</span><span class="w">
+</span><span class="w">        </span><span class="k">replace</span><span class="p">(</span><span class="w">
+</span><span class="w">          </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">contents</span><span class="p">,</span><span class="w">
+</span><span class="w">          </span><span class="s1">&#39;@application/&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">          </span><span class="s1">&#39;@../app_frontend/&#39;</span><span class="w">
+</span><span class="w">        </span><span class="p">),</span><span class="w">
+</span><span class="w">        </span><span class="s1">&#39;prompt --install&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">        </span><span class="s1">&#39;prompt --install_frontend&#39;</span><span class="w">
+</span><span class="w">      </span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="n">FORALL</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="mi">1</span><span class="p">..</span><span class="n">l_files</span><span class="p">.</span><span class="k">count</span><span class="w">
+</span><span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">temp_export_files</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">name</span><span class="p">,</span><span class="w">
+</span><span class="w">      </span><span class="n">l_files</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">contents</span><span class="w">
+</span><span class="w">    </span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">/</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Create</span><span class="w"> </span><span class="n">intermediate</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">unload</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">files</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">termout</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="s2">&#34;logs/temp_export_files.sql&#34;</span><span class="w">
+</span><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span><span class="w">  </span><span class="c1">-- create host commands for the needed directories (spool does NOT create missing directories)
+</span><span class="c1"></span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="k">WITH</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">      </span><span class="k">SELECT</span><span class="w"> </span><span class="n">regexp_substr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;^((\w|\.)+\/)+&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">dir</span><span class="w">
+</span><span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">temp_export_files</span><span class="w">
+</span><span class="w">    </span><span class="p">)</span><span class="w">
+</span><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w">
+</span><span class="w">            </span><span class="n">dir</span><span class="p">,</span><span class="w">
+</span><span class="w">            </span><span class="c1">-- This is for Windows to create a directory and suppress warning if it exist.
+</span><span class="c1"></span><span class="w">            </span><span class="c1">-- Align the command to your operating system:
+</span><span class="c1"></span><span class="w">            </span><span class="s1">&#39;host mkdir &#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">replace</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="s1">&#39;\&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34; 2&gt;NUL&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">mkdir</span><span class="w">
+</span><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w">
+</span><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">dir</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;set termout on&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool &#34;&amp;logfile.&#34; append&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;prompt --create directory if not exist: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">dir</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool off&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;set termout off&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">mkdir</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;-----&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c1">-- create the spool calls for unload the files
+</span><span class="c1"></span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">temp_export_files</span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;set termout on&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool &#34;&amp;logfile.&#34; append&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;prompt --&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool off&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;set termout off&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool &#34;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#34;&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;select contents from temp_export_files where name = &#39;&#39;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#39;&#39;;&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;spool off&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="n">dbms_output</span><span class="p">.</span><span class="n">put_line</span><span class="p">(</span><span class="s1">&#39;-----&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">/</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">termout</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="s2">&#34;&amp;logfile.&#34;</span><span class="w"> </span><span class="n">append</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Call</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">intermediate</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">files</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="o">@</span><span class="n">logs</span><span class="o">/</span><span class="n">temp_export_files</span><span class="p">.</span><span class="k">sql</span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">termout</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="s2">&#34;&amp;logfile.&#34;</span><span class="w"> </span><span class="n">append</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="k">Delete</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="k">temporary</span><span class="w"> </span><span class="k">table</span><span class="w">
+</span><span class="w"></span><span class="k">COMMIT</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">==================================================</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Export</span><span class="w"> </span><span class="n">DONE</span><span class="w"> </span><span class="p">:</span><span class="o">-</span><span class="p">)</span><span class="w"> 
+</span><span class="w"></span><span class="n">prompt</span><span class="w">
+</span></code></pre></div><p>To run this script file on your operating system, you need a shell script to call it. Here is an example for Windows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="c1">rem file: export_frontend.bat</span>
 
 <span class="k">echo</span> off
 <span class="k">setlocal</span>
-<span class="k">set</span> <span class="k"></span><span class="nv">systemrole</span><span class="p">=</span>DEV
-<span class="k">set</span> <span class="k"></span><span class="nv">connection</span><span class="p">=</span>localhost:1521/orcl
-<span class="k">set</span> <span class="k"></span><span class="nv">schema</span><span class="p">=</span>HR
-<span class="k">set</span> <span class="k"></span><span class="nv">app_id</span><span class="p">=</span>100
-<span class="k">set</span> <span class="k"></span><span class="nv">areyousure</span><span class="p">=</span>N
+<span class="k">set</span> <span class="nv">systemrole</span><span class="p">=</span>DEV
+<span class="k">set</span> <span class="nv">connection</span><span class="p">=</span>localhost:1521/orcl
+<span class="k">set</span> <span class="nv">schema</span><span class="p">=</span>HR
+<span class="k">set</span> <span class="nv">app_id</span><span class="p">=</span>100
+<span class="k">set</span> <span class="nv">areyousure</span><span class="p">=</span>N
 
-<span class="c1">rem align delimiters to your os locale</span>
-<span class="k">for</span> <span class="k">/f</span> <span class="s2">&#34;</span><span class="s2">tokens=1-3 delims=. </span><span class="s2">&#34;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;date /t&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span><span class="k">set</span> <span class="k"></span><span class="nv">mydate</span><span class="p">=</span><span class="se">%%</span>c<span class="se">%%</span>b<span class="se">%%</span>a<span class="p">)</span>
-<span class="k">for</span> <span class="k">/f</span> <span class="s2">&#34;</span><span class="s2">tokens=1-2 delims=:</span><span class="s2">&#34;</span>  <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;time /t&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span><span class="k">set</span> <span class="k"></span><span class="nv">mytime</span><span class="p">=</span><span class="se">%%</span>a<span class="se">%%</span>b<span class="p">)</span>
+<span class="c1">rem align delimiters to your os locale</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&#34;tokens=1-3 delims=. &#34;</span> <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;date /t&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span><span class="k">set</span> <span class="nv">mydate</span><span class="p">=</span><span class="se">%%</span>c<span class="se">%%</span>b<span class="se">%%</span>a<span class="p">)</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&#34;tokens=1-2 delims=:&#34;</span>  <span class="se">%%</span>a <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;time /t&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span><span class="k">set</span> <span class="nv">mytime</span><span class="p">=</span><span class="se">%%</span>a<span class="se">%%</span>b<span class="p">)</span>
 
-<span class="p">:</span><span class="nl">PROMPT</span><span class="c1"></span>
+<span class="p">:</span><span class="nl">PROMPT</span>
 <span class="k">echo</span>.
 <span class="k">echo</span>. 
 <span class="k">set</span> <span class="k">/p</span> <span class="nv">areyousure</span><span class="p">=</span>Export <span class="nv">%schema%</span> app <span class="nv">%app_id%</span> from <span class="nv">%systemrole%</span> (Y/N)?
 
-<span class="k">if</span> <span class="k">/i</span> <span class="k"></span><span class="nv">%areyousure%</span> <span class="ow">neq</span> y <span class="k">goto</span> <span class="p"></span><span class="nl">END</span><span class="c1"></span>
-<span class="k">set</span> <span class="k"></span><span class="nv">NLS_LANG</span><span class="p">=</span>AMERICAN_AMERICA.AL32UTF8
+<span class="k">if</span> <span class="k">/i</span> <span class="nv">%areyousure%</span> <span class="ow">neq</span> y <span class="k">goto</span> <span class="nl">END</span>
+<span class="k">set</span> <span class="nv">NLS_LANG</span><span class="p">=</span>AMERICAN_AMERICA.AL32UTF8
 <span class="k">set</span> <span class="k">/p</span> <span class="nv">password</span><span class="p">=</span>Please enter password for <span class="nv">%schema%</span> on <span class="nv">%systemrole%</span>:
-<span class="k">echo</span> exit <span class="p">|</span> sqlplus -S <span class="nv">%schema%</span>/<span class="nv">%password%</span>@<span class="nv">%connection%</span> <span class="se">^</span>
-  <span class="p">@</span>export_frontend.sql <span class="se">^</span>
-  <span class="nv">%app_id%</span> <span class="se">^</span>
-  <span class="nv">%systemrole%</span> <span class="se">^</span>
-  <span class="nv">%mydate%</span> <span class="se">^</span>
-  <span class="nv">%mytime%</span>
+<span class="k">echo</span> exit <span class="p">|</span> sqlplus -S <span class="nv">%schema%</span>/<span class="nv">%password%</span>@<span class="nv">%connection%</span> <span class="se">^
+</span><span class="se"> </span> @export_frontend.sql <span class="se">^
+</span><span class="se"> </span> <span class="nv">%app_id%</span> <span class="se">^
+</span><span class="se"> </span> <span class="nv">%systemrole%</span> <span class="se">^
+</span><span class="se"> </span> <span class="nv">%mydate%</span> <span class="se">^
+</span><span class="se"> </span> <span class="nv">%mytime%</span>
 
-<span class="p">:</span><span class="nl">END</span><span class="c1"></span>
+<span class="p">:</span><span class="nl">END</span>
 <span class="k">pause</span>
 </code></pre></div><p>There are better ways then to ask for a password at runtime - but that is not the focus of this post. Also, you may not want to keep the command line open until the user presses a key in a fully automated setup. This is only to be able to see any errors before the shell window closes when opened via double click on the file.</p>
 <p>Hope this helps someone.</p>
-<p>Happy exporting :-)<br>
-Ottmar</p>
+<p>Happy exporting :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
@@ -273,7 +281,7 @@ Ottmar</p>
   <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2018-07-25" itemprop="datePublished">July 25, 2018</time>, tagged with
     <a href="/tags/oracle/">Oracle</a>, 
     <a href="/tags/apex/">APEX</a>, 
-    <a href="/tags/version-control/">Version Control</a> and 
+    <a href="/tags/version-control/">Version control</a> and 
     <a href="/tags/sqlplus/">SQL*Plus</a>.
   </p>
   <span class="left item-meta">&#x2190; <a href="/posts/2018-07-22-today-button-in-apex-datepicker/">Show Today Button in APEX Datepicker</a></span>
@@ -281,8 +289,7 @@ Ottmar</p>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -291,9 +298,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -313,8 +317,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

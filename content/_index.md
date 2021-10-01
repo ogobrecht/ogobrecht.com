@@ -1,7 +1,6 @@
 ---
 title: Home
 description: The last five posts and a list of all tags
-menu: main
 ---
 
 {{< list-section "posts" 5 >}}

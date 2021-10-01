@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>generator on Ottmar’s Notes</title>
+    <title>Generator on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/generator/</link>
-    <description>Recent content in generator on Ottmar’s Notes</description>
+    <description>Recent content in Generator on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/generator/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/generator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create Fast Insert Scripts</title>
+      <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</guid>
+      <description>A few weeks ago I released a new version of my PLEX project. I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.
+It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application.</description>
+    </item>
     
     <item>
       <title>New Version of Oracle Table API Generator Available</title>
@@ -48,18 +53,8 @@ Normally in the business world I see minimalistic comments in the code and a ded
       
       <guid>https://ogobrecht.com/posts/2017-11-29-hydebar/</guid>
       <description>Earlier this year I wrote at the end of this post:
- P.S.: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;
+ PS: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;
  As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the JSDoc theme Minami and the Liquid docs site - both with nice sidebars.</description>
-    </item>
-    
-    <item>
-      <title>APEX Meetup 17.06.2016, Frankfurt</title>
-      <link>https://ogobrecht.com/posts/2016-06-17-apex-meetup-frankfurt/</link>
-      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-06-17-apex-meetup-frankfurt/</guid>
-      <description>Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum Table API Generator dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema APEX Fine Art Printing, Markdown Überall gezeigt.
-Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt.</description>
     </item>
     
     <item>

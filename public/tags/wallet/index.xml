@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>wallet on Ottmar’s Notes</title>
+    <title>Wallet on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/wallet/</link>
-    <description>Recent content in wallet on Ottmar’s Notes</description>
+    <description>Recent content in Wallet on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/wallet/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/wallet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
       <link>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</link>

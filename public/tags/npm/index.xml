@@ -5,12 +5,7 @@
     <link>https://ogobrecht.com/tags/npm/</link>
     <description>Recent content in npm on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://ogobrecht.com/tags/npm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/npm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
       <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>

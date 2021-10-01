@@ -8,10 +8,10 @@
   <title>Why I Like SQL*Plus for Deployment Scripts</title>
   <meta name="description" content="SQLcl is eating my error messages">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Why I Like SQL*Plus for Deployment Scripts">
+  <meta name="twitter:description" content="SQLcl is eating my error messages">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,38 +51,40 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">Why I Like SQL*Plus for Deployment Scripts</h1><p class="item-subtitle">SQLcl is eating my error messages</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
 
 <p>The following simplified example deployment master script is given:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">define</span> <span class="k">off</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">off</span>
-<span class="k">whenever</span> <span class="k">sqlerror</span> <span class="n">exit</span> <span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span> <span class="k">rollback</span>
-<span class="n">spool</span> <span class="n">deployment</span><span class="p">.</span><span class="n">log</span>
-
-<span class="n">prompt</span>
-<span class="n">prompt</span> <span class="n">Example</span> <span class="n">Deployment</span> <span class="n">Master</span> <span class="n">Script</span>
-<span class="n">prompt</span> <span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span>
-
-<span class="n">prompt</span> <span class="n">Step</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Dummy</span> <span class="k">for</span> <span class="n">demonstration</span>
-<span class="c1">-- normally we call here some other scripts like
-</span><span class="c1"></span><span class="c1">-- @other-script.sql
-</span><span class="c1"></span>
-<span class="n">prompt</span> <span class="n">Step</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Error</span> <span class="n">test</span> <span class="k">in</span> <span class="n">anonymous</span> <span class="n">block</span>
-<span class="k">begin</span>
-  <span class="n">raise_application_error</span><span class="p">(</span>
-    <span class="o">-</span><span class="mi">20000</span><span class="p">,</span> 
-    <span class="s1">&#39;</span><span class="s1">Error test for SQL*Plus &lt;&gt; SQLcl comparison</span><span class="s1">&#39;</span>
-  <span class="p">)</span><span class="p">;</span>
-<span class="k">end</span><span class="p">;</span>
-<span class="o">/</span>
-
-<span class="n">prompt</span> <span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span>
-<span class="n">prompt</span> <span class="n">Deployment</span> <span class="n">Done</span> <span class="p">:</span><span class="o">-</span><span class="p">)</span>
-<span class="n">prompt</span>
-
-<span class="n">spool</span> <span class="k">off</span>
-</code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="n">deployment</span><span class="p">.</span><span class="n">log</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Script</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">Dummy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">demonstration</span><span class="w">
+</span><span class="w"></span><span class="c1">-- normally we call here some other scripts like
+</span><span class="c1">-- @other-script.sql
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">anonymous</span><span class="w"> </span><span class="n">block</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="o">-</span><span class="mi">20000</span><span class="p">,</span><span class="w"> 
+</span><span class="w">    </span><span class="s1">&#39;Error test for SQL*Plus &lt;&gt; SQLcl comparison&#39;</span><span class="w">
+</span><span class="w">  </span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">/</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="p">:</span><span class="o">-</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="n">prompt</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span></code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
 the console and also in deployment.log) with an indication of what went wrong
 with our deployment:</p>
 <pre><code>Example Deployment Master Script
@@ -98,12 +106,12 @@ output (in the console and also the deployment.log):</p>
 Step 1: Dummy for demonstration
 Step 2: Error test in anonymous block
 </code></pre><p>Mhhh&hellip; What was going on here? Why was my script terminating in step 2?</p>
-<p>That's one reason why I like SQL*Plus a bit more than SQLcl for deployment
+<p>That&rsquo;s one reason why I like SQL*Plus a bit more than SQLcl for deployment
 scripts. The fast start time of SQL*Plus is another reason. Nevertheless, SQLcl
 is a cool command-line tool.</p>
-<p>Happy scripting :-)<br>
-Ottmar</p>
-<p>P.S.: There is a small <a href="https://twitter.com/ogobrecht/status/1212646721127366656">Twitter
+<p>Happy scripting :-)</p>
+<p>Ottmar</p>
+<p>PS: There is a small <a href="https://twitter.com/ogobrecht/status/1212646721127366656">Twitter
 discussion</a> around
 this&hellip;</p>
 <h2 id="update-january-3-2020">UPDATE January 3, 2020</h2>
@@ -113,9 +121,9 @@ this&hellip;</p>
 Windows, not Mac, not Linux&hellip;</p>
 <p>So, if you are facing this problem on Windows then you have to wait for a future
 release or set as a workaround the feedback to on:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">define</span> <span class="k">off</span> <span class="n">verify</span> <span class="k">off</span> <span class="n">feedback</span> <span class="k">on</span>
-<span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span>
-</code></pre></div><p>Here the output on my Windows 10 laptop:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span><span class="w"></span><span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span><span class="w">
+</span></code></pre></div><p>Here the output on my Windows 10 laptop:</p>
 <pre><code>Demo Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
@@ -164,8 +172,7 @@ Ottmar</p>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -174,9 +181,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -196,8 +200,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>

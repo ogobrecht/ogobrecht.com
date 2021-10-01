@@ -23,10 +23,7 @@
 {{- end }}
 <published>{{ .PublishDate.Format "2006-01-02T15:04:05" }}+01:00</published>
 <updated>{{ .Lastmod.Format "2006-01-02T15:04:05" }}+01:00</updated>
-<content type="html" xml:base="{{ .Permalink }}">
-{{ with .Params.description }}{{ printf "<p><em>%s</em></p>" . | html }}{{ end }}
-{{ .Content | html }}
-</content>
+{{/* <content type="html" xml:base="{{ .Permalink }}">{{ with .Params.description }}{{ printf "<p><em>%s</em></p>" . | html }}{{ end }}{{ .Content | html }}</content> */}}
 </entry>
 {{ end }}
 

@@ -8,10 +8,10 @@
   <title>Show Today Button in APEX Datepicker</title>
   <meta name="description" content="A short note on how to customize the jQuery UI datepicker">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.87.0" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/">
-  <link rel="alternate" type="application/atom+xml" title="Ottmar’s Notes" href="https://ogobrecht.com//feed.xml">
+  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -31,6 +31,12 @@
   <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Show Today Button in APEX Datepicker">
+  <meta name="twitter:description" content="A short note on how to customize the jQuery UI datepicker">
+  <meta name="twitter:image" content="/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -45,6 +51,8 @@
 
 <header class="item-header">
   <h1 class="item-title" itemprop="name headline">Show Today Button in APEX Datepicker</h1><p class="item-subtitle">A short note on how to customize the jQuery UI datepicker</p>
+  
+
 </header>
 
 <div class="item-content" itemprop="articleBody">
@@ -52,14 +60,14 @@
 <p>Maxime Tremblay has already described <a href="http://max-tremblay.blogspot.com/2018/03/datepicker-customization.html">here</a> how to customize the datepicker.</p>
 <p>He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.</p>
 <p>In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called <code>Today</code> and a second one to close the datepicker which is called <code>Done</code> I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:</p>
-<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">apex</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">datepicker</span><span class="p">.</span><span class="nx">setDefaults</span><span class="p">(</span><span class="p">{</span> <span class="s1">&#39;showButtonPanel&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">)</span><span class="p">;</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">body</span> <span class="p">.</span><span class="nc">ui-datepicker-close</span> <span class="p">{</span> <span class="k">display</span><span class="p">:</span> <span class="kc">none</span> <span class="cp">!important</span><span class="p">;</span> <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">apex</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">datepicker</span><span class="p">.</span><span class="nx">setDefaults</span><span class="p">({</span> <span class="s1">&#39;showButtonPanel&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="nt">body</span> <span class="p">.</span><span class="nc">ui-datepicker-close</span> <span class="p">{</span> <span class="k">display</span><span class="p">:</span> <span class="kc">none</span> <span class="cp">!important</span><span class="p">;</span> <span class="p">}</span>
 </code></pre></div><p><img src="jquery-datepicker-today-button.png" alt="jQuery datepicker today button"></p>
 <p>Just for reference: The jQuery UI datepicker widget can be tested <a href="https://jqueryui.com/datepicker/#buttonbar">here</a>. Be careful to pick the correct version of the jQuery UI API docs for your specific APEX version.</p>
-<p>Happy coding :-)<br>
-Ottmar</p>
+<p>Happy coding :-)</p>
+<p>Ottmar</p>
 
 
 </div><!--articleBody-end-->
@@ -70,13 +78,12 @@ Ottmar</p>
     <a href="/tags/apex/">APEX</a> and 
     <a href="/tags/jquery/">jQuery</a>.
   </p>
-  <span class="left item-meta">&#x2190; <a href="/posts/2017-12-27-first-postcard-comment/">Postcard Comment</a></span>
+  <span class="left item-meta">&#x2190; <a href="/posts/2017-11-29-hydebar/">HydeBar</a></span>
   <span class="right item-meta"><a href="/posts/2018-07-25-apex-export-and-version-control/">APEX_EXPORT and Version Control</a> &#x2192;</span>
 </footer>
 
 </article>
-
-
+<p><a id="comments"></a></p>
 <script src="https://utteranc.es/client.js"
         repo="ogobrecht/ogobrecht.com"
         issue-term="pathname"
@@ -85,9 +92,6 @@ Ottmar</p>
         crossorigin="anonymous"
         async>
 </script>
-
-
-
 <!--content-end-->
 
     </div>
@@ -107,8 +111,8 @@ Ottmar</p>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/tags/apex/">APEX</a></li>
-          <li><a href="/tags/plsql/">PL/SQL</a></li>
-          <li><a href="/tags/project/">Open Source Projects</a></li>
+          <li><a href="/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/tags/open-source-project/">Open Source Projects</a></li>
           <li><a href="/archive/">Post Archive</a></li>
           <li><a href="/about/">About</a></li>
         </ul>
