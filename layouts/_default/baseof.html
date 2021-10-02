@@ -46,11 +46,12 @@
   <meta name="twitter:title" content="{{ .Title | htmlEscape }}">
   <meta name="twitter:description" content="{{ .Description | htmlEscape | chomp | truncate 160 }}">
   {{- if .Params.featured_image }}
-  <meta name="twitter:image" content="{{ .Params.featured_image }}">
-  <meta name="twitter:image:alt" content="{{ .Params.featured_image_alt }}">
+  {{- $img := (.Resources.ByType "image").GetMatch .Params.featured_image }}
+  <meta name="twitter:image" content="{{ $img.Permalink }}">
+  <meta name="twitter:image:alt" content="{{ .Params.featured_image_alt}}">
   {{- else }}
-  <meta name="twitter:image" content="/assets/images/avatar.jpg">
-  <meta name="twitter:image:alt" content="Ottmar Gobrecht">
+  <meta name="twitter:image" content="{{ "/assets/images/avatar.jpg" | absURL }}">
+  <meta name="twitter:image:alt" content="Author photo">
   {{- end }}
   {{- end }}
   {{ `<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->` | safeHTML }}
