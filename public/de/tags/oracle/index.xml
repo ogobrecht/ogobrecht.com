@@ -12,7 +12,7 @@
       <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</guid>
-      <description>Foto von Pete Nuij auf unsplash.com Inhaltsverzeichnis Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-In für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage  Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
+      <description>Inhaltsverzeichnis Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-In für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage  Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
     </item>
     
     <item>
