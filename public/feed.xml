@@ -10,8 +10,25 @@
 <link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
 <generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-02T14:44:04+01:00</updated>
+<updated>2021-10-04T13:39:24+01:00</updated>
 
+
+<entry xml:lang="en">
+<id>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</id>
+<link href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" rel="alternate" type="text/html" title="Yet another Oracle DB logging tool: Console" />
+<title type="html">Yet another Oracle DB logging tool: Console</title>
+<summary type="html">Easy to install, works without context and special rights on administrative views, brings APEX integration with it</summary>
+<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
+<category term="log" label="Log" scheme="https://ogobrecht.com/tags/" />
+<category term="debug" label="Debug" scheme="https://ogobrecht.com/tags/" />
+<category term="instrumentation" label="Instrumentation" scheme="https://ogobrecht.com/tags/" />
+<published>2021-10-04T00:00:00+01:00</published>
+<updated>2021-10-04T12:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</id>
@@ -276,20 +293,6 @@
 <category term="docker" label="Docker" scheme="https://ogobrecht.com/tags/" />
 <published>2017-06-13T00:00:00+01:00</published>
 <updated>2017-08-12T20:11:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/</id>
-<link href="https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/" rel="alternate" type="text/html" title="jQuery Plugin svg2img" />
-<title type="html">jQuery Plugin svg2img</title>
-<summary type="html">Convert inline SVGs to standalone image files without loosing styles</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="jquery" label="jQuery" scheme="https://ogobrecht.com/tags/" />
-<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
-<category term="svg" label="SVG" scheme="https://ogobrecht.com/tags/" />
-<published>2017-04-03T00:00:00+01:00</published>
-<updated>2019-01-21T16:16:00+01:00</updated>
 
 </entry>
 
