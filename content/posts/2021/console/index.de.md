@@ -5,11 +5,10 @@ tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: "ein-weiteres-oracle-db-logging-tool-console"
 publishdate: 2021-10-04
 lastmod: 2021-10-04 12:00:00
+featured_image: pete-nuij-m-AqW5QCxNQ-unsplash.jpg
+featured_image_alt: Fliegende Eule
+featured_image_caption: Foto von Pete Nuij auf unsplash.com
 ---
-
-{{< figure "Foto von Pete Nuij auf unsplash.com" >}}
-![Fliegende Eule](pete-nuij-m-AqW5QCxNQ-unsplash.jpg)
-{{< /figure >}}
 
 {{< toc >}}
 
