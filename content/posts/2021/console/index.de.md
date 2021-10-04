@@ -482,8 +482,8 @@ Dann gibt es noch die Kurzformen von `console.print(console.format(...))` und `c
 
 ```sql
 console.printf(
-  'A %s message with a %n second line of text',
-  'dynamic'
+  'A dynamic message with a %n second line of text: %s',
+  my_var
 );
 
 console.assertf(
@@ -503,12 +503,12 @@ Mehr gibt es in der [API-Übersicht](https://github.com/ogobrecht/console/blob/m
 Wer sich dafür interessiert, was in der aktuellen Session von Console konfiguriert ist, kann sich das mit einer Pipelined Table Function anschauen oder in seiner Anwendung mit einem Report zur Verfügung stellen:
 
 ```sql
-select * from console.status();
+select * from table(console.status);
 ```
 
 | ATTRIBUTE                | VALUE               |
 |--------------------------|---------------------|
-| c_version                | 1.0-rc1             |
+| c_version                | 1.0.0               |
 | localtimestamp           | 2021-10-03 13:58:00 |
 | sysdate                  | 2021-10-03 11:58:00 |
 | g_conf_check_sysdate     | 2021-10-03 11:58:10 |

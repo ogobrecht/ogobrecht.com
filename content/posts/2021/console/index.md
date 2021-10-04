@@ -482,8 +482,8 @@ Then there are the short forms of `console.print(console.format(...))` and `cons
 
 ```sql
 console.printf(
-  'A %s message with a %n second line of text',
-  'dynamic'
+  'A dynamic message with a %n second line of text: %s',
+  my_var
 );
 
 console.assertf(
@@ -503,12 +503,12 @@ More can be found in the [API overview](https://github.com/ogobrecht/console/blo
 If you are interested in what is configured in the current session of Console, you can look at it with a pipelined table function or make it available in your application with a report:
 
 ```sql
-select * from console.status();
+select * from table(console.status);
 ```
 
 | ATTRIBUTE                | VALUE               |
 |--------------------------|---------------------|
-| c_version                | 1.0-rc1             |
+| c_version                | 1.0.0               |
 | localtimestamp           | 2021-10-03 13:58:00 |
 | sysdate                  | 2021-10-03 11:58:00 |
 | g_conf_check_sysdate     | 2021-10-03 11:58:10 |
@@ -532,8 +532,8 @@ select * from console.status();
 
 For APEX, Console comes with a so-called "[Error Handling Function](https://docs.oracle.com/en/database/oracle/application-express/20.2/aeapi/Example-of-an-Error-Handling-Function.html#GUID-2CD75881-1A59-4787-B04B-9AAEC14E1A82)" which can enter errors within the APEX runtime environment into the log table. If you want to use this, you have to enter this function in your application in the "Application Builder" under "Edit Application Properties > Error Handling > Error Handling Function": `console.apex_error_handling`.
 
-{{< figure "APEX Error Handling with ASCII type enabled" >}}
-![APEX Error Handling with ASCII Art enabled](apex-error-handling-function.png)
+{{< figure "APEX error handling with ASCII art enabled" >}}
+![APEX error handling with ASCII art enabled](apex-error-handling-function.png)
 {{< /figure >}}
 
 The Error Handling Function logs the technical error in the CONSOLE_LOGS table and writes a friendly message to the end user. It uses the APEX Text Message feature for the user-friendly messages in case of constraint violations, as described in [this video](https://www.insum.ca/episode-22-error-handling/) by Anton and Neelesh from Insum, which in turn is based on an idea by Roel Hartman in [this blog post](https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html). The APEX community rocks....
