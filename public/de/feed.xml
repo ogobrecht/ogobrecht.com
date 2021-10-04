@@ -10,8 +10,25 @@
 <link href="https://ogobrecht.com/de/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/de/" rel="alternate" type="text/html" hreflang="de" />
 <generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-02T14:44:04+01:00</updated>
+<updated>2021-10-04T13:39:25+01:00</updated>
 
+
+<entry xml:lang="de">
+<id>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</id>
+<link href="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/" rel="alternate" type="text/html" title="Ein weiteres Oracle DB Logging-Tool: Console" />
+<title type="html">Ein weiteres Oracle DB Logging-Tool: Console</title>
+<summary type="html">Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit</summary>
+<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
+<category term="log" label="Log" scheme="https://ogobrecht.com/tags/" />
+<category term="debug" label="Debug" scheme="https://ogobrecht.com/tags/" />
+<category term="instrumentation" label="Instrumentation" scheme="https://ogobrecht.com/tags/" />
+<published>2021-10-04T00:00:00+01:00</published>
+<updated>2021-10-04T12:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="de">
 <id>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</id>

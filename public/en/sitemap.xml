@@ -2,6 +2,136 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ogobrecht.com/tags/apex/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/apex/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/apex/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/debug/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/debug/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/debug/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/instrumentation/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/instrumentation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/instrumentation/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/log/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/log/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/log/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/open-source-project/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/open-source-project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/open-source-project/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/oracle/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/oracle/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/oracle/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/posts/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/posts/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</loc>
+    <lastmod>2021-10-04T12:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/"
+                />
+  </url><url>
     <loc>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</loc>
     <lastmod>2021-08-30T13:00:00+00:00</lastmod>
     <xhtml:link
@@ -28,45 +158,6 @@
                 href="https://ogobrecht.com/tags/generator/"
                 />
   </url><url>
-    <loc>https://ogobrecht.com/</loc>
-    <lastmod>2021-08-30T13:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/tags/oracle/</loc>
-    <lastmod>2021-08-30T13:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/oracle/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/oracle/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/posts/</loc>
-    <lastmod>2021-08-30T13:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/posts/"
-                />
-  </url><url>
     <loc>https://ogobrecht.com/tags/script/</loc>
     <lastmod>2021-08-30T13:00:00+00:00</lastmod>
     <xhtml:link
@@ -78,19 +169,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/tags/script/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/tags/</loc>
-    <lastmod>2021-08-30T13:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</loc>
@@ -108,9 +186,6 @@
     <loc>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</loc>
     <lastmod>2020-07-29T20:15:00+00:00</lastmod>
   </url><url>
-    <loc>https://ogobrecht.com/tags/open-source-project/</loc>
-    <lastmod>2021-01-31T20:45:00+00:00</lastmod>
-  </url><url>
     <loc>https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/</loc>
     <lastmod>2020-05-25T14:00:00+00:00</lastmod>
   </url><url>
@@ -119,19 +194,6 @@
   </url><url>
     <loc>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</loc>
     <lastmod>2021-01-31T20:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://ogobrecht.com/tags/apex/</loc>
-    <lastmod>2021-01-31T20:45:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/apex/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/apex/"
-                />
   </url><url>
     <loc>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</loc>
     <lastmod>2020-10-26T16:43:00+00:00</lastmod>
@@ -357,6 +419,16 @@
                 />
   </url><url>
     <loc>https://ogobrecht.com/tags/pl/sql/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/pl/sql/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/pl/sql/"
+                />
   </url><url>
     <loc>https://ogobrecht.com/archive/</loc>
     <xhtml:link

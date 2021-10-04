@@ -1,10 +1,10 @@
 ---
 title: "Yet another Oracle DB logging tool: Console"
-description: Easy to install and works without context and without special rights to administrative views
+description: Easy to install, works without context and special rights on administrative views, brings APEX integration with it
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: yet-another-oracle-db-logging-tool-console
-publishdate: 2021-10-03
-lastmod: 2021-10-03 11:00:00
+publishdate: 2021-10-04
+lastmod: 2021-10-04 12:00:00
 ---
 
 {{< figure "Photo by Pete Nuij on unsplash.com" >}}
@@ -25,7 +25,7 @@ It looks like it is a hobby of PL/SQL developers to develop their own logging to
 - [BMC_DEBUG](https://sites.google.com/site/oraplsqlinst/)
 - ...
 
-One reason seems to be that everyone has different ideas or needs. In my case I wanted a logging tool, which is very easy to install and works even if you are not allowed to create a context in the database and also have no special read permissions for administrative views like v$session. You only need the rights to create tables and packages and a cleanup job - pretty standard. Nevertheless, it is possible to move individual users/sessions to a higher log level for debugging purposes. As this is solved via client identifier, this will also work in an environment without fixed session ID like e.g. APEX. If no client identifier is set in an environment, then Console simply assigns one itself. Console reads its configuration from a table with only one line supported by the result cache. This ensures a resource-saving execution. Also the check whether a log message is really written to the log table based on the current log level is highly optimized to keep the overhead as low as possible in production environments.
+One reason seems to be that everyone has different ideas or needs. For me, I wanted a logging tool that is very easy to install and works even if you are not allowed to create a context in the database and also have no special read permissions for administrative views like v$session. You only need the rights to create tables and packages and optionally a cleanup job - pretty standard. Nevertheless, it is possible to move individual users/sessions to a higher log level for debugging purposes. As this is solved via client identifier, this will also work in an environment without fixed session ID like e.g. APEX. If no client identifier is set in an environment, then Console simply assigns one itself. Console reads its configuration from a table with only one line supported by the result cache. This ensures a resource-saving execution. Also the check whether a log message is really written to the log table based on the current log level is highly optimized to keep the overhead as low as possible in production environments.
 
 ## A single install script
 
@@ -33,7 +33,69 @@ For Console, all scripts are merged into a single install script. Since SQLcl ca
 
 ## Production safe without further configuration
 
-By default, Console logs only errors (Level 1). This means that you are on the safe side on production systems without any further configuration. But if you want to enable other levels like warning (2), info (3), debug (4) or trace (5) on a development system and don't want to do this for each session individually, you can set it globally: `exec console.conf(p_level => 3);`. More on this in the [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) document.
+Console logs only errors (level 1) by default. This means that you are on the safe side on production systems without any further configuration. But if you want to enable other levels like warning (2), info (3), debug (4) or trace (5) on a development system and don't want to do this for each session individually, you can set it globally: `exec console.conf(p_level => 3);`. More about this in the package description for the procedure [console.conf](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-conf).
+
+To set a session (client identifier) to a higher log level use the procedure [console.init](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-init). If you omit the parameter `p_client_identifier`, then the client identifier of your own session is automatically taken - here is an example:
+
+```sql
+-- Dive into your own session with the default log level of 3 (info) and the
+-- default duration of 60 (minutes).
+exec console.init;
+
+-- With level 4 (debug) for the next 15 minutes.
+exec console.init(4, 15);
+
+-- Using a constant for the level
+exec console.init(console.c_level_debug, 90);
+
+-- Debug an APEX session...
+begin
+  console.init(
+    p_client_identifier => 'OGOBRECHT:8805903776765',
+    p_level             => console.c_level_debug,
+    p_duration          => 15
+    -- there are more parameters availabe... 
+  );
+end;
+/
+```
+
+Now the question arises, how to get the client identifier of a foreign session without read access to adminstrative views like e.g. v$session. A variant would be to write this for example in the frontend of an application with `sys_context('USERENV', 'CLIENT_IDENTIFIER')` - e.g. in the footer or on a help page.
+
+If you want to return to the normal mode of global settings for all sessions, you can do so with [console.exit](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-exit).
+
+You should not use the procedures `console.conf`, `init` and `exit` in your business logic - they are only used for managing session settings and for debugging purposes and should therefore only be used interactively or in SQL scripts.
+
+## Method names based on JavaScript Console
+
+Console uses as many method names from the JavaScript Console as possible - so switching between backend code and frontend code shouldn't be that hard as far as method names are concerned. Whether the methods really write anything to the log table CONSOLE_LOGS depends on the active log level - so first these:
+
+- Level 1: Error
+- Level 2: Warning
+- Level 3: Info
+- Level 4: Debug (instead of verbose in the JavaScript Console)
+- Level 5: Trace (not available in the JavaScript Console)
+
+The main instrumentation methods:
+
+- console.error_save_stack (more on that in a moment):
+- console.error (level error)
+- console.warn (level warning)
+- console.info & log (level info)
+- console.debug (level debug)
+- console.trace (level trace)
+- console.count & count_reset
+- console.count_current & count_end (level info)
+- console.count_current & count_end (function overloads, independent of log level)
+- console.time & time_reset
+- console.time_current & time_end (level info)
+- console.time_current & time_end (function overloads, independent of log level)
+- console.table# (level info)
+- console.assert & assertf
+- console.format
+- console.add_param
+
+More in the [API overview](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
 
 ## Reduced amount of log entries through saved call stack
 
@@ -166,10 +228,6 @@ Call Stack
 ```
 
 If you don't use `console.error_save_stack` but always `console.error`, then you get at least the last three sections in the log - and without extra work in the code. You just have to remember `console.error`.
-
-## Method names based on JavaScript Console
-
-I intentionally reused as many method names from the JavaScript Console as possible - so switching between backend code and frontend code shouldn't be that hard regarding the method names. An [API Overview](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md) and a [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) document help with the first steps.
 
 ## Simple logging of method parameters
 
@@ -320,7 +378,7 @@ end;
 
 This then leads to something like this server output:
 
-```
+```bash
 Processing step one...
 Elapsed: 00:00:00.105398
 Processing step two...
@@ -356,7 +414,7 @@ end;
 
 This then results in a server output as follows:
 
-```
+```bash
 Counting nonsense...
 Current value: 333
 Final value: 10
@@ -424,8 +482,8 @@ Then there are the short forms of `console.print(console.format(...))` and `cons
 
 ```sql
 console.printf(
-  'A %s message with a %n second line of text',
-  'dynamic'
+  'A dynamic message with a %n second line of text: %s',
+  my_var
 );
 
 console.assertf(
@@ -440,19 +498,57 @@ Also often needed is a fast, cached clob concatenation - that's where Console ca
 
 More can be found in the [API overview](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
 
+## Displaying the package status of Console in a session
+
+If you are interested in what is configured in the current session of Console, you can look at it with a pipelined table function or make it available in your application with a report:
+
+```sql
+select * from table(console.status);
+```
+
+| ATTRIBUTE                | VALUE               |
+|--------------------------|---------------------|
+| c_version                | 1.0.0               |
+| localtimestamp           | 2021-10-03 13:58:00 |
+| sysdate                  | 2021-10-03 11:58:00 |
+| g_conf_check_sysdate     | 2021-10-03 11:58:10 |
+| g_conf_exit_sysdate      | 2021-10-03 12:58:00 |
+| g_conf_client_identifier | {o,o} 11ECD3500002  |
+| g_conf_level             | 5                   |
+| level_name(g_conf_level) | trace               |
+| g_conf_check_interval    | 10                  |
+| g_conf_enable_ascii_art  | true                |
+| g_conf_call_stack        | false               |
+| g_conf_user_env          | false               |
+| g_conf_apex_env          | false               |
+| g_conf_cgi_env           | false               |
+| g_conf_console_env       | false               |
+| g_counters.count         | 1                   |
+| g_timers.count           | 2                   |
+| g_saved_stack.count      | 0                   |
+| g_prev_error_msg         |                     |
+
 ## APEX Error Handling Function
 
-For APEX, Console comes with a so-called "Error Handling Function", which can enter errors within the APEX runtime environment into the log table. If you want to use this, you have to enter this function in your application in the "Application Builder" under "Edit Application Properties > Error Handling > Error Handling Function": `console.apex_error_handling`.
+For APEX, Console comes with a so-called "[Error Handling Function](https://docs.oracle.com/en/database/oracle/application-express/20.2/aeapi/Example-of-an-Error-Handling-Function.html#GUID-2CD75881-1A59-4787-B04B-9AAEC14E1A82)" which can enter errors within the APEX runtime environment into the log table. If you want to use this, you have to enter this function in your application in the "Application Builder" under "Edit Application Properties > Error Handling > Error Handling Function": `console.apex_error_handling`.
 
 {{< figure "APEX error handling with ASCII art enabled" >}}
 ![APEX error handling with ASCII art enabled](apex-error-handling-function.png)
 {{< /figure >}}
 
+The Error Handling Function logs the technical error in the CONSOLE_LOGS table and writes a friendly message to the end user. It uses the APEX Text Message feature for the user-friendly messages in case of constraint violations, as described in [this video](https://www.insum.ca/episode-22-error-handling/) by Anton and Neelesh from Insum, which in turn is based on an idea by Roel Hartman in [this blog post](https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html). The APEX community rocks....
+
 ## APEX Plug-In for capturing frontend errors
 
-Furthermore, there is an APEX Dynamic Action Plug-In, which enters JavaScript errors in the user's browser into the log table via AJAX call. With this plug-in you can also see, if the frontend is not running smoothly...
+Furthermore, there is an APEX Dynamic Action Plug-In, which enters JavaScript errors in the user's browser via AJAX call into the log table. This way you also get to know if the frontend is not running smoothly for the users...
 
-If you want to use it, you can find it in the folder `install/apex_plugin.sql`.
+You have to make sure that Console is either installed in the parsing schema of the application or a synonym named CONSOLE has been created in the parsing schema which points to the package CONSOLE. Then you can install the plug-in in `install/apex_plugin.sql` and create a Dynamic Action for the whole application on page zero:
+
+- Event: Page Load
+- Action: Oracle Instrumentation Console [Plug-In]
+- No further customization required (only a JavaScript file will be loaded)
+
+For those interested in what the plug-in does: `sources/apex_plugin_console.js`. This is currently a minimal implementation and may be improved in the future.
 
 ## Sources of inspiration
 

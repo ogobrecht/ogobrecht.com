@@ -1,10 +1,10 @@
 ---
 title: "Ein weiteres Oracle DB Logging-Tool: Console"
-description: Einfach zu installieren und funktioniert ohne Kontext und ohne besondere Rechte auf administrative Views
+description: Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: "ein-weiteres-oracle-db-logging-tool-console"
-publishdate: 2021-10-03
-lastmod: 2021-10-03 11:00:00
+publishdate: 2021-10-04
+lastmod: 2021-10-04 12:00:00
 ---
 
 {{< figure "Foto von Pete Nuij auf unsplash.com" >}}
@@ -15,7 +15,7 @@ lastmod: 2021-10-03 11:00:00
 
 ## Einleitung
 
-Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln. Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie veröffentlicht wurden:
+Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln. Es gibt schon einige freie Tools auf dem Markt und wahrscheinlich viele, die nie veröffentlicht wurden ([DOAG-Vortrag von Sabine Heimsath zum Thema](https://www.doag.org/formes/pubfiles/10101682/2018-SQLPLSQL-Sabine_Heimsath-PL_SQL__Monitoren__gt__Messen__gt__Optimieren_-_mit_Open_Source-Praesentation.pdf)):
 
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [PIT](https://github.com/j-sieben/PIT/)
@@ -25,15 +25,77 @@ Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Loggi
 - [BMC_DEBUG](https://sites.google.com/site/oraplsqlinst/)
 - ...
 
-Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder Bedürfnisse hat. Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf und auch keine besonderen Leserechte für administrative Views wie z.B. v$session hat. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie einem Bereinigungsjob - ziemlicher Standard. Trotzdem ist es möglich, einzelne Nutzer/Sessions für Debugging-Zwecke in einen höheren Log-Level zu versetzen. Da das über den Client-Identifier gelöst ist, funktioniert das auch in einer Umgebung ohne feste Session-ID wie z.B. APEX. Sollte in einer Umgebung kein Client-Identifier gesetzt sein, dann vergibt Console einfach selber einen. Seine Konfiguration liest Console aus einer Tabelle mit nur einer Zeile unterstützt durch den Result-Cache. Das stellt eine resourcenschonende Ausführung sicher. Auch die Prüfung, ob eine Log-Message aufgrund des aktuellen Log-Levels wirklich in die Log-Tabelle geschrieben wird ist hochoptimiert, um in Produktionsumgebungen den Overhead so gering wie möglich zu halten.
+Ein Grund dafür scheint zu sein, dass jeder unterschiedliche Vorstellungen oder Bedürfnisse hat. Bei mir ist es so, dass ich ein Logging Tool haben wollte, was sehr einfach zu installieren ist und auch dann funktioniert, wenn man keinen Kontext in der Datenbank anlegen darf und auch keine besonderen Leserechte für administrative Views wie z.B. v$session hat. Man benötigt nur die Rechte zur Erstellung von Tabellen und Packages sowie optional einem Bereinigungsjob - ziemlicher Standard. Trotzdem ist es möglich, einzelne Nutzer/Sessions für Debugging-Zwecke in einen höheren Log-Level zu versetzen. Da das über den Client-Identifier gelöst ist, funktioniert das auch in einer Umgebung ohne feste Session-ID wie z.B. APEX. Sollte in einer Umgebung kein Client-Identifier gesetzt sein, dann vergibt Console einfach selber einen. Seine Konfiguration liest Console aus einer Tabelle mit nur einer Zeile unterstützt durch den Result-Cache. Das stellt eine resourcenschonende Ausführung sicher. Auch die Prüfung, ob eine Log-Message aufgrund des aktuellen Log-Levels wirklich in die Log-Tabelle geschrieben wird ist hochoptimiert, um in Produktionsumgebungen den Overhead so gering wie möglich zu halten.
 
-## Ein einziges Installtionsskript
+## Ein einziges Installationsskript
 
 Für Console werden alle Skripte in ein einziges Installationsskript zusammengeführt. Da SQLcl auch Skripte aus dem Internet laden kann, könnte man das Tool in einer Minute ohne vorherigen Download auch so installieren: SQLcl aufrufen, im gewünschten Schema anmelden und `@https://raw.githubusercontent.com/ogobrecht/console/main/install/create_console_objects.sql` aufrufen. Ein paar Sekunden später kann man schon loslegen mit dem Logging. Möchte man es in APEX installieren und hat nur einen Browserzugang zu seiner Entwicklungsumgebung, dann ist das einzelne Installtionsskript im SQL Workshop auch sehr hilfreich und Console schnell installiert.
 
 ## Produktionssicher ohne weitere Konfiguration
 
-Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren Seite. Möchte man aber auf einem Entwicklungssystem auch andere Level wie Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für jede Session einzeln tun müssen, dann kann man das global einstellen: `exec console.conf(p_level => 3);`. Mehr dazu im [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument.
+Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren Seite. Möchte man aber auf einem Entwicklungssystem auch andere Level wie Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für jede Session einzeln tun müssen, dann kann man das global einstellen: `exec console.conf(p_level => 3);`. Mehr dazu in der Package-Beschreibung zur Prozedur [console.conf](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-conf).
+
+Um eine Session (Client Identifier) in einen höheren Log-Level zu versetzen benutzt man die Prozedur [console.init](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-init). Lässt man den Parameter `p_client_identifier` weg, dann wird automatisch der Client Identifier der eigenen Session genommen - hier ein Beispiel:
+
+```sql
+-- Dive into your own session with the default log level of 3 (info) and the
+-- default duration of 60 (minutes).
+exec console.init;
+
+-- With level 4 (debug) for the next 15 minutes.
+exec console.init(4, 15);
+
+-- Using a constant for the level
+exec console.init(console.c_level_debug, 90);
+
+-- Debug an APEX session...
+begin
+  console.init(
+    p_client_identifier => 'OGOBRECHT:8805903776765',
+    p_level             => console.c_level_debug,
+    p_duration          => 15
+    -- there are more parameters availabe... 
+  );
+end;
+/
+```
+
+Nun stellt sich die Frage, wie man an den Client-Identifier einer fremdem Session kommt ohne Leserechte auf adminstrative Views wie z.B. v$session. Eine Variante wäre, das zum Beispiel in das Frontend einer Anwendung zu schreiben mit `sys_context('USERENV', 'CLIENT_IDENTIFIER')` - z.B. in den Footer oder auf eine Hilfe-Seite.
+
+Möchte man zurückkehren in den normalen Modus der globalen Einstellungen aller Sessions, dann kann man das mit [console.exit](https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-exit) tun.
+
+Man sollte die Prozeduren `console.conf`, `init` und `exit` nicht in seiner Business-Logik verwenden - sie dienen ausschließlich zum managen von Session-Einstellungen und für Debugging-Zwecke und sollten daher nur interaktiv oder in SQL-Skripten verwendet werden.
+
+## Methodennamen angelehnt an JavaScript Console
+
+Console verwendet so viele Methodennamen aus dem JavaScript-Console wie möglich - damit sollte der Wechsel zwischen Backendcode und Frontendcode nicht so schwer fallen was die Methodennamen angeht. Ob die Methoden wirklich etwas in die Logtabelle CONSOLE_LOGS schreiben, hängt vom aktiven Log-Level ab - daher erst noch einmal diese:
+
+- Level 1: Error
+- Level 2: Warning
+- Level 3: Info
+- Level 4: Debug (anstelle von verbose in der JavaScript Console)
+- Level 5: Trace (gibt es nicht in der JavaScript Console)
+
+Die Haupt-Instrumentierungsmethoden:
+
+- console.error_save_stack (dazu gleich mehr):
+- console.error (level error)
+- console.warn (level warning)
+- console.info & log (level info)
+- console.debug (level debug)
+- console.trace (level trace)
+- console.count & count_reset
+- console.count_current & count_end (level info)
+- console.count_current & count_end (function overloads, independent of log level)
+- console.time & time_reset
+- console.time_current & time_end (level info)
+- console.time_current & time_end (function overloads, independent of log level)
+- console.table# (level info)
+- console.assert & assertf
+- console.format
+- console.add_param
+
+Mehr in der [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
 
 ## Reduzierte Menge Logeinträge durch gespeicherten Call Stack
 
@@ -166,10 +228,6 @@ Call Stack
 ```
 
 Nutzt man nicht `console.error_save_stack` sondern immer nur `console.error`, dann erhält man im Log wenigstens immer die drei letzten Abschnitte - und das ohne extra Arbeit im Code. Man muss sich dafür nur `console.error` merken.
-
-## Methodennamen angelehnt an JavaScript Console
-
-Ich habe mit Absicht so viele Methodennamen aus der JavaScript Console wiederverwendet wie möglich - damit sollte der Wechsel zwischen Backendcode und Frontendcode nicht so schwer fallen was die Methodennamen angeht. Eine [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md) und ein [Getting Started](https://github.com/ogobrecht/console/blob/main/docs/getting-started.md) Dokument helfen bei den ersten Schritten.
 
 ## Einfaches loggen von Methodenparametern
 
@@ -320,7 +378,7 @@ end;
 
 Das führt dann in etwa zu so einem Serveroutput:
 
-```
+```bash
 Processing step one...
 Elapsed: 00:00:00.105398
 Processing step two...
@@ -356,14 +414,13 @@ end;
 
 Das ergibt dann einen Serveroutput wie folgt:
 
-```
+```bash
 Counting nonsense...
 Current value: 333
 Final value: 10
 ```
 
 Die im Beispiel verwendete Prozedur `count_reset` gibt es auch für Timer und heißt dort `time_reset`. Die jeweiligen `*_end`-Methoden löschen den Eintrag aus der im Console-Package verwalteten Liste von Timern/Countern.
-
 
 ## Assert, format und andere Helferlein
 
@@ -425,8 +482,8 @@ Dann gibt es noch die Kurzformen von `console.print(console.format(...))` und `c
 
 ```sql
 console.printf(
-  'A %s message with a %n second line of text',
-  'dynamic'
+  'A dynamic message with a %n second line of text: %s',
+  my_var
 );
 
 console.assertf(
@@ -441,19 +498,57 @@ Auch häufig gebraucht wird eine schnelle, gecachte Clob-Verknüpfung - da kann 
 
 Mehr gibt es in der [API-Übersicht](https://github.com/ogobrecht/console/blob/main/docs/api-overview.md).
 
+## Anzeigen des Package-Status von Console in einer Session
+
+Wer sich dafür interessiert, was in der aktuellen Session von Console konfiguriert ist, kann sich das mit einer Pipelined Table Function anschauen oder in seiner Anwendung mit einem Report zur Verfügung stellen:
+
+```sql
+select * from table(console.status);
+```
+
+| ATTRIBUTE                | VALUE               |
+|--------------------------|---------------------|
+| c_version                | 1.0.0               |
+| localtimestamp           | 2021-10-03 13:58:00 |
+| sysdate                  | 2021-10-03 11:58:00 |
+| g_conf_check_sysdate     | 2021-10-03 11:58:10 |
+| g_conf_exit_sysdate      | 2021-10-03 12:58:00 |
+| g_conf_client_identifier | {o,o} 11ECD3500002  |
+| g_conf_level             | 5                   |
+| level_name(g_conf_level) | trace               |
+| g_conf_check_interval    | 10                  |
+| g_conf_enable_ascii_art  | true                |
+| g_conf_call_stack        | false               |
+| g_conf_user_env          | false               |
+| g_conf_apex_env          | false               |
+| g_conf_cgi_env           | false               |
+| g_conf_console_env       | false               |
+| g_counters.count         | 1                   |
+| g_timers.count           | 2                   |
+| g_saved_stack.count      | 0                   |
+| g_prev_error_msg         |                     |
+
 ## APEX Error Handling Function
 
-Für APEX bringt Console eine sogenannte "Error Handling Function" mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im "Application Builder" unter "Edit Application Properties > Error Handling > Error Handling Function" eintragen: `console.apex_error_handling`.
+Für APEX bringt Console eine sogenannte "[Error Handling Function](https://docs.oracle.com/en/database/oracle/application-express/20.2/aeapi/Example-of-an-Error-Handling-Function.html#GUID-2CD75881-1A59-4787-B04B-9AAEC14E1A82)" mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im "Application Builder" unter "Edit Application Properties > Error Handling > Error Handling Function" eintragen: `console.apex_error_handling`.
 
 {{< figure "APEX Error Handling mit eingeschalteter ASCII Art" >}}
 ![APEX Error Handling mit eingeschalteter ASCII Art](apex-error-handling-function.png)
 {{< /figure >}}
 
+Die Error Handling Function protokolliert den technischen Fehler in der Tabelle CONSOLE_LOGS und schreibt eine freundliche Nachricht an den Endbenutzer. Sie nutzt das APEX Text Message Feature für die benutzerfreundlichen Meldungen im Falle von Constraint-Verletzungen, wie beschrieben in [diesem Video](https://www.insum.ca/episode-22-error-handling/) von Anton und Neelesh von Insum, welches wiederum auf einer Idee von Roel Hartman in [diesem Blog Beitrag](https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html) basiert. Die APEX-Community rockt...
+
 ## APEX Plug-In für die Erfassung von Frontend-Fehlern
 
 Desweiteren gibt es noch ein APEX Dynamic Action Plug-In, welches JavaScript-Fehler im Browser der Anwender per AJAX-Call in die Log-Tabelle einträgt. Damit bekommt man auch mit, wenn es im Frontend bei den Anwendern nicht so richtig rund läuft...
 
-Wer es nutzen möchte findet es im Ordner `install/apex_plugin.sql`.
+Es muss sichergestellt sein, dass Console entweder im Parsing-Schema der Anwendung installiert ist oder ein Synonym namens CONSOLE im Parsing-Schema erstellt wurde, welches auf das Package CONSOLE verweist. Dann können Sie das Plug-in unter `install/apex_plugin.sql` installieren und eine Dynamic Action für die gesamte Anwendung auf Seite null erstellen:
+
+- Event: Page Load
+- Action: Oracle Instrumentation Console [Plug-In]
+- Keine weiteren Anpassungen erforderlich (es wird nur eine JavaScript-Datei geladen)
+
+Wer sich dafür interessiert, was das Plug-In macht: `sources/apex_plugin_console.js`. Dies ist derzeit eine minimale Implementierung und kann in Zukunft verbessert werden.
 
 ## Inspirationsquellen
 
