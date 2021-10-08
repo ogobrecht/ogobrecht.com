@@ -4,7 +4,7 @@ description: Easy to install, works without context and special rights on admini
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
 slug: yet-another-oracle-db-logging-tool-console
 publishdate: 2021-10-04
-lastmod: 2021-10-04 12:00:00
+lastmod: 2021-10-08 13:00:00
 featured_image: pete-nuij-m-AqW5QCxNQ-unsplash.jpg
 featured_image_alt: Flying owl
 featured_image_caption: Photo by Pete Nuij on unsplash.com
@@ -14,7 +14,7 @@ featured_image_caption: Photo by Pete Nuij on unsplash.com
 
 ## Introduction
 
-It looks like it is a hobby of PL/SQL developers to develop their own logging tool. There are already some free tools on the market and probably many that have never been released:
+It looks like it is a hobby of PL/SQL developers to develop their own logging tool. There are already some free tools on the market and probably many that have never been released ([DOAG talk by Sabine Heimsath on the topic](https://www.doag.org/formes/pubfiles/10101682/2018-SQLPLSQL-Sabine_Heimsath-PL_SQL__Monitoren__gt__Messen__gt__Optimieren_-_mit_Open_Source-Praesentation.pdf)):
 
 - [Logger](https://github.com/OraOpenSource/Logger)
 - [PIT](https://github.com/j-sieben/PIT/)
