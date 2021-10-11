@@ -5,6 +5,9 @@ tags: [Oracle, APEX, Plug-in , Debug, Instrumentation]
 slug: "apex-plugins-generieren"
 publishdate: 2021-10-30
 lastmod: 2021-10-30 12:00:00
+featured_image: felix-prado-nbKaLT4cmRM-unsplash.jpg
+featured_image_alt: Wäscheklammern auf Leine
+featured_image_caption: Foto von Felix Prado auf unsplash.com
 ---
 
 {{< toc >}}
@@ -13,7 +16,7 @@ lastmod: 2021-10-30 12:00:00
 
 Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen. Das kann ein sehr zeitaufwendiger Prozess sein, wenn man Fehler sucht oder ein neues Feature implementiert.
 
-Für mein letztes Open-Source-Projekt habe ich mir deshalb überlegt, wie ich das Ganze abkürzen kann. Ich hatte sowieso schon einen File-Watcher laufen, der bei Änderungen von Quelldateien das komplette Projekt kompiliert. Im Plug-in ging es nur darum, eine JavaScript-Datei zu aktualisieren (normal und minifiziert). Der PL/SQL-Code für das Plug-in liegt in einem Package und wird nur referenziert - das ist auch aus Performance-Gründen ein gutes Vorgehen (FIXME: reference article from Daniel here).
+Für mein letztes Open-Source-Projekt habe ich mir deshalb überlegt, wie ich das Ganze abkürzen kann. Ich hatte sowieso schon einen File-Watcher und ein Build-Skript laufen, das bei Änderungen von Quelldateien das komplette Projekt in eine einziges SQL-Installationsskript zusammenfasst. Im Plug-in ging es nur darum, eine JavaScript-Datei zu aktualisieren (normal und minifiziert). Der PL/SQL-Code für das Plug-in liegt in einem Package und wird nur referenziert - das ist auch aus Performance-Gründen ein gutes Vorgehen ([Blog-Post von Daniel Hochleitner zum Thema](https://blog.danielhochleitner.de/2018/02/11/oracle-apex-plugin-performance/)).
 
 ## Erstellen eines Templates aus dem vorhandenen Plug-in
 
@@ -68,12 +71,12 @@ Dann eine Helfer-Funktion, die eine Zeichenkette in Blöcke von 200 Zeichen zerl
 
 ```js
 const toChunks = function (text, size) {
-    const numChunks = Math.ceil(text.length / size)
-    const chunks = new Array(numChunks)
+    const numChunks = Math.ceil(text.length / size);
+    const chunks = new Array(numChunks);
     for (let i = 0, start = 0; i < numChunks; ++i, start += size) {
-        chunks[i] = text.substr(start, size)
-    }
-    return chunks
+        chunks[i] = text.substr(start, size);
+    } 
+    return chunks;
 };
 ```
 
@@ -81,15 +84,15 @@ Und schließlich unsere eigentliche Funktion, die eine Zeichenkette (eingelesene
 
 ```js
 const toApexPluginFile = function (text) {
-    const hexString = new Buffer.from(text).toString('hex')
-    const chunks = toChunks(hexString, 200)
+    const hexString = new Buffer.from(text).toString('hex');
+    const chunks = toChunks(hexString, 200);
     let apexLoadFile = 'begin\n' +
-        '  wwv_flow_api.g_varchar2_table := wwv_flow_api.empty_varchar2_table;\n'
+        '  wwv_flow_api.g_varchar2_table := wwv_flow_api.empty_varchar2_table;\n';
     for (let i = 0; i < chunks.length; ++i) {
-        apexLoadFile += `  wwv_flow_api.g_varchar2_table(${(i + 1)}) := '${chunks[i]}';\n`
+        apexLoadFile += `  wwv_flow_api.g_varchar2_table(${(i + 1)}) := '${chunks[i]}';\n`;
     }
-    apexLoadFile += 'end;\n/'
-    return apexLoadFile
+    apexLoadFile += 'end;\n/';
+    return apexLoadFile;
 };
 ```
 
@@ -97,7 +100,7 @@ const toApexPluginFile = function (text) {
 
 Nun müssen wir das Template so anpassen, dass anstelle der Dateiinhalte Platzhalter stehen:
 
-{{< figure "Beispiel einer Datei im Plug-in-Template" >}}
+{{< figure "Beispiel einer Datei im Plug-in-Template mit Platzhalter (erste Zeile)" >}}
 ```sql
 #CONSOLE_JS_FILE_MIN#
 
@@ -144,6 +147,12 @@ if (conf.version !== version || conf.jsFile.md5Hash !== md5Hash) {
     );
     fs.writeFileSync('apexplugin.json', JSON.stringify(conf, null, 2));
 }
+
+console.log('- change version number in README.md');
+fs.writeFileSync('README.md',
+    fs.readFileSync('README.md', 'utf8')
+        .replace(/version(.*). Feedback/, 'version ' + conf.version + '. Feedback')
+);
 --snip--
 ```
 {{< /figure >}}
@@ -185,7 +194,8 @@ Build- und Installtionsskripte verwalte ich mittlerweile häufig mit dem Node-Pa
 ![Screenshot: npm script integration in VS Code](npm-scripts.png)
 {{< /figure >}}
 
-Klar ist auch, dass man hier nicht mehr Usernamen und Passwörter in die Skripte schreibt - das verbietet sich schon prinzipiell, wenn der Code in die Versionskontrolle eingecheckt wird. Auf dem Screenshot kann man (hoffentlich) erkennen, dass hier ein Wallet mit dem Alias `playground` bemüht wird.
+Klar ist auch, dass man hier nicht mehr Usernamen und Passwörter in die Skripte schreibt - das verbietet sich schon prinzipiell, wenn der Code in die Versionskontrolle eingecheckt wird. Auf dem Screenshot kann man (hoffentlich) erkennen, dass hier ein Wallet mit dem Alias `playground` bemüht wird. Wer nur den Instant-Client benutzt und Probleme hat ein Wallet einzurichten: [How to use mkstore and orapki with Oracle Instant Client](https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/)
+
 
 Verwaltet werden die Skripte in der Datei `package.json` auf der obersten Ebene des Projektverzeichnisses:
 
@@ -194,11 +204,6 @@ Wer mehr zum Thema npm-Skripte lesen möchte, kann hier anfangen:
 - [Introduction to NPM Scripts](https://medium.freecodecamp.org/introduction-to-npm-scripts-1dbb2ae01633)
 - [Why I Left Gulp and Grunt for npm Scripts](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8)
 - [Why npm Scripts?](https://css-tricks.com/why-npm-scripts/)
-
-Hier noch zwei Artikel zu Wallets mit dem Instant-Client:
-
-- fixme: artikel übersetzen nach deutsch und link einfügen
-- fixme: artikel übersetzen nach deutsch und link einfügen
 
 ## Ein komplettes Beispiel
 
