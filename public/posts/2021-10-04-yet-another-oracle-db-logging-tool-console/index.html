@@ -77,7 +77,7 @@
     <li><a href="#assert-format-and-other-helpers">Assert, format and other helpers</a></li>
     <li><a href="#displaying-the-package-status-of-console-in-a-session">Displaying the package status of Console in a session</a></li>
     <li><a href="#apex-error-handling-function">APEX Error Handling Function</a></li>
-    <li><a href="#apex-plug-in-for-capturing-frontend-errors">APEX Plug-In for capturing frontend errors</a></li>
+    <li><a href="#apex-plug-in-for-capturing-frontend-errors">APEX Plug-in for capturing frontend errors</a></li>
     <li><a href="#sources-of-inspiration">Sources of inspiration</a></li>
     <li><a href="#project-homepage">Project homepage</a></li>
   </ul>
@@ -569,12 +569,12 @@ Final value: <span class="m">10</span>
 <figcaption>APEX error handling with ASCII art enabled</figcaption>
 </figure>
 <p>The Error Handling Function logs the technical error in the CONSOLE_LOGS table and writes a friendly message to the end user. It uses the APEX Text Message feature for the user-friendly messages in case of constraint violations, as described in <a href="https://www.insum.ca/episode-22-error-handling/">this video</a> by Anton and Neelesh from Insum, which in turn is based on an idea by Roel Hartman in <a href="https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html">this blog post</a>. The APEX community rocks&hellip;.</p>
-<h2 id="apex-plug-in-for-capturing-frontend-errors">APEX Plug-In for capturing frontend errors</h2>
-<p>Furthermore, there is an APEX Dynamic Action Plug-In, which enters JavaScript errors in the user&rsquo;s browser via AJAX call into the log table. This way you also get to know if the frontend is not running smoothly for the users&hellip;</p>
+<h2 id="apex-plug-in-for-capturing-frontend-errors">APEX Plug-in for capturing frontend errors</h2>
+<p>Furthermore, there is an APEX Dynamic Action Plug-in, which enters JavaScript errors in the user&rsquo;s browser via AJAX call into the log table. This way you also get to know if the frontend is not running smoothly for the users&hellip;</p>
 <p>You have to make sure that Console is either installed in the parsing schema of the application or a synonym named CONSOLE has been created in the parsing schema which points to the package CONSOLE. Then you can install the plug-in in <code>install/apex_plugin.sql</code> and create a Dynamic Action for the whole application on page zero:</p>
 <ul>
 <li>Event: Page Load</li>
-<li>Action: Oracle Instrumentation Console [Plug-In]</li>
+<li>Action: Oracle Instrumentation Console [Plug-in]</li>
 <li>No further customization required (only a JavaScript file will be loaded)</li>
 </ul>
 <p>For those interested in what the plug-in does: <code>sources/apex_plugin_console.js</code>. This is currently a minimal implementation and may be improved in the future.</p>
