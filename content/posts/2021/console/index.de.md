@@ -537,17 +537,17 @@ Für APEX bringt Console eine sogenannte "[Error Handling Function](https://docs
 
 Die Error Handling Function protokolliert den technischen Fehler in der Tabelle CONSOLE_LOGS und schreibt eine freundliche Nachricht an den Endbenutzer. Sie nutzt das APEX Text Message Feature für die benutzerfreundlichen Meldungen im Falle von Constraint-Verletzungen, wie beschrieben in [diesem Video](https://www.insum.ca/episode-22-error-handling/) von Anton und Neelesh von Insum, welches wiederum auf einer Idee von Roel Hartman in [diesem Blog Beitrag](https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html) basiert. Die APEX-Community rockt...
 
-## APEX Plug-In für die Erfassung von Frontend-Fehlern
+## APEX Plug-in für die Erfassung von Frontend-Fehlern
 
-Desweiteren gibt es noch ein APEX Dynamic Action Plug-In, welches JavaScript-Fehler im Browser der Anwender per AJAX-Call in die Log-Tabelle einträgt. Damit bekommt man auch mit, wenn es im Frontend bei den Anwendern nicht so richtig rund läuft...
+Desweiteren gibt es noch ein APEX Dynamic Action Plug-in, welches JavaScript-Fehler im Browser der Anwender per AJAX-Call in die Log-Tabelle einträgt. Damit bekommt man auch mit, wenn es im Frontend bei den Anwendern nicht so richtig rund läuft...
 
 Es muss sichergestellt sein, dass Console entweder im Parsing-Schema der Anwendung installiert ist oder ein Synonym namens CONSOLE im Parsing-Schema erstellt wurde, welches auf das Package CONSOLE verweist. Dann können Sie das Plug-in unter `install/apex_plugin.sql` installieren und eine Dynamic Action für die gesamte Anwendung auf Seite null erstellen:
 
 - Event: Page Load
-- Action: Oracle Instrumentation Console [Plug-In]
+- Action: Oracle Instrumentation Console [Plug-in]
 - Keine weiteren Anpassungen erforderlich (es wird nur eine JavaScript-Datei geladen)
 
-Wer sich dafür interessiert, was das Plug-In macht: `sources/apex_plugin_console.js`. Dies ist derzeit eine minimale Implementierung und kann in Zukunft verbessert werden.
+Wer sich dafür interessiert, was das Plug-in macht: `sources/apex_plugin_console.js`. Dies ist derzeit eine minimale Implementierung und kann in Zukunft verbessert werden.
 
 ## Inspirationsquellen
 

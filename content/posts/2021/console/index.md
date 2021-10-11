@@ -537,14 +537,14 @@ For APEX, Console comes with a so-called "[Error Handling Function](https://docs
 
 The Error Handling Function logs the technical error in the CONSOLE_LOGS table and writes a friendly message to the end user. It uses the APEX Text Message feature for the user-friendly messages in case of constraint violations, as described in [this video](https://www.insum.ca/episode-22-error-handling/) by Anton and Neelesh from Insum, which in turn is based on an idea by Roel Hartman in [this blog post](https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html). The APEX community rocks....
 
-## APEX Plug-In for capturing frontend errors
+## APEX Plug-in for capturing frontend errors
 
-Furthermore, there is an APEX Dynamic Action Plug-In, which enters JavaScript errors in the user's browser via AJAX call into the log table. This way you also get to know if the frontend is not running smoothly for the users...
+Furthermore, there is an APEX Dynamic Action Plug-in, which enters JavaScript errors in the user's browser via AJAX call into the log table. This way you also get to know if the frontend is not running smoothly for the users...
 
 You have to make sure that Console is either installed in the parsing schema of the application or a synonym named CONSOLE has been created in the parsing schema which points to the package CONSOLE. Then you can install the plug-in in `install/apex_plugin.sql` and create a Dynamic Action for the whole application on page zero:
 
 - Event: Page Load
-- Action: Oracle Instrumentation Console [Plug-In]
+- Action: Oracle Instrumentation Console [Plug-in]
 - No further customization required (only a JavaScript file will be loaded)
 
 For those interested in what the plug-in does: `sources/apex_plugin_console.js`. This is currently a minimal implementation and may be improved in the future.

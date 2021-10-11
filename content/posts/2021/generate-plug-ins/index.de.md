@@ -209,6 +209,6 @@ Wer mehr zum Thema npm-Skripte lesen möchte, kann hier anfangen:
 
 Wer sich anschauen möchte, wie alles zusammen funktionieren kann: Die Beispiele hier im Artikel habe ich aus meinem Open-Source-Projekt [Oracle Instrumentation Console](https://github.com/ogobrecht/console) entnommen.
 
-Viel Spaß beim Plug-In skripten :-)
+Viel Spaß beim Plug-in skripten :-)
 
 Ottmar
