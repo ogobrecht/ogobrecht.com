@@ -194,6 +194,10 @@ Verwaltet werden die Skripte in der Datei `package.json` auf der obersten Ebene 
 
 Wer sich anschauen möchte, wie alles zusammen funktionieren kann: Die Beispiele hier im Artikel habe ich aus meinem Open-Source-Projekt [Oracle Instrumentation Console](https://github.com/ogobrecht/console) entnommen.
 
+## Ein anderer Weg
+
+Mein Fokus bei dieser Lösung war, ein Plug-in lokal auf dem PC mit neuen Dateien versorgen zu können. Es gibt aber auch einen anderen Weg: Man kann per Skript Dateien oder ganze Verzeichnisse in ein installiertes Plug-in einer APEX-Anwendung hochladen und dann im Anschluss das Plug-in herunterladen. Dafür gibt es das Open Souce Project [APEX Publish Static Files](https://github.com/vincentmorneau/apex-publish-static-files) von Vincent Morneau. Dieses Projekt ist auch in [APEX Nitro](https://github.com/OraOpenSource/apex-nitro) integriert, welches die Frontendentwicklung in APEX beschleunigen kann.
+
 Viel Spaß beim Plug-in generieren :-)
 
 Ottmar

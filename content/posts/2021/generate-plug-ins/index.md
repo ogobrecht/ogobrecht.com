@@ -195,6 +195,10 @@ The scripts are managed in the file `package.json` on the top level of the proje
 
 For those who want to see how everything can work together: I took the examples here in the article from my open source project [Oracle Instrumentation Console](https://github.com/ogobrecht/console).
 
+## Another way
+
+My focus with this solution was to be able to supply a plug-in locally on the PC with new files. But there is another way: You can upload files or whole directories via script into an installed plug-in of an APEX application and then download the plug-in afterwards. For this purpose there is the Open Souce Project [APEX Publish Static Files](https://github.com/vincentmorneau/apex-publish-static-files) by Vincent Morneau. This project is also integrated with [APEX Nitro](https://github.com/OraOpenSource/apex-nitro) which can speed up frontend development in APEX.
+
 Have fun generating plug-ins :-)
 
 Ottmar

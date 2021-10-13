@@ -71,6 +71,7 @@
     <li><a href="#build-script-to-build-the-plug-in-when-changes-are-made-in-the-source-code">Build script to build the plug-in when changes are made in the source code.</a></li>
     <li><a href="#npm-scripts-for-orchestration">NPM scripts for orchestration</a></li>
     <li><a href="#a-complete-example">A complete example</a></li>
+    <li><a href="#another-way">Another way</a></li>
   </ul>
 </nav>
 
@@ -220,6 +221,8 @@
 </ul>
 <h2 id="a-complete-example">A complete example</h2>
 <p>For those who want to see how everything can work together: I took the examples here in the article from my open source project <a href="https://github.com/ogobrecht/console">Oracle Instrumentation Console</a>.</p>
+<h2 id="another-way">Another way</h2>
+<p>My focus with this solution was to be able to supply a plug-in locally on the PC with new files. But there is another way: You can upload files or whole directories via script into an installed plug-in of an APEX application and then download the plug-in afterwards. For this purpose there is the Open Souce Project <a href="https://github.com/vincentmorneau/apex-publish-static-files">APEX Publish Static Files</a> by Vincent Morneau. This project is also integrated with <a href="https://github.com/OraOpenSource/apex-nitro">APEX Nitro</a> which can speed up frontend development in APEX.</p>
 <p>Have fun generating plug-ins :-)</p>
 <p>Ottmar</p>
 
