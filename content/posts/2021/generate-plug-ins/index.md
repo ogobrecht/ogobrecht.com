@@ -2,7 +2,7 @@
 title: Generate APEX plug-ins on the command line
 description: Instead of uploading new files to a plug-in, we generate the plug-in via a template on the command line and install it
 tags: [Oracle, APEX, Plug-in, Node.js, npm, Script]
-slug: generating-apex-plug-ins-on-command-line
+slug: generate-apex-plug-ins-on-the-command-line
 publishdate: 2021-10-13
 lastmod: 2021-10-13 12:00:00
 featured_image: felix-prado-nbKaLT4cmRM-unsplash.jpg

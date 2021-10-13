@@ -10,12 +10,12 @@
 <link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
 <generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-13T14:28:00+01:00</updated>
+<updated>2021-10-13T14:36:56+01:00</updated>
 
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/</id>
-<link href="https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/" rel="alternate" type="text/html" title="Generate APEX plug-ins on the command line" />
+<id>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</id>
+<link href="https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/" rel="alternate" type="text/html" title="Generate APEX plug-ins on the command line" />
 <title type="html">Generate APEX plug-ins on the command line</title>
 <summary type="html">Instead of uploading new files to a plug-in, we generate the plug-in via a template on the command line and install it</summary>
 <category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
