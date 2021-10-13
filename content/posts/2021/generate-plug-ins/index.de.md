@@ -1,12 +1,12 @@
 ---
-title: "APEX-Plug-ins auf der Kommandozeile generieren"
+title: APEX-Plug-ins auf der Kommandozeile generieren
 description: Anstelle neue Dateien in ein Plug-in hochzuladen generieren wir das Plug-in über ein Template auf der Kommandozeile und installieren es
-tags: [Oracle, APEX, Plug-in , Debug, Instrumentation]
-slug: "apex-plugins-generieren"
-publishdate: 2021-10-30
-lastmod: 2021-10-30 12:00:00
+tags: [Oracle, APEX, Plug-in, Node.js, npm, Script]
+slug: apex-plugins-auf-der-kommandozeile-generieren
+publishdate: 2021-10-13
+lastmod: 2021-10-13 12:00:00
 featured_image: felix-prado-nbKaLT4cmRM-unsplash.jpg
-featured_image_alt: Wäscheklammern auf Leine
+featured_image_alt: Wäscheklammern auf einer Leine
 featured_image_caption: Foto von Felix Prado auf unsplash.com
 ---
 
@@ -29,16 +29,7 @@ begin
   wwv_flow_api.g_varchar2_table(1) := '766172206f69633d7b6f633a7b7d2c6f613a7b7d2c6c6e3a7b7d7d3b6f69632e6c6e2e6572726f723d312c6f69632e6c6e2e7761726e696e673d322c6f69632e6c6e2e696e666f3d332c6f69632e6c6e2e64656275673d342c6f69632e6c6e2e74726163';
   wwv_flow_api.g_varchar2_table(2) := '653d352c6f69632e746f537472696e673d66756e6374696f6e2872297b666f7228766172206f3d22222c653d303b653c722e6c656e6774683b652b2b296f2b3d30213d3d653f2220223a22222c226f626a656374223d3d747970656f6620725b655d3f6f';
   wwv_flow_api.g_varchar2_table(3) := '2b3d225c6e222b4a534f4e2e737472696e6769667928725b655d2c6e756c6c2c32293a6f2b3d725b655d3b72657475726e206f7d2c6f69632e696e69743d66756e6374696f6e28297b6f69632e6d6573736167653d66756e6374696f6e28722c6f2c652c';
-  wwv_flow_api.g_varchar2_table(4) := '6e297b617065782e7365727665722e706c7567696e286f69632e706c7567696e49642c7b7830313a722c7830323a6f2c7830333a22415045582046524f4e54454e44204a4156415343524950543a20222b652c7830343a6e2c7830353a6e617669676174';
-  wwv_flow_api.g_varchar2_table(5) := '6f722e757365724167656e742c705f64656275673a21317d2c7b737563636573733a66756e6374696f6e2872297b225355434345535322213d7226266f69632e6572726f7228224f7261636c6520496e737472756d656e746174696f6e20436f6e736f6c';
-  wwv_flow_api.g_varchar2_table(6) := '653a20414a41582063616c6c2068616420736572766572207369646520504c2f53514c206572726f723a20222b722b222e22297d2c6572726f723a66756e6374696f6e28722c6f2c65297b6f69632e6572726f7228224f7261636c6520496e737472756d';
-  wwv_flow_api.g_varchar2_table(7) := '656e746174696f6e20436f6e736f6c653a20414a41582063616c6c207465726d696e617465642077697468206572726f72733a20222b652b222e22297d2c64617461547970653a2274657874227d297d2c6f69632e6f632e6572726f723d636f6e736f6c';
-  wwv_flow_api.g_varchar2_table(8) := '652e6572726f722c636f6e736f6c652e6572726f723d66756e6374696f6e28297b6f69632e6d657373616765286f69632e6c6e2e6572726f722c6f69632e746f537472696e6728617267756d656e7473292c22636f6e736f6c652e6572726f7222292c6f';
-  wwv_flow_api.g_varchar2_table(9) := '69632e6f632e6572726f722e6170706c7928636f6e736f6c652c617267756d656e7473297d2c6f69632e6f612e6572726f723d617065782e64656275672e6572726f722c617065782e64656275672e6572726f723d66756e6374696f6e28297b6f69632e';
-  wwv_flow_api.g_varchar2_table(10) := '6d657373616765286f69632e6c6e2e6572726f722c6f69632e746f537472696e6728617267756d656e7473292c22617065782e64656275672e6572726f7222292c6f69632e6f612e6572726f722e6170706c7928617065782e64656275672c617267756d';
-  wwv_flow_api.g_varchar2_table(11) := '656e7473297d2c77696e646f772e6f6e6572726f723d66756e6374696f6e28722c6f2c652c6e2c69297b6e3d2277696e646f772e6f6e6572726f722c2075726c20222b6f2e6d61746368282f5c2f5c2f2e2a3f285c2f2e2a292f295b315d2b222c206c69';
-  wwv_flow_api.g_varchar2_table(12) := '6e6520222b652b222c20636f6c756d6e20222b6e3b72657475726e2d313c722e746f4c6f7765724361736528292e696e6465784f662822736372697074206572726f7222293f6f69632e6d657373616765286f69632e6c6e2e6572726f722c2253637269';
-  wwv_flow_api.g_varchar2_table(13) := '7074206572726f7220696e20616e2065787465726e616c2066696c652028646966666572656e74206f726967696e293a205365652062726f7773657220636f6e736f6c6520666f722064657461696c73222c6e293a6f69632e6d657373616765286f6963';
+  /* snip */
   wwv_flow_api.g_varchar2_table(14) := '2e6c6e2e6572726f722c722c6e2c692e737461636b292c21317d7d3b';
 end;
 /
@@ -56,51 +47,11 @@ end;
 {{< /figure >}}
 
 
-Es sieht so aus, als müsste man die Dateien irgendwie kodieren - nur wie? Schaut man sich die Zeichen genauer an, fällt einem irgendwann auf, dass nur die Ziffern 0 bis 9 und die Buchstaben a bis f verwendet werden. Es scheint also eine Hexadezimal-Kodierung zu sein - mit jeweils 200 Zeichen in einem Block.
+Es sieht so aus, als müssten wir die Dateien irgendwie kodieren - nur wie? Schaut man sich die Zeichen genauer an, fällt einem irgendwann auf, dass nur die Ziffern 0 bis 9 und die Buchstaben a bis f verwendet werden. Es scheint also eine Hexadezimal-Kodierung zu sein - mit jeweils 200 Zeichen in einem Block. 
 
-## JavaScript-Hilfsfunktionen für die Konvertierung
+Ok, dann ersetzen wir im Template den ersten anonymen PL/SQL-Block durch einen Platzhalter:
 
-Da ich den File-Watcher und andere Skripte mit Node.js/npm umgesetzt habe, lag es nahe auch dies in JavaScript zu lösen. Zuerst brauchen wir das File-System- und Crypto-Modul:
-
-```js
-const fs = require('fs');
-const crypto = require('crypto');
-```
-
-Dann eine Helfer-Funktion, die eine Zeichenkette in Blöcke von 200 Zeichen zerlegt und als Array zurückgibt:
-
-```js
-const toChunks = function (text, size) {
-    const numChunks = Math.ceil(text.length / size);
-    const chunks = new Array(numChunks);
-    for (let i = 0, start = 0; i < numChunks; ++i, start += size) {
-        chunks[i] = text.substr(start, size);
-    } 
-    return chunks;
-};
-```
-
-Und schließlich unsere eigentliche Funktion, die eine Zeichenkette (eingelesene Datei) hexadezimal kodiert und in die benötigte SQL-Skriptform bringt:
-
-```js
-const toApexPluginFile = function (text) {
-    const hexString = new Buffer.from(text).toString('hex');
-    const chunks = toChunks(hexString, 200);
-    let apexLoadFile = 'begin\n' +
-        '  wwv_flow_api.g_varchar2_table := wwv_flow_api.empty_varchar2_table;\n';
-    for (let i = 0; i < chunks.length; ++i) {
-        apexLoadFile += `  wwv_flow_api.g_varchar2_table(${(i + 1)}) := '${chunks[i]}';\n`;
-    }
-    apexLoadFile += 'end;\n/';
-    return apexLoadFile;
-};
-```
-
-## Anpassung des Templates
-
-Nun müssen wir das Template so anpassen, dass anstelle der Dateiinhalte Platzhalter stehen:
-
-{{< figure "Beispiel einer Datei im Plug-in-Template mit Platzhalter (erste Zeile)" >}}
+{{< figure "Beispiel einer Datei im Plug-in-Template mit Platzhalter" >}}
 ```sql
 #CONSOLE_JS_FILE_MIN#
 
@@ -117,22 +68,64 @@ end;
 ```
 {{< /figure >}}
 
+Nun brauchen wir ein wenig Code, der den Platzhalter durch die konvertierte Quell-Datei ersetzt.
+
+## JavaScript-Hilfsfunktionen für die Konvertierung
+
+Da ich den File-Watcher und andere Skripte mit Node.js/npm umgesetzt habe, lag es nahe auch dies in JavaScript zu lösen. Zuerst die benötigten Module und eine md5 Hash-Funktion:
+
+```js
+const fs = require('fs');
+const UglifyJS = require('uglify-js');
+const crypto = require('crypto');
+const toMd5Hash = function (string) { return crypto.createHash('md5').update(string).digest('hex') };
+let consoleJsCode, minified, version, md5Hash, conf;
+```
+
+Dann brauchen wir eine Helfer-Funktion, die eine Zeichenkette in Blöcke von 200 Zeichen zerlegt und als Array zurückgibt:
+
+```js
+const toChunks = function (text, size) {
+    const numChunks = Math.ceil(text.length / size);
+    const chunks = new Array(numChunks);
+    for (let i = 0, start = 0; i < numChunks; ++i, start += size) {
+        chunks[i] = text.substr(start, size);
+    }
+    return chunks;
+};
+```
+
+Zuletzt unsere eigentliche Funktion, die eine Zeichenkette (eingelesene Datei) hexadezimal kodiert und in die benötigte SQL-Skriptform bringt:
+
+```js
+const toApexPluginFile = function (text) {
+    const hexString = new Buffer.from(text).toString('hex');
+    const chunks = toChunks(hexString, 200);
+    let apexLoadFile = 'begin\n' +
+        '  wwv_flow_api.g_varchar2_table := wwv_flow_api.empty_varchar2_table;\n';
+    for (let i = 0; i < chunks.length; ++i) {
+        apexLoadFile += `  wwv_flow_api.g_varchar2_table(${(i + 1)}) := '${chunks[i]}';\n`;
+    }
+    apexLoadFile += 'end;\n/';
+    return apexLoadFile;
+};
+```
+
 ## Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode
 
-{{< figure "Beispiel eines Build-Skriptes (Ausschnitt)" >}}
-```sql
---snip--
+Zusammengebaut wird alles durch das Build-Skript - hier der relevante Ausschnitt:
+
+{{< figure "Beispiel eines Build-Skriptes (Ausschnitt, [hier das komplette Skript](https://github.com/ogobrecht/console/blob/main/sources/build.js))" >}}
+```js
 console.log('- build file install/apex_plugin.sql');
-const consoleJsCode = fs.readFileSync('sources/apex_plugin_console.js', 'utf8');
-const version = fs.readFileSync('sources/CONSOLE.pks', 'utf8').match(/c_version\s+constant.*?'(.*?)'/)[1];
-const md5Hash = toMd5Hash(consoleJsCode);
-let conf = JSON.parse(fs.readFileSync('apexplugin.json', 'utf8'));
-let minified;
+consoleJsCode = fs.readFileSync('sources/apex_plugin_console.js', 'utf8');
+version = fs.readFileSync('sources/CONSOLE.pks', 'utf8').match(/c_version\s+constant.*?'(.*?)'/)[1];
+md5Hash = toMd5Hash(consoleJsCode);
+// reading the last saved version and md5Hash values as a reference for the comparison
+conf = JSON.parse(fs.readFileSync('apexplugin.json', 'utf8'));
 if (conf.version !== version || conf.jsFile.md5Hash !== md5Hash) {
-    // minify JS code
     minified = UglifyJS.minify({ "console.js": consoleJsCode }, { sourceMap: true });
     if (minified.error) throw minified.error;
-    // build plug-in
     conf.version = version;
     conf.jsFile.md5Hash = md5Hash;
     conf.jsFile.version += 1;
@@ -147,20 +140,14 @@ if (conf.version !== version || conf.jsFile.md5Hash !== md5Hash) {
     );
     fs.writeFileSync('apexplugin.json', JSON.stringify(conf, null, 2));
 }
-
-console.log('- change version number in README.md');
-fs.writeFileSync('README.md',
-    fs.readFileSync('README.md', 'utf8')
-        .replace(/version(.*). Feedback/, 'version ' + conf.version + '. Feedback')
-);
---snip--
 ```
 {{< /figure >}}
 
-Zu beachten ist hier, dass wir auch die Dateiversion selber verwalten müssen - APEX installiert es so, wie wir es erstellen. Wir überprüfen dazu mit Hilfe einer Hash-Funktion, ob sich die JavaScript-Quelldatei geändert hat und generieren nur dann das Plug-in neu (inklusive Minifizierung). Somit verhindern wir, das bei jeder Änderung von Quellcode im Repository unnötigerweise das Plug-in neu generiert und damit die Dateiversion hochgezählt wird. Im obigen Build-Skript-Beispiel wird die aktuelle Dateiversion und der aktuelle Hash-Wert in einer JSON-Datei (`apexplugin.json`) gespeichert.
+Es ist zu beachten, dass wir auch die Dateiversion selber verwalten müssen - APEX installiert es so, wie wir es erstellen. Wir überprüfen dazu mit Hilfe der Hash-Funktion, ob sich die JavaScript-Quelldatei geändert hat und generieren nur dann das Plug-in neu (inklusive Minifizierung). Somit verhindern wir, das bei jeder Änderung von Quellcode im Repository unnötigerweise das Plug-in neu generiert und damit die Dateiversion hochgezählt wird. Im obigen Build-Skript-Ausschnitt wird die aktuelle Dateiversion und der aktuelle Hash-Wert in einer JSON-Datei (`apexplugin.json`, letzte Code-Zeile) gespeichert, damit wir beim nächsten Build dies als Referenz verwenden können.
 
-Hier die relevante Stelle im Plug-in-Template, wo die Dateiversion durch das Build-Skript eingetragen wird (Platzhalter `#FILE_VERSION#` in der drittletzten Zeile):
+Hier die relevante Stelle im Plug-in-Template, wo die Dateiversion durch das Build-Skript eingetragen wird (Platzhalter `#FILE_VERSION#`, letzter Parameter):
 
+{{< figure "Plug-in Template mit Platzhaltern für Datei- und Plug-in-Version (Ausschnitt)" >}}
 ```sql
 prompt - application/shared_components/plugins/dynamic_action/com_ogobrecht_console
 begin
@@ -181,25 +168,23 @@ begin
 end;
 /
 ```
+{{< /figure >}}
 
-Zusätzlich wird hier auch noch die Versionsnummer des Plug-ins selbst aktualisiert (Platzhalter `#CONSOLE_VERSION#` in der fünftletzten Zeile) - das hängt aber von den jeweiligen Gegebenheiten des Projektes ab. Bei mir ist es so, dass ich die Versionsnummer des PL/SQL-Packages CONSOLE auch in das davon abhängige Plug-in schreibe - wenn sich also die Versionsnummer des Packages ändert wird auch das Plug-in neu erstellt. Hier muss aber jeder schauen, was er in seinem Projekt braucht.
+Zusätzlich wird hier auch noch die Versionsnummer des Plug-ins selbst aktualisiert (Platzhalter `#CONSOLE_VERSION#`, drittletzter Parameter) - das hängt aber von den jeweiligen Gegebenheiten des Projektes ab. Bei mir ist es so, dass ich die Versionsnummer des PL/SQL-Packages CONSOLE auch in das davon abhängige Plug-in schreibe - wenn sich also die Versionsnummer des Packages ändert wird auch das Plug-in neu erstellt. Hier muss aber jeder schauen, was im Projekt gebraucht wird.
 
-Beim Speichern von Quellcode-Änderungen springt der File-Watcher an und triggert das Build-Skript. Dieses baut dann zwei Installations-SQL-Skripte zusammen: Einmal das des Logging-Tools selbst (nicht im Fokus diese Artikels) und dann das für das Plug-in. Im Anschluss daran werden dann beide Skripte in einer Test-Umgebung installiert. Dazu muss natürlich der im Plug-in hinterlegte Default-Workspace und die Default-Anwendungsnummer in der Test-Umgebung vorhanden sein.
+Beim Speichern von Quellcode-Änderungen springt der File-Watcher an und triggert das Build-Skript. Dieses baut dann zwei Installations-SQL-Skripte zusammen: Das des Logging-Tools selbst (nicht im Fokus dieses Artikels) und dann das für das Plug-in. Im Anschluss daran werden dann beide Skripte in einer Dev-Umgebung installiert. Dazu muss natürlich der im Plug-in hinterlegte Default-Workspace und die Default-Anwendungsnummer in der Dev-Umgebung vorhanden sein.
 
-## npm Skripte zur Orchestrierung
+## NPM Skripte zur Orchestrierung
 
-Build- und Installtionsskripte verwalte ich mittlerweile häufig mit dem Node-Package-Manager npm. Der Grund dafür ist die gute Integration in Visual Studio Code, die Betriebssystemunabhängikeit und die Möglichkeit die Skripte ein wenig zu orchestrieren - ok, man muss Node.js installieren, aber hat man das nicht immer? Man kann dann mit einem Klick entweder den watch-Task starten, der alles automatisch macht mit jedem Speichervorgang einer Quelldatei oder eben die Skripte bequem einzeln aufrufen. Wenn mal wer anders ins Repository schaut, ist es auch mit den npm-Skripten schneller klar, was hier wie gelöst ist.
+Build- und Installtionsskripte verwalte ich mittlerweile häufig mit dem Node-Package-Manager npm. Der Grund dafür ist die gute Integration in Visual Studio Code, die Betriebssystemunabhängikeit und die Möglichkeit die Skripte ein wenig zu orchestrieren - ok, man muss Node.js installieren, aber hat man das nicht immer? Man kann dann mit einem Klick entweder den watch-Task starten, der alles automatisch macht mit jedem Speichervorgang einer Quelldatei oder eben die Skripte bequem einzeln aufrufen. Wenn mal wer anderes ins Repository schaut, ist es auch mit den npm-Skripten schneller klar, was hier wie funktioniert.
 
 {{< figure "npm Script-Integration in VS Code: Links die Skripte zum Anklicken, rechts die geöffnete Datei package.json" >}}
-![Screenshot: npm script integration in VS Code](npm-scripts.png)
+![Screenshot: npm Skript-Integration in VS Code](npm-scripts.png)
 {{< /figure >}}
 
 Klar ist auch, dass man hier nicht mehr Usernamen und Passwörter in die Skripte schreibt - das verbietet sich schon prinzipiell, wenn der Code in die Versionskontrolle eingecheckt wird. Auf dem Screenshot kann man (hoffentlich) erkennen, dass hier ein Wallet mit dem Alias `playground` bemüht wird. Wer nur den Instant-Client benutzt und Probleme hat ein Wallet einzurichten: [How to use mkstore and orapki with Oracle Instant Client](https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/)
 
-
-Verwaltet werden die Skripte in der Datei `package.json` auf der obersten Ebene des Projektverzeichnisses:
-
-Wer mehr zum Thema npm-Skripte lesen möchte, kann hier anfangen:
+Verwaltet werden die Skripte in der Datei `package.json` auf der obersten Ebene des Projektverzeichnisses. Wer mehr zum Thema npm-Skripte lesen möchte, kann hier anfangen:
 
 - [Introduction to NPM Scripts](https://medium.freecodecamp.org/introduction-to-npm-scripts-1dbb2ae01633)
 - [Why I Left Gulp and Grunt for npm Scripts](https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8)
@@ -209,6 +194,6 @@ Wer mehr zum Thema npm-Skripte lesen möchte, kann hier anfangen:
 
 Wer sich anschauen möchte, wie alles zusammen funktionieren kann: Die Beispiele hier im Artikel habe ich aus meinem Open-Source-Projekt [Oracle Instrumentation Console](https://github.com/ogobrecht/console) entnommen.
 
-Viel Spaß beim Plug-in skripten :-)
+Viel Spaß beim Plug-in generieren :-)
 
 Ottmar

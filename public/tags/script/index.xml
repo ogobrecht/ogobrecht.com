@@ -5,7 +5,16 @@
     <link>https://ogobrecht.com/tags/script/</link>
     <description>Recent content in Script on Ottmar’s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generate APEX plug-ins on the command line</title>
+      <link>https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/</guid>
+      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example  Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+    </item>
+    
     <item>
       <title>Create Fast Insert Scripts</title>
       <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>

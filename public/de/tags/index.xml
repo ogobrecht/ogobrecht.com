@@ -5,13 +5,58 @@
     <link>https://ogobrecht.com/de/tags/</link>
     <description>Recent content in Tags on Ottmar’s Notizen</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>APEX</title>
       <link>https://ogobrecht.com/de/tags/apex/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/tags/apex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node.js</title>
+      <link>https://ogobrecht.com/de/tags/node.js/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>npm</title>
+      <link>https://ogobrecht.com/de/tags/npm/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/tags/npm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oracle</title>
+      <link>https://ogobrecht.com/de/tags/oracle/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/tags/oracle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plug-in</title>
+      <link>https://ogobrecht.com/de/tags/plug-in/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/tags/plug-in/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Script</title>
+      <link>https://ogobrecht.com/de/tags/script/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/tags/script/</guid>
       <description></description>
     </item>
     
@@ -52,29 +97,11 @@
     </item>
     
     <item>
-      <title>Oracle</title>
-      <link>https://ogobrecht.com/de/tags/oracle/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/oracle/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Generator</title>
       <link>https://ogobrecht.com/de/tags/generator/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/tags/generator/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Script</title>
-      <link>https://ogobrecht.com/de/tags/script/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/script/</guid>
       <description></description>
     </item>
     

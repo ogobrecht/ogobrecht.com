@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.js on Ottmar’s Notizen</title>
+    <link>https://ogobrecht.com/de/tags/node.js/</link>
+    <description>Recent content in Node.js on Ottmar’s Notizen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APEX-Plug-ins auf der Kommandozeile generieren</title>
+      <link>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
+      <description>Inhaltsverzeichnis Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel  Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
+    </item>
+    
+  </channel>
+</rss>

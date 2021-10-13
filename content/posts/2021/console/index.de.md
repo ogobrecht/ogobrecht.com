@@ -2,7 +2,7 @@
 title: "Ein weiteres Oracle DB Logging-Tool: Console"
 description: Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit
 tags: [Open source project, Oracle, APEX, PL/SQL, Log, Debug, Instrumentation]
-slug: "ein-weiteres-oracle-db-logging-tool-console"
+slug: ein-weiteres-oracle-db-logging-tool-console
 publishdate: 2021-10-04
 lastmod: 2021-10-04 12:00:00
 featured_image: pete-nuij-m-AqW5QCxNQ-unsplash.jpg

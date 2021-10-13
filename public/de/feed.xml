@@ -10,8 +10,24 @@
 <link href="https://ogobrecht.com/de/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/de/" rel="alternate" type="text/html" hreflang="de" />
 <generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-11T13:19:10+01:00</updated>
+<updated>2021-10-13T12:49:27+01:00</updated>
 
+
+<entry xml:lang="de">
+<id>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</id>
+<link href="https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/" rel="alternate" type="text/html" title="APEX-Plug-ins auf der Kommandozeile generieren" />
+<title type="html">APEX-Plug-ins auf der Kommandozeile generieren</title>
+<summary type="html">Anstelle neue Dateien in ein Plug-in hochzuladen generieren wir das Plug-in über ein Template auf der Kommandozeile und installieren es</summary>
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
+<category term="node.js" label="Node.js" scheme="https://ogobrecht.com/tags/" />
+<category term="npm" label="npm" scheme="https://ogobrecht.com/tags/" />
+<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<published>2021-10-13T00:00:00+01:00</published>
+<updated>2021-10-13T12:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="de">
 <id>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</id>

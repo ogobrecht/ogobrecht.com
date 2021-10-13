@@ -10,8 +10,24 @@
 <link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
 <generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-11T13:19:10+01:00</updated>
+<updated>2021-10-13T12:49:27+01:00</updated>
 
+
+<entry xml:lang="en">
+<id>https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/</id>
+<link href="https://ogobrecht.com/posts/2021-10-13-generating-apex-plug-ins-on-command-line/" rel="alternate" type="text/html" title="Generate APEX plug-ins on the command line" />
+<title type="html">Generate APEX plug-ins on the command line</title>
+<summary type="html">Instead of uploading new files to a plug-in, we generate the plug-in via a template on the command line and install it</summary>
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
+<category term="node.js" label="Node.js" scheme="https://ogobrecht.com/tags/" />
+<category term="npm" label="npm" scheme="https://ogobrecht.com/tags/" />
+<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<published>2021-10-13T00:00:00+01:00</published>
+<updated>2021-10-13T12:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</id>
@@ -280,19 +296,6 @@
 <category term="html" label="HTML" scheme="https://ogobrecht.com/tags/" />
 <published>2017-09-26T00:00:00+01:00</published>
 <updated>2017-10-01T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/</id>
-<link href="https://ogobrecht.com/posts/2017-06-13-ora11xe-install-file-swap-check-disabler/" rel="alternate" type="text/html" title="Oracle DB 11gXE Install File Swap Check Disabler" />
-<title type="html">Oracle DB 11gXE Install File Swap Check Disabler</title>
-<summary type="html">A Docker file to prepare the 11gXE install file for use in a container environment</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="docker" label="Docker" scheme="https://ogobrecht.com/tags/" />
-<published>2017-06-13T00:00:00+01:00</published>
-<updated>2017-08-12T20:11:00+01:00</updated>
 
 </entry>
 
