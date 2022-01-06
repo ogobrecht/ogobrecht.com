@@ -8,7 +8,7 @@
   <title>APEX_EXPORT and Version Control</title>
   <meta name="description" content="How to export the splitted APEX app definition with SQL*Plus">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.87.0" />
+  <meta name="generator" content="Hugo 0.90.1" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -65,7 +65,7 @@
 <p>So how to do it?</p>
 <p>First, I have to describe what the sctructure of each file in the collection is. Dead simple: a record type with two columns: <code>name</code> of type VARCHAR2(255) which is in fact the file path and <code>contents</code> of type CLOB.</p>
 <p>The desired file structure:</p>
-<pre><code>- app_backend
+<pre tabindex="0"><code>- app_backend
 - app_frontend (for the splitted files without subfolder fxxx)
   - pages
   - shared_components

@@ -15,7 +15,7 @@
       <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
 Open HTML presentation in a new window/tab
 You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+ N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
     </item>
     
     <item>
@@ -24,7 +24,7 @@ You need a modern browser with activated JavaScript. Navigation tips:
       <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</guid>
-      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit  Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
+      <description>Inhaltsverzeichnis  Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit   Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
     </item>
     
   </channel>

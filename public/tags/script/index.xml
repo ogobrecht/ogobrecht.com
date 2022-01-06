@@ -12,11 +12,11 @@
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
-      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way  Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+      <description>Table of Contents  Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way   Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
     </item>
     
     <item>
-      <title>Create Fast Insert Scripts</title>
+      <title>Create fast insert scripts</title>
       <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
@@ -62,7 +62,7 @@ Sure, but I have no SYS rights on the database in my current project to install 
       <guid>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
       <description>The following simplified example deployment master script is given:
 setdefineoffverifyofffeedbackoffwheneversqlerrorexitsql.sqlcoderollbackspooldeployment.logpromptpromptExampleDeploymentMasterScriptprompt========================================promptStep1:Dummyfordemonstration-- normally we call here some other scripts like -- @other-script.sql promptStep2:Errortestinanonymousblockbeginraise_application_error(-20000,&amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt========================================promptDeploymentDone:-)promptspooloffWhen we call this in SQL*Plus (version 19.5), we get the following output (in the console and also in deployment.log) with an indication of what went wrong with our deployment:
-Example Deployment Master Script========================================Step 1: Dummy for demonstrationStep 2: Error test in anonymous blockbegin*ERROR at line 1:ORA-20000: Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison ORA-06512: at line 2 Ok, this error message is stupid, but usually, I get some useful information here to fix my problem in the deployment script - especially when the problematic script is a bit longer&amp;hellip;</description>
+Example Deployment Master Script ======================================== Step 1: Dummy for demonstration Step 2: Error test in anonymous block begin * ERROR at line 1: ORA-20000: Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison ORA-06512: at line 2 Ok, this error message is stupid, but usually, I get some useful information here to fix my problem in the deployment script - especially when the problematic script is a bit longer&amp;hellip;</description>
     </item>
     
     <item>

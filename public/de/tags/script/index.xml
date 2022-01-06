@@ -12,11 +12,11 @@
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
-      <description>Inhaltsverzeichnis Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg  Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
+      <description>Inhaltsverzeichnis  Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg   Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
     </item>
     
     <item>
-      <title>Create Fast Insert Scripts</title>
+      <title>Erstellung schneller Insert-Skripte</title>
       <link>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       

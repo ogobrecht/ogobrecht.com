@@ -8,7 +8,7 @@
   <title>Why I Like SQL*Plus for Deployment Scripts</title>
   <meta name="description" content="SQLcl is eating my error messages">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.87.0" />
+  <meta name="generator" content="Hugo 0.90.1" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -87,7 +87,7 @@
 </span></code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
 the console and also in deployment.log) with an indication of what went wrong
 with our deployment:</p>
-<pre><code>Example Deployment Master Script
+<pre tabindex="0"><code>Example Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
 Step 2: Error test in anonymous block
@@ -101,7 +101,7 @@ here to fix my problem in the deployment script - especially when the
 problematic script is a bit longer&hellip;</p>
 <p>When we call this in SQLcl (latest version 19.4 on Windows) we get the following
 output (in the console and also the deployment.log):</p>
-<pre><code>Example Deployment Master Script
+<pre tabindex="0"><code>Example Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
 Step 2: Error test in anonymous block
@@ -124,7 +124,7 @@ release or set as a workaround the feedback to on:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">on</span><span class="w">
 </span><span class="w"></span><span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span><span class="w">
 </span></code></pre></div><p>Here the output on my Windows 10 laptop:</p>
-<pre><code>Demo Deployment Master Script
+<pre tabindex="0"><code>Demo Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
 Step 2: Begin error test in anonymous block

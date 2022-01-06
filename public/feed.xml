@@ -9,8 +9,8 @@
 <id>https://ogobrecht.com/index.xml</id>
 <link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
-<generator uri="https://gohugo.io/" version="0.87.0">Hugo</generator>
-<updated>2021-10-13T14:36:56+01:00</updated>
+<generator uri="https://gohugo.io/" version="0.90.1">Hugo</generator>
+<updated>2022-01-06T21:29:19+01:00</updated>
 
 
 <entry xml:lang="en">
@@ -48,8 +48,8 @@
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</id>
-<link href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/" rel="alternate" type="text/html" title="Create Fast Insert Scripts" />
-<title type="html">Create Fast Insert Scripts</title>
+<link href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/" rel="alternate" type="text/html" title="Create fast insert scripts" />
+<title type="html">Create fast insert scripts</title>
 <summary type="html">PL/SQL Export Utilities are now able to export table data as insert scripts</summary>
 <category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
 <category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />

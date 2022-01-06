@@ -12,7 +12,7 @@
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
-      <description>Inhaltsverzeichnis Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg  Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
+      <description>Inhaltsverzeichnis  Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg   Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
     </item>
     
     <item>
@@ -21,11 +21,11 @@
       <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</guid>
-      <description>Inhaltsverzeichnis Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-in für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage  Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
+      <description>Inhaltsverzeichnis  Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-in für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage   Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
     </item>
     
     <item>
-      <title>Create Fast Insert Scripts</title>
+      <title>Erstellung schneller Insert-Skripte</title>
       <link>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
@@ -73,7 +73,7 @@ Für die Teilnehmer hier die Folien:</description>
       <description>Die Folien zu meinem Vortrag:
 Open HTML presentation in a new window/tab
 You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tabKurzdarstellung:
+ N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   Kurzdarstellung:
 Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
     </item>
     
@@ -96,7 +96,7 @@ Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office ge
       <description>Die Folien zu meinem Vortrag:
 Open HTML presentation in a new window/tab
 You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+ N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
     </item>
     
     <item>
@@ -108,7 +108,7 @@ You need a modern browser with activated JavaScript. Navigation tips:
       <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
 Open HTML presentation in a new window/tab
 You need a modern browser with activated JavaScript. Navigation tips:
-N, Space = Next slideP = Previous slideO, Esc = Overview all slides? = Show all keyboard shortcutsAll links are opened in a new window/tab</description>
+ N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
     </item>
     
     <item>
@@ -117,7 +117,7 @@ You need a modern browser with activated JavaScript. Navigation tips:
       <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</guid>
-      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit  Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
+      <description>Inhaltsverzeichnis  Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit   Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
     </item>
     
   </channel>

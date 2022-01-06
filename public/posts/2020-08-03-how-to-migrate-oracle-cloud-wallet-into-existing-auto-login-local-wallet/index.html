@@ -8,7 +8,7 @@
   <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
   <meta name="description" content="One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.87.0" />
+  <meta name="generator" content="Hugo 0.90.1" />
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -66,11 +66,11 @@
 <p>I assume you have set an environment variable called TNS_ADMIN pointing to your TNS directory. In this directory, you have your wallet files and also your existing tnsnames.ora and sqlnet.ora to successfully connect to your local Oracle instances.</p>
 <p>Now you need to extract the downloaded cloud wallet - for security reasons it makes sense to create a temporary subdirectory in your TNS directory and extract the cloud wallet there. You need to migrate the entries from <code>tnsnames.ora</code> and <code>sqlnet.ora</code> into your own TNS files and align the path to your wallet directory. Additionally, you should also copy over the file <code>ojdbc.properties</code> if you do not have it already and you plan to use SQLcl or SQL Developer with your wallet.</p>
 <p>My resulting sqlnet.ora:</p>
-<pre><code>WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY = &quot;C:\\path\\to\\my\\wallet&quot;)))
+<pre tabindex="0"><code>WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY = &quot;C:\\path\\to\\my\\wallet&quot;)))
 SSL_SERVER_DN_MATCH = yes
 sqlnet.wallet_override = true
 </code></pre><p>My resulting tnsnames.ora:</p>
-<pre><code>myCloudDbName_high, myAlias = (description = (...
+<pre tabindex="0"><code>myCloudDbName_high, myAlias = (description = (...
 myCloudDbName_medium        = (description = (...
 myCloudDbName_low           = (description = (...
 myCloudDbName_tp            = (description = (...
