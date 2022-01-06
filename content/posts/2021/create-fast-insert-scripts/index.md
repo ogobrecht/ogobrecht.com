@@ -1,5 +1,5 @@
 ---
-title: Create Fast Insert Scripts
+title: Create fast insert scripts
 description: PL/SQL Export Utilities are now able to export table data as insert scripts
 tags: [Oracle, Script, Generator]
 slug: create-fast-insert-scripts
