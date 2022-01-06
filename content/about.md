@@ -8,6 +8,8 @@ title: About
 
 Hi, I am Ottmar Gobrecht, a database developer living in Munich, Germany and this is my development blog - mainly about Oracle APEX and PL/SQL.
 
+Since December 2021 I am a member of the Oracle APEX development team. The posts are my own and do not necessarily reflect Oracle's opinion.
+
 I'm a bit active in open source development - you can find my projects on [GitHub](https://github.com/ogobrecht/) and of course [here on this website](/tags/open-source-project/).
 
 <span class="clear"></span>

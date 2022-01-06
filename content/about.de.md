@@ -9,6 +9,8 @@ slug: ueber
 
 Hallo, ich bin Ottmar Gobrecht, ein Datenbankentwickler, der in München lebt, und dies ist mein Entwicklungsblog - hauptsächlich über Oracle APEX und PL/SQL.
 
+Seit Dezember 2021 bin ich Mitglied des Oracle APEX Entwicklungsteams. Die Beiträge sind meine eigenen und spiegeln nicht unbedingt die Meinung von Oracle wider.
+
 Ich bin ein wenig aktiv in der Open-Source-Entwicklung - Ihr könnt meine Projekte auf [GitHub](https://github.com/ogobrecht/) und natürlich [hier auf dieser Webseite](/de/tags/open-source-project/) finden.
 
 <span class="clear"></span>
