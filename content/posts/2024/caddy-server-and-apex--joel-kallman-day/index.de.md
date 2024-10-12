@@ -41,16 +41,16 @@ Hier nun der eigentliche Kern des Blogbeitrags, die Konfiguration. Caddy nutzt g
     order replace after encode
 }
 
-localhost:8443 {
+localhost:8001 {
     handle /ords/* {
-        reverse_proxy http://localhost:8080 {
-            header_down Location //localhost/ //localhost:8443/
-            header_up Host localhost:8443
-            header_up +HTTP_X-Forwarded-Port 8443
+        reverse_proxy http://localhost:7001 {
+            header_down Location //localhost/ //localhost:8001/
+            header_up Host localhost:8001
+            header_up +HTTP_X-Forwarded-Port 8001
             header_up -Origin
         }
         replace {
-            //localhost/ //localhost:8443/
+            //localhost/ //localhost:8001/
         }
     }
 
@@ -68,17 +68,17 @@ Die ersten drei Zeilen ordnen das `replace` Plugin in die richtige Prozessreihen
 
 Danach kommt dann die Konfiguration für unseren lokalen Development Server:
 
-- `localhost:8443`: Wenn Caddy eine Domain erkennt (inklusive localhost), dann wird automatisch für die Domain ein Zertifikat ausgestellt.
+- `localhost:8001`: Wenn Caddy eine Domain erkennt (inklusive localhost), dann wird automatisch für die Domain ein Zertifikat ausgestellt.
 - `handle /ords/*`: Startet die Konfiguration für den Pfad `/ords/*`.
-- `reverse_proxy http://localhost:8080`: Wir wollen also alle `/ords/*` Anfragen weiterleiten an den ORDS auf Port 8080.
+- `reverse_proxy http://localhost:7001`: Wir wollen also alle `/ords/*` Anfragen weiterleiten an den ORDS auf Port 7001.
 
 Jetzt kommt der Teil, warum ich eingangs geschrieben habe, dass APEX hinter einem Reverse-Proxy so seine Tücken hat. In eine idealen Welt würde es nicht notwendig sein, Caddy mehr zum Reverseproxy zu sagen, da automatisch die üblichen Header von Caddy gesetzt werden, damit der dahinterliegende Service weiß, dass der Request über einen Proxy-Server gelaufen ist (X-Forwarded-*).
 
-- `header_down Location //localhost/ //localhost:8443/`: header_down meint Richtung Browser, wir ersetzen also alle Location Header, in denen nur `//localhost/` ohne Port steht mit der korrekten Information.
-- `header_up Host localhost:8443`: header_up meint Richtung ORDS, wir teilen also ORDS mit, was der Hostname und Port ist (leider versteht das ORDS nicht richtig und ignoriert die Portangabe).
-- `header_up +HTTP_X-Forwarded-Port 8443`: Man beachte das kleine Plus-Symbol. Das bedeutet, wir fügen diesen Header hinzu. Ich habe es auch mit `X-Forwarded-Port 8443` versucht, aber ORDS scheint taub auf diesen Ohren zu sein und APEX ist schlau genug, mehrere Portangaben zu berücksichtigen, so dass wenigstens die von APEX generierten URLs korrekt sind.
+- `header_down Location //localhost/ //localhost:8001/`: header_down meint Richtung Browser, wir ersetzen also alle Location Header, in denen nur `//localhost/` ohne Port steht mit der korrekten Information.
+- `header_up Host localhost:8001`: header_up meint Richtung ORDS, wir teilen also ORDS mit, was der Hostname und Port ist (leider versteht das ORDS nicht richtig und ignoriert die Portangabe).
+- `header_up +HTTP_X-Forwarded-Port 8001`: Man beachte das kleine Plus-Symbol. Das bedeutet, wir fügen diesen Header hinzu. Ich habe es auch mit `X-Forwarded-Port 8001` versucht, aber ORDS scheint taub auf diesen Ohren zu sein und APEX ist schlau genug, mehrere Portangaben zu berücksichtigen, so dass wenigstens die von APEX generierten URLs korrekt sind.
 - `header_up -Origin`: Hier bedeutet das kleine Minus-Sysmbol, dass der Header gelöscht werden soll. Wir tun dies, damit ORDS nicht mit Cross Origin Fehlern austeigt aus dem Spiel. Eigentlich habe ich den ORDS so konfiguriert, dass dies nicht notwendig wäre, aber es hat nicht funktioniert. Wenn jemand eine bessere Lösung hat, dann bitte bei mir melden (siehe hierzu auch die ORDS-Konfiguration weiter unten).
-- `replace` und `//localhost/ //localhost:8443/`: Das gleiche Spielchen wie zuvor, nur diesmal nicht mit den Headern, sondern mit dem Inhalt der Anworten (Response Body), die der ORDS aufgrund von REST Aufrufen zurücksendet (meistens JSON Daten). APEX ist hier komplett außen vor.
+- `replace` und `//localhost/ //localhost:8001/`: Das gleiche Spielchen wie zuvor, nur diesmal nicht mit den Headern, sondern mit dem Inhalt der Anworten (Response Body), die der ORDS aufgrund von REST Aufrufen zurücksendet (meistens JSON Daten). APEX ist hier komplett außen vor.
 
 Jetzt wieder Standard-Funktionalität:
 
@@ -99,13 +99,13 @@ Hier meine Beispiel-Konfiguration für den ORDS (settings.xml):
 <comment>Saved on Wed Oct 09 12:14:37 UTC 2024</comment>
 <entry key="database.api.enabled">true</entry>
 <entry key="debug.printDebugToScreen">true</entry>
-<entry key="security.externalSessionTrustedOrigins">localhost:8443</entry>
+<entry key="security.externalSessionTrustedOrigins">localhost:8001</entry>
 <entry key="security.httpsHeaderCheck">X-Forwarded-Proto:https</entry>
 <entry key="security.requestValidationFunction">ords_util.authorize_plsql_gateway</entry>
 <entry key="http.cookie.filter.byValue">startsWith:ORA_WWV</entry>
 <entry key="standalone.access.log">/path/to/your/access.log</entry>
 <entry key="standalone.http.host">localhost</entry>
-<entry key="standalone.http.port">8080</entry>
+<entry key="standalone.http.port">7001</entry>
 <entry key="standalone.context.path">/ords</entry>
 <entry key="standalone.static.path">/path/to/the/apex/images</entry>
 <entry key="standalone.static.context.path">/i/</entry>
@@ -119,7 +119,7 @@ Hier meine Beispiel-Konfiguration für den ORDS (settings.xml):
 Die wichtigsten beiden Zeilen im Bezug auf einen Betrieb hinter einem Reverse Proxy:
 
 ```xml
-<entry key="security.externalSessionTrustedOrigins">localhost:8443</entry>
+<entry key="security.externalSessionTrustedOrigins">localhost:8001</entry>
 <entry key="security.httpsHeaderCheck">X-Forwarded-Proto:https</entry>
 ```
 
@@ -145,11 +145,11 @@ Falls Ihr die Konfigurationsdatei anders nennen wollt, sie aber im Caddyfile For
 caddy run --config /path/to/config.txt --adapter caddyfile
 ```
 
-Wer mag, kann Caddy (und ORDS) natürlich auch als Service in seinem Betriebssystem registrieren, so dass man die Server nicht manuell starten muss.
+Wer mag, kann Caddy (und ORDS) auch als Service in seinem Betriebssystem registrieren, so dass man die Server nicht manuell starten muss.
 
-Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert, falls noch nicht geschehen, und danach Caddy und ORDS in jeweils einem Kindprozess startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet, so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch bzw. Worktree. Aber dass alles wäre dann ein Thema für einen anderen Blogeintrag.
+Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert, falls noch nicht geschehen, und danach Caddy und ORDS in jeweils einem Kindprozess startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet (daher auch die Ports 7001 und 8001 in meinen Beispielen hier), so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch bzw. Worktree. Aber das alles wäre dann ein Thema für einen anderen Blogeintrag.
 
-## Zusammenfassung
+## Fazit
 
 Ich mag es, wenn auch auf meinen Entwicklungsumgebungen SSL-seitig alles gut aussieht. Caddy ist diesbezüglich wirklich eine große Hilfe. Man könnte mit Caddy sogar einen internen Zertifizierungsserver bereitstellen, der dann alle Webserver innerhalb eines Netzwerkes mit Zertifikaten versorgt. Mehr dazu in der [offiziellen Dokumentation](https://caddyserver.com/docs/caddyfile/directives/acme_server).
 
