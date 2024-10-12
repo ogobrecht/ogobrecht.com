@@ -4,298 +4,290 @@
 <author>
   <name>Ottmar Gobrecht</name>
   <email>ottmar.gobrecht@gmail.com</email>
-  <uri>https://ogobrecht.com/about/</uri>
+  <uri>http://localhost:8888/about/</uri>
 </author>
-<id>https://ogobrecht.com/index.xml</id>
-<link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
-<link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
-<generator uri="https://gohugo.io/" version="0.90.1">Hugo</generator>
-<updated>2022-01-06T21:29:19+01:00</updated>
+<id>http://localhost:8888/index.xml</id>
+<link href="http://localhost:8888/feed.xml" rel="self" type="application/atom+xml" />
+<link href="http://localhost:8888/" rel="alternate" type="text/html" hreflang="en" />
+<generator uri="https://gohugo.io/" version="0.132.1">Hugo</generator>
+<updated>2024-10-12T18:28:17+01:00</updated>
 
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</id>
-<link href="https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/" rel="alternate" type="text/html" title="Generate APEX plug-ins on the command line" />
+<id>http://localhost:8888/posts/2099-12-31-markdown-examples/</id>
+<link href="http://localhost:8888/posts/2099-12-31-markdown-examples/" rel="alternate" type="text/html" title="Markdown Examples" />
+<title type="html">Markdown Examples</title>
+<summary type="html">Include also Hugo shortcode examples</summary>
+<category term="hugo" label="hugo" scheme="http://localhost:8888/tags/" />
+<published>2099-12-31T00:00:00+01:00</published>
+<updated>2099-12-31T00:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2030-01-01-create-missing-foreign-keys-and-indices/</id>
+<link href="http://localhost:8888/posts/2030-01-01-create-missing-foreign-keys-and-indices/" rel="alternate" type="text/html" title="Create Missing Foreign Keys and Indices" />
+<title type="html">Create Missing Foreign Keys and Indices</title>
+<summary type="html">Two of my deployment helper scripts</summary>
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
+<published>2030-01-01T00:00:00+01:00</published>
+<updated>2030-12-31T14:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2030-01-01-downgrade-an-apex-plug-in-with-a-diff-tool/</id>
+<link href="http://localhost:8888/posts/2030-01-01-downgrade-an-apex-plug-in-with-a-diff-tool/" rel="alternate" type="text/html" title="Downgrade an APEX Plug-in With a Diff Tool" />
+<title type="html">Downgrade an APEX Plug-in With a Diff Tool</title>
+<summary type="html">Greetings from the lazy programmer</summary>
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="plug-in" label="Plug-in" scheme="http://localhost:8888/tags/" />
+<published>2030-01-01T00:00:00+01:00</published>
+<updated>2030-12-31T14:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2030-01-01-unify-constraint-and-index-names/</id>
+<link href="http://localhost:8888/posts/2030-01-01-unify-constraint-and-index-names/" rel="alternate" type="text/html" title="Unify Constraint and Index Names" />
+<title type="html">Unify Constraint and Index Names</title>
+<summary type="html">Again two of my deployment helper scripts</summary>
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
+<published>2030-01-01T00:00:00+01:00</published>
+<updated>2030-12-31T14:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2030-01-01-using-utplsql-for-a-code-generator/</id>
+<link href="http://localhost:8888/posts/2030-01-01-using-utplsql-for-a-code-generator/" rel="alternate" type="text/html" title="Using utPLSQL for a code generator" />
+<title type="html">Using utPLSQL for a code generator</title>
+<summary type="html">The spcifics when testing generated code</summary>
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="unit-tests" label="unit-tests" scheme="http://localhost:8888/tags/" />
+<published>2030-01-01T00:00:00+01:00</published>
+<updated>2030-12-31T14:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</id>
+<link href="http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" rel="alternate" type="text/html" title="Caddy Server - APEX behind a fully automated SSL proxy" />
+<title type="html">Caddy Server - APEX behind a fully automated SSL proxy</title>
+<summary type="html">Forget self-signed certificates and browsers that complain about them</summary>
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="ssl" label="SSL" scheme="http://localhost:8888/tags/" />
+<category term="proxy" label="proxy" scheme="http://localhost:8888/tags/" />
+<category term="caddy" label="Caddy" scheme="http://localhost:8888/tags/" />
+<published>2024-10-16T00:00:00+01:00</published>
+<updated>2024-10-16T12:00:00+01:00</updated>
+
+</entry>
+
+<entry xml:lang="en">
+<id>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</id>
+<link href="http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/" rel="alternate" type="text/html" title="Generate APEX plug-ins on the command line" />
 <title type="html">Generate APEX plug-ins on the command line</title>
 <summary type="html">Instead of uploading new files to a plug-in, we generate the plug-in via a template on the command line and install it</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
-<category term="node.js" label="Node.js" scheme="https://ogobrecht.com/tags/" />
-<category term="npm" label="npm" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="plug-in" label="Plug-in" scheme="http://localhost:8888/tags/" />
+<category term="node.js" label="Node.js" scheme="http://localhost:8888/tags/" />
+<category term="npm" label="npm" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
 <published>2021-10-13T00:00:00+01:00</published>
 <updated>2021-10-13T12:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</id>
-<link href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" rel="alternate" type="text/html" title="Yet another Oracle DB logging tool: Console" />
+<id>http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</id>
+<link href="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" rel="alternate" type="text/html" title="Yet another Oracle DB logging tool: Console" />
 <title type="html">Yet another Oracle DB logging tool: Console</title>
 <summary type="html">Easy to install, works without context and special rights on administrative views, brings APEX integration with it</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="log" label="Log" scheme="https://ogobrecht.com/tags/" />
-<category term="debug" label="Debug" scheme="https://ogobrecht.com/tags/" />
-<category term="instrumentation" label="Instrumentation" scheme="https://ogobrecht.com/tags/" />
+<category term="open-source-project" label="Open source project" scheme="http://localhost:8888/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="log" label="Log" scheme="http://localhost:8888/tags/" />
+<category term="debug" label="Debug" scheme="http://localhost:8888/tags/" />
+<category term="instrumentation" label="Instrumentation" scheme="http://localhost:8888/tags/" />
 <published>2021-10-04T00:00:00+01:00</published>
 <updated>2021-10-08T13:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</id>
-<link href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/" rel="alternate" type="text/html" title="Create fast insert scripts" />
+<id>http://localhost:8888/posts/2021-01-31-create-fast-insert-scripts/</id>
+<link href="http://localhost:8888/posts/2021-01-31-create-fast-insert-scripts/" rel="alternate" type="text/html" title="Create fast insert scripts" />
 <title type="html">Create fast insert scripts</title>
 <summary type="html">PL/SQL Export Utilities are now able to export table data as insert scripts</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
-<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
+<category term="generator" label="Generator" scheme="http://localhost:8888/tags/" />
 <published>2021-01-31T00:00:00+01:00</published>
 <updated>2021-08-30T13:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</id>
-<link href="https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/" rel="alternate" type="text/html" title="New Version of Oracle Table API Generator Available" />
+<id>http://localhost:8888/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</id>
+<link href="http://localhost:8888/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/" rel="alternate" type="text/html" title="New Version of Oracle Table API Generator Available" />
 <title type="html">New Version of Oracle Table API Generator Available</title>
 <summary type="html">Bulk processing, support for audit and row version columns and more</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
-<category term="oddgen" label="oddgen" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="generator" label="Generator" scheme="http://localhost:8888/tags/" />
+<category term="oddgen" label="oddgen" scheme="http://localhost:8888/tags/" />
 <published>2020-12-26T00:00:00+01:00</published>
 <updated>2020-12-27T15:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</id>
-<link href="https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/" rel="alternate" type="text/html" title="How to migrate Oracle Cloud wallet into existing auto_login_local wallet" />
+<id>http://localhost:8888/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</id>
+<link href="http://localhost:8888/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/" rel="alternate" type="text/html" title="How to migrate Oracle Cloud wallet into existing auto_login_local wallet" />
 <title type="html">How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
 <summary type="html">One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="wallet" label="Wallet" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="wallet" label="Wallet" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
 <published>2020-08-03T00:00:00+01:00</published>
 <updated>2020-11-28T15:42:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</id>
-<link href="https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/" rel="alternate" type="text/html" title="How to use mkstore and orapki with Oracle Instant Client" />
+<id>http://localhost:8888/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</id>
+<link href="http://localhost:8888/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/" rel="alternate" type="text/html" title="How to use mkstore and orapki with Oracle Instant Client" />
 <title type="html">How to use mkstore and orapki with Oracle Instant Client</title>
 <summary type="html">Create and manage wallets without full client installation</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="wallet" label="Wallet" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="wallet" label="Wallet" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
 <published>2020-07-29T00:00:00+01:00</published>
 <updated>2020-07-29T20:15:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/</id>
-<link href="https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/" rel="alternate" type="text/html" title="Sample Data Sets for Oracle" />
+<id>http://localhost:8888/posts/2020-05-25-sample-data-sets-for-oracle/</id>
+<link href="http://localhost:8888/posts/2020-05-25-sample-data-sets-for-oracle/" rel="alternate" type="text/html" title="Sample Data Sets for Oracle" />
 <title type="html">Sample Data Sets for Oracle</title>
 <summary type="html">A collection of common data sets for testing purposes</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
+<category term="open-source-project" label="Open source project" scheme="http://localhost:8888/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
 <published>2020-05-25T00:00:00+01:00</published>
 <updated>2020-05-25T14:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</id>
-<link href="https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/" rel="alternate" type="text/html" title="Why I Like SQL*Plus for Deployment Scripts" />
+<id>http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</id>
+<link href="http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/" rel="alternate" type="text/html" title="Why I Like SQL*Plus for Deployment Scripts" />
 <title type="html">Why I Like SQL*Plus for Deployment Scripts</title>
 <summary type="html">SQLcl is eating my error messages</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
-<category term="sqlplus" label="SQL*Plus" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
+<category term="sqlplus" label="SQL*Plus" scheme="http://localhost:8888/tags/" />
 <published>2020-01-02T00:00:00+01:00</published>
 <updated>2021-01-31T20:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</id>
-<link href="https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/" rel="alternate" type="text/html" title="Download BLOBs with SQL*Plus" />
+<id>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</id>
+<link href="http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/" rel="alternate" type="text/html" title="Download BLOBs with SQL*Plus" />
 <title type="html">Download BLOBs with SQL*Plus</title>
 <summary type="html">New version of PL/SQL Export Utilities available</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="script" label="Script" scheme="https://ogobrecht.com/tags/" />
-<category term="sqlplus" label="SQL*Plus" scheme="https://ogobrecht.com/tags/" />
-<category term="version-control" label="Version control" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="script" label="Script" scheme="http://localhost:8888/tags/" />
+<category term="sqlplus" label="SQL*Plus" scheme="http://localhost:8888/tags/" />
+<category term="version-control" label="Version control" scheme="http://localhost:8888/tags/" />
 <published>2020-01-01T00:00:00+01:00</published>
 <updated>2020-10-26T16:43:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</id>
-<link href="https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/" rel="alternate" type="text/html" title="Quick start - version control for existing Oracle projects" />
+<id>http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</id>
+<link href="http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/" rel="alternate" type="text/html" title="Quick start - version control for existing Oracle projects" />
 <title type="html">Quick start - version control for existing Oracle projects</title>
 <summary type="html">DOAG Red Stack Magazin 03-2019</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="version-control" label="Version control" scheme="https://ogobrecht.com/tags/" />
-<category term="doag" label="DOAG" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="version-control" label="Version control" scheme="http://localhost:8888/tags/" />
+<category term="doag" label="DOAG" scheme="http://localhost:8888/tags/" />
 <published>2019-07-20T00:00:00+01:00</published>
 <updated>2019-08-15T21:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</id>
-<link href="https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/" rel="alternate" type="text/html" title="New Major Version of PL/SQL Export Utilities Available" />
+<id>http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/</id>
+<link href="http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/" rel="alternate" type="text/html" title="New Major Version of PL/SQL Export Utilities Available" />
 <title type="html">New Major Version of PL/SQL Export Utilities Available</title>
 <summary type="html">PLEX is now independent from an APEX installation</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="version-control" label="Version control" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="version-control" label="Version control" scheme="http://localhost:8888/tags/" />
 <published>2019-06-26T00:00:00+01:00</published>
 <updated>2019-06-26T21:49:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</id>
-<link href="https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/" rel="alternate" type="text/html" title="New Version of D3 Force Network Chart Available" />
+<id>http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</id>
+<link href="http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/" rel="alternate" type="text/html" title="New Version of D3 Force Network Chart Available" />
 <title type="html">New Version of D3 Force Network Chart Available</title>
 <summary type="html">Links can now have a label</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
-<category term="d3.js" label="D3.js" scheme="https://ogobrecht.com/tags/" />
-<category term="chart" label="Chart" scheme="https://ogobrecht.com/tags/" />
-<category term="svg" label="SVG" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="apex" label="APEX" scheme="http://localhost:8888/tags/" />
+<category term="plug-in" label="Plug-in" scheme="http://localhost:8888/tags/" />
+<category term="d3.js" label="D3.js" scheme="http://localhost:8888/tags/" />
+<category term="chart" label="Chart" scheme="http://localhost:8888/tags/" />
+<category term="svg" label="SVG" scheme="http://localhost:8888/tags/" />
 <published>2019-06-09T00:00:00+01:00</published>
 <updated>2019-06-09T16:00:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</id>
-<link href="https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/" rel="alternate" type="text/html" title="PLOC - Convert PL/SQL Code into Markdown Docs" />
+<id>http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</id>
+<link href="http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/" rel="alternate" type="text/html" title="PLOC - Convert PL/SQL Code into Markdown Docs" />
 <title type="html">PLOC - Convert PL/SQL Code into Markdown Docs</title>
 <summary type="html">Another way to document PL/SQL business logic</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
-<category term="converter" label="Converter" scheme="https://ogobrecht.com/tags/" />
-<category term="markdown" label="Markdown" scheme="https://ogobrecht.com/tags/" />
-<category term="npm" label="npm" scheme="https://ogobrecht.com/tags/" />
+<category term="open-source-project" label="Open source project" scheme="http://localhost:8888/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="generator" label="Generator" scheme="http://localhost:8888/tags/" />
+<category term="converter" label="Converter" scheme="http://localhost:8888/tags/" />
+<category term="markdown" label="Markdown" scheme="http://localhost:8888/tags/" />
+<category term="npm" label="npm" scheme="http://localhost:8888/tags/" />
 <published>2019-01-10T00:00:00+01:00</published>
 <updated>2019-01-11T20:02:00+01:00</updated>
 
 </entry>
 
 <entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</id>
-<link href="https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/" rel="alternate" type="text/html" title="Table API Generator v0.5.0 Available" />
+<id>http://localhost:8888/posts/2018-12-26-table-api-generator-v0.5.0-available/</id>
+<link href="http://localhost:8888/posts/2018-12-26-table-api-generator-v0.5.0-available/" rel="alternate" type="text/html" title="Table API Generator v0.5.0 Available" />
 <title type="html">Table API Generator v0.5.0 Available</title>
 <summary type="html">Long changelog and took a long time</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
-<category term="oddgen" label="oddgen" scheme="https://ogobrecht.com/tags/" />
+<category term="oracle" label="Oracle" scheme="http://localhost:8888/tags/" />
+<category term="pl/sql" label="PL/SQL" scheme="http://localhost:8888/tags/" />
+<category term="generator" label="Generator" scheme="http://localhost:8888/tags/" />
+<category term="oddgen" label="oddgen" scheme="http://localhost:8888/tags/" />
 <published>2018-12-26T00:00:00+01:00</published>
 <updated>2018-12-26T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</id>
-<link href="https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/" rel="alternate" type="text/html" title="New Major Version of D3 Force Network Chart Available" />
-<title type="html">New Major Version of D3 Force Network Chart Available</title>
-<summary type="html">Better responsiveness by implementing a resize observer</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="plug-in" label="Plug-in" scheme="https://ogobrecht.com/tags/" />
-<category term="d3.js" label="D3.js" scheme="https://ogobrecht.com/tags/" />
-<category term="chart" label="Chart" scheme="https://ogobrecht.com/tags/" />
-<category term="svg" label="SVG" scheme="https://ogobrecht.com/tags/" />
-<published>2018-12-02T00:00:00+01:00</published>
-<updated>2018-12-05T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</id>
-<link href="https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/" rel="alternate" type="text/html" title="PLEX - PL/SQL Export Utilities" />
-<title type="html">PLEX - PL/SQL Export Utilities</title>
-<summary type="html">Export Oracle APEX app, ORDS modules, all schema objects and table data in one go</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="pl/sql" label="PL/SQL" scheme="https://ogobrecht.com/tags/" />
-<category term="version-control" label="Version control" scheme="https://ogobrecht.com/tags/" />
-<published>2018-08-26T00:00:00+01:00</published>
-<updated>2021-01-31T20:45:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</id>
-<link href="https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/" rel="alternate" type="text/html" title="APEX_EXPORT and Version Control" />
-<title type="html">APEX_EXPORT and Version Control</title>
-<summary type="html">How to export the splitted APEX app definition with SQL*Plus</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="version-control" label="Version control" scheme="https://ogobrecht.com/tags/" />
-<category term="sqlplus" label="SQL*Plus" scheme="https://ogobrecht.com/tags/" />
-<published>2018-07-25T00:00:00+01:00</published>
-<updated>2018-07-25T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/</id>
-<link href="https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/" rel="alternate" type="text/html" title="Show Today Button in APEX Datepicker" />
-<title type="html">Show Today Button in APEX Datepicker</title>
-<summary type="html">A short note on how to customize the jQuery UI datepicker</summary>
-<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="jquery" label="jQuery" scheme="https://ogobrecht.com/tags/" />
-<published>2018-07-22T00:00:00+01:00</published>
-<updated>2018-07-22T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-11-29-hydebar/</id>
-<link href="https://ogobrecht.com/posts/2017-11-29-hydebar/" rel="alternate" type="text/html" title="HydeBar" />
-<title type="html">HydeBar</title>
-<summary type="html">A Jekyll Sidebar Template</summary>
-<category term="open-source-project" label="Open source project" scheme="https://ogobrecht.com/tags/" />
-<category term="generator" label="Generator" scheme="https://ogobrecht.com/tags/" />
-<category term="html" label="HTML" scheme="https://ogobrecht.com/tags/" />
-<published>2017-11-29T00:00:00+01:00</published>
-<updated>2017-12-01T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</id>
-<link href="https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/" rel="alternate" type="text/html" title="Form Behaviour - Bug or Feature?" />
-<title type="html">Form Behaviour - Bug or Feature?</title>
-<summary type="html">Why forms with a single input field are submitted by the enter key</summary>
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="html" label="HTML" scheme="https://ogobrecht.com/tags/" />
-<published>2017-09-26T00:00:00+01:00</published>
-<updated>2017-10-01T20:00:00+01:00</updated>
 
 </entry>
 

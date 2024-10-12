@@ -2,180 +2,174 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ottmar’s Notizen</title>
-    <link>https://ogobrecht.com/de/tags/</link>
+    <link>http://localhost:8888/de/tags/</link>
     <description>Recent content in Tags on Ottmar’s Notizen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Wed, 16 Oct 2024 12:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/de/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Caddy</title>
+      <link>http://localhost:8888/de/tags/caddy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/caddy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Oracle APEX</title>
+      <link>http://localhost:8888/de/tags/oracle-apex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/oracle-apex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Proxy</title>
+      <link>http://localhost:8888/de/tags/proxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/proxy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SSL</title>
+      <link>http://localhost:8888/de/tags/ssl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/ssl/</guid>
+      <description></description>
+    </item>
     <item>
       <title>APEX</title>
-      <link>https://ogobrecht.com/de/tags/apex/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/apex/</guid>
+      <link>http://localhost:8888/de/tags/apex/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/apex/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Node.js</title>
-      <link>https://ogobrecht.com/de/tags/node.js/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/node.js/</guid>
+      <link>http://localhost:8888/de/tags/node.js/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/node.js/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>npm</title>
-      <link>https://ogobrecht.com/de/tags/npm/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/npm/</guid>
+      <title>Npm</title>
+      <link>http://localhost:8888/de/tags/npm/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/npm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Oracle</title>
-      <link>https://ogobrecht.com/de/tags/oracle/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/oracle/</guid>
+      <link>http://localhost:8888/de/tags/oracle/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/oracle/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>Plug-in</title>
-      <link>https://ogobrecht.com/de/tags/plug-in/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/plug-in/</guid>
+      <title>Plug-In</title>
+      <link>http://localhost:8888/de/tags/plug-in/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/plug-in/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Script</title>
-      <link>https://ogobrecht.com/de/tags/script/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/script/</guid>
+      <link>http://localhost:8888/de/tags/script/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/script/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Debug</title>
-      <link>https://ogobrecht.com/de/tags/debug/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/debug/</guid>
+      <link>http://localhost:8888/de/tags/debug/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/debug/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Instrumentation</title>
-      <link>https://ogobrecht.com/de/tags/instrumentation/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/instrumentation/</guid>
+      <link>http://localhost:8888/de/tags/instrumentation/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/instrumentation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Log</title>
-      <link>https://ogobrecht.com/de/tags/log/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/log/</guid>
+      <link>http://localhost:8888/de/tags/log/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/log/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>Open source project</title>
-      <link>https://ogobrecht.com/de/tags/open-source-project/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/open-source-project/</guid>
+      <title>Open Source Project</title>
+      <link>http://localhost:8888/de/tags/open-source-project/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/open-source-project/</guid>
       <description></description>
     </item>
-    
-    <item>
-      <title>Generator</title>
-      <link>https://ogobrecht.com/de/tags/generator/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/generator/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DOAG</title>
-      <link>https://ogobrecht.com/de/tags/doag/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/doag/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Slides</title>
-      <link>https://ogobrecht.com/de/tags/slides/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/slides/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Version control</title>
-      <link>https://ogobrecht.com/de/tags/version-control/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/version-control/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Chart</title>
-      <link>https://ogobrecht.com/de/tags/chart/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/chart/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Markdown</title>
-      <link>https://ogobrecht.com/de/tags/markdown/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>D3.js</title>
-      <link>https://ogobrecht.com/de/tags/d3.js/</link>
-      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/d3.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SVG</title>
-      <link>https://ogobrecht.com/de/tags/svg/</link>
-      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/svg/</guid>
-      <description></description>
-    </item>
-    
     <item>
       <title>PL/SQL</title>
-      <link>https://ogobrecht.com/de/tags/pl/sql/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/tags/pl/sql/</guid>
+      <link>http://localhost:8888/de/tags/pl/sql/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/pl/sql/</guid>
       <description></description>
     </item>
-    
+    <item>
+      <title>Generator</title>
+      <link>http://localhost:8888/de/tags/generator/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/generator/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DOAG</title>
+      <link>http://localhost:8888/de/tags/doag/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/doag/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Slides</title>
+      <link>http://localhost:8888/de/tags/slides/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/slides/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Version Control</title>
+      <link>http://localhost:8888/de/tags/version-control/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/version-control/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Chart</title>
+      <link>http://localhost:8888/de/tags/chart/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/chart/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>http://localhost:8888/de/tags/markdown/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>D3.js</title>
+      <link>http://localhost:8888/de/tags/d3.js/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/d3.js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SVG</title>
+      <link>http://localhost:8888/de/tags/svg/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/tags/svg/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

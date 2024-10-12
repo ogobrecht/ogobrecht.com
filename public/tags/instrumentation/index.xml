@@ -2,18 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Instrumentation on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/instrumentation/</link>
+    <link>http://localhost:8888/tags/instrumentation/</link>
     <description>Recent content in Instrumentation on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/instrumentation/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Fri, 08 Oct 2021 13:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/instrumentation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Yet another Oracle DB logging tool: Console</title>
-      <link>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</guid>
-      <description>Table of Contents  Introduction A single install script Production safe without further configuration Method names based on JavaScript Console Reduced amount of log entries through saved call stack Simple logging of method parameters Markdown format for automatically determined metadata Extensible logs through overloaded log methods Measure time and count things Assert, format and other helpers Displaying the package status of Console in a session APEX Error Handling Function APEX Plug-in for capturing frontend errors Sources of inspiration Project homepage   Introduction It looks like it is a hobby of PL/SQL developers to develop their own logging tool.</description>
+      <link>http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</guid>
+      <description>Table of Contents Introduction A single install script Production safe without further configuration Method names based on JavaScript Console Reduced amount of log entries through saved call stack Simple logging of method parameters Markdown format for automatically determined metadata Extensible logs through overloaded log methods Measure time and count things Assert, format and other helpers Displaying the package status of Console in a session APEX Error Handling Function APEX Plug-in for capturing frontend errors Sources of inspiration Project homepage Introduction It looks like it is a hobby of PL/SQL developers to develop their own logging tool.</description>
     </item>
-    
   </channel>
 </rss>

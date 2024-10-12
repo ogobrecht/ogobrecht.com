@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oracle APEX on Ottmar’s Notizen</title>
+    <link>http://localhost:8888/de/tags/oracle-apex/</link>
+    <description>Recent content in Oracle APEX on Ottmar’s Notizen</description>
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <atom:link href="http://localhost:8888/de/tags/oracle-apex/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

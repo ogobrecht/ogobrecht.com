@@ -2,165 +2,132 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>APEX on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/apex/</link>
+    <link>http://localhost:8888/tags/apex/</link>
     <description>Recent content in APEX on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/apex/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Tue, 31 Dec 2030 14:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/apex/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Downgrade an APEX Plug-in With a Diff Tool</title>
+      <link>http://localhost:8888/posts/2030-01-01-downgrade-an-apex-plug-in-with-a-diff-tool/</link>
+      <pubDate>Tue, 01 Jan 2030 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2030-01-01-downgrade-an-apex-plug-in-with-a-diff-tool/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Generate APEX plug-ins on the command line</title>
-      <link>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
-      <description>Table of Contents  Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way   Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+      <link>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
+      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
     </item>
-    
     <item>
       <title>Yet another Oracle DB logging tool: Console</title>
-      <link>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</guid>
-      <description>Table of Contents  Introduction A single install script Production safe without further configuration Method names based on JavaScript Console Reduced amount of log entries through saved call stack Simple logging of method parameters Markdown format for automatically determined metadata Extensible logs through overloaded log methods Measure time and count things Assert, format and other helpers Displaying the package status of Console in a session APEX Error Handling Function APEX Plug-in for capturing frontend errors Sources of inspiration Project homepage   Introduction It looks like it is a hobby of PL/SQL developers to develop their own logging tool.</description>
+      <link>http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</guid>
+      <description>Table of Contents Introduction A single install script Production safe without further configuration Method names based on JavaScript Console Reduced amount of log entries through saved call stack Simple logging of method parameters Markdown format for automatically determined metadata Extensible logs through overloaded log methods Measure time and count things Assert, format and other helpers Displaying the package status of Console in a session APEX Error Handling Function APEX Plug-in for capturing frontend errors Sources of inspiration Project homepage Introduction It looks like it is a hobby of PL/SQL developers to develop their own logging tool.</description>
     </item>
-    
     <item>
       <title>Download BLOBs with SQL*Plus</title>
-      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <link>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
       <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
     </item>
-    
     <item>
       <title>Quick start - version control for existing Oracle projects</title>
-      <link>https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</link>
-      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</guid>
+      <link>http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</guid>
       <description>Many Oracle projects still do not use version control. The reasons for this are manifold. Mostly it is assumed that the database is a safe place for the source code. With a working backup this is also correct, but in any case one loses the complete history of changes. Often in running projects there is not enough time to deal with the introduction of source code versioning, because at first sight there is no direct benefit to be seen.</description>
     </item>
-    
     <item>
       <title>New Major Version of PL/SQL Export Utilities Available</title>
-      <link>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</link>
-      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</guid>
-      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.
-After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&amp;rsquo;t use APEX&amp;rdquo;.</description>
+      <link>http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/</guid>
+      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.&#xA;After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&amp;rsquo;t use APEX&amp;rdquo;.</description>
     </item>
-    
     <item>
       <title>New Version of D3 Force Network Chart Available</title>
-      <link>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
-      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</guid>
-      <description>First of all: Thanks to the community!
-From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.
-The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above.</description>
+      <link>http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
+      <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</guid>
+      <description>First of all: Thanks to the community!&#xA;From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.&#xA;The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above.</description>
     </item>
-    
     <item>
       <title>New Major Version of D3 Force Network Chart Available</title>
-      <link>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</link>
-      <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</guid>
+      <link>http://localhost:8888/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</link>
+      <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</guid>
       <description>Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes.</description>
     </item>
-    
     <item>
       <title>PLEX - PL/SQL Export Utilities</title>
-      <link>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</link>
-      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</guid>
-      <description>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called BackApp and Queries_to_CSV. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:
- Export the app definition of an APEX app (splitted files and optional single SQL file) Export all ORDS modules from the current schema Export all object DDL from the current schema Export table data into CSV files Provide basic script templates for export/import of whole app for DEV, TEST and PROD Everything in a (hopefully) nice directory structure ready to use with version control Return value is a file collection of type plex.</description>
+      <link>http://localhost:8888/posts/2018-08-26-plex-plsql-export-utilities/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-08-26-plex-plsql-export-utilities/</guid>
+      <description>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called BackApp and Queries_to_CSV. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:&#xA;Export the app definition of an APEX app (splitted files and optional single SQL file) Export all ORDS modules from the current schema Export all object DDL from the current schema Export table data into CSV files Provide basic script templates for export/import of whole app for DEV, TEST and PROD Everything in a (hopefully) nice directory structure ready to use with version control Return value is a file collection of type plex.</description>
     </item>
-    
     <item>
       <title>APEX_EXPORT and Version Control</title>
-      <link>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</link>
-      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</guid>
+      <link>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</guid>
       <description>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply ask Google. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</description>
     </item>
-    
     <item>
       <title>Show Today Button in APEX Datepicker</title>
-      <link>https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/</guid>
-      <description>Maxime Tremblay has already described here how to customize the datepicker.
-He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.
-In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called Today and a second one to close the datepicker which is called Done I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:</description>
+      <link>http://localhost:8888/posts/2018-07-22-today-button-in-apex-datepicker/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-07-22-today-button-in-apex-datepicker/</guid>
+      <description>Maxime Tremblay has already described here how to customize the datepicker.&#xA;He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.&#xA;In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called Today and a second one to close the datepicker which is called Done I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:</description>
     </item>
-    
     <item>
       <title>Form Behaviour - Bug or Feature?</title>
-      <link>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</guid>
-      <description>Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.
-The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue).</description>
+      <link>http://localhost:8888/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</link>
+      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</guid>
+      <description>Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.&#xA;The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue).</description>
     </item>
-    
     <item>
       <title>APEX Plugin dhtmlxGantt</title>
-      <link>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</link>
-      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
-      <description>Some weeks ago I was asked, if I can create a plugin for the Gantt chart library from dhtmlx.com. I had a look at the library and I thought that it should be possible.
-Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality.</description>
+      <link>http://localhost:8888/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
+      <description>Some weeks ago I was asked, if I can create a plugin for the Gantt chart library from dhtmlx.com. I had a look at the library and I thought that it should be possible.&#xA;Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality.</description>
     </item>
-    
     <item>
       <title>Markdown for Oracle APEX</title>
-      <link>https://ogobrecht.com/posts/2016-01-01-markdown-for-oracle-apex/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-01-01-markdown-for-oracle-apex/</guid>
-      <description>Some years ago I implemented a task board in APEX. For commenting I used the stackexchange markdown implementation (old Google code repo), which is a pure JavaScript converter and editor and based on showdown.js.
-Some months ago I had to implement an application, which should be able to have multiple editors on one page and the editors should be able to support a read only mode. Furthermore there were hard limits for the amount of text for each editor.</description>
+      <link>http://localhost:8888/posts/2016-01-01-markdown-for-oracle-apex/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2016-01-01-markdown-for-oracle-apex/</guid>
+      <description>Some years ago I implemented a task board in APEX. For commenting I used the stackexchange markdown implementation (old Google code repo), which is a pure JavaScript converter and editor and based on showdown.js.&#xA;Some months ago I had to implement an application, which should be able to have multiple editors on one page and the editors should be able to support a read only mode. Furthermore there were hard limits for the amount of text for each editor.</description>
     </item>
-    
     <item>
       <title>Why a subdomain for an APEX development system is a bad idea</title>
-      <link>https://ogobrecht.com/posts/2015-12-12-why-a-subdomain-for-an-apex-development-system-is-a-bad-idea/</link>
-      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2015-12-12-why-a-subdomain-for-an-apex-development-system-is-a-bad-idea/</guid>
-      <description>Do you find dev.apex.mycompany.tld a nice, rememberable address? Unfortunately this will not work - at least when you use Internet Explorer (which is the standard browser in most companies) and you use the same cookie name in some or all applications to share the session across multiple applications.
-What is the problem on a subdomain? Internet Explorer including version 11 has a really bad cookie implementation. If you login to your productive APEX instance under apex.</description>
+      <link>http://localhost:8888/posts/2015-12-12-why-a-subdomain-for-an-apex-development-system-is-a-bad-idea/</link>
+      <pubDate>Sat, 12 Dec 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2015-12-12-why-a-subdomain-for-an-apex-development-system-is-a-bad-idea/</guid>
+      <description>Do you find dev.apex.mycompany.tld a nice, rememberable address? Unfortunately this will not work - at least when you use Internet Explorer (which is the standard browser in most companies) and you use the same cookie name in some or all applications to share the session across multiple applications.&#xA;What is the problem on a subdomain? Internet Explorer including version 11 has a really bad cookie implementation. If you login to your productive APEX instance under apex.</description>
     </item>
-    
     <item>
       <title>D3.js Force-Directed Network Chart</title>
-      <link>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</link>
-      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</guid>
-      <description>My first Oracle APEX plugin and open source project :-)
-Everything started some months ago when I stumbled over this fascinating force-directed graph. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</description>
+      <link>http://localhost:8888/posts/2015-02-20-d3js-force-directed-network-chart/</link>
+      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2015-02-20-d3js-force-directed-network-chart/</guid>
+      <description>My first Oracle APEX plugin and open source project :-)&#xA;Everything started some months ago when I stumbled over this fascinating force-directed graph. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</description>
     </item>
-    
     <item>
       <title>Double click on APEX report row opens first link target</title>
-      <link>https://ogobrecht.com/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/</link>
-      <pubDate>Wed, 14 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/</guid>
-      <description>Do you like scanning a report for certain information and then moving the mouse to the first column to click the small link for details or a edit form? Would it be nice to double click anywhere on the row to open the first link?
-With a little help of a dynamic action on page zero you have the solution for all your interactive and standard reports in your application. The only additional to do is, to find out the right selectors for your reports.</description>
+      <link>http://localhost:8888/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/</link>
+      <pubDate>Wed, 14 Jan 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2015-01-14-double-click-on-apex-report-row-opens-first-link-target/</guid>
+      <description>Do you like scanning a report for certain information and then moving the mouse to the first column to click the small link for details or a edit form? Would it be nice to double click anywhere on the row to open the first link?&#xA;With a little help of a dynamic action on page zero you have the solution for all your interactive and standard reports in your application. The only additional to do is, to find out the right selectors for your reports.</description>
     </item>
-    
   </channel>
 </rss>

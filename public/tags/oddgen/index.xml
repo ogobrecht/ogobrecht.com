@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>oddgen on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/oddgen/</link>
-    <description>Recent content in oddgen on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
+    <title>Oddgen on Ottmar’s Notes</title>
+    <link>http://localhost:8888/tags/oddgen/</link>
+    <description>Recent content in Oddgen on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sun, 27 Dec 2020 15:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of Oracle Table API Generator Available</title>
-      <link>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>
-      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</guid>
-      <description>Short before Christmas André and I released version 0.6.0 of our table API generator. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the complete changelog is available on GitHub.
-Table of Contents  Bulk Processing Support for Audit Columns Support for a Row Version Column Tenant Support More Breaking Changes Conclusion   Bulk Processing When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data.</description>
+      <link>http://localhost:8888/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</guid>
+      <description>Short before Christmas André and I released version 0.6.0 of our table API generator. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the complete changelog is available on GitHub.&#xA;Table of Contents Bulk Processing Support for Audit Columns Support for a Row Version Column Tenant Support More Breaking Changes Conclusion Bulk Processing When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data.</description>
     </item>
-    
     <item>
       <title>Table API Generator v0.5.0 Available</title>
-      <link>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
-      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
-      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:
- Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods:  Can have the dictionary column defaults Can return the whole row instead of the primary key   You can exclude columns (e.</description>
+      <link>http://localhost:8888/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
+      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:&#xA;Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods: Can have the dictionary column defaults Can return the whole row instead of the primary key You can exclude columns (e.</description>
     </item>
-    
     <item>
       <title>Table API Generator</title>
-      <link>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</link>
-      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</guid>
+      <link>http://localhost:8888/posts/2016-06-10-table-api-generator/</link>
+      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2016-06-10-table-api-generator/</guid>
       <description>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</description>
     </item>
-    
   </channel>
 </rss>

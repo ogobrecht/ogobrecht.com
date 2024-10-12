@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Version control on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/version-control/</link>
-    <description>Recent content in Version control on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
+    <title>Version Control on Ottmar’s Notes</title>
+    <link>http://localhost:8888/tags/version-control/</link>
+    <description>Recent content in Version Control on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sun, 31 Jan 2021 20:45:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Download BLOBs with SQL*Plus</title>
-      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <link>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
       <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
     </item>
-    
     <item>
       <title>Quick start - version control for existing Oracle projects</title>
-      <link>https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</link>
-      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</guid>
+      <link>http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/</guid>
       <description>Many Oracle projects still do not use version control. The reasons for this are manifold. Mostly it is assumed that the database is a safe place for the source code. With a working backup this is also correct, but in any case one loses the complete history of changes. Often in running projects there is not enough time to deal with the introduction of source code versioning, because at first sight there is no direct benefit to be seen.</description>
     </item>
-    
     <item>
       <title>New Major Version of PL/SQL Export Utilities Available</title>
-      <link>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</link>
-      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-06-26-new-major-version-of-plex-available/</guid>
-      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.
-After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&amp;rsquo;t use APEX&amp;rdquo;.</description>
+      <link>http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-06-26-new-major-version-of-plex-available/</guid>
+      <description>PLEX is a PL/SQL package with export utilities - see this post what it can do for you. In the past it was dependent on APEX for two reasons: The APEX_EXPORT package to allow exporting an APEX app and the APEX_ZIP package for compressing the resulting file collection to a zip file.&#xA;After the first public release of PLEX, I got a comment like &amp;ldquo;Nice tool, but I don&amp;rsquo;t use APEX&amp;rdquo;.</description>
     </item>
-    
     <item>
       <title>PLEX - PL/SQL Export Utilities</title>
-      <link>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</link>
-      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-08-26-plex-plsql-export-utilities/</guid>
-      <description>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called BackApp and Queries_to_CSV. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:
- Export the app definition of an APEX app (splitted files and optional single SQL file) Export all ORDS modules from the current schema Export all object DDL from the current schema Export table data into CSV files Provide basic script templates for export/import of whole app for DEV, TEST and PROD Everything in a (hopefully) nice directory structure ready to use with version control Return value is a file collection of type plex.</description>
+      <link>http://localhost:8888/posts/2018-08-26-plex-plsql-export-utilities/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-08-26-plex-plsql-export-utilities/</guid>
+      <description>PLEX is a standalone PL/SQL package with export utilities. It was created to be able to quickstart version control for existing (APEX) apps. It currently has two main functions called BackApp and Queries_to_CSV. Queries_to_CSV is used by BackApp as a helper function, but its functionality is also useful as a standalone. This post is all about BackApp, which has the following features:&#xA;Export the app definition of an APEX app (splitted files and optional single SQL file) Export all ORDS modules from the current schema Export all object DDL from the current schema Export table data into CSV files Provide basic script templates for export/import of whole app for DEV, TEST and PROD Everything in a (hopefully) nice directory structure ready to use with version control Return value is a file collection of type plex.</description>
     </item>
-    
     <item>
       <title>APEX_EXPORT and Version Control</title>
-      <link>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</link>
-      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</guid>
+      <link>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</guid>
       <description>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply ask Google. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</description>
     </item>
-    
   </channel>
 </rss>

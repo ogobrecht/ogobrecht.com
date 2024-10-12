@@ -2,38 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SQL*Plus on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/sqlplus/</link>
+    <link>http://localhost:8888/tags/sqlplus/</link>
     <description>Recent content in SQL*Plus on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/sqlplus/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sun, 31 Jan 2021 20:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/sqlplus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why I Like SQL*Plus for Deployment Scripts</title>
-      <link>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</link>
-      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
-      <description>The following simplified example deployment master script is given:
-setdefineoffverifyofffeedbackoffwheneversqlerrorexitsql.sqlcoderollbackspooldeployment.logpromptpromptExampleDeploymentMasterScriptprompt========================================promptStep1:Dummyfordemonstration-- normally we call here some other scripts like -- @other-script.sql promptStep2:Errortestinanonymousblockbeginraise_application_error(-20000,&amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt========================================promptDeploymentDone:-)promptspooloffWhen we call this in SQL*Plus (version 19.5), we get the following output (in the console and also in deployment.log) with an indication of what went wrong with our deployment:
-Example Deployment Master Script ======================================== Step 1: Dummy for demonstration Step 2: Error test in anonymous block begin * ERROR at line 1: ORA-20000: Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison ORA-06512: at line 2 Ok, this error message is stupid, but usually, I get some useful information here to fix my problem in the deployment script - especially when the problematic script is a bit longer&amp;hellip;</description>
+      <link>http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
+      <description>The following simplified example deployment master script is given:&#xA;set define off verify off feedback off whenever sqlerror exit sql.sqlcode rollback spool deployment.log prompt prompt Example Deployment Master Script prompt ======================================== prompt Step 1: Dummy for demonstration -- normally we call here some other scripts like -- @other-script.sql prompt Step 2: Error test in anonymous block begin raise_application_error( -20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39; ); end; / prompt ======================================== prompt Deployment Done :-) prompt spool off When we call this in SQL*Plus (version 19.</description>
     </item>
-    
     <item>
       <title>Download BLOBs with SQL*Plus</title>
-      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <link>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
       <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
     </item>
-    
     <item>
       <title>APEX_EXPORT and Version Control</title>
-      <link>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</link>
-      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2018-07-25-apex-export-and-version-control/</guid>
+      <link>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2018-07-25-apex-export-and-version-control/</guid>
       <description>Since years it has been possible to export an APEX app definition with the help of APEXExport, a Java utility delivered within the APEX install zip file. There is also the possibility to split the file into its components like pages, plugins and so on. There are some blog postings available how to do this - simply ask Google. Also the Java based SQLcl has the capability to do the export of an APEX app directly.</description>
     </item>
-    
   </channel>
 </rss>

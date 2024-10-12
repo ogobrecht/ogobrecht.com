@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Caddy on Ottmar’s Notizen</title>
+    <link>http://localhost:8888/de/tags/caddy/</link>
+    <description>Recent content in Caddy on Ottmar’s Notizen</description>
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Wed, 16 Oct 2024 12:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/de/tags/caddy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Caddy Server - APEX hinter einem vollautomatischem SSL Proxy</title>
+      <link>http://localhost:8888/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</link>
+      <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</guid>
+      <description>Inhaltsverzeichnis Einleitung Installation Konfiguration Caddy Konfiguration ORDS Einleitung Wie die Zeit vergeht. Fast auf den Tag genau vor drei Jahren habe ich meinen letzten Blogeintrag geschrieben. Vielen Dank an Tim Hall und seine Erinnerung, mal wieder etwas zu schreiben für den #Joel Kallman Day.&#xA;Hast Du Dich schon einmal über Deinen Browser geärgert, dass er Dir in Deiner lokalen Entwicklungsumgebung immer mit roter Schrift in der URL zeigt, dass Du Dein SSL-Zertifikat selbst ausgestellt hast und es somit für Ihn ungültig ist?</description>
+    </item>
+  </channel>
+</rss>

@@ -2,123 +2,90 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Oracle on Ottmar’s Notizen</title>
-    <link>https://ogobrecht.com/de/tags/oracle/</link>
+    <link>http://localhost:8888/de/tags/oracle/</link>
     <description>Recent content in Oracle on Ottmar’s Notizen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Wed, 13 Oct 2021 12:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/de/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>APEX-Plug-ins auf der Kommandozeile generieren</title>
-      <link>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
-      <description>Inhaltsverzeichnis  Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg   Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
+      <link>http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
+      <description>Inhaltsverzeichnis Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
     </item>
-    
     <item>
       <title>Ein weiteres Oracle DB Logging-Tool: Console</title>
-      <link>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</guid>
-      <description>Inhaltsverzeichnis  Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-in für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage   Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
+      <link>http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</guid>
+      <description>Inhaltsverzeichnis Einleitung Ein einziges Installationsskript Produktionssicher ohne weitere Konfiguration Methodennamen angelehnt an JavaScript Console Reduzierte Menge Logeinträge durch gespeicherten Call Stack Einfaches loggen von Methodenparametern Markdown-Format für automatisch ermittelte Metadaten Erweiterbare Logs durch überladene Log-Methoden Zeit messen und Dinge zählen Assert, format und andere Helferlein Anzeigen des Package-Status von Console in einer Session APEX Error Handling Function APEX Plug-in für die Erfassung von Frontend-Fehlern Inspirationsquellen Projekt-Homepage Einleitung Es sieht so aus, als wäre es ein Hobby von PL/SQL-Entwicklern ein eigenes Logging-Tool zu entwickeln.</description>
     </item>
-    
     <item>
       <title>Erstellung schneller Insert-Skripte</title>
-      <link>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</guid>
-      <description>Vor einigen Wochen habe ich eine neue Version meines PLEX-Projekts veröffentlicht. Ich habe die Möglichkeit verbessert, Tabellendaten als Insert-Skripte zu exportieren. Bisher war PLEX nur in der Lage, CSV-Daten zu exportieren. Der Grund dafür war, dass ich PLEX ursprünglich entwickelt habe, um die Einführung einer Versionskontrolle in Oracle-DB-Projekten zu beschleunigen, und die Möglichkeit CSV-Daten zu exportieren war dazu gedacht, Änderungen in Stammdatentabellen zu verfolgen.
-Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert.</description>
+      <link>http://localhost:8888/de/posts/2021-01-31-create-fast-insert-scripts/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2021-01-31-create-fast-insert-scripts/</guid>
+      <description>Vor einigen Wochen habe ich eine neue Version meines PLEX-Projekts veröffentlicht. Ich habe die Möglichkeit verbessert, Tabellendaten als Insert-Skripte zu exportieren. Bisher war PLEX nur in der Lage, CSV-Daten zu exportieren. Der Grund dafür war, dass ich PLEX ursprünglich entwickelt habe, um die Einführung einer Versionskontrolle in Oracle-DB-Projekten zu beschleunigen, und die Möglichkeit CSV-Daten zu exportieren war dazu gedacht, Änderungen in Stammdatentabellen zu verfolgen.&#xA;Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert.</description>
     </item>
-    
     <item>
       <title>DOAG Konferenz 2019</title>
-      <link>https://ogobrecht.com/de/posts/2019-11-19-doag-konferenz/</link>
-      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2019-11-19-doag-konferenz/</guid>
-      <description>Leider konnte ich meinen Vortrag im PDF-Format zuerst nicht auf die DOAG-Webseite hochladen, da dort eine Größenbeschränkung von 10 MB gilt. Letztendlich habe ich dann eine Version ohne Hintergrundbilder hochgeladen. Aber Ihr habt ja hier die Möglichkeit die Original-HTML-Version anzuschauen, die auf der Konferenz gezeigt wurde. Viel Spaß damit.
-Wer noch im Nachgang Fragen zum Thema hat, kann mich gern direkt kontaktieren (für Kontaktmöglichkeiten einfach in der Navigation schauen). Für Fragen zum vorgestellten Tool „PLEX“ nutzt bitte die Feedbackfunktion auf GitHub innerhalb der Projektseite, damit alle Nutzer etwas davon haben.</description>
+      <link>http://localhost:8888/de/posts/2019-11-19-doag-konferenz/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2019-11-19-doag-konferenz/</guid>
+      <description>Leider konnte ich meinen Vortrag im PDF-Format zuerst nicht auf die DOAG-Webseite hochladen, da dort eine Größenbeschränkung von 10 MB gilt. Letztendlich habe ich dann eine Version ohne Hintergrundbilder hochgeladen. Aber Ihr habt ja hier die Möglichkeit die Original-HTML-Version anzuschauen, die auf der Konferenz gezeigt wurde. Viel Spaß damit.&#xA;Wer noch im Nachgang Fragen zum Thema hat, kann mich gern direkt kontaktieren (für Kontaktmöglichkeiten einfach in der Navigation schauen). Für Fragen zum vorgestellten Tool „PLEX“ nutzt bitte die Feedbackfunktion auf GitHub innerhalb der Projektseite, damit alle Nutzer etwas davon haben.</description>
     </item>
-    
     <item>
       <title>Schnellstart - Versionskontrolle für existierende Oracle-Projekte</title>
-      <link>https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</link>
-      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</guid>
+      <link>http://localhost:8888/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</guid>
       <description>Viele Oracle-Projekte setzen bis heute keine Versionskontrolle ein. Die Gründe dafür sind vielfältig. Meist geht man wohl davon aus, dass die Datenbank ein sicherer Ort für den Quellcode ist. Mit einem funktionierenden Backup ist das auch richtig, man verliert aber auf jeden Fall die komplette Historie der Änderungen. Oft fehlt in laufenden Projekten auch einfach die Zeit, sich zusätzlich noch mit der Einführung einer Quellcodeversionierung zu beschäftigen, weil auf den ersten Blick kein direkter Nutzen zu sehen ist.</description>
     </item>
-    
     <item>
       <title>DOAG Regionaltreffen 11. März 2019, München</title>
-      <link>https://ogobrecht.com/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</guid>
-      <description>Ich hatte die Ehre an einer gemeinsamen Veranstaltung der DOAG Regionalgruppe München und der Oracle APEX Meetup-Gruppe München einen Vortrag halten zu dürfen zu dem im Untertitel genannten Thema.
-Danke an Alle, die an dem Abend da waren. Der Raum war voll - wohl wegen Carsten Czarski und den von ihm vorgestellten APEX 19.1 Data Loading Features. Mit so vielen Teilnehmern macht das gleich doppelt Spaß.
-Für die Teilnehmer hier die Folien:</description>
+      <link>http://localhost:8888/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</guid>
+      <description>Ich hatte die Ehre an einer gemeinsamen Veranstaltung der DOAG Regionalgruppe München und der Oracle APEX Meetup-Gruppe München einen Vortrag halten zu dürfen zu dem im Untertitel genannten Thema.&#xA;Danke an Alle, die an dem Abend da waren. Der Raum war voll - wohl wegen Carsten Czarski und den von ihm vorgestellten APEX 19.1 Data Loading Features. Mit so vielen Teilnehmern macht das gleich doppelt Spaß.&#xA;Für die Teilnehmer hier die Folien:</description>
     </item>
-    
     <item>
       <title>Reporting mal anders, Markdown sei Dank</title>
-      <link>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
- N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   Kurzdarstellung:
-Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
+      <link>http://localhost:8888/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
+      <description>Die Folien zu meinem Vortrag:&#xA;Open HTML presentation in a new window/tab&#xA;You need a modern browser with activated JavaScript. Navigation tips:&#xA;N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab Kurzdarstellung:&#xA;Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
     </item>
-    
     <item>
       <title>APEX Meetup 17.06.2016, Frankfurt</title>
-      <link>https://ogobrecht.com/de/posts/2016-06-17-apex-meetup-frankfurt/</link>
-      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2016-06-17-apex-meetup-frankfurt/</guid>
-      <description>Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum Table API Generator dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema APEX Fine Art Printing, Markdown Überall gezeigt.
-Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt.</description>
+      <link>http://localhost:8888/de/posts/2016-06-17-apex-meetup-frankfurt/</link>
+      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2016-06-17-apex-meetup-frankfurt/</guid>
+      <description>Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum Table API Generator dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema APEX Fine Art Printing, Markdown Überall gezeigt.&#xA;Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt.</description>
     </item>
-    
     <item>
       <title>APEX Fine Art Printing, Markdown Überall</title>
-      <link>https://ogobrecht.com/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</link>
-      <pubDate>Tue, 26 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
- N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
+      <link>http://localhost:8888/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</link>
+      <pubDate>Tue, 26 Apr 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</guid>
+      <description>Die Folien zu meinem Vortrag:&#xA;Open HTML presentation in a new window/tab&#xA;You need a modern browser with activated JavaScript. Navigation tips:&#xA;N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab </description>
     </item>
-    
     <item>
       <title>D3.js - Data Driven Documents</title>
-      <link>https://ogobrecht.com/de/posts/2015-06-09-d3js-data-driven-documents/</link>
-      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2015-06-09-d3js-data-driven-documents/</guid>
-      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
- N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
+      <link>http://localhost:8888/de/posts/2015-06-09-d3js-data-driven-documents/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2015-06-09-d3js-data-driven-documents/</guid>
+      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):&#xA;Open HTML presentation in a new window/tab&#xA;You need a modern browser with activated JavaScript. Navigation tips:&#xA;N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab </description>
     </item>
-    
     <item>
       <title>D3.js Grundlagen</title>
-      <link>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</link>
-      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</guid>
-      <description>Inhaltsverzeichnis  Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit   Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
+      <link>http://localhost:8888/de/posts/2015-03-01-d3js-grundlagen/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2015-03-01-d3js-grundlagen/</guid>
+      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung. Im Gegensatz zu der Papierversion der DOAG haben wir natürlich auf einer Webseite alle Möglichkeiten, D3 live zu zeigen - also los, wir starten mit einer Netzwerkvisualisierung live im Browser (JavaScript muß aktiv sein, damit die Beispiele auf dieser Seite funktionieren):</description>
     </item>
-    
   </channel>
 </rss>

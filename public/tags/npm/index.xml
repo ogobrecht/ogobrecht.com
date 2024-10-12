@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>npm on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/npm/</link>
-    <description>Recent content in npm on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    <title>Npm on Ottmar’s Notes</title>
+    <link>http://localhost:8888/tags/npm/</link>
+    <description>Recent content in Npm on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Wed, 13 Oct 2021 12:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/npm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Generate APEX plug-ins on the command line</title>
-      <link>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
-      <description>Table of Contents  Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way   Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+      <link>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
+      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
     </item>
-    
     <item>
       <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
-      <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
-      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
-      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)
-Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
+      <link>http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
+      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)&#xA;Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
     </item>
-    
   </channel>
 </rss>

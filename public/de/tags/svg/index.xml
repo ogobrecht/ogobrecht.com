@@ -2,30 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SVG on Ottmar’s Notizen</title>
-    <link>https://ogobrecht.com/de/tags/svg/</link>
+    <link>http://localhost:8888/de/tags/svg/</link>
     <description>Recent content in SVG on Ottmar’s Notizen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 09 Jun 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/svg/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Thu, 15 Aug 2019 21:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/de/tags/svg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>D3.js - Data Driven Documents</title>
-      <link>https://ogobrecht.com/de/posts/2015-06-09-d3js-data-driven-documents/</link>
-      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2015-06-09-d3js-data-driven-documents/</guid>
-      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
- N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   </description>
+      <link>http://localhost:8888/de/posts/2015-06-09-d3js-data-driven-documents/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2015-06-09-d3js-data-driven-documents/</guid>
+      <description>Die Folien zu meinem Vortrag (wurde in einer Vorversion auch auf dem DOAG Regionaltreffen München am 24.03.2015 gezeigt):&#xA;Open HTML presentation in a new window/tab&#xA;You need a modern browser with activated JavaScript. Navigation tips:&#xA;N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab </description>
     </item>
-    
     <item>
       <title>D3.js Grundlagen</title>
-      <link>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</link>
-      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</guid>
-      <description>Inhaltsverzeichnis  Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit   Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung.</description>
+      <link>http://localhost:8888/de/posts/2015-03-01-d3js-grundlagen/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/de/posts/2015-03-01-d3js-grundlagen/</guid>
+      <description>Inhaltsverzeichnis Einleitung Beispiele von der D3 Homepage D3: Was ist das? Das Fundament: SVG Der Unterschied: Selectors versus Selections Die D3 Mengenlehre: Wie man Daten an das DOM bindet Das Geheimnis der Geschwindigkeit Wiederverwendung von Chart Code Exkurs: Closures in JavaScript Die Königsklasse: Physik-Simulationen Netzwerken: Ein Plugin (nicht nur) für APEX Fazit Einleitung Dieser Artikel erschien im Magazin DOAG/SOUG News 02-2015 und steht auch im Original zur Verfügung. Im Gegensatz zu der Papierversion der DOAG haben wir natürlich auf einer Webseite alle Möglichkeiten, D3 live zu zeigen - also los, wir starten mit einer Netzwerkvisualisierung live im Browser (JavaScript muß aktiv sein, damit die Beispiele auf dieser Seite funktionieren):</description>
     </item>
-    
   </channel>
 </rss>

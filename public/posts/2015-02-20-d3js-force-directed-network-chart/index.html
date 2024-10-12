@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>D3.js Force-Directed Network Chart</title>
   <meta name="description" content="A JavaScript standalone implementation and Oracle APEX region type plugin">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
-  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
-  <link rel="canonical" href="https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/">
-  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
+  <meta name="generator" content="Hugo 0.132.1">
+  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
+  <link rel="canonical" href="http://localhost:8888/posts/2015-02-20-d3js-force-directed-network-chart/">
+  <link rel="alternate" href="http://localhost:8888/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -35,7 +35,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="D3.js Force-Directed Network Chart">
   <meta name="twitter:description" content="A JavaScript standalone implementation and Oracle APEX region type plugin">
-  <meta name="twitter:image" content="https://ogobrecht.com/assets/images/avatar.jpg">
+  <meta name="twitter:image" content="http://localhost:8888/assets/images/avatar.jpg">
   <meta name="twitter:image:alt" content="Author photo">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -61,27 +61,27 @@
 <div id="example"></div><!--the graph container-->
 <p>Everything started some months ago when I stumbled over this fascinating <a href="https://bl.ocks.org/mbostock/4062045">force-directed graph</a>. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</p>
 <p>If you use the bare JavaScript files you can run it on every HTML page:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;example&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="c">&lt;!--the graph container--&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span>  <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/ResizeObserver-1.5.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-3.5.6.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nb">window</span><span class="p">.</span><span class="nx">example</span> <span class="o">=</span> <span class="nx">netGobrechtsD3Force</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">useDomParentWidth</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">//for responsive layout
-</span><span class="c1"></span>        <span class="c1">//.zoomMode(true)
-</span><span class="c1"></span>        <span class="p">.</span><span class="nx">lassoMode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">wrapLabels</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">showBorder</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">//to enable the customization wizard
-</span><span class="c1"></span>        <span class="p">.</span><span class="nx">render</span><span class="p">();</span> <span class="c1">//sample data is provided when called without data
-</span><span class="c1"></span>        <span class="c1">//see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
-</span><span class="c1"></span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></div><p>I found myself often fiddling around with the parameters of the physical simulation - change config, reload page, not amused, change config&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;example&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="c">&lt;!--the graph container--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span>  <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/ResizeObserver-1.5.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-3.5.6.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/d3.js/d3-force-3.0.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">window</span><span class="p">.</span><span class="nx">example</span> <span class="o">=</span> <span class="nx">netGobrechtsD3Force</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">useDomParentWidth</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">//for responsive layout
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//.zoomMode(true)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">.</span><span class="nx">lassoMode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">wrapLabels</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">showBorder</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="c1">//to enable the customization wizard
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">.</span><span class="nx">render</span><span class="p">();</span> <span class="c1">//sample data is provided when called without data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//see also https://ogobrecht.github.io/d3-force-apex-plugin/tutorial-1-getting-started.html
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>I found myself often fiddling around with the parameters of the physical simulation - change config, reload page, not amused, change config&hellip;</p>
 <p>Really annoying - even I know the implementation behind. So, the question was: What can I do for an easy configuration. My answer was after a while of thinking and trying out: A customization wizard with a live preview of the changes. The link to enter the wizard is shown when the debug mode is switched on or in APEX when the developer bar is shown - try it out in the example graph above.</p>
 <p>You can find the sources and more informations on <a href="https://github.com/ogobrecht/d3-force-apex-plugin">GitHub</a> and a demo app on <a href="https://apex.oracle.com/pls/apex/f?p=18290:1">apex.oracle.com</a>.</p>
 <p>Happy networking :-)</p>

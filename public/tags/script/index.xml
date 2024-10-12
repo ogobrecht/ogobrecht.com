@@ -2,77 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Script on Ottmar’s Notes</title>
-    <link>https://ogobrecht.com/tags/script/</link>
+    <link>http://localhost:8888/tags/script/</link>
     <description>Recent content in Script on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Tue, 31 Dec 2030 14:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/script/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create Missing Foreign Keys and Indices</title>
+      <link>http://localhost:8888/posts/2030-01-01-create-missing-foreign-keys-and-indices/</link>
+      <pubDate>Tue, 01 Jan 2030 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2030-01-01-create-missing-foreign-keys-and-indices/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unify Constraint and Index Names</title>
+      <link>http://localhost:8888/posts/2030-01-01-unify-constraint-and-index-names/</link>
+      <pubDate>Tue, 01 Jan 2030 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2030-01-01-unify-constraint-and-index-names/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Generate APEX plug-ins on the command line</title>
-      <link>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
-      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
-      <description>Table of Contents  Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way   Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+      <link>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
+      <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
+      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
     </item>
-    
     <item>
       <title>Create fast insert scripts</title>
-      <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</guid>
-      <description>A few weeks ago I released a new version of my PLEX project. I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.
-It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application.</description>
+      <link>http://localhost:8888/posts/2021-01-31-create-fast-insert-scripts/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2021-01-31-create-fast-insert-scripts/</guid>
+      <description>A few weeks ago I released a new version of my PLEX project. I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.&#xA;It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application.</description>
     </item>
-    
     <item>
       <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
-      <link>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</link>
-      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</guid>
+      <link>http://localhost:8888/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</link>
+      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</guid>
       <description>I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with orapki instead of mkstore:</description>
     </item>
-    
     <item>
       <title>How to use mkstore and orapki with Oracle Instant Client</title>
-      <link>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</guid>
+      <link>http://localhost:8888/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</guid>
       <description>For some years I use only the Oracle Instant Client. I had too often trouble with the full client installation on my corporate PCs under Windows, especially in the old Windows 32/64 bit times. The instant client can be used by download and extract one basic zip file and adding an entry to your path environment variable. If you want to use SQL*Plus and other tools you need to download two additional files - no drama, also without admin rights.</description>
     </item>
-    
     <item>
       <title>Sample Data Sets for Oracle</title>
-      <link>https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/</link>
-      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-05-25-sample-data-sets-for-oracle/</guid>
-      <description>Sometimes you need only some small tables and some rows of data to play around with, to test things out. I think most of you immediately would say EMP, DEPT&amp;hellip;
-Sure, but a bit more data would be nice. Ok, OE and HR schema&amp;hellip;
-Sure, but I have no SYS rights on the database in my current project to install the schemas, can I have it in my current dev schema?</description>
+      <link>http://localhost:8888/posts/2020-05-25-sample-data-sets-for-oracle/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-05-25-sample-data-sets-for-oracle/</guid>
+      <description>Sometimes you need only some small tables and some rows of data to play around with, to test things out. I think most of you immediately would say EMP, DEPT&amp;hellip;&#xA;Sure, but a bit more data would be nice. Ok, OE and HR schema&amp;hellip;&#xA;Sure, but I have no SYS rights on the database in my current project to install the schemas, can I have it in my current dev schema?</description>
     </item>
-    
     <item>
       <title>Why I Like SQL*Plus for Deployment Scripts</title>
-      <link>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</link>
-      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
-      <description>The following simplified example deployment master script is given:
-setdefineoffverifyofffeedbackoffwheneversqlerrorexitsql.sqlcoderollbackspooldeployment.logpromptpromptExampleDeploymentMasterScriptprompt========================================promptStep1:Dummyfordemonstration-- normally we call here some other scripts like -- @other-script.sql promptStep2:Errortestinanonymousblockbeginraise_application_error(-20000,&amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39;);end;/prompt========================================promptDeploymentDone:-)promptspooloffWhen we call this in SQL*Plus (version 19.5), we get the following output (in the console and also in deployment.log) with an indication of what went wrong with our deployment:
-Example Deployment Master Script ======================================== Step 1: Dummy for demonstration Step 2: Error test in anonymous block begin * ERROR at line 1: ORA-20000: Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison ORA-06512: at line 2 Ok, this error message is stupid, but usually, I get some useful information here to fix my problem in the deployment script - especially when the problematic script is a bit longer&amp;hellip;</description>
+      <link>http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/</guid>
+      <description>The following simplified example deployment master script is given:&#xA;set define off verify off feedback off whenever sqlerror exit sql.sqlcode rollback spool deployment.log prompt prompt Example Deployment Master Script prompt ======================================== prompt Step 1: Dummy for demonstration -- normally we call here some other scripts like -- @other-script.sql prompt Step 2: Error test in anonymous block begin raise_application_error( -20000, &amp;#39;Error test for SQL*Plus &amp;lt;&amp;gt; SQLcl comparison&amp;#39; ); end; / prompt ======================================== prompt Deployment Done :-) prompt spool off When we call this in SQL*Plus (version 19.</description>
     </item>
-    
     <item>
       <title>Download BLOBs with SQL*Plus</title>
-      <link>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ogobrecht.com/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
+      <link>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2020-01-01-download-blobs-with-sqlplus/</guid>
       <description>Have you ever tried to spool/download BLOBS with SQL*Plus? Some months ago I tried to find a way to download a collection of CLOBs or even better a zipped version of the collection as BLOB. I learned that BLOBs are not a valid datatype in SQL*Plus when it comes to the spool command. I found a way by putting the CLOBs into a global temporary table, creating an intermediate SQL script with tons of select and spool commands, and finally spooling the CLOBs one by one by calling the intermediate SQL script.</description>
     </item>
-    
   </channel>
 </rss>

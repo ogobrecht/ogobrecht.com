@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New Version of Oracle Table API Generator Available</title>
   <meta name="description" content="Bulk processing, support for audit and row version columns and more">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
-  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
-  <link rel="canonical" href="https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/">
-  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
+  <meta name="generator" content="Hugo 0.132.1">
+  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
+  <link rel="canonical" href="http://localhost:8888/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/">
+  <link rel="alternate" href="http://localhost:8888/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -35,7 +35,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="New Version of Oracle Table API Generator Available">
   <meta name="twitter:description" content="Bulk processing, support for audit and row version columns and more">
-  <meta name="twitter:image" content="https://ogobrecht.com/assets/images/avatar.jpg">
+  <meta name="twitter:image" content="http://localhost:8888/assets/images/avatar.jpg">
   <meta name="twitter:image:alt" content="Author photo">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -80,64 +80,64 @@
 </ul>
 <p>This setup follows the principle of the least privilege. When you need to bulk process your data in the business logic (API schema), then you have a problem without bulk processing facilities in your table APIs. You need to implement business logic in the data schema or you grant update and/or delete rights to the API schema. The first solution is against the separation of concerns and the second one lowers your data security and maybe prevents you from not having triggers (more about this later in the audit columns section).</p>
 <p>That is why we have now also bulk processing in the core of our generated table APIs. Here is how you can use it in your business logic:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="cm">/* EXAMPLE INSERT
-</span><span class="cm">To keep the memory usage low we break our inserts into 
-</span><span class="cm">a bulk size of 1000 rows. You should adapt the bulk size
-</span><span class="cm">to your use case. */</span><span class="w"> 
-</span><span class="w"></span><span class="k">declare</span><span class="w">
-</span><span class="w">  </span><span class="n">l_rows_tab</span><span class="w">     </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">l_number_bulks</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">l_bulk_size</span><span class="w">    </span><span class="nb">integer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">l_rows_tab</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">();</span><span class="w">
-</span><span class="w">  </span><span class="n">l_rows_tab</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l_bulk_size</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="n">number_bulks</span><span class="o">&gt;&gt;</span><span class="w">
-</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_number_bulks</span><span class="w"> </span><span class="n">loop</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="o">&lt;&lt;</span><span class="n">bulk_size</span><span class="o">&gt;&gt;</span><span class="w">
-</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_bulk_size</span><span class="w"> </span><span class="n">loop</span><span class="w">
-</span><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
-</span><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_2</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">bulk_size</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">create_rows</span><span class="p">(</span><span class="n">l_rows_tab</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="k">commit</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">number_bulks</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="cm">/* EXAMPLE UPDATE */</span><span class="w"> 
-</span><span class="w"></span><span class="k">declare</span><span class="w">
-</span><span class="w">  </span><span class="n">l_rows_tab</span><span class="w">   </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">l_ref_cursor</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_strong_ref_cursor</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="c1">-- optionally set bulk limit, default is 1000
-</span><span class="c1"></span><span class="w">  </span><span class="c1">-- data_schema.your_table_api.set_bulk_limit(500);
-</span><span class="c1"></span><span class="w">  </span><span class="k">open</span><span class="w"> </span><span class="n">l_ref_cursor</span><span class="w"> </span><span class="k">for</span><span class="w"> 
-</span><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">app_users</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">your_conditions_here</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="n">outer_bulk</span><span class="o">&gt;&gt;</span><span class="w">
-</span><span class="w">  </span><span class="n">loop</span><span class="w">
-</span><span class="w">    </span><span class="n">l_rows_tab</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">read_rows</span><span class="p">(</span><span class="n">l_ref_cursor</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="o">&lt;&lt;</span><span class="n">inner_data</span><span class="o">&gt;&gt;</span><span class="w">
-</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_rows_tab</span><span class="p">.</span><span class="k">count</span><span class="w">
-</span><span class="w">    </span><span class="n">loop</span><span class="w">
-</span><span class="w">      </span><span class="c1">--do your business logic here
-</span><span class="c1"></span><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">inner_data</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">update_rows</span><span class="p">(</span><span class="n">l_rows_tab</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="k">commit</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">bulk_is_complete</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">outer_bulk</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">close</span><span class="w"> </span><span class="n">l_ref_cursor</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>The bulk deletion works the same way as the bulk update - the difference is that you do not modify your data before calling the <code>delete_rows</code> method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="cm">/* EXAMPLE INSERT
+</span></span></span><span class="line"><span class="cl"><span class="cm">To keep the memory usage low we break our inserts into 
+</span></span></span><span class="line"><span class="cl"><span class="cm">a bulk size of 1000 rows. You should adapt the bulk size
+</span></span></span><span class="line"><span class="cl"><span class="cm">to your use case. */</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">declare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_rows_tab</span><span class="w">     </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_number_bulks</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_bulk_size</span><span class="w">    </span><span class="nb">integer</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_rows_tab</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_rows_tab</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l_bulk_size</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">&lt;&lt;</span><span class="n">number_bulks</span><span class="o">&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_number_bulks</span><span class="w"> </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">&lt;&lt;</span><span class="n">bulk_size</span><span class="o">&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_bulk_size</span><span class="w"> </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_2</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">bulk_size</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">create_rows</span><span class="p">(</span><span class="n">l_rows_tab</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">commit</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">number_bulks</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="cm">/* EXAMPLE UPDATE */</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">declare</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_rows_tab</span><span class="w">   </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_rows_tab</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">l_ref_cursor</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">t_strong_ref_cursor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">-- optionally set bulk limit, default is 1000
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="c1">-- data_schema.your_table_api.set_bulk_limit(500);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="k">open</span><span class="w"> </span><span class="n">l_ref_cursor</span><span class="w"> </span><span class="k">for</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">app_users</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">your_conditions_here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">&lt;&lt;</span><span class="n">outer_bulk</span><span class="o">&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">l_rows_tab</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">read_rows</span><span class="p">(</span><span class="n">l_ref_cursor</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">&lt;&lt;</span><span class="n">inner_data</span><span class="o">&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">l_rows_tab</span><span class="p">.</span><span class="k">count</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">--do your business logic here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">l_rows_tab</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">column_1</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">your_logic_here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">inner_data</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">update_rows</span><span class="p">(</span><span class="n">l_rows_tab</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">commit</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="n">data_schema</span><span class="p">.</span><span class="n">your_table_api</span><span class="p">.</span><span class="n">bulk_is_complete</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="w"> </span><span class="n">outer_bulk</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">close</span><span class="w"> </span><span class="n">l_ref_cursor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>The bulk deletion works the same way as the bulk update - the difference is that you do not modify your data before calling the <code>delete_rows</code> method.</p>
 <p>For more examples see the docs:</p>
 <ul>
 <li><a href="https://github.com/OraMUC/table-api-generator/blob/master/docs/bulk-processing.md">Basic usage</a></li>
@@ -146,54 +146,54 @@
 <h2 id="support-for-audit-columns">Support for Audit Columns</h2>
 <p>Keeping the bulk processing in mind for performance reasons it is a bad idea to have triggers only to manage audit columns in a table. If you have your tables in an own schema and the business logic and the app cannot directly write to the tables then it is easy to prevent triggers. Therefore the table APIs need to support that and hides the audit columns for insert or update operations. This is what our generator now supports.</p>
 <p>You can map your specific audit column names to the four often used names <code>created</code>, <code>created_by</code>, <code>updated</code> and <code>updated_by</code> by providing a mapping string to the new parameter <code>p_audit_column_mappings</code> - an example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- TABLE DEFINITION --
-</span><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">app_users</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">au_id</span><span class="w">          </span><span class="nb">integer</span><span class="w">            </span><span class="k">generated</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">identity</span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_first_name</span><span class="w">  </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                         </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_last_name</span><span class="w">   </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                         </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_email</span><span class="w">       </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">30</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">               </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_active_yn</span><span class="w">   </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">   </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w">  </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="c1">-- This is only for demo purposes. In reality we expect
-</span><span class="c1"></span><span class="w">  </span><span class="c1">-- more unified names and types for audit columns.
-</span><span class="c1"></span><span class="w">  </span><span class="n">au_created_on</span><span class="w">  </span><span class="nb">date</span><span class="w">                            </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_created_by</span><span class="w">  </span><span class="nb">char</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                   </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_updated_at</span><span class="w">  </span><span class="k">timestamp</span><span class="w">                       </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">au_updated_by</span><span class="w">  </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">               </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="c1">--
-</span><span class="c1"></span><span class="w">  </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">au_id</span><span class="p">),</span><span class="w">
-</span><span class="w">  </span><span class="k">unique</span><span class="w"> </span><span class="p">(</span><span class="n">au_email</span><span class="p">),</span><span class="w">
-</span><span class="w">  </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">au_active_yn</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="p">))</span><span class="w">
-</span><span class="w"></span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="n">p_table_name</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;APP_USERS&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_audit_column_mappings</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;created=#PREFIX#_CREATED_ON, created_by=#PREFIX#_CREATED_BY, updated=#PREFIX#_UPDATED_AT, updated_by=#PREFIX#_UPDATED_BY&#39;</span><span class="w">
-</span><span class="w">  </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>The <code>#PREFIX#</code> in our example is optional (determined automatically by the generator) and replaced with the found column_prefix <code>au</code>. Doing it this way you can provide always the same audit column mapping to all of your tables. I know some people hate column prefixes - but if you design your data models this way the generator can save you the work to align the mapping for each table.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- TABLE DEFINITION --
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">app_users</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_id</span><span class="w">          </span><span class="nb">integer</span><span class="w">            </span><span class="k">generated</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">identity</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_first_name</span><span class="w">  </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_last_name</span><span class="w">   </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_email</span><span class="w">       </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">30</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">               </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_active_yn</span><span class="w">   </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">   </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w">  </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">-- This is only for demo purposes. In reality we expect
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="c1">-- more unified names and types for audit columns.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">au_created_on</span><span class="w">  </span><span class="nb">date</span><span class="w">                            </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_created_by</span><span class="w">  </span><span class="nb">char</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">                   </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_updated_at</span><span class="w">  </span><span class="k">timestamp</span><span class="w">                       </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">au_updated_by</span><span class="w">  </span><span class="n">varchar2</span><span class="p">(</span><span class="mi">15</span><span class="w"> </span><span class="nb">char</span><span class="p">)</span><span class="w">               </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">--
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">au_id</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">unique</span><span class="w"> </span><span class="p">(</span><span class="n">au_email</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">au_active_yn</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N&#39;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_table_name</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;APP_USERS&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_audit_column_mappings</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;created=#PREFIX#_CREATED_ON, created_by=#PREFIX#_CREATED_BY, updated=#PREFIX#_UPDATED_AT, updated_by=#PREFIX#_UPDATED_BY&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>The <code>#PREFIX#</code> in our example is optional (determined automatically by the generator) and replaced with the found column_prefix <code>au</code>. Doing it this way you can provide always the same audit column mapping to all of your tables. I know some people hate column prefixes - but if you design your data models this way the generator can save you the work to align the mapping for each table.</p>
 <h2 id="support-for-a-row-version-column">Support for a Row Version Column</h2>
 <p>The same reasons with triggers for the audit columns are valid for the support of a row version column. This can also be handled by our generator:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="n">p_table_name</span><span class="w">                 </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;YOUR_TABLE&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_row_version_column_mapping</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;#PREFIX#_VERSION_ID=tag_global_version_sequence.nextval&#39;</span><span class="w">
-</span><span class="w">  </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>You can also see here the before mentioned <code>#PREFIX#</code> substitution. The difference is that you define here only your column and for the column the SQL expression which should be used for the row version column - in this case, a sequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_table_name</span><span class="w">                 </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;YOUR_TABLE&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_row_version_column_mapping</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;#PREFIX#_VERSION_ID=tag_global_version_sequence.nextval&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>You can also see here the before mentioned <code>#PREFIX#</code> substitution. The difference is that you define here only your column and for the column the SQL expression which should be used for the row version column - in this case, a sequence.</p>
 <p>What we cannot do here is to add always 1 to the previous value like it is possible in a trigger - the table API has no idea what the previous value was. So, we are a little bit limited to a SQL expression but the point is, you can let the generated API manage the row version column without having a trigger.</p>
 <h2 id="tenant-support">Tenant Support</h2>
 <p>This is the third new column mapping definition. For all people who have not an enterprise version with the VPD (virtual private database) functionality you can define a tenant expression for one of your columns:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="n">p_table_name</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;YOUR_TABLE&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_tenant_column_mapping</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;#PREFIX#_TENANT_ID=to_number(sys_context(&#39;&#39;my_sec_ctx&#39;&#39;,&#39;&#39;my_tenant_id&#39;&#39;))&#39;</span><span class="w">
-</span><span class="w">  </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>For more information see the <a href="https://github.com/OraMUC/table-api-generator/blob/master/docs/parameters.md#p_tenant_column_mapping-since-v060">parameter docs for p_tenant_column_mapping</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">om_tapigen</span><span class="p">.</span><span class="n">compile_api</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_table_name</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;YOUR_TABLE&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_tenant_column_mapping</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;#PREFIX#_TENANT_ID=to_number(sys_context(&#39;&#39;my_sec_ctx&#39;&#39;,&#39;&#39;my_tenant_id&#39;&#39;))&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>For more information see the <a href="https://github.com/OraMUC/table-api-generator/blob/master/docs/parameters.md#p_tenant_column_mapping-since-v060">parameter docs for p_tenant_column_mapping</a>.</p>
 <h2 id="more">More</h2>
 <ul>
 <li>A new optional 1:1 view can be generated (new parameter <code>p_enable_one_to_one_view</code>)</li>

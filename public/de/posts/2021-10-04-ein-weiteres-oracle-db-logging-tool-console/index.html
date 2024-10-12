@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ein weiteres Oracle DB Logging-Tool: Console</title>
   <meta name="description" content="Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
-  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
-  <link rel="canonical" href="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/">
-  <link rel="alternate" href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" hreflang="en" title="English">
-  <link rel="alternate" href="https://ogobrecht.com/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
+  <meta name="generator" content="Hugo 0.132.1">
+  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
+  <link rel="canonical" href="http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/">
+  <link rel="alternate" href="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" hreflang="en" title="English">
+  <link rel="alternate" href="http://localhost:8888/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -36,7 +36,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="Ein weiteres Oracle DB Logging-Tool: Console">
   <meta name="twitter:description" content="Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit">
-  <meta name="twitter:image" content="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/pete-nuij-m-AqW5QCxNQ-unsplash.jpg">
+  <meta name="twitter:image" content="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/pete-nuij-m-AqW5QCxNQ-unsplash.jpg">
   <meta name="twitter:image:alt" content="Fliegende Eule">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -100,27 +100,27 @@
 <h2 id="produktionssicher-ohne-weitere-konfiguration">Produktionssicher ohne weitere Konfiguration</h2>
 <p>Console loggt per Default nur Fehler (Level 1). Damit ist man auf Produktivsystemen ohne weitere Einstellung auf der sicheren Seite. Möchte man aber auf einem Entwicklungssystem auch andere Level wie Warning (2), Info (3), Debug (4) oder Trace (5) aktivieren und dies nicht für jede Session einzeln tun müssen, dann kann man das global einstellen: <code>exec console.conf(p_level =&gt; 3);</code>. Mehr dazu in der Package-Beschreibung zur Prozedur <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-conf">console.conf</a>.</p>
 <p>Um eine Session (Client Identifier) in einen höheren Log-Level zu versetzen benutzt man die Prozedur <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-init">console.init</a>. Lässt man den Parameter <code>p_client_identifier</code> weg, dann wird automatisch der Client Identifier der eigenen Session genommen - hier ein Beispiel:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- Dive into your own session with the default log level of 3 (info) and the
-</span><span class="c1">-- default duration of 60 (minutes).
-</span><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c1">-- With level 4 (debug) for the next 15 minutes.
-</span><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c1">-- Using a constant for the level
-</span><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">c_level_debug</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c1">-- Debug an APEX session...
-</span><span class="c1"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="n">p_client_identifier</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;OGOBRECHT:8805903776765&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_level</span><span class="w">             </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">c_level_debug</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_duration</span><span class="w">          </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">15</span><span class="w">
-</span><span class="w">    </span><span class="c1">-- there are more parameters availabe... 
-</span><span class="c1"></span><span class="w">  </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>Nun stellt sich die Frage, wie man an den Client-Identifier einer fremdem Session kommt ohne Leserechte auf adminstrative Views wie z.B. v$session. Eine Variante wäre, das zum Beispiel in das Frontend einer Anwendung zu schreiben mit <code>sys_context('USERENV', 'CLIENT_IDENTIFIER')</code> - z.B. in den Footer oder auf eine Hilfe-Seite.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- Dive into your own session with the default log level of 3 (info) and the
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- default duration of 60 (minutes).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- With level 4 (debug) for the next 15 minutes.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- Using a constant for the level
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">exec</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">c_level_debug</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- Debug an APEX session...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_client_identifier</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;OGOBRECHT:8805903776765&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_level</span><span class="w">             </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">c_level_debug</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_duration</span><span class="w">          </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">-- there are more parameters availabe... 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>Nun stellt sich die Frage, wie man an den Client-Identifier einer fremdem Session kommt ohne Leserechte auf adminstrative Views wie z.B. v$session. Eine Variante wäre, das zum Beispiel in das Frontend einer Anwendung zu schreiben mit <code>sys_context('USERENV', 'CLIENT_IDENTIFIER')</code> - z.B. in den Footer oder auf eine Hilfe-Seite.</p>
 <p>Möchte man zurückkehren in den normalen Modus der globalen Einstellungen aller Sessions, dann kann man das mit <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-exit">console.exit</a> tun.</p>
 <p>Man sollte die Prozeduren <code>console.conf</code>, <code>init</code> und <code>exit</code> nicht in seiner Business-Logik verwenden - sie dienen ausschließlich zum managen von Session-Einstellungen und für Debugging-Zwecke und sollten daher nur interaktiv oder in SQL-Skripten verwendet werden.</p>
 <h2 id="methodennamen-angelehnt-an-javascript-console">Methodennamen angelehnt an JavaScript Console</h2>
@@ -155,216 +155,216 @@
 <h2 id="reduzierte-menge-logeinträge-durch-gespeicherten-call-stack">Reduzierte Menge Logeinträge durch gespeicherten Call Stack</h2>
 <p>Console nutzt die Möglichkeiten des Packages <code>sys.utl_call_stack</code> um die Anzahl der Logeinträge auf ein mögliches Minimum zu reduzieren. Wer kennt es nicht, das Problem: Im Fehlerfall wird in jeder Unterfunktion ein Logeintrag erstellt, um möglichst viele Details festzuhalten. Am Ende muss man dann zusehen, wie so die Logtabelle zugemüllt wird und man versucht aus den vielen Log-Einträgen herauszufinden, wo denn nun genau der Fehler aufgetreten ist.</p>
 <p>Es wäre hilfreich, im Error Backtrace auch die Methodennamen zu sehen - die Datenbank schreibt aber nur die Packagenamen und die Zeilennummer in den Backtrace. Um dieses Problem zu umgehen bietet Console die Möglichkeit anstatt in den Untermethoden einen Fehler in die Log-Tabelle zu schreiben, den Call-Stack mit dem Aufruf <code>console.error_save_stack</code> so lange zwischenzuspeichern, bis final in der äußersten Hauptmethode <code>console.error</code> aufgerufen wird, was dann den Fehler inklusive gespeichertem Call Stack in die Log-Tabelle einträgt. Zur Verdeutlichung hier ein Skript mit einem Testpackage:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w">
-</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w">
-</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
-</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">linesize</span><span class="w"> </span><span class="mi">120</span><span class="w">
-</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">pagesize</span><span class="w"> </span><span class="mi">40</span><span class="w">
-</span><span class="w"></span><span class="k">column</span><span class="w"> </span><span class="n">call_stack</span><span class="w"> </span><span class="n">heading</span><span class="w"> </span><span class="s2">&#34;Call Stack&#34;</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">a120</span><span class="w">
-</span><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">TEST</span><span class="w"> </span><span class="n">ERROR_SAVE_STACK</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">spec</span><span class="w">
-</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">some_api</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w">  </span><span class="k">procedure</span><span class="w"> </span><span class="n">do_stuff</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">body</span><span class="w">
-</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="n">some_api</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w"></span><span class="c1">------------------------------------------------------------------------------
-</span><span class="c1"></span><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="n">do_stuff</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w">    </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub1</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w">        </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">            </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub2</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w">            </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">                </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub3</span><span class="w"> </span><span class="k">is</span><span class="w">
-</span><span class="w">                </span><span class="k">begin</span><span class="w">
-</span><span class="w">                  </span><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">                </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub3
-</span><span class="c1"></span><span class="w">                  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">                    </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
-</span><span class="w">                    </span><span class="n">raise</span><span class="p">;</span><span class="w">
-</span><span class="w">                </span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w">            </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">            </span><span class="k">begin</span><span class="w">
-</span><span class="w">              </span><span class="n">sub3</span><span class="p">;</span><span class="w">
-</span><span class="w">            </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub2
-</span><span class="c1"></span><span class="w">              </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">                </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
-</span><span class="w">                </span><span class="n">raise</span><span class="p">;</span><span class="w">
-</span><span class="w">            </span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">        </span><span class="k">begin</span><span class="w">
-</span><span class="w">          </span><span class="n">sub2</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub1
-</span><span class="c1"></span><span class="w">          </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">            </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
-</span><span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">no_data_found</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="c1">--------------------------------------
-</span><span class="c1"></span><span class="w">    </span><span class="k">begin</span><span class="w">
-</span><span class="w">      </span><span class="n">sub1</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="k">exception</span><span class="w"> </span><span class="c1">--do_stuff
-</span><span class="c1"></span><span class="w">      </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="n">error</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="n">raise</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="c1">------------------------------------------------------------------------------
-</span><span class="c1"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">package</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">some_api</span><span class="p">.</span><span class="n">do_stuff</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">exception</span><span class="w">
-</span><span class="w">  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">    </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="c1">--&gt; I know, I know, never do that without a final raise...
-</span><span class="c1"></span><span class="w">          </span><span class="c1">--&gt; But we want only test our logging without killing the script run...
-</span><span class="c1"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">FINISHED</span><span class="p">,</span><span class="w"> </span><span class="n">selecting</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">entry</span><span class="p">...</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">call_stack</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">console_logs</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">log_id</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="k">fetch</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">only</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>Hier die Ausgabe des obigen Skriptes - der Abschnitt &ldquo;Saved Error Stack&rdquo; ist die Besonderheit von Console, die drei anderen Stack- und Trace-Abschnitte sind die Standards der Datenbank:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">TEST ERROR_SAVE_STACK
-- compile package spec
-- compile package body
-- call the package
-- FINISHED, selecting now the call stack from the last log entry...
-
-Call Stack
-------------------------------------------------------------------------------------------------------------------------
-<span class="c1">#### Saved Error Stack</span>
-
-- PLAYGROUND.SOME_API.DO_STUFF.SUB1.SUB2.SUB3, line <span class="m">14</span> <span class="o">(</span>line 11, ORA-20777 Assertion failed: Demo<span class="o">)</span>
-- PLAYGROUND.SOME_API.DO_STUFF.SUB1.SUB2, line <span class="m">22</span> <span class="o">(</span>line 19<span class="o">)</span>
-- PLAYGROUND.SOME_API.DO_STUFF.SUB1, line <span class="m">30</span> <span class="o">(</span>line 27<span class="o">)</span>
-- PLAYGROUND.SOME_API.DO_STUFF, line <span class="m">38</span> <span class="o">(</span>line 35, ORA-01403 no data found<span class="o">)</span>
-
-<span class="c1">#### Call Stack</span>
-
-- PLAYGROUND.SOME_API.DO_STUFF, line <span class="m">38</span>
-- __anonymous_block, line <span class="m">2</span>
-
-<span class="c1">#### Error Stack</span>
-
-- ORA-01403 no data found
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">31</span>
-- ORA-20777 Assertion failed: Test assertion with line break.
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">23</span>
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">15</span>
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.CONSOLE&#34;</span>, line <span class="m">750</span>
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">11</span>
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">19</span>
-- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">27</span>
-
-<span class="c1">#### Error Backtrace</span>
-
-- PLAYGROUND.SOME_API, line <span class="m">31</span>
-- PLAYGROUND.SOME_API, line <span class="m">23</span>
-- PLAYGROUND.SOME_API, line <span class="m">15</span>
-- PLAYGROUND.CONSOLE, line <span class="m">750</span>
-- PLAYGROUND.SOME_API, line <span class="m">11</span>
-- PLAYGROUND.SOME_API, line <span class="m">19</span>
-- PLAYGROUND.SOME_API, line <span class="m">27</span>
-- PLAYGROUND.SOME_API, line <span class="m">35</span>
-</code></pre></div><p>Nutzt man nicht <code>console.error_save_stack</code> sondern immer nur <code>console.error</code>, dann erhält man im Log wenigstens immer die drei letzten Abschnitte - und das ohne extra Arbeit im Code. Man muss sich dafür nur <code>console.error</code> merken.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">linesize</span><span class="w"> </span><span class="mi">120</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">pagesize</span><span class="w"> </span><span class="mi">40</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">column</span><span class="w"> </span><span class="n">call_stack</span><span class="w"> </span><span class="n">heading</span><span class="w"> </span><span class="s2">&#34;Call Stack&#34;</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">a120</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">TEST</span><span class="w"> </span><span class="n">ERROR_SAVE_STACK</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">spec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">some_api</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">procedure</span><span class="w"> </span><span class="n">do_stuff</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">body</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="n">some_api</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="n">do_stuff</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub1</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub2</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                </span><span class="k">procedure</span><span class="w"> </span><span class="n">sub3</span><span class="w"> </span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">raise</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">sub3</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">              </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">raise</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sub2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">exception</span><span class="w"> </span><span class="c1">--sub1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">console</span><span class="p">.</span><span class="n">error_save_stack</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">no_data_found</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">sub1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">exception</span><span class="w"> </span><span class="c1">--do_stuff
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="n">error</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">raise</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">package</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">some_api</span><span class="p">.</span><span class="n">do_stuff</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">exception</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="c1">--&gt; I know, I know, never do that without a final raise...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="c1">--&gt; But we want only test our logging without killing the script run...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">FINISHED</span><span class="p">,</span><span class="w"> </span><span class="n">selecting</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">entry</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">call_stack</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">console_logs</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">log_id</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="k">fetch</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">only</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Hier die Ausgabe des obigen Skriptes - der Abschnitt &ldquo;Saved Error Stack&rdquo; ist die Besonderheit von Console, die drei anderen Stack- und Trace-Abschnitte sind die Standards der Datenbank:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">TEST ERROR_SAVE_STACK
+</span></span><span class="line"><span class="cl">- compile package spec
+</span></span><span class="line"><span class="cl">- compile package body
+</span></span><span class="line"><span class="cl">- call the package
+</span></span><span class="line"><span class="cl">- FINISHED, selecting now the call stack from the last log entry...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Call Stack
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"><span class="c1">#### Saved Error Stack</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API.DO_STUFF.SUB1.SUB2.SUB3, line <span class="m">14</span> <span class="o">(</span>line 11, ORA-20777 Assertion failed: Demo<span class="o">)</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API.DO_STUFF.SUB1.SUB2, line <span class="m">22</span> <span class="o">(</span>line 19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API.DO_STUFF.SUB1, line <span class="m">30</span> <span class="o">(</span>line 27<span class="o">)</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API.DO_STUFF, line <span class="m">38</span> <span class="o">(</span>line 35, ORA-01403 no data found<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#### Call Stack</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API.DO_STUFF, line <span class="m">38</span>
+</span></span><span class="line"><span class="cl">- __anonymous_block, line <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#### Error Stack</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- ORA-01403 no data found
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">31</span>
+</span></span><span class="line"><span class="cl">- ORA-20777 Assertion failed: Test assertion with line break.
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">23</span>
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">15</span>
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.CONSOLE&#34;</span>, line <span class="m">750</span>
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">11</span>
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">19</span>
+</span></span><span class="line"><span class="cl">- ORA-06512 at <span class="s2">&#34;PLAYGROUND.SOME_API&#34;</span>, line <span class="m">27</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#### Error Backtrace</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">31</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">23</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">15</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.CONSOLE, line <span class="m">750</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">11</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">19</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">27</span>
+</span></span><span class="line"><span class="cl">- PLAYGROUND.SOME_API, line <span class="m">35</span>
+</span></span></code></pre></div><p>Nutzt man nicht <code>console.error_save_stack</code> sondern immer nur <code>console.error</code>, dann erhält man im Log wenigstens immer die drei letzten Abschnitte - und das ohne extra Arbeit im Code. Man muss sich dafür nur <code>console.error</code> merken.</p>
 <h2 id="einfaches-loggen-von-methodenparametern">Einfaches loggen von Methodenparametern</h2>
 <p>Console bietet auch eine einfache Möglichkeit Methodenparameter zu loggen. Hier eine Beispiel-Prozedur mit Parametern aller unterstützten Typen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">--create demo procedure
-</span><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">demo_proc</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">p_01</span><span class="w"> </span><span class="n">varchar2</span><span class="w">                       </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_02</span><span class="w"> </span><span class="nb">number</span><span class="w">                         </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_03</span><span class="w"> </span><span class="nb">date</span><span class="w">                           </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_04</span><span class="w"> </span><span class="k">timestamp</span><span class="w">                      </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_05</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="k">zone</span><span class="w">       </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_06</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">local</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_07</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">month</span><span class="w">         </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_08</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">second</span><span class="w">         </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_09</span><span class="w"> </span><span class="nb">boolean</span><span class="w">                        </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_10</span><span class="w"> </span><span class="k">clob</span><span class="w">                           </span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">p_11</span><span class="w"> </span><span class="n">xmltype</span><span class="w">                        </span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="k">is</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20999</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Test Error.&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">exception</span><span class="w">
-</span><span class="w">  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_01&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_01</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_02&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_02</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_03&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_03</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_04&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_04</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_05&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_05</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_06&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_06</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_07&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_07</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_08&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_08</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_09&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_09</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_10&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_10</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_11&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_11</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Ooops, something went wrong&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="n">raise</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="w"> </span><span class="n">demo_proc</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>In der Ausnahmebehandlung kann man schön erkennen, dass man immer die gleiche Prozedur <code>console.add_param</code> aufruft und den Namen und den Wert übergibt. Die Parameter werden in einem Array im Console-Package zwischengespeichert (gekürzt auf maximal 2000 Zeichen) und beim nächsten Aufruf einer Log-Methode (error, warn, info, log, debug oder trace) übernommen. Möchte man nicht, dass die Parameter gekürzt werden, so steht es einem frei den Parameter direkt in die Log-Nachricht zu schreiben - diese ist vom Typ Clob und unterliegt somit keiner Größenbeschränkung.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">--create demo procedure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">demo_proc</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_01</span><span class="w"> </span><span class="n">varchar2</span><span class="w">                       </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_02</span><span class="w"> </span><span class="nb">number</span><span class="w">                         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_03</span><span class="w"> </span><span class="nb">date</span><span class="w">                           </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_04</span><span class="w"> </span><span class="k">timestamp</span><span class="w">                      </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_05</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="k">zone</span><span class="w">       </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_06</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="k">local</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_07</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">month</span><span class="w">         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_08</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">second</span><span class="w">         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_09</span><span class="w"> </span><span class="nb">boolean</span><span class="w">                        </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_10</span><span class="w"> </span><span class="k">clob</span><span class="w">                           </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_11</span><span class="w"> </span><span class="n">xmltype</span><span class="w">                        </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20999</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Test Error.&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">exception</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">when</span><span class="w"> </span><span class="n">others</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_01&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_01</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_02&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_02</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_03&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_03</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_04&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_04</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_05&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_05</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_06&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_06</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_07&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_07</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_08&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_08</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_09&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_09</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_10&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">add_param</span><span class="p">(</span><span class="s1">&#39;p_11&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">p_11</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Ooops, something went wrong&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">raise</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="w"> </span><span class="n">demo_proc</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>In der Ausnahmebehandlung kann man schön erkennen, dass man immer die gleiche Prozedur <code>console.add_param</code> aufruft und den Namen und den Wert übergibt. Die Parameter werden in einem Array im Console-Package zwischengespeichert (gekürzt auf maximal 2000 Zeichen) und beim nächsten Aufruf einer Log-Methode (error, warn, info, log, debug oder trace) übernommen. Möchte man nicht, dass die Parameter gekürzt werden, so steht es einem frei den Parameter direkt in die Log-Nachricht zu schreiben - diese ist vom Typ Clob und unterliegt somit keiner Größenbeschränkung.</p>
 <p>Hier ein Beispiel-Aufruf der obigen Prozedur:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">demo_proc</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="n">p_01</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;test vc2&#39;</span><span class="w">                             </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_02</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">23</span><span class="w">                                   </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_03</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sysdate</span><span class="w">                                </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_04</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">systimestamp</span><span class="w">                           </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_05</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">systimestamp</span><span class="w">                           </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_06</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">localtimestamp</span><span class="w">                         </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_07</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;4-2&#39;</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">month</span><span class="w">           </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_08</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;7 6:12:42.123&#39;</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">second</span><span class="w"> </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_09</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="w">                                   </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_10</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">to_clob</span><span class="p">(</span><span class="s1">&#39;test clob&#39;</span><span class="p">)</span><span class="w">                   </span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">p_11</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">xmltype</span><span class="p">(</span><span class="s1">&#39;&lt;test_xml/&gt;&#39;</span><span class="p">)</span><span class="w">                 </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>Dieser Aufruf schreibt dann folgende Log-Nachricht - siehe Spalte MESSAGE:</p>
-<p><img src="console_logs-single-record.png" alt="example log entry"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">demo_proc</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_01</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;test vc2&#39;</span><span class="w">                             </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_02</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">23</span><span class="w">                                   </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_03</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sysdate</span><span class="w">                                </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_04</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">systimestamp</span><span class="w">                           </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_05</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">systimestamp</span><span class="w">                           </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_06</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">localtimestamp</span><span class="w">                         </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_07</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;4-2&#39;</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">month</span><span class="w">           </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_08</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;7 6:12:42.123&#39;</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">second</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_09</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="w">                                   </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_10</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">to_clob</span><span class="p">(</span><span class="s1">&#39;test clob&#39;</span><span class="p">)</span><span class="w">                   </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">p_11</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">xmltype</span><span class="p">(</span><span class="s1">&#39;&lt;test_xml/&gt;&#39;</span><span class="p">)</span><span class="w">                 </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>Dieser Aufruf schreibt dann folgende Log-Nachricht - siehe Spalte MESSAGE:</p>
+<p><img alt="example log entry" src="/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/console_logs-single-record.png"></p>
 <h2 id="markdown-format-für-automatisch-ermittelte-metadaten">Markdown-Format für automatisch ermittelte Metadaten</h2>
 <p>Dem aufmerksamen Leser dürfte nicht entgangen sein, dass die obige Log-Nachricht in Markdown formatiert ist. Wer möchte, kann also seinen Report entsprechend in HTML rendern lassen (z.B. in APEX) - gut lesbar ist es aber auch in Textform. Die Markdown-Tabellenform wie im obigen Beispiel nutzt Console auch für das Loggen weiterer Metadaten wie z.B. APEX-Umgebung, CGI-Umgebung, User-Umgebung und Console-Umgebung. All diese Umgebungen können für jeden einzelnen Log-Aufruf eingeschaltet werden. Sie werden dann an die Log-Nachricht angehängt wie die Parameter. Hier beispielhaft die Signatur der Error-Prozedur:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">procedure</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">p_message</span><span class="w">         </span><span class="k">in</span><span class="w"> </span><span class="k">clob</span><span class="w">     </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- The log message itself
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_permanent</span><span class="w">       </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Should the log entry be permanent (not deleted by purge methods)
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_call_stack</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">true</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include call stack
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_apex_env</span><span class="w">        </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include APEX environment
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_cgi_env</span><span class="w">         </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include CGI environment
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_console_env</span><span class="w">     </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include Console environment
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_user_env</span><span class="w">        </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include user environment
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_user_agent</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- User agent of browser or other client technology
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_user_scope</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Override PL/SQL scope
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_user_error_code</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">integer</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Override PL/SQL error code
-</span><span class="c1"></span><span class="w">  </span><span class="n">p_user_call_stack</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">    </span><span class="c1">-- Override PL/SQL call stack
-</span><span class="c1"></span><span class="p">);</span><span class="w">
-</span></code></pre></div><h2 id="erweiterbare-logs-durch-überladene-log-methoden">Erweiterbare Logs durch überladene Log-Methoden</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">procedure</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">p_message</span><span class="w">         </span><span class="k">in</span><span class="w"> </span><span class="k">clob</span><span class="w">     </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- The log message itself
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_permanent</span><span class="w">       </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Should the log entry be permanent (not deleted by purge methods)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_call_stack</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">true</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include call stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_apex_env</span><span class="w">        </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include APEX environment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_cgi_env</span><span class="w">         </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include CGI environment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_console_env</span><span class="w">     </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include Console environment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_user_env</span><span class="w">        </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Include user environment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_user_agent</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- User agent of browser or other client technology
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_user_scope</span><span class="w">      </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Override PL/SQL scope
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_user_error_code</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">integer</span><span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="c1">-- Override PL/SQL error code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">p_user_call_stack</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">varchar2</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">null</span><span class="w">    </span><span class="c1">-- Override PL/SQL call stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="erweiterbare-logs-durch-überladene-log-methoden">Erweiterbare Logs durch überladene Log-Methoden</h2>
 <p>Die Error-Prozedur hat eine Überladung in Form einer Funktion, die die Log-ID zurückliefert. Somit kann man das Logging auch mit eigenen Daten in eigenen Tabellen erweitern z.B. für einen nachgelagerten Freigabeprozess im Falle von spezifischen Fehlern. Dafür ist dann auch der Parameter <code>p_permanent</code> gedacht, der dafür sorgt, das der Aufräumjob oder die Prozeduren <code>console.purge</code> und <code>console.purge_all</code> die entsprechend markierten Log-Einträge nicht löscht und diese permanent zur Verfügung stehen. Alle anderen Log-Methoden (warn, info, log, debug, trace) sind in gleicher Weise und mit den gleichen Parametern implementiert - haben aber teilweise andere Standardwerte. Bei der Error-Methode wird der Call-Stack geschrieben, bei der Trace-Methode alle vier Umgebungsdetails.</p>
 <p>Die Parameter <code>p_user_agent</code>, <code>p_user_scope</code>, <code>p_user_error_code</code> und <code>p_user_call_stack</code> sind dafür gedacht, auch externe Log-Ereignisse erfassen und die automatisch ermittelten Werte der PL/SQL-Umgebung überschreiben zu können. Als Beispiel sei ein externer Ladeprozess in einem Data-Warhouse genannt oder Fehlermeldungen aus dem JavaScript-Frontend einer Anwendung. Mit ein wenig Phantasie werden hier jedem eigene Anwendungsfälle in den Sinn kommen&hellip;</p>
 <h2 id="zeit-messen-und-dinge-zählen">Zeit messen und Dinge zählen</h2>
 <p>Ausführungszeiten messen und Dinge zählen sind sehr häufig gebrauchte Funktionen. Console kann hier helfen, nicht zu viele Hilfsvariablen erstellen zu müssen und den Code kurz und knapp zu halten. Dazu bietet es die Prozeduren <code>time</code>, <code>count</code> und weitere Helfer an. Man kann bequem mehrere Timer oder Counter parallel betreiben - sie werden jeweils über ein optionales Label identifiziert. Lässt man das Label weg, dann wird intern das Label <code>default</code>. Am besten verdeutlicht das wohl ein wenig Beispielcode:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="c1">--basic usage
-</span><span class="c1"></span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">;</span><span class="w"> </span><span class="c1">-- without optional label and message
-</span><span class="c1"></span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">-- without optional message
-</span><span class="c1"></span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end of step two&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end of step three&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>Dies führt zu folgenden Lognachrichten in der Tabelle console_logs, wenn der aktuelle Log-Level 3 (info) oder höher ist:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">--basic usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">;</span><span class="w"> </span><span class="c1">-- without optional label and message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">-- without optional message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end of step two&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">(</span><span class="s1">&#39;myTimer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end of step three&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>Dies führt zu folgenden Lognachrichten in der Tabelle console_logs, wenn der aktuelle Log-Level 3 (info) oder höher ist:</p>
 <ul>
 <li>default: 00:00:00.102508</li>
 <li>myTimer: 00:00:00.108048</li>
@@ -372,111 +372,111 @@ Call Stack
 <li>myTimer: 00:00:00.316084 - end of step three</li>
 </ul>
 <p>Manchmal möchte man aber keine vorgefertigten Logeinträge haben oder benötigt die verstrichene Zeit, um sie in Scripten in den Serveroutput zu schreiben. Hierfür gibt die im Code verwendeten Prozeduren <code>time_current</code> und <code>time_end</code> auch in Form von überladenen Funktionen. Mit denen kann man dann machen, was man möchte:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1">--console.print is an alias for sys.dbms_output.put_line
-</span><span class="c1"></span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step one...&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step two...&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step three...&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>Das führt dann in etwa zu so einem Serveroutput:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Processing step one...
-Elapsed: 00:00:00.105398
-Processing step two...
-Elapsed: 00:00:00.209267
-Processing step three...
-Elapsed: 00:00:00.313301
-</code></pre></div><p>Zum Zählen von Dingen oder Vorgängen gibt es die gleichen Prozeduren und Funktionen wie für die Zeitmessungen - nur eben mit dem prefix <code>count</code> anstelle von <code>time</code> (wir verwenden im Beispiel die Variante ohne Label):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Counting nonsense...&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">loop</span><span class="w">
-</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">mod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">      </span><span class="n">console</span><span class="p">.</span><span class="k">count</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Current value: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">count_current</span><span class="w"> </span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">count_reset</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">loop</span><span class="w">
-</span><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="k">count</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Final value: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">count_end</span><span class="w"> </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div><p>Das ergibt dann einen Serveroutput wie folgt:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Counting nonsense...
-Current value: <span class="m">333</span>
-Final value: <span class="m">10</span>
-</code></pre></div><p>Die im Beispiel verwendete Prozedur <code>count_reset</code> gibt es auch für Timer und heißt dort <code>time_reset</code>. Die jeweiligen <code>*_end</code>-Methoden löschen den Eintrag aus der im Console-Package verwalteten Liste von Timern/Countern.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">time</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">--console.print is an alias for sys.dbms_output.put_line
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step one...&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step two...&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_current</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Processing step three...&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sys</span><span class="p">.</span><span class="n">dbms_session</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Elapsed: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">time_end</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>Das führt dann in etwa zu so einem Serveroutput:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Processing step one...
+</span></span><span class="line"><span class="cl">Elapsed: 00:00:00.105398
+</span></span><span class="line"><span class="cl">Processing step two...
+</span></span><span class="line"><span class="cl">Elapsed: 00:00:00.209267
+</span></span><span class="line"><span class="cl">Processing step three...
+</span></span><span class="line"><span class="cl">Elapsed: 00:00:00.313301
+</span></span></code></pre></div><p>Zum Zählen von Dingen oder Vorgängen gibt es die gleichen Prozeduren und Funktionen wie für die Zeitmessungen - nur eben mit dem prefix <code>count</code> anstelle von <code>time</code> (wir verwenden im Beispiel die Variante ohne Label):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">set</span><span class="w"> </span><span class="n">serveroutput</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Counting nonsense...&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">mod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">console</span><span class="p">.</span><span class="k">count</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Current value: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">count_current</span><span class="w"> </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">count_reset</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="k">count</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="n">loop</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Final value: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="n">count_end</span><span class="w"> </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div><p>Das ergibt dann einen Serveroutput wie folgt:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Counting nonsense...
+</span></span><span class="line"><span class="cl">Current value: <span class="m">333</span>
+</span></span><span class="line"><span class="cl">Final value: <span class="m">10</span>
+</span></span></code></pre></div><p>Die im Beispiel verwendete Prozedur <code>count_reset</code> gibt es auch für Timer und heißt dort <code>time_reset</code>. Die jeweiligen <code>*_end</code>-Methoden löschen den Eintrag aus der im Console-Package verwalteten Liste von Timern/Countern.</p>
 <h2 id="assert-format-und-andere-helferlein">Assert, format und andere Helferlein</h2>
 <p>Es gibt noch weitere Hilfsmethoden, die das Entwicklerleben angenehmer machen. Zuerst sei die Assert-Prozedur genannt. Dieses immer wiederkehrende Muster sollte jeder kennen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="k">then</span><span class="w">
-</span><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20999</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x should be less then y&#39;</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">else</span><span class="w">
-</span><span class="w">  </span><span class="c1">-- your code here
-</span><span class="c1"></span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>Besonders hässlich wird es, wenn man mehrere Bedingungen prüfen muss. Das ganze kann man auch als Einzeiler formulieren:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x should be less then x&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>Möchte man Texte mit dynamischen Informationen anreichern, dann ist man schnell in der Verknüpfungshölle:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
-</span><span class="w">  </span><span class="s1">&#39;x should be less then y (x=&#39;</span><span class="w">
-</span><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;, y=&#39;</span><span class="w">
-</span><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
-</span><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;)&#39;</span><span class="w">
-</span><span class="w"></span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>Hier kann einem dann die <code>format</code> Funktion helfen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
-</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="s1">&#39;X should be less then Y (x=%s, y=%s)&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w">
-</span><span class="w">    </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
-</span><span class="w">  </span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="p">);</span><span class="w">
-</span></code></pre></div><p><code>format</code> akzeptiert bis zu 10 Parameter und arbeitet nach folgenden Regeln:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20999</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x should be less then y&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">else</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">-- your code here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Besonders hässlich wird es, wenn man mehrere Bedingungen prüfen muss. Das ganze kann man auch als Einzeiler formulieren:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x should be less then x&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Möchte man Texte mit dynamischen Informationen anreichern, dann ist man schnell in der Verknüpfungshölle:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s1">&#39;x should be less then y (x=&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;, y=&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Hier kann einem dann die <code>format</code> Funktion helfen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">console</span><span class="p">.</span><span class="n">assert</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s1">&#39;X should be less then Y (x=%s, y=%s)&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p><code>format</code> akzeptiert bis zu 10 Parameter und arbeitet nach folgenden Regeln:</p>
 <ol>
 <li>Ersetze alle Vorkommen von <code>%0</code> .. <code>%9</code> mit den entsprechenden Parameter <code>p0</code> &hellip; <code>p9</code></li>
 <li>Ersetze <code>%n</code> durch neue Zeilen (Zeilenvorschubzeichen)</li>
 <li>Ersetze alle Vorkommen von <code>%s</code> in positioneller Reihenfolge durch die entsprechenden Parameter mit sys.utl_lms.format_message - siehe auch die <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_LMS.html#GUID-88FFBFB6-FCA4-4951-884B-B0275BD5DF44">Oracle docs</a></li>
 </ol>
 <p>Ich persönlich tippe sehr ungern <code>dbms_output.put_line</code>. Console schreibt zwar mit allen Log-Methoden in eine Log-Tabelle, aber eigentlich legt das Wort Console ja nahe, dass wir auch direkt in den Serveroutput schreiben können, oder? Dafür gibt es dann die Prozedur <code>print</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;A message&#39;</span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>Dann gibt es noch die Kurzformen von <code>console.print(console.format(...))</code> und <code>console.assert([boolean expression], console.format(...))</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">console</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="s1">&#39;A dynamic message with a %n second line of text: %s&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">my_var</span><span class="w">
-</span><span class="w"></span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">console</span><span class="p">.</span><span class="n">assertf</span><span class="p">(</span><span class="w">
-</span><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
-</span><span class="w">  </span><span class="s1">&#39;x should be less then y (x=%s, y=%s)&#39;</span><span class="p">,</span><span class="w">
-</span><span class="w">  </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w">
-</span><span class="w">  </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="p">);</span><span class="w">
-</span></code></pre></div><p>Auch häufig gebraucht wird eine schnelle, gecachte Clob-Verknüpfung - da kann dann Console mit <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_append">clob_append</a> &amp; <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_flush_cache">clob_flush_cache</a> helfen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">console</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;A message&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Dann gibt es noch die Kurzformen von <code>console.print(console.format(...))</code> und <code>console.assert([boolean expression], console.format(...))</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">console</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s1">&#39;A dynamic message with a %n second line of text: %s&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">my_var</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">console</span><span class="p">.</span><span class="n">assertf</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s1">&#39;x should be less then y (x=%s, y=%s)&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">to_char</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">to_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Auch häufig gebraucht wird eine schnelle, gecachte Clob-Verknüpfung - da kann dann Console mit <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_append">clob_append</a> &amp; <a href="https://github.com/ogobrecht/console/blob/main/docs/package-console.md#procedure-clob_flush_cache">clob_flush_cache</a> helfen.</p>
 <p>Mehr gibt es in der <a href="https://github.com/ogobrecht/console/blob/main/docs/api-overview.md">API-Übersicht</a>.</p>
 <h2 id="anzeigen-des-package-status-von-console-in-einer-session">Anzeigen des Package-Status von Console in einer Session</h2>
 <p>Wer sich dafür interessiert, was in der aktuellen Session von Console konfiguriert ist, kann sich das mit einer Pipelined Table Function anschauen oder in seiner Anwendung mit einem Report zur Verfügung stellen:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">status</span><span class="p">);</span><span class="w">
-</span></code></pre></div><table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">status</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><table>
 <thead>
 <tr>
 <th>ATTRIBUTE</th>
@@ -565,7 +565,7 @@ Final value: <span class="m">10</span>
 <h2 id="apex-error-handling-function">APEX Error Handling Function</h2>
 <p>Für APEX bringt Console eine sogenannte &ldquo;<a href="https://docs.oracle.com/en/database/oracle/application-express/20.2/aeapi/Example-of-an-Error-Handling-Function.html#GUID-2CD75881-1A59-4787-B04B-9AAEC14E1A82">Error Handling Function</a>&rdquo; mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im &ldquo;Application Builder&rdquo; unter &ldquo;Edit Application Properties &gt; Error Handling &gt; Error Handling Function&rdquo; eintragen: <code>console.apex_error_handling</code>.</p>
 <figure>
-<img src="apex-error-handling-function.png" alt="APEX Error Handling mit eingeschalteter ASCII Art">
+<img alt="APEX Error Handling mit eingeschalteter ASCII Art" src="apex-error-handling-function.png">
 <figcaption>APEX Error Handling mit eingeschalteter ASCII Art</figcaption>
 </figure>
 <p>Die Error Handling Function protokolliert den technischen Fehler in der Tabelle CONSOLE_LOGS und schreibt eine freundliche Nachricht an den Endbenutzer. Sie nutzt das APEX Text Message Feature für die benutzerfreundlichen Meldungen im Falle von Constraint-Verletzungen, wie beschrieben in <a href="https://www.insum.ca/episode-22-error-handling/">diesem Video</a> von Anton und Neelesh von Insum, welches wiederum auf einer Idee von Roel Hartman in <a href="https://roelhartman.blogspot.com/2021/02/stop-using-validations-for-checking.html">diesem Blog Beitrag</a> basiert. Die APEX-Community rockt&hellip;</p>

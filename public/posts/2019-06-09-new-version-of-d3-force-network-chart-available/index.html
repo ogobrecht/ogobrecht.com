@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New Version of D3 Force Network Chart Available</title>
   <meta name="description" content="Links can now have a label">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
-  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
-  <link rel="canonical" href="https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/">
-  <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
+  <meta name="generator" content="Hugo 0.132.1">
+  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
+  <link rel="canonical" href="http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/">
+  <link rel="alternate" href="http://localhost:8888/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -35,7 +35,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="New Version of D3 Force Network Chart Available">
   <meta name="twitter:description" content="Links can now have a label">
-  <meta name="twitter:image" content="https://ogobrecht.com/assets/images/avatar.jpg">
+  <meta name="twitter:image" content="http://localhost:8888/assets/images/avatar.jpg">
   <meta name="twitter:image:alt" content="Author photo">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -57,7 +57,7 @@
 
 <div class="item-content" itemprop="articleBody">
 
-<p><img src="link-label.png" alt="Link label example"></p>
+<p><img alt="Link label example" src="/posts/2019-06-09-new-version-of-d3-force-network-chart-available/link-label.png"></p>
 <p>First of all: Thanks to the community!</p>
 <p>From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.</p>
 <p>The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above. The labels are positioned in a way that they are always readable - this is the reason why they appear sometimes above and sometimes below a link line (they are rotated, if needed). The nice thing is that you can also read both labels when you have links in both directions between two nodes. The other benefit of having labels on links is that they extend the area for the link click and hover events. This improves the usabiltiy in cases where the links should show a tooltip when they are hovered or some action should be executed when they are clicked. This is normally not so easy because the links are so narrow.</p>

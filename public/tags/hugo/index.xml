@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on Ottmar’s Notes</title>
+    <link>http://localhost:8888/tags/hugo/</link>
+    <description>Recent content in Hugo on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Thu, 31 Dec 2099 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:8888/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown Examples</title>
+      <link>http://localhost:8888/posts/2099-12-31-markdown-examples/</link>
+      <pubDate>Thu, 31 Dec 2099 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
+      <guid>http://localhost:8888/posts/2099-12-31-markdown-examples/</guid>
+      <description>Table of Contents Table of Contents Table of Contents Code Figure With Shortcode Image Figure Code Figure The Normal Way In Hugo Quotes Capitalization in Headers Reveal.js Code Figure With Shortcode var dummy = 123; Some description with a link to GitHub in Markdown style and &amp;ldquo;escaped quote signs&amp;rdquo; var dummy = 123; caption Image Figure caption Code Figure The Normal Way In Hugo var dummy = 123; Some description with a link to GitHub in Markdown style and &#34;</description>
+    </item>
+  </channel>
+</rss>

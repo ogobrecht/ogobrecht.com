@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caddy Server - APEX hinter einem vollautomatischem SSL Proxy</title>
+  <meta name="description" content="Vergiss selbstsignierte Zertifikate und Browser, die sich darüber beschweren">
+  <meta name="author" content="Ottmar Gobrecht">
+  <meta name="generator" content="Hugo 0.132.1">
+  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
+  <link rel="canonical" href="http://localhost:8888/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/">
+  <link rel="alternate" href="http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" hreflang="en" title="English">
+  <link rel="alternate" href="http://localhost:8888/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico">
+  <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/icon/favicon-64.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="/assets/icon/favicon-160.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/assets/icon/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon/favicon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icon/favicon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon/favicon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icon/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icon/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon/favicon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icon/favicon-152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/favicon-180.png">
+  <meta name="msapplication-config" content="/assets/icon/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/assets/icon/favicon-144.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ogobrecht">
+  <meta name="twitter:title" content="Caddy Server - APEX hinter einem vollautomatischem SSL Proxy">
+  <meta name="twitter:description" content="Vergiss selbstsignierte Zertifikate und Browser, die sich darüber beschweren">
+  <meta name="twitter:image" content="http://localhost:8888/assets/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="Author photo">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      <div class="nav-spacer"></div>
+
+<!--content-begin-->
+
+<article class="post clear" itemscope itemtype="http://schema.org/BlogPosting">
+
+<header class="item-header">
+  <h1 class="item-title" itemprop="name headline">Caddy Server - APEX hinter einem vollautomatischem SSL Proxy</h1><p class="item-subtitle">Vergiss selbstsignierte Zertifikate und Browser, die sich darüber beschweren</p>
+  <p class="item-meta"><a href="/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/">Show content in English</a></p>
+
+</header>
+
+<div class="item-content" itemprop="articleBody">
+
+<h2>Inhaltsverzeichnis</h2>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#konfiguration-caddy">Konfiguration Caddy</a></li>
+    <li><a href="#konfiguration-ords">Konfiguration ORDS</a></li>
+  </ul>
+</nav>
+
+<h2 id="einleitung">Einleitung</h2>
+<p>Wie die Zeit vergeht. Fast auf den Tag genau vor drei Jahren habe ich meinen letzten Blogeintrag geschrieben. Vielen Dank an Tim Hall und seine Erinnerung, mal wieder etwas zu schreiben für den <a href="https://oracle-base.com/blog/2024/09/27/joel-kallman-day-2024-announcement/">#Joel Kallman Day</a>.</p>
+<p>Hast Du Dich schon einmal über Deinen Browser geärgert, dass er Dir in Deiner lokalen Entwicklungsumgebung immer mit roter Schrift in der URL zeigt, dass Du Dein SSL-Zertifikat selbst ausgestellt hast und es somit für Ihn ungültig ist?</p>
+<p>Das muss nicht sein. Es gibt neben den großen Webservern wie etwa <a href="https://httpd.apache.org/">Apache</a> oder <a href="https://nginx.org/en/">NGINX</a> noch eine ganze Menge andere. Einer davon is <a href="https://caddyserver.com/">Caddy</a>, der in Bezug auf automatisches SSL eine gewisse Sonderstellung einnimmt: Er bringt eine ganze SSL-Zertifizierungsstelle mit und kann lokal auf dem Rechner automatisch sein Root-Zertifikat in den Zertifikatsspeicher des Betriebssystem einbinden. Dann beschwert sich auch Dein Browser nicht mehr über ein ungültiges Zertifikat.</p>
+<p>Die einzige Herausforderung bei Caddy ist, dass man herausfinden muss, wie man ihn konfiguriert, damit APEX sauber hinter ihm als Reverse-Proxy läuft. Leider ist das ein wenig kompliziert, nicht wegen Caddy, sondern wegen APEX bzw ORDS. Sagen wir es einmal so: APEX hinter einem Reverse-Proxy hat so seine Tücken.</p>
+<p>Wer mehr darüber wissen möchte, findet eine Menge Blogbeiträge dazu - meistens geht dann um Apache oder NGINX. Ich wollte aber gerne die vollautomatische SSL-Terminierung von Caddy nutzen, daher musste ich mir mit Hilfe der vorhandenen Informationen anschauen, wie es mit Caddy gehen kann. Ein besonderer Dank geht dabei an meinen Kollegen Peter Raganitsch, der mir sowohl persönlich als auch mit seinem schon einige Jahre altem Blogeintrag zum Thema APEX und NGINX sehr geholfen hat - hier der Link: <a href="https://www.oracle-and-apex.com/the-oracle-apex-reverse-proxy-guide-using-NGINX/">The Oracle APEX Reverse Proxy Guide using NGINX</a>.</p>
+<h2 id="installation">Installation</h2>
+<p>Caddy ist in <a href="https://go.dev/">Go</a> geschrieben. Der <a href="https://caddyserver.com/download?package=github.com%2Fcaddyserver%2Freplace-response">Download</a> umfasst immer nur eine einzige Binärdatei für das jeweilige Betriebssystem. Caddy unterstützt Plugins, um zusätzliche Funktionalität in den Web-Server zu integrieren. Umschreiben von HTTP-Headers und Umleiten von URLs ist natürlich Basisfunktionalität. Das inhaltliche Verändern der ausgelieferten Webseiten dagegen ist eine Funktionalität, die man per Plugin nachrüsten muss. Da wir das brauchen, müssen wir einen sogenannten Custom Build anstoßen, damit das Plugin in die Binärdatei integriert wird.</p>
+<p>Der obige Downloadlink hat das Plugin bereits vorausgewählt. Ihr müsst nur noch das Zielbetriebssystem auswählen, falls es nicht korrekt erkannt wurde. Dieser Custom Build Modus ist auch der Grund, warum es keinen Sinn macht, Caddy mit einem Package-Manager wie etwa <a href="https://brew.sh/">Homebrew</a> (Mac) oder <a href="https://chocolatey.org/">Chocolatey</a> (Windows) zu installieren. Nach dem Download solltet Ihr Caddy in den Suchpfad Eures Betriebssystems einbinden, damit der Aufruf einfacher wird.</p>
+<p>Noch ein Hinweis: Caddy versucht einmalig, sein Root-Zertifikat in den Zertifikatsspeicher des Betriebssystem einzubinden. Dafür braucht es aber Bibliotheken aus den <a href="https://firefox-source-docs.mozilla.org/security/nss/index.html">Network Security Services (NSS)</a>, einem Mozilla-Projekt (siehe auch <a href="https://en.wikipedia.org/wiki/Network_Security_Services">Wikipedia</a>). Wenn Caddy diese Bibliotheken nicht finden kann, dann müsste Ihr halt das Root-Zertifikat von Caddy selber importieren. Ich habe die Bibliotheken auf meinem Mac mit Homebrew installiert (brew install nss) und es klappte automatisch. Für Linux kann man den jeweiligen Paket-Manager bemühen. Für Windows gibt es nicht wirklich eine Installationsmöglichkeit. Angeblich soll es reichen, Firefox installiert zu haben, was dann wohl die nss3.dll mitbringt (habe ich nicht verifiziert, ich arbeite mit Chromium auf einem Mac).</p>
+<h2 id="konfiguration-caddy">Konfiguration Caddy</h2>
+<p>Hier nun der eigentliche Kern des Blogbeitrags, die Konfiguration. Caddy nutzt grundsätzlich ein JSON Format für seine Konfiguration und kann auch zur Laufzeit ohne Neustart per API umkonfiguriert werden. Es gibt aber ein paar Adapter, die auch andere Formate einlesen können, wenn Caddy gestartet wird. Das bekannteste Format is wohl das sogenannte Caddyfile, eine Mischung aus JSON und und einem einfachen Textformat. Das ist für Menschen einfacher zu lesen und schreiben als eine stark hierarchisches JSON-Struktur:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	order replace after encode
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">localhost:8443 {
+</span></span><span class="line"><span class="cl">	handle /ords/* {
+</span></span><span class="line"><span class="cl">		reverse_proxy http://localhost:8080 {
+</span></span><span class="line"><span class="cl">			header_down Location //localhost/ //localhost:8443/
+</span></span><span class="line"><span class="cl">			header_up Host localhost:8443
+</span></span><span class="line"><span class="cl">			header_up +HTTP_X-Forwarded-Port 8443
+</span></span><span class="line"><span class="cl">			header_up -Origin
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">		replace {
+</span></span><span class="line"><span class="cl">			//localhost/ //localhost:8443/
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	handle_path /i/* {
+</span></span><span class="line"><span class="cl">		root * ./images
+</span></span><span class="line"><span class="cl">		file_server
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	redir /ords /ords/
+</span></span><span class="line"><span class="cl">	redir / /ords/
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Die ersten drei Zeilen ordnen das <code>replace</code> Plugin in die richtige Prozessreihenfolge ein, damit es funktioniert wie gewünscht (<code>order replace after encode</code>, siehe auch das <a href="https://github.com/caddyserver/replace-response">Plugin auf GitHub</a>).</p>
+<p>Danach kommt dann die Konfiguration für unseren lokalen Development Server:</p>
+<ul>
+<li><code>localhost:8443</code>: Wenn Caddy eine Domain erkennt (inklusive localhost), dann wird automatisch für die Domain ein Zertifikat ausgestellt.</li>
+<li><code>handle /ords/*</code>: Startet die Konfiguration für den Pfad <code>/ords/*</code>.</li>
+<li><code>reverse_proxy http://localhost:8080</code>: Wir wollen also alle <code>/ords/*</code> Anfragen weiterleiten an den ORDS auf Port 8080.</li>
+</ul>
+<p>Jetzt kommt der Teil, warum ich eingangs geschrieben habe, dass APEX hinter einem Reverse-Proxy so seine Tücken hat. In eine idealen Welt würde es nicht notwendig sein, Caddy mehr zum Reverseproxy zu sagen, da automatisch die üblichen Header von Caddy gesetzt werden, damit der dahinterliegende Service weiß, dass der Request über einen Proxy-Server gelaufen ist (X-Forwarded-*).</p>
+<ul>
+<li><code>header_down Location //localhost/ //localhost:8443/</code>: header_down meint Richtung Browser, wir ersetzen also alle Location Header, in denen nur <code>//localhost/</code> ohne Port steht mit der korrekten Information.</li>
+<li><code>header_up Host localhost:8443</code>: header_up meint Richtung ORDS, wir teilen also ORDS mit, was der Hostname und Port ist (leider versteht das ORDS nicht richtig und ignoriert die Portangabe).</li>
+<li><code>header_up +HTTP_X-Forwarded-Port 8443</code>: Man beachte das kleine Plus-Symbol. Das bedeutet, wir fügen diesen Header hinzu. Ich habe es auch mit <code>X-Forwarded-Port 8443</code> versucht, aber ORDS scheint taub auf diesen Ohren zu sein und APEX ist schlau genug, mehrere Portangaben zu berücksichtigen, so dass wenigstens die von APEX generierten URLs korrekt sind.</li>
+<li><code>header_up -Origin</code>: Hier bedeutet das kleine Minus-Sysmbol, dass der Header gelöscht werden soll. Wir tun dies, damit ORDS nicht mit Cross Origin Fehlern austeigt aus dem Spiel. Eigentlich habe ich den ORDS so konfiguriert, dass dies nicht notwendig wäre, aber es hat nicht funktioniert. Wenn jemand eine bessere Lösung hat, dann bitte bei mir melden (siehe hierzu auch die ORDS-Konfiguration weiter unten).</li>
+<li><code>replace</code> und <code>//localhost/ //localhost:8443/</code>: Das gleiche Spielchen wie zuvor, nur diesmal nicht mit den Headern, sondern mit dem Inhalt der Anworten (Response Body), die der ORDS aufgrund von REST Aufrufen zurücksendet (meistens JSON Daten). APEX ist hier komplett außen vor.</li>
+</ul>
+<p>Jetzt wieder Standard-Funktionalität:</p>
+<ul>
+<li><code>handle_path /i/*</code> (und folgende zwei Zeilen): Hier hosten wir unsere statischen APEX Dateien wie JavScript, CSS, Bilder, Fonts&hellip;, so dass dies nicht vom ORDS übernommen werden muss.</li>
+<li><code>redir /ords /ords/</code>: Hier leiten wir Anforderungen ohne abschließenden Slash um zum korrekten Pfad</li>
+<li>redir <code>/ /ords/</code>: Das solltet Ihr individuell anpassen, falls Ihr das Wuzelverzeichnis anders behandeln wollt.</li>
+</ul>
+<h2 id="konfiguration-ords">Konfiguration ORDS</h2>
+<p>Hier meine Beispiel <code>settings.xml</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE properties SYSTEM &#34;http://java.sun.com/dtd/properties.dtd&#34;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;properties&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;comment&gt;</span>Saved on Wed Oct 09 12:14:37 UTC 2024<span class="nt">&lt;/comment&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;database.api.enabled&#34;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;debug.printDebugToScreen&#34;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;security.externalSessionTrustedOrigins&#34;</span><span class="nt">&gt;</span>localhost:8443<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;security.httpsHeaderCheck&#34;</span><span class="nt">&gt;</span>X-Forwarded-Proto:https<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;security.requestValidationFunction&#34;</span><span class="nt">&gt;</span>ords_util.authorize_plsql_gateway<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;http.cookie.filter.byValue&#34;</span><span class="nt">&gt;</span>startsWith:ORA_WWV<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.access.log&#34;</span><span class="nt">&gt;</span>/path/to/your/access.log<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.http.host&#34;</span><span class="nt">&gt;</span>localhost<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.http.port&#34;</span><span class="nt">&gt;</span>8080<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.context.path&#34;</span><span class="nt">&gt;</span>/ords<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.static.path&#34;</span><span class="nt">&gt;</span>/path/to/the/apex/images<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;standalone.static.context.path&#34;</span><span class="nt">&gt;</span>/i/<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;misc.defaultPage&#34;</span><span class="nt">&gt;</span>apex<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;jdbc.InitialLimit&#34;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;jdbc.MaxLimit&#34;</span><span class="nt">&gt;</span>20<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;jdbc.InactivityTimeout&#34;</span><span class="nt">&gt;</span>60<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/properties&gt;</span>
+</span></span></code></pre></div><p>Die wichtigsten beiden Zeilen im Bezug auf einen Betrieb hinter einem Reverse Proxy:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;security.externalSessionTrustedOrigins&#34;</span><span class="nt">&gt;</span>localhost:8443<span class="nt">&lt;/entry&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;security.httpsHeaderCheck&#34;</span><span class="nt">&gt;</span>X-Forwarded-Proto:https<span class="nt">&lt;/entry&gt;</span>
+</span></span></code></pre></div><p>Die erste Zeile sollte eigentlich helfen, so dass ich den Origin Header nicht löschen muss in Richtung ORDS, es hat aber bei mir nicht funktioniert. Die zweite Zeile hilft ORDS zu erkennen, dass der Frontend-Server (Reverse Proxy) die SSL-Terminierung übernimmt. Für einen Development-Server, wo beide Dienste auf localhost laufen, sehe ich keine Veranlassung, die Verbindung zwischen Proxy und ORDS abzusichern. Das würde gegen mein Ziel gehen, durch Caddy in den Genuss einer vollautomatischen SSL-Lösung zu kommen. Für Prodktivumgebungen sieht das natürlich anders aus. Caddy kann sehr wohl auch Richtung ORDS die Verbindung absichern.</p>
+<p>Ich hoffe, dieser Beitrag hilft ein paar Entwicklern mit einem lokalen Development Server.</p>
+<p>Viel Spaß mit dem Caddy Server :-)</p>
+<p>Ottmar</p>
+
+
+</div><!--articleBody-end-->
+
+<footer>
+  <p class="item-meta">Posted by <a href="/about/">Ottmar Gobrecht</a> on <time datetime="2024-10-16" itemprop="datePublished">October 16, 2024</time>, tagged with
+    <a href="/de/tags/oracle/">Oracle</a>, 
+    <a href="/de/tags/apex/">APEX</a>, 
+    <a href="/de/tags/ssl/">SSL</a>, 
+    <a href="/de/tags/proxy/">proxy</a> and 
+    <a href="/de/tags/caddy/">Caddy</a>.
+  </p>
+  <span class="left item-meta">&#x2190; <a href="/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/">APEX-Plug-ins auf der Kommandozeile generieren</a></span>
+  
+</footer>
+
+</article>
+<p class="item-meta"><a href="/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/#comments">Comments are only available in English</a></p>
+<!--content-end-->
+
+    </div>
+  </main>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="nav-button"><span class="nav-icon"></span></label>
+  <label for="nav-trigger" class="overlay"></label>
+  <div class="sidebar">
+    <div class="wrapper">
+      <header>
+        <a href="/de/">
+          <h2>Ottmar’s Notizen</h2>
+          <p>Hauptsächlich über Oracle APEX und PL/SQL</p>
+        </a>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="/de/">Startseite</a></li>
+          <li><a href="/de/tags/apex/">APEX</a></li>
+          <li><a href="/de/tags/pl/sql/">PL/SQL</a></li>
+          <li><a href="/de/tags/open-source-project/">Open-Source-Projekte</a></li>
+          <li><a href="/de/archiv/">Beitragsarchiv</a></li>
+          <li><a href="/de/ueber/">Über</a></li>
+        </ul>
+        <h3>Kontakt</h3>
+        <ul>
+          <li><a href="mailto:ottmar.gobrecht@gmail.com">Email</a></li>
+          <li><a href="https://github.com/ogobrecht">GitHub</a></li>
+          <li><a href="https://twitter.com/ogobrecht">Twitter</a></li>
+          <li><a href="https://xing.com/profile/Ottmar_Gobrecht">XING</a></li>
+        </ul>
+        <h3>Rechtliche Dinge</h3>
+        <ul>
+          <li><a href="/de/impressum/">Impressum</a></li>
+          <li><a href="/de/datenschutz-erklaerung/">Datenschutz-Erklärung</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>
