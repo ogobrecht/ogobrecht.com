@@ -26,7 +26,7 @@ Wer mehr darüber wissen möchte, findet eine Menge Blogbeiträge dazu - meisten
 
 ## Installation
 
-Caddy ist in [Go](https://go.dev/) geschrieben. Der [Download](https://caddyserver.com/download?package=github.com%2Fcaddyserver%2Freplace-response) umfasst immer nur eine einzige Binärdatei für das jeweilige Betriebssystem. Caddy unterstützt Plugins, um zusätzliche Funktionalität in den Web-Server zu integrieren. Manipulieren von HTTP-Headern und Umleiten von URLs ist natürlich Basisfunktionalität. Das inhaltliche Verändern der ausgelieferten Webseiten dagegen ist eine Funktionalität, die man per Plugin nachrüsten muss. Da wir das brauchen, müssen wir einen sogenannten Custom Build anstoßen, damit das Plugin in die Binärdatei integriert wird.
+Caddy ist in [Go](https://go.dev/) geschrieben. Der [Download](https://caddyserver.com/download?package=github.com%2Fcaddyserver%2Freplace-response) umfasst immer nur eine einzige Binärdatei für das jeweilige Betriebssystem. Caddy unterstützt Plugins, um zusätzliche Funktionalität in den Web-Server zu integrieren. Manipulieren von HTTP-Headers und Umleiten von URLs ist natürlich Basisfunktionalität. Das inhaltliche Verändern der ausgelieferten Webseiten dagegen ist eine Funktionalität, die man per Plugin nachrüsten muss. Da wir das brauchen, müssen wir einen sogenannten Custom Build anstoßen, damit das Plugin in die Binärdatei integriert wird.
 
 Der obige Downloadlink hat das Plugin bereits vorausgewählt. Ihr müsst nur noch das Zielbetriebssystem auswählen, falls es nicht korrekt erkannt wurde. Dieser Custom Build Modus ist auch der Grund, warum es keinen Sinn macht, Caddy mit einem Package-Manager wie etwa [Homebrew](https://brew.sh/) (Mac) oder [Chocolatey](https://chocolatey.org/) (Windows) zu installieren. Nach dem Download solltet Ihr Caddy in den Suchpfad Eures Betriebssystems einbinden, damit der Aufruf einfacher wird.
 
@@ -34,7 +34,7 @@ Noch ein Hinweis: Caddy versucht einmalig, sein Root-Zertifikat in den Zertifika
 
 ## Konfiguration Caddy
 
-Hier nun der eigentliche Kern des Blogbeitrags, die Konfiguration. Caddy nutzt grundsätzlich ein JSON Format für seine Konfiguration und kann auch zur Laufzeit ohne Neustart per API umkonfiguriert werden (eine weitere Besonderheit). Es gibt aber ein paar Adapter, die auch andere Formate einlesen können, wenn Caddy gestartet wird. Das bekannteste Format is wohl das sogenannte Caddyfile, eine Mischung aus JSON und und einem einfachen Textformat. Das ist für Menschen einfacher zu lesen und schreiben als eine stark hierarchische JSON-Struktur:
+Hier nun der eigentliche Kern des Blogbeitrags, die Konfiguration. Caddy nutzt grundsätzlich ein JSON Format für seine Konfiguration und kann auch zur Laufzeit ohne Neustart per API umkonfiguriert werden (eine weitere Besonderheit). Es gibt aber ein paar Adapter, die auch andere Formate einlesen können, wenn Caddy gestartet wird. Das bekannteste Format is wohl das sogenannte Caddyfile, das ist für Menschen einfacher zu lesen und zu schreiben als ein stark hierarchisches JSON:
 
 ```txt
 {
@@ -72,21 +72,21 @@ Danach kommt dann die Konfiguration für unseren lokalen Development Server:
 - `handle /ords/*`: Startet die Konfiguration für den Pfad `/ords/*`.
 - `reverse_proxy http://localhost:7001`: Wir wollen also alle `/ords/*` Anfragen weiterleiten an den ORDS auf Port 7001.
 
-Jetzt kommt der Teil, warum ich eingangs geschrieben habe, dass APEX hinter einem Reverse-Proxy so seine Tücken hat. In eine idealen Welt würde es nicht notwendig sein, Caddy mehr zum Reverseproxy zu sagen, da automatisch die üblichen Header von Caddy gesetzt werden, damit der dahinterliegende Service weiß, dass der Request über einen Proxy-Server gelaufen ist (X-Forwarded-*).
+Jetzt kommt der Teil, warum ich eingangs geschrieben habe, dass APEX hinter einem Reverse-Proxy so seine Tücken hat. In eine idealen Welt wäre es nicht notwendig, Caddy mehr zur Reverse Proxy Direktive zu sagen, da automatisch die üblichen Header von Caddy gesetzt werden, damit der dahinterliegende Service weiß, dass der Request über einen Proxy-Server gelaufen ist (X-Forwarded-*, siehe auch die [Doku dazu](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#headers)):
 
-- `header_down Location //localhost/ //localhost:8001/`: header_down meint Richtung Browser, wir ersetzen also alle Location Header, in denen nur `//localhost/` ohne Port steht mit der korrekten Information.
+- `header_down Location //localhost/ //localhost:8001/`: header_down meint Richtung Browser, wir ersetzen also alle Location Header, in denen nur denen der Port fehlt mit der korrekten Information.
 - `header_up Host localhost:8001`: header_up meint Richtung ORDS, wir teilen also ORDS mit, was der Hostname und Port ist (leider versteht das ORDS nicht richtig und ignoriert die Portangabe).
-- `header_up +HTTP_X-Forwarded-Port 8001`: Man beachte das kleine Plus-Symbol. Das bedeutet, wir fügen diesen Header hinzu. Ich habe es auch mit `X-Forwarded-Port 8001` versucht, aber ORDS scheint taub auf diesen Ohren zu sein und APEX ist schlau genug, mehrere Portangaben zu berücksichtigen, so dass wenigstens die von APEX generierten URLs korrekt sind.
+- `header_up +HTTP_X-Forwarded-Port 8001`: Man beachte das kleine Plus-Symbol. Das bedeutet, wir fügen diesen Header hinzu. Ich habe es auch mit `X-Forwarded-Port 8001` versucht, aber ORDS scheint dies zu ignorieren. Zum Glück ist APEX schlau genug, die Portangaben aus mehreren Headers zu berücksichtigen, so dass wenigstens die von APEX generierten URLs korrekt sind.
 - `header_up -Origin`: Hier bedeutet das kleine Minus-Sysmbol, dass der Header gelöscht werden soll. Wir tun dies, damit ORDS nicht mit Cross Origin Fehlern austeigt aus dem Spiel. Eigentlich habe ich den ORDS so konfiguriert, dass dies nicht notwendig wäre, aber es hat nicht funktioniert. Wenn jemand eine bessere Lösung hat, dann bitte bei mir melden (siehe hierzu auch die ORDS-Konfiguration weiter unten).
-- `replace` und `//localhost/ //localhost:8001/`: Das gleiche Spielchen wie zuvor, nur diesmal nicht mit den Headern, sondern mit dem Inhalt der Anworten (Response Body), die der ORDS aufgrund von REST Aufrufen zurücksendet (meistens JSON Daten). APEX ist hier komplett außen vor.
+- `replace` und `//localhost/ //localhost:8001/`: Das gleiche Spielchen wie zuvor, nur diesmal nicht mit den Headers, sondern mit dem Inhalt der Anworten (Response Body), die der ORDS aufgrund von REST Aufrufen zurücksendet (meistens JSON Daten). APEX ist hier komplett außen vor.
 
 Jetzt wieder Standard-Funktionalität:
 
-- `handle_path /i/*` (und folgende zwei Zeilen): Hier hosten wir unsere statischen APEX Dateien wie JavaScript, CSS, Bilder, Schriften..., so dass dies nicht vom ORDS übernommen werden muss.
+- `handle_path /i/*` (und folgende zwei Zeilen): Hier hosten wir unsere statischen APEX Dateien wie JavaScript, CSS, usw., so dass dies nicht vom ORDS übernommen werden muss.
 - `redir /ords /ords/`: Hier leiten wir Anforderungen ohne abschließenden Slash um zum korrekten Pfad
-- redir `/ /ords/`: Das solltet Ihr individuell anpassen, falls Ihr das Wuzelverzeichnis anders behandeln wollt.
+- redir `/ /ords/`: Das solltet Ihr individuell anpassen, falls Ihr das Wurzelverzeichnis anders behandeln wollt.
 
-Zur Verteidigung von ORDS muss ich aber sagen, dass man in einer Produktivumgebung mit den Standardports 80 und 443 arbeiten sollte. Damit sind die Probleme hinter einem Proxy deutlich kleiner bzw. verschwinden sogar. Aber das hilft alles nichts, wenn man nicht auf die Standardports zurückgreifen kann. In meinem Fall ist es so, dass der Port abhängig ist davon, in welchem Development Branch ich mich gerade befinde. Ich könnte mehrere Instanzen parallel betreiben, da kann nicht jeder Server auf dem gleichen Port arbeiten wollen...
+Zur Verteidigung von ORDS muss ich aber sagen, dass man in einer Produktivumgebung mit den Standardports 80 und 443 arbeiten sollte. Damit sind die Probleme hinter einem Proxy deutlich kleiner bzw. verschwinden sogar. Aber das hilft alles nichts, wenn man nicht auf die Standardports zurückgreifen kann. In meinem Fall ist es so, dass der Port abhängig davon ist, in welchem Development Branch ich mich gerade befinde. Ich könnte mehrere Instanzen parallel betreiben, da kann nicht jeder Server auf dem gleichen Port arbeiten wollen...
 
 ## Konfiguration ORDS
 
@@ -147,13 +147,13 @@ caddy run --config /path/to/config.txt --adapter caddyfile
 
 Wer mag, kann Caddy (und ORDS) auch als Service in seinem Betriebssystem registrieren, so dass man die Server nicht manuell starten muss.
 
-Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert, falls noch nicht geschehen, und danach Caddy und ORDS in jeweils einem Kindprozess startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet (daher auch die Ports 7001 und 8001 in meinen Beispielen hier), so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch bzw. Worktree. Aber das alles wäre dann ein Thema für einen anderen Blogeintrag.
+Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert (falls noch nicht geschehen), und danach Caddy und ORDS in jeweils einem Child Process startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet (daher auch die Ports 7001 und 8001 in meinen Beispielen hier), so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch bzw. Worktree. Aber das alles wäre dann ein Thema für einen anderen Blogeintrag.
 
 ## Fazit
 
 Ich mag es, wenn auch auf meinen Entwicklungsumgebungen SSL-seitig alles gut aussieht. Caddy ist diesbezüglich wirklich eine große Hilfe. Man könnte mit Caddy sogar einen internen Zertifizierungsserver bereitstellen, der dann alle Webserver innerhalb eines Netzwerkes mit Zertifikaten versorgt. Mehr dazu in der [offiziellen Dokumentation](https://caddyserver.com/docs/caddyfile/directives/acme_server).
 
-Vielleicht hilft dieser Blogeintrag ja auch ein paar von Euch da draußen.
+Vielleicht hilft dieser Blogeintrag ja auch ein paar von Euch da draußen in der weiten Welt.
 
 Viel Spaß mit dem Caddy Server :-)
 
