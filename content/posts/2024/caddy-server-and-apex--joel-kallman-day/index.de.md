@@ -86,7 +86,7 @@ Jetzt wieder Standard-Funktionalität:
 - `redir /ords /ords/`: Hier leiten wir Anforderungen ohne abschließenden Slash um zum korrekten Pfad
 - redir `/ /ords/`: Das solltet Ihr individuell anpassen, falls Ihr das Wurzelverzeichnis anders behandeln wollt.
 
-Zur Verteidigung von ORDS muss ich aber sagen, dass man in einer Produktivumgebung mit den Standardports 80 und 443 arbeiten sollte. Damit sind die Probleme hinter einem Proxy deutlich kleiner bzw. verschwinden sogar. Aber das hilft alles nichts, wenn man nicht auf die Standardports zurückgreifen kann. In meinem Fall ist es so, dass der Port abhängig davon ist, in welchem Development Branch ich mich gerade befinde. Ich könnte mehrere Instanzen parallel betreiben, da kann nicht jeder Server auf dem gleichen Port arbeiten wollen...
+Zur Verteidigung des ORDS muss ich aber sagen, dass man in einer Produktivumgebung mit dem Standardport 443 arbeiten sollte. Damit sind die Probleme hinter einem Proxy deutlich kleiner bzw. verschwinden sogar. Aber das hilft alles nichts, wenn man nicht auf den Standardport zurückgreifen kann. In meinem Fall ist es so, dass der Port abhängig davon ist, in welchem Development Branch ich mich gerade befinde. Ich könnte mehrere Instanzen parallel betreiben, da kann nicht jeder Server auf dem gleichen Port arbeiten wollen...
 
 ## Konfiguration ORDS
 
@@ -147,7 +147,7 @@ caddy run --config /path/to/config.txt --adapter caddyfile
 
 Wer mag, kann Caddy (und ORDS) auch als Service in seinem Betriebssystem registrieren, so dass man die Server nicht manuell starten muss.
 
-Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert (falls noch nicht geschehen), und danach Caddy und ORDS in jeweils einem Child Process startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet (daher auch die Ports 7001 und 8001 in meinen Beispielen hier, in einem anderen Branch könnte das dann auch 7005 und 8005 sein), so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch bzw. Worktree. Aber das alles wäre dann ein Thema für einen anderen Blogeintrag.
+Ich selber habe mir einen einen kleinen Development-Server mit Node.js gebaut, der zuerst die Konfigurationsdateien für Caddy und ORDS generiert, dann ORDS in der PDB installiert (falls noch nicht geschehen), und danach Caddy und ORDS in jeweils einem Child Process startet. Ich kann dann einfach mit Ctrl + C beide gleichzeitig terminieren. Außerdem wird automatisch pro Development Branch ein anderer Port verwendet (daher auch die Ports 7001 und 8001 in meinen Beispielen hier, in einem anderen Branch könnte das dann auch 7005 und 8005 sein), so dass ich parallel mehrere Instanzen betreiben kann (das klappt gut mit Git Worktrees). Ich arbeite also sehr flexibel auf der Kommandozeile und starte den jeweils benötigten Development Server mit einem kurzen Befehl im jeweiligen Branch. Aber das alles wäre dann ein Thema für einen anderen Blogeintrag.
 
 ## Fazit
 
