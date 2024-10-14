@@ -32,7 +32,7 @@ Der obige Downloadlink hat das Plugin bereits vorausgewählt. Ihr müsst nur noc
 
 Noch ein Hinweis: Caddy versucht beim Start, sein Root-Zertifikat in den Zertifikatspeicher des Betriebssystem einzubinden. Dafür braucht es aber Bibliotheken aus den [Network Security Services (NSS)](https://firefox-source-docs.mozilla.org/security/nss/index.html), einem Mozilla-Projekt (siehe auch [Wikipedia](https://en.wikipedia.org/wiki/Network_Security_Services)). Wenn Caddy diese Bibliotheken nicht finden kann, dann müsst Ihr das Root-Zertifikat von Caddy selber importieren. Ich habe die Bibliotheken auf meinem Mac mit Homebrew installiert (brew install nss) und es klappte automatisch (man wird natürlich nach dem Admin Passwort gefragt für diesen Vorgang). Für Linux kann man den jeweiligen Paket-Manager bemühen. Für Windows gibt es nicht wirklich eine Installationsmöglichkeit. Angeblich soll es reichen, Firefox installiert zu haben, was dann wohl die benötigte nss3.dll mitbringt (habe ich nicht verifiziert, ich arbeite mit Chromium auf einem Mac).
 
-## Konfiguration Caddy
+## Caddy Konfiguration
 
 Hier nun der eigentliche Kern des Blogbeitrags, die Konfiguration. Caddy nutzt grundsätzlich ein JSON Format für seine Konfiguration und kann auch zur Laufzeit ohne Neustart per API umkonfiguriert werden (eine weitere Besonderheit). Es gibt aber ein paar Adapter, die auch andere Formate einlesen können, wenn Caddy gestartet wird. Das bekannteste Format is wohl das sogenannte Caddyfile, das ist für Menschen einfacher zu lesen und zu schreiben als ein stark hierarchisches JSON:
 
@@ -88,7 +88,7 @@ Jetzt wieder Standard-Funktionalität:
 
 Zur Verteidigung des ORDS muss ich aber sagen, dass man in einer Produktivumgebung mit dem Standardport 443 arbeiten sollte. Damit sind die Probleme hinter einem Proxy deutlich kleiner bzw. verschwinden sogar. Aber das hilft alles nichts, wenn man nicht auf den Standardport zurückgreifen kann. In meinem Fall ist es so, dass der Port abhängig davon ist, in welchem Development Branch ich mich gerade befinde. Ich könnte mehrere Instanzen parallel betreiben, da kann nicht jeder Server auf dem gleichen Port arbeiten wollen...
 
-## Konfiguration ORDS
+## ORDS Konfiguration
 
 Hier meine Beispiel-Konfiguration für den ORDS (settings.xml):
 
