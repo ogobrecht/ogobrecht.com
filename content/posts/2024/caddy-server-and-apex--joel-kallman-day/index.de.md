@@ -4,10 +4,10 @@ description: Vergesst selbstsignierte Zertifikate und Browser, die sich darüber
 tags: [Oracle, APEX, SSL, proxy, Caddy]
 slug: caddy-server-and-apex--joel-kallman-day
 publishdate: 2024-10-16
-lastmod: 2024-10-16 12:00:00
-featured_image: 
-featured_image_alt: 
-featured_image_caption: 
+lastmod: 2024-10-16 00:00:00
+featured_image: pexels-ekrulila-2292837.jpg
+featured_image_alt: Person mit weißer Schriftrolle
+featured_image_caption: Foto von Gül Işık auf pexels.com
 ---
 
 Wie die Zeit vergeht. Fast auf den Tag genau vor drei Jahren habe ich meinen letzten Blogeintrag geschrieben. Vielen Dank an Tim Hall und seine Erinnerung, mal wieder etwas zu schreiben für den [#JoelKallmanDay](https://oracle-base.com/blog/2024/09/27/joel-kallman-day-2024-announcement/).
