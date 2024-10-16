@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>oddgen on Ottmar’s Notes</title>
+    <title>Oddgen on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/oddgen/</link>
-    <description>Recent content in oddgen on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent content in Oddgen on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sun, 27 Dec 2020 15:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/oddgen/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of Oracle Table API Generator Available</title>
       <link>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>
-      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</guid>
-      <description>Short before Christmas André and I released version 0.6.0 of our table API generator. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the complete changelog is available on GitHub.
-Table of Contents  Bulk Processing Support for Audit Columns Support for a Row Version Column Tenant Support More Breaking Changes Conclusion   Bulk Processing When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data.</description>
+      <description>&lt;p&gt;Short before Christmas André and I released version 0.6.0 of our &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;table API generator&lt;/a&gt;. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#060-2020-12-20&#34;&gt;complete changelog is available on GitHub&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#bulk-processing&#34;&gt;Bulk Processing&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#support-for-audit-columns&#34;&gt;Support for Audit Columns&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#support-for-a-row-version-column&#34;&gt;Support for a Row Version Column&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#tenant-support&#34;&gt;Tenant Support&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#more&#34;&gt;More&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#breaking-changes&#34;&gt;Breaking Changes&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;bulk-processing&#34;&gt;Bulk Processing&lt;/h2&gt;&#xA;&lt;p&gt;When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data. Imagine the following, common schema setup (also see this nice &lt;a href=&#34;https://www.youtube.com/watch?v=OF7qR5lAmiw&#34;&gt;video by Connor McDonald&lt;/a&gt;, 20 minutes):&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Table API Generator v0.5.0 Available</title>
       <link>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
-      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
-      
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
-      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:
- Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods:  Can have the dictionary column defaults Can return the whole row instead of the primary key   You can exclude columns (e.</description>
+      <description>&lt;p&gt;Short before Christmas André and I released version 0.5.0 of our &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;PL/SQL table API generator&lt;/a&gt;. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Support for multicolumn primary keys&lt;/li&gt;&#xA;&lt;li&gt;Support for 12c long identifier names&lt;/li&gt;&#xA;&lt;li&gt;More control over the API features and name (10 new parameters)&lt;/li&gt;&#xA;&lt;li&gt;Insert methods:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Can have the dictionary column defaults&lt;/li&gt;&#xA;&lt;li&gt;Can return the whole row instead of the primary key&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;You can exclude columns (e.g. audit columns) for inserts and updates&lt;/li&gt;&#xA;&lt;li&gt;Improved template engine:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Generated code better readable because of formatted parameter lists&lt;/li&gt;&#xA;&lt;li&gt;Tables with many columns no longer breaking character limits&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Special methods for testing and dummy data generation&lt;/li&gt;&#xA;&lt;li&gt;Also see the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#050-2018-12-23&#34;&gt;full changelog on the project site&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Happy new year and happy coding :-)&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Table API Generator</title>
       <link>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</link>
-      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate>
-      
+      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</guid>
-      <description>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</description>
+      <description>&lt;p&gt;Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

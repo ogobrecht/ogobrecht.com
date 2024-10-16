@@ -9,9 +9,24 @@
 <id>https://ogobrecht.com/de/index.xml</id>
 <link href="https://ogobrecht.com/de/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/de/" rel="alternate" type="text/html" hreflang="de" />
-<generator uri="https://gohugo.io/" version="0.90.1">Hugo</generator>
-<updated>2022-01-06T21:29:19+01:00</updated>
+<generator uri="https://gohugo.io/" version="0.135.0">Hugo</generator>
+<updated>2024-10-16T09:19:47+01:00</updated>
 
+
+<entry xml:lang="de">
+<id>https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</id>
+<link href="https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" rel="alternate" type="text/html" title="Caddy Server - APEX hinter einem vollautomatischem SSL Proxy" />
+<title type="html">Caddy Server - APEX hinter einem vollautomatischem SSL Proxy</title>
+<summary type="html">Vergesst selbstsignierte Zertifikate und Browser, die sich darüber beschweren</summary>
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="ssl" label="SSL" scheme="https://ogobrecht.com/tags/" />
+<category term="proxy" label="proxy" scheme="https://ogobrecht.com/tags/" />
+<category term="caddy" label="Caddy" scheme="https://ogobrecht.com/tags/" />
+<published>2024-10-16T00:00:00+01:00</published>
+<updated>2024-10-16T00:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="de">
 <id>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</id>

@@ -4,16 +4,18 @@
     <title>Instrumentation on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/instrumentation/</link>
     <description>Recent content in Instrumentation on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/instrumentation/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Fri, 08 Oct 2021 13:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/instrumentation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Yet another Oracle DB logging tool: Console</title>
       <link>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</link>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</guid>
-      <description>Table of Contents  Introduction A single install script Production safe without further configuration Method names based on JavaScript Console Reduced amount of log entries through saved call stack Simple logging of method parameters Markdown format for automatically determined metadata Extensible logs through overloaded log methods Measure time and count things Assert, format and other helpers Displaying the package status of Console in a session APEX Error Handling Function APEX Plug-in for capturing frontend errors Sources of inspiration Project homepage   Introduction It looks like it is a hobby of PL/SQL developers to develop their own logging tool.</description>
+      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#a-single-install-script&#34;&gt;A single install script&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#production-safe-without-further-configuration&#34;&gt;Production safe without further configuration&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#method-names-based-on-javascript-console&#34;&gt;Method names based on JavaScript Console&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#reduced-amount-of-log-entries-through-saved-call-stack&#34;&gt;Reduced amount of log entries through saved call stack&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#simple-logging-of-method-parameters&#34;&gt;Simple logging of method parameters&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#markdown-format-for-automatically-determined-metadata&#34;&gt;Markdown format for automatically determined metadata&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#extensible-logs-through-overloaded-log-methods&#34;&gt;Extensible logs through overloaded log methods&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#measure-time-and-count-things&#34;&gt;Measure time and count things&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#assert-format-and-other-helpers&#34;&gt;Assert, format and other helpers&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#displaying-the-package-status-of-console-in-a-session&#34;&gt;Displaying the package status of Console in a session&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#apex-error-handling-function&#34;&gt;APEX Error Handling Function&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#apex-plug-in-for-capturing-frontend-errors&#34;&gt;APEX Plug-in for capturing frontend errors&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#sources-of-inspiration&#34;&gt;Sources of inspiration&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#project-homepage&#34;&gt;Project homepage&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;It looks like it is a hobby of PL/SQL developers to develop their own logging tool. There are already some free tools on the market and probably many that have never been released (&lt;a href=&#34;https://www.doag.org/formes/pubfiles/10101682/2018-SQLPLSQL-Sabine_Heimsath-PL_SQL__Monitoren__gt__Messen__gt__Optimieren_-_mit_Open_Source-Praesentation.pdf&#34;&gt;DOAG talk by Sabine Heimsath on the topic&lt;/a&gt;):&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

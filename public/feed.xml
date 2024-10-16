@@ -9,9 +9,24 @@
 <id>https://ogobrecht.com/index.xml</id>
 <link href="https://ogobrecht.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/" rel="alternate" type="text/html" hreflang="en" />
-<generator uri="https://gohugo.io/" version="0.90.1">Hugo</generator>
-<updated>2022-01-06T21:29:19+01:00</updated>
+<generator uri="https://gohugo.io/" version="0.135.0">Hugo</generator>
+<updated>2024-10-16T09:19:47+01:00</updated>
 
+
+<entry xml:lang="en">
+<id>https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</id>
+<link href="https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" rel="alternate" type="text/html" title="Caddy Server - APEX behind a fully automated SSL proxy" />
+<title type="html">Caddy Server - APEX behind a fully automated SSL proxy</title>
+<summary type="html">Forget self-signed certificates and browsers that complain about them</summary>
+<category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
+<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
+<category term="ssl" label="SSL" scheme="https://ogobrecht.com/tags/" />
+<category term="proxy" label="proxy" scheme="https://ogobrecht.com/tags/" />
+<category term="caddy" label="Caddy" scheme="https://ogobrecht.com/tags/" />
+<published>2024-10-16T00:00:00+01:00</published>
+<updated>2024-10-16T00:00:00+01:00</updated>
+
+</entry>
 
 <entry xml:lang="en">
 <id>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</id>
@@ -284,18 +299,6 @@
 <category term="html" label="HTML" scheme="https://ogobrecht.com/tags/" />
 <published>2017-11-29T00:00:00+01:00</published>
 <updated>2017-12-01T20:00:00+01:00</updated>
-
-</entry>
-
-<entry xml:lang="en">
-<id>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</id>
-<link href="https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/" rel="alternate" type="text/html" title="Form Behaviour - Bug or Feature?" />
-<title type="html">Form Behaviour - Bug or Feature?</title>
-<summary type="html">Why forms with a single input field are submitted by the enter key</summary>
-<category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
-<category term="html" label="HTML" scheme="https://ogobrecht.com/tags/" />
-<published>2017-09-26T00:00:00+01:00</published>
-<updated>2017-10-01T20:00:00+01:00</updated>
 
 </entry>
 

@@ -4,67 +4,53 @@
     <title>Generator on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/generator/</link>
     <description>Recent content in Generator on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/generator/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Mon, 30 Aug 2021 13:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/generator/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Create fast insert scripts</title>
       <link>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/</guid>
-      <description>A few weeks ago I released a new version of my PLEX project. I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.
-It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application.</description>
+      <description>&lt;p&gt;A few weeks ago I released a new version of my &lt;a href=&#34;https://github.com/ogobrecht/plex&#34;&gt;PLEX project&lt;/a&gt;. I improved the ability to export table data as insert scripts. Previously, PLEX was only able to export CSV data. The reason was that I originally developed PLEX to speed up the implementation of version control in Oracle DB projects, and the ability to export CSV data was intended to track changes in master data tables.&lt;/p&gt;&#xA;&lt;p&gt;It turned out that a colleague of mine wanted PLEX to export insert scripts for all data in all tables for the initial deployment of a new application. I implemented an initial version, but was not happy with the runtime of the insert scripts. I now hear some people arguing that there are better tools than insert scripts for importing larger amounts of data - but sometimes this is the only accepted way because only SQL*Plus is available to run the deployment scripts&amp;hellip;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>New Version of Oracle Table API Generator Available</title>
       <link>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</link>
-      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/</guid>
-      <description>Short before Christmas André and I released version 0.6.0 of our table API generator. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the complete changelog is available on GitHub.
-Table of Contents  Bulk Processing Support for Audit Columns Support for a Row Version Column Tenant Support More Breaking Changes Conclusion   Bulk Processing When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data.</description>
+      <description>&lt;p&gt;Short before Christmas André and I released version 0.6.0 of our &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;table API generator&lt;/a&gt;. The last release was exactly two years ago - time flies. This blog post highlights some of the changes - the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#060-2020-12-20&#34;&gt;complete changelog is available on GitHub&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#bulk-processing&#34;&gt;Bulk Processing&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#support-for-audit-columns&#34;&gt;Support for Audit Columns&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#support-for-a-row-version-column&#34;&gt;Support for a Row Version Column&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#tenant-support&#34;&gt;Tenant Support&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#more&#34;&gt;More&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#breaking-changes&#34;&gt;Breaking Changes&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;bulk-processing&#34;&gt;Bulk Processing&lt;/h2&gt;&#xA;&lt;p&gt;When you split your app over multiple schemas for higher data security you might need at some point the possibility to bulk process your data. Imagine the following, common schema setup (also see this nice &lt;a href=&#34;https://www.youtube.com/watch?v=OF7qR5lAmiw&#34;&gt;video by Connor McDonald&lt;/a&gt;, 20 minutes):&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
       <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
-      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
-      
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
-      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)
-Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
+      <description>&lt;p&gt;Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)&lt;/p&gt;&#xA;&lt;p&gt;Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code. As you can imagine, the latter is sometimes - let&amp;rsquo;s say &amp;ldquo;out of date&amp;rdquo;, if it exists at all &amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Table API Generator v0.5.0 Available</title>
       <link>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</link>
-      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
-      
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2018-12-26-table-api-generator-v0.5.0-available/</guid>
-      <description>Short before Christmas André and I released version 0.5.0 of our PL/SQL table API generator. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:
- Support for multicolumn primary keys Support for 12c long identifier names More control over the API features and name (10 new parameters) Insert methods:  Can have the dictionary column defaults Can return the whole row instead of the primary key   You can exclude columns (e.</description>
+      <description>&lt;p&gt;Short before Christmas André and I released version 0.5.0 of our &lt;a href=&#34;https://github.com/OraMUC/table-api-generator&#34;&gt;PL/SQL table API generator&lt;/a&gt;. It took a long time to come to this point. One of the reasons behind was the fact that we had to rework some internals to support feature wishes from the community. Here the most important features of the new version:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Support for multicolumn primary keys&lt;/li&gt;&#xA;&lt;li&gt;Support for 12c long identifier names&lt;/li&gt;&#xA;&lt;li&gt;More control over the API features and name (10 new parameters)&lt;/li&gt;&#xA;&lt;li&gt;Insert methods:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Can have the dictionary column defaults&lt;/li&gt;&#xA;&lt;li&gt;Can return the whole row instead of the primary key&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;You can exclude columns (e.g. audit columns) for inserts and updates&lt;/li&gt;&#xA;&lt;li&gt;Improved template engine:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Generated code better readable because of formatted parameter lists&lt;/li&gt;&#xA;&lt;li&gt;Tables with many columns no longer breaking character limits&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Special methods for testing and dummy data generation&lt;/li&gt;&#xA;&lt;li&gt;Also see the &lt;a href=&#34;https://github.com/OraMUC/table-api-generator/blob/master/docs/changelog.md#050-2018-12-23&#34;&gt;full changelog on the project site&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Happy new year and happy coding :-)&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>HydeBar</title>
       <link>https://ogobrecht.com/posts/2017-11-29-hydebar/</link>
-      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
-      
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2017-11-29-hydebar/</guid>
-      <description>Earlier this year I wrote at the end of this post:
- PS: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;
- As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the JSDoc theme Minami and the Liquid docs site - both with nice sidebars.</description>
+      <description>&lt;p&gt;Earlier this year I wrote at the end of &lt;a href=&#34;https://ogobrecht.com/posts/2017-03-05-dokuwiki-plugin-revealjs&#34;&gt;this post&lt;/a&gt;:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;PS: In the meantime I switched complete to Markdown and &lt;a href=&#34;https://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt;, a static site generator - but this is another story for another post &amp;hellip;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the &lt;a href=&#34;https://github.com/nijikokun/minami&#34;&gt;JSDoc theme Minami&lt;/a&gt; and the &lt;a href=&#34;https://shopify.github.io/liquid/&#34;&gt;Liquid docs site&lt;/a&gt; - both with nice sidebars. I wanted to have such a nice sidebar for my dev blog and began to look deeper how it was implemented. To my surprise the sidebar from the JSDoc theme Minami was complete CSS driven - cool.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Table API Generator</title>
       <link>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</link>
-      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate>
-      
+      <pubDate>Fri, 10 Jun 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2016-06-10-table-api-generator/</guid>
-      <description>Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.</description>
+      <description>&lt;p&gt;Last year I needed for a project a simple table API, which is able to generate a generic change log - something like &amp;ldquo;show me for table xyz which column was changed when and what was the old value and what is the new one&amp;rdquo;. Only changed values should be stored and all tables should log into the same generic logging table. Sounds like we need a generator for this.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

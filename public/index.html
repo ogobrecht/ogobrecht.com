@@ -8,7 +8,7 @@
   <title>Home</title>
   <meta name="description" content="The last five posts and a list of all tags">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
+  <meta name="generator" content="Hugo 0.135.0">
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/">
   <link rel="alternate" href="https://ogobrecht.com/de/" hreflang="de" title="Deutsch">
@@ -55,6 +55,10 @@
 
 <ul class="item-list">
 
+<li><span class="item-meta">Oct 2024</span>
+<h2><a class="item-link" href="/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/">Caddy Server - APEX behind a fully automated SSL proxy</a></h2>
+<span class="item-meta">Forget self-signed certificates and browsers that complain about them</span></li>
+
 <li><span class="item-meta">Oct 2021</span>
 <h2><a class="item-link" href="/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/">Generate APEX plug-ins on the command line</a></h2>
 <span class="item-meta">Instead of uploading new files to a plug-in, we generate the plug-in via a template on the command line and install it</span></li>
@@ -71,13 +75,10 @@
 <h2><a class="item-link" href="/posts/2020-12-26-new-version-of-oracle-table-api-generator-available/">New Version of Oracle Table API Generator Available</a></h2>
 <span class="item-meta">Bulk processing, support for audit and row version columns and more</span></li>
 
-<li><span class="item-meta">Aug 2020</span>
-<h2><a class="item-link" href="/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/">How to migrate Oracle Cloud wallet into existing auto_login_local wallet</a></h2>
-<span class="item-meta">One secure wallet for all your connections, no need to provide passwords in SQL*Plus, SQLcl and SQL Developer</span></li>
-
 </ul>
 <p>More in the <a href="/archive/">archive</a>, subscribe via <a href="/feed.xml">RSS</a>, explore via tags: 
-<span class="nowrap"><a href="/tags/apex/">APEX</a><sub class="item-meta xs"> 16</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/apex/">APEX</a><sub class="item-meta xs"> 17</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/caddy/">Caddy</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/chart/">Chart</a><sub class="item-meta xs"> 4</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/converter/">Converter</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/d3.js/">D3.js</a><sub class="item-meta xs"> 3</sub></span>&nbsp;
@@ -88,26 +89,28 @@
 <span class="nowrap"><a href="/tags/generator/">Generator</a><sub class="item-meta xs"> 6</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/html/">HTML</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/instrumentation/">Instrumentation</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/jquery/">jQuery</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/jquery/">JQuery</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/log/">Log</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/mac/">Mac</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/markdown/">Markdown</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/matplotlib/">Matplotlib</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/node.js/">Node.js</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/npm/">npm</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/oddgen/">oddgen</a><sub class="item-meta xs"> 3</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/open-source-project/">Open source project</a><sub class="item-meta xs"> 13</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/oracle/">Oracle</a><sub class="item-meta xs"> 27</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/npm/">Npm</a><sub class="item-meta xs"> 2</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/oddgen/">Oddgen</a><sub class="item-meta xs"> 3</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/open-source-project/">Open Source Project</a><sub class="item-meta xs"> 13</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/oracle/">Oracle</a><sub class="item-meta xs"> 28</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/pandoc/">Pandoc</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/php/">PHP</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/pl/sql/">PL/SQL</a><sub class="item-meta xs"> 9</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/plug-in/">Plug-in</a><sub class="item-meta xs"> 8</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/plug-in/">Plug-In</a><sub class="item-meta xs"> 8</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/proxy/">Proxy</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/python/">Python</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/reveal.js/">Reveal.js</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/script/">Script</a><sub class="item-meta xs"> 7</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/sqlplus/">SQL*Plus</a><sub class="item-meta xs"> 3</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/ssl/">SSL</a><sub class="item-meta xs"> 1</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/svg/">SVG</a><sub class="item-meta xs"> 4</sub></span>&nbsp;
-<span class="nowrap"><a href="/tags/version-control/">Version control</a><sub class="item-meta xs"> 5</sub></span>&nbsp;
+<span class="nowrap"><a href="/tags/version-control/">Version Control</a><sub class="item-meta xs"> 5</sub></span>&nbsp;
 <span class="nowrap"><a href="/tags/wallet/">Wallet</a><sub class="item-meta xs"> 2</sub></span>&nbsp;</p>
 
 

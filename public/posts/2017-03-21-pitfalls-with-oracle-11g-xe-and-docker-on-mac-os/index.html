@@ -8,7 +8,7 @@
   <title>Pitfalls with Oracle 11g XE and Docker on Mac OS</title>
   <meta name="description" content="The swap space problem and how to fix it">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
+  <meta name="generator" content="Hugo 0.135.0">
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -65,74 +65,74 @@
 <p>So, what can we do? After a short search I found <a href="https://www.elastichosts.com/blog/oracle-database-installation-on-a-container-running-centos/">this blog post</a>, which describes how to alter the pre-installation script of the RPM installation file with the help of the <code>repmrebuild</code> command. Unfortunately this command is not available on Mac OS. I found only rpmbuild as part of the rpm installation with <a href="https://brew.sh">Homebrew</a>.</p>
 <p>Luckily I found another way to modify a rpm package under Mac OS: There is a Ruby based tool to build packages for multiple platforms called <a href="https://github.com/jordansissel/fpm">fpm</a>. So, lets start:</p>
 <p>If you don&rsquo;t have <a href="https://brew.sh">Homebrew</a> on your Mac, install this first:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/ruby -e <span class="se">\
-</span><span class="se"></span><span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&#34;</span>
-</code></pre></div><p>Install rpm:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install rpm
-</code></pre></div><p>Install tar:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install gnu-tar
-</code></pre></div><p>Install fpm:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gem install --no-ri --no-rdoc fpm
-</code></pre></div><p>Unzip the downloaded Linux XE installation archive and go into the directory Disk1:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span><span class="nb">cd</span> Disk1
-</code></pre></div><p>Write rpm scripts to text file:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rpm <span class="se">\
-</span><span class="se"></span>  --scripts <span class="se">\
-</span><span class="se"></span>  -qp oracle-xe-11.2.0-1.0.x86_64.rpm <span class="se">\
-</span><span class="se"></span>  &gt; scripts.txt
-</code></pre></div><p>Find this loop (from line 197 until line 212 as of this writing) and comment out or delete it:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># check and disallow install, if swap space is less than Min( 2047, 2 * RAM)`</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$swapspace</span> -lt <span class="nv">$requiredswapspace</span> <span class="o">]</span>
-<span class="k">then</span>
-	<span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$requiredswapspace</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;2047&#34;</span> <span class="o">]</span><span class="p">;</span>
-	<span class="k">then</span>
-		<span class="nv">requiredswapspace</span><span class="o">=</span><span class="m">2048</span>
-	<span class="k">fi</span>
-	<span class="nb">echo</span>
-        <span class="nb">echo</span> <span class="s2">&#34;This system does not meet the minimum requirements for swap space.  Based on
-</span><span class="s2">the amount of physical memory available on the system, Oracle Database 11g
-</span><span class="s2">Express Edition requires </span><span class="nv">$requiredswapspace</span><span class="s2"> MB of swap space. This system has </span><span class="nv">$swapspace</span><span class="s2"> MB
-</span><span class="s2">of swap space.  Configure more swap space on the system and retry the
-</span><span class="s2">installation.&#34;</span>
-	<span class="nb">echo</span>
-        <span class="nb">exit</span> <span class="m">1</span>
-<span class="k">fi</span>
-</code></pre></div><p>Find this line (starting on line 328 as of this writing) and delete the line and everything behind until the file end:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">postinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
-</code></pre></div><p>Delete the very first line containing this code:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">preinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
-</code></pre></div><p>Save the file and bring it back into the rpm with this command (will take some time):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">fpm <span class="se">\
-</span><span class="se"></span>  -s rpm <span class="se">\
-</span><span class="se"></span>  -t rpm <span class="se">\
-</span><span class="se"></span>  -f --before-install scripts.txt <span class="se">\
-</span><span class="se"></span>  ./oracle-xe-11.2.0-1.0.x86_64.rpm
-</code></pre></div><p>Go out of Disk1 and update the zip archive, because the Oracle provided build script needs it compressed (will take some time):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>zip -r oracle-xe-11.2.0-1.0.x86_64.rpm.zip Disk1
-</code></pre></div><p>When you now do the Docker build you will face another error message:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/usr/bin/ruby -e <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p>Install rpm:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install rpm
+</span></span></code></pre></div><p>Install tar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install gnu-tar
+</span></span></code></pre></div><p>Install fpm:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gem install --no-ri --no-rdoc fpm
+</span></span></code></pre></div><p>Unzip the downloaded Linux XE installation archive and go into the directory Disk1:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="nb">cd</span> Disk1
+</span></span></code></pre></div><p>Write rpm scripts to text file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rpm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --scripts <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -qp oracle-xe-11.2.0-1.0.x86_64.rpm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  &gt; scripts.txt
+</span></span></code></pre></div><p>Find this loop (from line 197 until line 212 as of this writing) and comment out or delete it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># check and disallow install, if swap space is less than Min( 2047, 2 * RAM)`</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$swapspace</span> -lt <span class="nv">$requiredswapspace</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">then</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$requiredswapspace</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;2047&#34;</span> <span class="o">]</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">then</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">requiredswapspace</span><span class="o">=</span><span class="m">2048</span>
+</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;This system does not meet the minimum requirements for swap space.  Based on
+</span></span></span><span class="line"><span class="cl"><span class="s2">the amount of physical memory available on the system, Oracle Database 11g
+</span></span></span><span class="line"><span class="cl"><span class="s2">Express Edition requires </span><span class="nv">$requiredswapspace</span><span class="s2"> MB of swap space. This system has </span><span class="nv">$swapspace</span><span class="s2"> MB
+</span></span></span><span class="line"><span class="cl"><span class="s2">of swap space.  Configure more swap space on the system and retry the
+</span></span></span><span class="line"><span class="cl"><span class="s2">installation.&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><p>Find this line (starting on line 328 as of this writing) and delete the line and everything behind until the file end:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">postinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
+</span></span></code></pre></div><p>Delete the very first line containing this code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">preinstall scriptlet <span class="o">(</span>using /bin/sh<span class="o">)</span>:
+</span></span></code></pre></div><p>Save the file and bring it back into the rpm with this command (will take some time):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fpm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -s rpm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -t rpm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -f --before-install scripts.txt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  ./oracle-xe-11.2.0-1.0.x86_64.rpm
+</span></span></code></pre></div><p>Go out of Disk1 and update the zip archive, because the Oracle provided build script needs it compressed (will take some time):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>zip -r oracle-xe-11.2.0-1.0.x86_64.rpm.zip Disk1
+</span></span></code></pre></div><p>When you now do the Docker build you will face another error message:</p>
 <blockquote>
 <p>package oracle-xe-11.2.0-1.0.x86_64 is intended for a different operating system</p>
 </blockquote>
 <p>To fix this is fairly easy. Open the Dockerfile.xe, go to line 61 (as of this writing) and change this code:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rpm -i Disk1/*.rpm <span class="o">&amp;&amp;</span>    <span class="se">\
-</span></code></pre></div><p>to this one:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rpm -i --ignoreos Disk1/*.rpm <span class="o">&amp;&amp;</span> <span class="se">\
-</span></code></pre></div><p>When you now start the docker build you should be successful (will take some time):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo ./buildDockerImage.sh -v 11.2.0.2 -x -i
-</code></pre></div><p>The last step is to run the container - on the first startup the database is created (will take some time, align the name to your needs):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run <span class="se">\
-</span><span class="se"></span>  --name orclapex51 <span class="se">\
-</span><span class="se"></span>  --shm-size<span class="o">=</span>1g <span class="se">\
-</span><span class="se"></span>  -p 1521:1521 <span class="se">\
-</span><span class="se"></span>  -p 8080:8080 <span class="se">\
-</span><span class="se"></span>  oracle/database:11.2.0.2-xe
-</code></pre></div><p>If you plan to use APEX without any dedicated webserver (maybe because you are the only user and it is only a small dev instance) you should pimp the EPG a little bit:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">shared_servers</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">max_shared_servers</span><span class="o">=</span><span class="mi">20</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">dispatchers</span><span class="o">=</span><span class="s1">&#39;(PROTOCOL=TCP) (SERVICE=xeXDB) (DISPATCHERS=2)&#39;</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
-</span></code></pre></div><p>I use currently a Node.js based proxy server running directly on my Mac OS, because I need a webserver there anyway. The nice thing is, that the EPG don&rsquo;t need to serve the images and I also don&rsquo;t need to install the images into the EPG, when I upgrade to a newer APEX version. This saves me time and the EPG runs faster because of less number of requests. I will cover this topic in the next post.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rpm -i Disk1/*.rpm <span class="o">&amp;&amp;</span>    <span class="se">\
+</span></span></span></code></pre></div><p>to this one:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rpm -i --ignoreos Disk1/*.rpm <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span></code></pre></div><p>When you now start the docker build you should be successful (will take some time):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ./buildDockerImage.sh -v 11.2.0.2 -x -i
+</span></span></code></pre></div><p>The last step is to run the container - on the first startup the database is created (will take some time, align the name to your needs):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name orclapex51 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --shm-size<span class="o">=</span>1g <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 1521:1521 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8080:8080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  oracle/database:11.2.0.2-xe
+</span></span></code></pre></div><p>If you plan to use APEX without any dedicated webserver (maybe because you are the only user and it is only a small dev instance) you should pimp the EPG a little bit:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">shared_servers</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">max_shared_servers</span><span class="o">=</span><span class="mi">20</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">dispatchers</span><span class="o">=</span><span class="s1">&#39;(PROTOCOL=TCP) (SERVICE=xeXDB) (DISPATCHERS=2)&#39;</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="k">both</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>I use currently a Node.js based proxy server running directly on my Mac OS, because I need a webserver there anyway. The nice thing is, that the EPG don&rsquo;t need to serve the images and I also don&rsquo;t need to install the images into the EPG, when I upgrade to a newer APEX version. This saves me time and the EPG runs faster because of less number of requests. I will cover this topic in the next post.</p>
 <p>Happy installing :-)</p>
 <p>Ottmar</p>
 

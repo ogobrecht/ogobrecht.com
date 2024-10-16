@@ -8,7 +8,7 @@
   <title>New Version of D3 Force Network Chart Available</title>
   <meta name="description" content="Links can now have a label">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
+  <meta name="generator" content="Hugo 0.135.0">
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -57,7 +57,7 @@
 
 <div class="item-content" itemprop="articleBody">
 
-<p><img src="link-label.png" alt="Link label example"></p>
+<p><img alt="Link label example" src="/posts/2019-06-09-new-version-of-d3-force-network-chart-available/link-label.png"></p>
 <p>First of all: Thanks to the community!</p>
 <p>From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.</p>
 <p>The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above. The labels are positioned in a way that they are always readable - this is the reason why they appear sometimes above and sometimes below a link line (they are rotated, if needed). The nice thing is that you can also read both labels when you have links in both directions between two nodes. The other benefit of having labels on links is that they extend the area for the link click and hover events. This improves the usabiltiy in cases where the links should show a tooltip when they are hovered or some action should be executed when they are clicked. This is normally not so easy because the links are so narrow.</p>

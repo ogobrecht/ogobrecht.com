@@ -2,8 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ogobrecht.com/</loc>
+    <lastmod>2099-12-31T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/posts/</loc>
+    <lastmod>2099-12-31T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/posts/"
+                />
+  </url><url>
     <loc>https://ogobrecht.com/tags/apex/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
@@ -13,6 +39,84 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/tags/apex/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/caddy/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/caddy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/caddy/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/oracle/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/oracle/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/oracle/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/proxy/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/proxy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/proxy/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/ssl/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/ssl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/ssl/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</loc>
@@ -26,19 +130,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/tags/node.js/</loc>
@@ -67,19 +158,6 @@
                 href="https://ogobrecht.com/tags/npm/"
                 />
   </url><url>
-    <loc>https://ogobrecht.com/tags/oracle/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/oracle/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/oracle/"
-                />
-  </url><url>
     <loc>https://ogobrecht.com/tags/plug-in/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
@@ -93,19 +171,6 @@
                 href="https://ogobrecht.com/tags/plug-in/"
                 />
   </url><url>
-    <loc>https://ogobrecht.com/posts/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/posts/"
-                />
-  </url><url>
     <loc>https://ogobrecht.com/tags/script/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
@@ -117,19 +182,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/tags/script/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/tags/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/tags/debug/</loc>
@@ -182,6 +234,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/tags/open-source-project/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/tags/pl/sql/</loc>
+    <lastmod>2021-10-08T13:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/pl/sql/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/pl/sql/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/</loc>
@@ -459,18 +524,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://ogobrecht.com/imprint/"
-                />
-  </url><url>
-    <loc>https://ogobrecht.com/tags/pl/sql/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://ogobrecht.com/de/tags/pl/sql/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://ogobrecht.com/tags/pl/sql/"
                 />
   </url><url>
     <loc>https://ogobrecht.com/archive/</loc>

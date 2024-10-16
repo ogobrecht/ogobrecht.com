@@ -8,7 +8,7 @@
   <title>Schnellstart - Versionskontrolle für existierende Oracle-Projekte</title>
   <meta name="description" content="DOAG Red Stack Magazin 03-2019">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
+  <meta name="generator" content="Hugo 0.135.0">
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/">
   <link rel="alternate" href="https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/" hreflang="en" title="English">
@@ -94,52 +94,52 @@
 <p>Abbildung 1 zeigt das Ergebnis bezogen auf die Fragestellung.</p>
 <figure>
 <table>
-<thead>
-<tr>
-<th>Kriterium</th>
-<th>SQL Dev.</th>
-<th>PL/SQL Dev.</th>
-<th>Toad</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Datei pro Objekt</td>
-<td>Ja</td>
-<td>Ja</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>Unterverz. pro Typ</td>
-<td>Ja</td>
-<td>Nein</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>FK Constr. extra</td>
-<td>Ja</td>
-<td>Nein</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>Verhi. &ldquo;object exist&rdquo;</td>
-<td>Nein</td>
-<td>Nein</td>
-<td>Nein</td>
-</tr>
-<tr>
-<td>Export Daten</td>
-<td>Ja</td>
-<td>Nein</td>
-<td><em><strong>Jein</strong></em></td>
-</tr>
-<tr>
-<td>Export APEX App</td>
-<td><em><strong>Jein</strong></em></td>
-<td>Nein</td>
-<td>Nein</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Kriterium</th>
+          <th style="text-align: left">SQL Dev.</th>
+          <th style="text-align: left">PL/SQL Dev.</th>
+          <th style="text-align: left">Toad</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Datei pro Objekt</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Unterverz. pro Typ</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">FK Constr. extra</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Verhi. &ldquo;object exist&rdquo;</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Export Daten</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left"><em><strong>Jein</strong></em></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Export APEX App</td>
+          <td style="text-align: left"><em><strong>Jein</strong></em></td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+      </tr>
+  </tbody>
 </table>
 
 <figcaption>Abbildung 1: Toolvergleich DDL-Export</figcaption>
@@ -173,36 +173,36 @@
 <h2 id="schnellstart-package-plex">Schnellstart: Package PLEX</h2>
 <p>PLEX hat zum Ziel, die erste Version des Repositories mit einer einfachen Query als BLOB selektieren zu können. Nach Speichern des BLOBs in das lokale Verzeichnissystem auf dem PC mit der Endung .zip kann man es entpacken und findet in der generierten Verzeichnisstruktur dann auch Skript-Beispiele für zukünftige halb- oder vollautomatische Exporte und Deployments per Shell-Befehl bzw. SQL*Plus. Ein möglicher Erstexport könnte so aussehen wie in Listing 1 dargestellt.</p>
 <figure>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">WITH</span><span class="w">
-</span><span class="w">  </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">backapp</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="nb">BLOB</span><span class="w"> </span><span class="k">IS</span><span class="w">
-</span><span class="w">  </span><span class="k">BEGIN</span><span class="w">
-</span><span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span><span class="w">
-</span><span class="w">      </span><span class="n">p_app_id</span><span class="w">               </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* If null, we simply skip the APEX app export. 
-</span><span class="cm">        Parameter only available if APEX installed. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_include_object_ddl</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* If true, include DDL of current user/schema and 
-</span><span class="cm">        all its objects. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_include_templates</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* If true, include templates for README.md, export 
-</span><span class="cm">        and install scripts. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_include_runtime_log</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* If true, generate file plex_backapp_log.md with 
-</span><span class="cm">        runtime statistics. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_include_data</span><span class="w">         </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* If true, include CSV data of each table. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_data_max_rows</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="cm">/* Maximum number of rows per table. */</span><span class="w">
-</span><span class="w">      </span><span class="n">p_data_table_name_like</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;DEMO_PRODUCT_INFO,DEMO_STATES&#39;</span><span class="w"> 
-</span><span class="w">        </span><span class="cm">/* A comma separated list of like expressions to filter 
-</span><span class="cm">        the tables. Example: &#39;EMP%,DEPT%&#39; will be translated to 
-</span><span class="cm">        &#34;where ... and (table_name like &#39;EMP%&#39; escape &#39;\&#39; or
-</span><span class="cm">        table_name like &#39;DEPT%&#39; escape &#39;\&#39;)&#34;. */</span><span class="w">
-</span><span class="w">    </span><span class="p">));</span><span class="w">
-</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">backapp</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">backapp</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="p">;</span><span class="w">
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">WITH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">backapp</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="nb">BLOB</span><span class="w"> </span><span class="k">IS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">plex</span><span class="p">.</span><span class="n">to_zip</span><span class="p">(</span><span class="n">plex</span><span class="p">.</span><span class="n">backapp</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_app_id</span><span class="w">               </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* If null, we simply skip the APEX app export. 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        Parameter only available if APEX installed. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_include_object_ddl</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* If true, include DDL of current user/schema and 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        all its objects. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_include_templates</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* If true, include templates for README.md, export 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        and install scripts. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_include_runtime_log</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* If true, generate file plex_backapp_log.md with 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        runtime statistics. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_include_data</span><span class="w">         </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* If true, include CSV data of each table. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_data_max_rows</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* Maximum number of rows per table. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">p_data_table_name_like</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">&#39;DEMO_PRODUCT_INFO,DEMO_STATES&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="cm">/* A comma separated list of like expressions to filter 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        the tables. Example: &#39;EMP%,DEPT%&#39; will be translated to 
+</span></span></span><span class="line"><span class="cl"><span class="cm">        &#34;where ... and (table_name like &#39;EMP%&#39; escape &#39;\&#39; or
+</span></span></span><span class="line"><span class="cl"><span class="cm">        table_name like &#39;DEPT%&#39; escape &#39;\&#39;)&#34;. */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">backapp</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">backapp</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div>
 <figcaption>Listing 1: Möglicher Erstexport</figcaption>
 </figure>
 <p>Da PLEX boolesche Parameter besitzt, benutzen wir eine Inline-Funktion in der With-Klausel. Wer eine Datenbankversion kleiner als 12c verwendet erstellt sich eine Hilfsfunktion analog dem Beispiel. PLEX hat noch einige Parameter mehr um z.B. den APEX App Export zu konfigurieren. Weitere Details sind auf der offiziellen Projektseite unter <a href="https://github.com/ogobrecht/plex">github.com/ogobrecht/plex</a> zu finden. Je nach Größe des Schemas und der APEX App kann dieser erste Aufruf zwischen wenigen Sekunden und mehreren Minuten dauern. Das liegt daran, dass im Hintergund für jedes Objekt das Package DBMS_METADATA bemüht wird, um das DDL des Objektes zu generieren. Wer an Laufzeitinfos interessiert ist, findet im Hauptverzeichnis des Exportes eine Logdatei mit Infos, was PLEX so alles gemacht hat und wie lange die jeweiligen Schritte gedauert haben. PLEX selbst existiert jetzt in einer ersten Version - Verbesserungsvorschläge oder Fehlermeldungen sind willkommen und können über die Projektseite als Issue gemeldet werden.</p>
@@ -211,47 +211,47 @@
 <h2 id="geschwindigkeit-immer-skripte">Geschwindigkeit: Immer Skripte</h2>
 <p>Wie man schon an den von PLEX mitgelieferten Skript-Beispielen erkennen kann, sollte es das Ziel sein, jedwedes Deployment per Skript auszuführen. Dazu gehört dann auch wieder die Überlegung, das Objekt-DDL nur beim allerersten Mal zu exportieren - denn was passiert z.B. beim Export von Tabellen-DDL? Hat man eine weitere Spalte per Alter Table Anweisung in das Tabellenskript geschrieben und dafür gesorgt, dass es wiederanlauffähig ist (siehe Listing 2), dann überschreibt ein weiterer DDL-Export die Alter Anweisung und unser Tabellenskript enthält einfach die neue Spalte gelistet in der Create Table Anweisung. Diese wird aber aufgrund der Wiederanlauffähigkeit niemals mehr ausgeführt, da unsere Tabelle ja schon existiert.</p>
 <figure>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">BEGIN</span><span class="w">
-</span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;DEMO_STATES&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">object_name</span><span class="w">
-</span><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="w"> 
-</span><span class="w">     </span><span class="n">MINUS</span><span class="w">
-</span><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">object_name</span><span class="w"> 
-</span><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_objects</span><span class="w">
-</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
-</span><span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">q</span><span class="s1">&#39;[
-</span><span class="s1">----------------------------------------
-</span><span class="s1">CREATE TABLE &#34;DEMO_STATES&#34; (
-</span><span class="s1">  &#34;ST&#34;         VARCHAR2(30), 
-</span><span class="s1">  &#34;STATE_NAME&#34; VARCHAR2(30)
-</span><span class="s1">) 
-</span><span class="s1">----------------------------------------
-</span><span class="s1">    ]&#39;</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">BEGIN</span><span class="w">
-</span><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;STATE_DESCRIPTION&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">column_name</span><span class="w"> 
-</span><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="w"> 
-</span><span class="w">     </span><span class="n">MINUS</span><span class="w">
-</span><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> 
-</span><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_tab_columns</span><span class="w">
-</span><span class="w">     </span><span class="k">WHERE</span><span class="w"> </span><span class="k">table_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DEMO_STATES&#39;</span><span class="w">
-</span><span class="w">       </span><span class="k">AND</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;STATE_DESCRIPTION&#39;</span><span class="w">
-</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
-</span><span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">q</span><span class="s1">&#39;[
-</span><span class="s1">----------------------------------------
-</span><span class="s1">ALTER TABLE demo_states ADD (
-</span><span class="s1">  state_description VARCHAR2(255)
-</span><span class="s1">)
-</span><span class="s1">----------------------------------------
-</span><span class="s1">    ]&#39;</span><span class="p">;</span><span class="w">
-</span><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;DEMO_STATES&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">object_name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">MINUS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">object_name</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_objects</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">q</span><span class="s1">&#39;[
+</span></span></span><span class="line"><span class="cl"><span class="s1">----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1">CREATE TABLE &#34;DEMO_STATES&#34; (
+</span></span></span><span class="line"><span class="cl"><span class="s1">  &#34;ST&#34;         VARCHAR2(30), 
+</span></span></span><span class="line"><span class="cl"><span class="s1">  &#34;STATE_NAME&#34; VARCHAR2(30)
+</span></span></span><span class="line"><span class="cl"><span class="s1">) 
+</span></span></span><span class="line"><span class="cl"><span class="s1">----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ]&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;STATE_DESCRIPTION&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">column_name</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">dual</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">MINUS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_tab_columns</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">WHERE</span><span class="w"> </span><span class="k">table_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DEMO_STATES&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="k">AND</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;STATE_DESCRIPTION&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">LOOP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">q</span><span class="s1">&#39;[
+</span></span></span><span class="line"><span class="cl"><span class="s1">----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1">ALTER TABLE demo_states ADD (
+</span></span></span><span class="line"><span class="cl"><span class="s1">  state_description VARCHAR2(255)
+</span></span></span><span class="line"><span class="cl"><span class="s1">)
+</span></span></span><span class="line"><span class="cl"><span class="s1">----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ]&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span></code></pre></div>
 <figcaption>Listing 2: Wiederanlauffähiges Skript</figcaption>
 </figure>
 <p>Somit haben wir jetzt eine Quellcodedatei, die für das Deployment nicht mehr geeignet ist. Schade eigentlich, denn bis eben hätten wir mit unserem Master-Skript einfach immer alle Objekt-Skripte aufrufen können und nur die Änderungen (wie z.B. unsere neue Spalte) wären wirklich ausgeführt worden - ein einfaches Deployment und eine übersichtliche Historie im Repository. Dem gegenüber steht das automatische Erstellen von Diff-Skripten, die mitunter nicht wiederanlauffähig sind und auch bei etwas komplizierteren Schema-Änderungen die Gefahr eines Datenverlustes beinhalten. Man kommt auch bei sehr teuren Tools dieser Klasse nicht umhin, die generierten Skripte auf Richtigkeit zu überprüfen und manuelle Anpassungen für etwaige Datenmigrationen auszuführen. Die Entscheidung, welchen Weg man geht, nimmt einem niemand ab. Jetzt sind wir mittendrin in der Diskussion wie man ein Deployment in das Zielsystem durchführt. Da kann dann auch PLEX nicht weiterhelfen - außer, dass das Package per se versucht, alle notwenigen Objekt-DDLs wiederanlauffähig zu extrahieren. Hier sind wir im weiten Feld der individuellen Bedürfnisse eines Projektes angekommen. Die von PLEX gelieferten Skriptbeispiele müssen auf jeden Fall an die Bedürfnisse des jeweiligen Projektes angepasst werden. Der Autor z.B. unterscheidet fast immer zwischen Skripten für das Backend und das Frontend - sowohl für den Export als auch das Deployment.</p>

@@ -4,11 +4,11 @@ languages:
   en:
     weight: 1
     languageName: English
-    translationHint: Show content in English
-    commentHint: Comments are only available in English
     title: Ottmar’s Notes
     params:
       description: Mainly about Oracle APEX and PL/SQL
+      translationHint: Show content in English
+      commentHint: Comments are only available in English
     menu:
       main:
         - name: Home
@@ -39,10 +39,10 @@ languages:
   de:
     weight: 2
     languageName: Deutsch
-    translationHint: Inhalt in Deutsch anzeigen
     title: Ottmar’s Notizen
     params:
       description: Hauptsächlich über Oracle APEX und PL/SQL
+      translationHint: Inhalt in Deutsch anzeigen
     menu:
       main:
         - name: Startseite

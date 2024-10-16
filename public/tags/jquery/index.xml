@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>jQuery on Ottmar’s Notes</title>
+    <title>JQuery on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/jquery/</link>
-    <description>Recent content in jQuery on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent content in JQuery on Ottmar’s Notes</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Mon, 21 Jan 2019 16:16:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Show Today Button in APEX Datepicker</title>
       <link>https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2018-07-22-today-button-in-apex-datepicker/</guid>
-      <description>Maxime Tremblay has already described here how to customize the datepicker.
-He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.
-In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called Today and a second one to close the datepicker which is called Done I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:</description>
+      <description>&lt;p&gt;Maxime Tremblay has already described &lt;a href=&#34;http://max-tremblay.blogspot.com/2018/03/datepicker-customization.html&#34;&gt;here&lt;/a&gt; how to customize the datepicker.&lt;/p&gt;&#xA;&lt;p&gt;He had to deal with missing classes after changing options. I found this week a different way to customize the datepicker without loosing classes added by APEX: Simply by setting datepicker defaults on page load before any datepicker is initialized.&lt;/p&gt;&#xA;&lt;p&gt;In my case I wanted to enable the button panel which shows two buttons - one to go to the current month which is called &lt;code&gt;Today&lt;/code&gt; and a second one to close the datepicker which is called &lt;code&gt;Done&lt;/code&gt; I only wanted the today button, so I had to provide beside the JavaScript or dynamic action some CSS to hide the second one:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>jQuery Plugin svg2img</title>
       <link>https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/</link>
-      <pubDate>Mon, 03 Apr 2017 00:00:00 +0000</pubDate>
-      
+      <pubDate>Mon, 03 Apr 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2017-04-03-jquery-plugin-svg2img/</guid>
-      <description>SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?
-You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements.</description>
+      <description>&lt;p&gt;SVG based charts and visualizations are often used these days. But what if you want to use your browser inline SVGs, generated with some sort of JavaScript and fancy styled with CSS, offline - maybe in a presentation, send by email or printed out large scaled?&lt;/p&gt;&#xA;&lt;p&gt;You can create a screenshot, of course. But does this look nice when it comes to scaling? You can try to copy the HTML code of the SVG and wrap it into a correct SVG container, but then you will loose in the most cases the stylings, as normally not all CSS definitions are directly attached to the SVG elements. You can also use a browser extension like &lt;a href=&#34;https://chrome.google.com/webstore/detail/export-svg-with-style/dkjdcaddoplepioppogpckelchefhddi&#34;&gt;this one for Google Chrome&lt;/a&gt;, but then you depend on the browser and the extension.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

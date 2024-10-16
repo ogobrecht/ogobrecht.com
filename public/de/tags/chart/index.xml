@@ -4,20 +4,18 @@
     <title>Chart on Ottmar’s Notizen</title>
     <link>https://ogobrecht.com/de/tags/chart/</link>
     <description>Recent content in Chart on Ottmar’s Notizen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 17 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/chart/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sat, 12 Aug 2017 20:06:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/de/tags/chart/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reporting mal anders, Markdown sei Dank</title>
       <link>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</guid>
-      <description>Die Folien zu meinem Vortrag:
-Open HTML presentation in a new window/tab
-You need a modern browser with activated JavaScript. Navigation tips:
- N, Space = Next slide P = Previous slide O, Esc = Overview all slides ? = Show all keyboard shortcuts All links are opened in a new window/tab   Kurzdarstellung:
-Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.</description>
+      <description>&lt;p&gt;Die Folien zu meinem Vortrag:&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://ogobrecht.com/slides/2016-11-17-reporting-mal-anders-markdown-sei-dank/&#34; target=&#34;_blank&#34;&gt;Open HTML presentation in a new window/tab&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;blockquote class=&#34;item-meta&#34;&gt;&#xA;  &lt;p&gt;You need a modern browser with activated JavaScript. Navigation tips:&lt;/p&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;code&gt;N&lt;/code&gt;, &lt;code&gt;Space&lt;/code&gt; = Next slide&lt;/li&gt;&#xA;    &lt;li&gt;&lt;code&gt;P&lt;/code&gt; = Previous slide&lt;/li&gt;&#xA;    &lt;li&gt;&lt;code&gt;O&lt;/code&gt;, &lt;code&gt;Esc&lt;/code&gt; = Overview all slides&lt;/li&gt;&#xA;    &lt;li&gt;&lt;code&gt;?&lt;/code&gt; = Show all keyboard shortcuts&lt;/li&gt;&#xA;    &lt;li&gt;All links are opened in a new window/tab&lt;/li&gt;&#xA;    &#xA;    &#xA;  &lt;/ul&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;Kurzdarstellung:&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;Markdown hat sich in den letzten Jahren als vereinfachte Auszeichnungssprache zur HTML-Erstellung durchgesetzt. Es genügt ein einfacher Texteditor und wenige, allgemein gebräuchliche Konventionen, um z.B. eine Aufzählung in reinem Text auszuzeichnen, die jeder als solche erkennt. Dieser Vortrag erklärt anhand einer Beispiel-Implementierung, wie wir mit Hilfe von Markdown, dem Formatkonverter Pandoc, dem Textsatzsystem LaTeX, der Python Matplotlib und Node.js eine auf Open Source Tools basierende Reporting-Engine erstellen können, die per PL/SQL ansprechbar ist. Das Ergebnis sind hochwertige PDF-Dokumente in Buchdruckqualität, in denen Charts rein vektorbasiert eingebettet sind. Auch bei einer Konvertierung in HTML sind alle Charts vektorbasiert direkt in einer einzelnen HTML-Datei enthalten, wodurch die Weiterverarbeitung erleichtert wird. Was diese Reporting-Engine von anderen unterscheidet ist die Herangehensweise: Es werden keine pixelgenauen Templates erstellt, stattdessen überläßt man es LaTeX, wie der Text gesetzt und die Tabellen und Charts eingebettet werden. Und das ganze eben, ohne sich mit LaTeX-Quellcode auseinandersetzen zu müssen. Zur Auszeichnung wird Markdown verwendet und zur Definition von Tabellen und Charts verwenden wir trickreich die in Markdown vorhandene Möglichkeit, Codeblöcke zu hinterlegen, in die wir einfach unsere SQL-Abfragen eintragen.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

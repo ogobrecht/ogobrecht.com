@@ -4,25 +4,25 @@
     <title>Wallet on Ottmar’s Notes</title>
     <link>https://ogobrecht.com/tags/wallet/</link>
     <description>Recent content in Wallet on Ottmar’s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/tags/wallet/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Sat, 28 Nov 2020 15:42:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/wallet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to migrate Oracle Cloud wallet into existing auto_login_local wallet</title>
       <link>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</link>
-      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
-      
+      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2020-08-03-how-to-migrate-oracle-cloud-wallet-into-existing-auto-login-local-wallet/</guid>
-      <description>I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with orapki instead of mkstore:</description>
+      <description>&lt;p&gt;I started to store user credentials in wallet files for higher security in SQL scripts. If you do so you should also secure the access to your wallet files on the operating system level. This is especially true for auto-login wallets from the Oracle Cloud. To increase the security a bit further you can restrict the auto-login to the local user who created the wallet. To achieve this you need to create an own wallet with &lt;code&gt;orapki&lt;/code&gt; instead of &lt;code&gt;mkstore&lt;/code&gt;:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>How to use mkstore and orapki with Oracle Instant Client</title>
       <link>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/posts/2020-07-29-how-to-use-mkstore-and-orapki-with-oracle-instant-client/</guid>
-      <description>For some years I use only the Oracle Instant Client. I had too often trouble with the full client installation on my corporate PCs under Windows, especially in the old Windows 32/64 bit times. The instant client can be used by download and extract one basic zip file and adding an entry to your path environment variable. If you want to use SQL*Plus and other tools you need to download two additional files - no drama, also without admin rights.</description>
+      <description>&lt;p&gt;For some years I use only the &lt;a href=&#34;https://www.oracle.com/database/technologies/instant-client.html&#34;&gt;Oracle Instant Client&lt;/a&gt;. I had too often trouble with the full client installation on my corporate PCs under Windows, especially in the old Windows 32/64 bit times. The instant client can be used by download and extract one basic zip file and adding an entry to your path environment variable. If you want to use SQL*Plus and other tools you need to download two additional files - no drama, also without admin rights.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

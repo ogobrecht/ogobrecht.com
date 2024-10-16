@@ -8,7 +8,7 @@
   <title>Why I Like SQL*Plus for Deployment Scripts</title>
   <meta name="description" content="SQLcl is eating my error messages">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.90.1" />
+  <meta name="generator" content="Hugo 0.135.0">
   <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
   <link rel="canonical" href="https://ogobrecht.com/posts/2020-01-02-why-i-like-sqlplus-for-deployment-scripts/">
   <link rel="alternate" href="https://ogobrecht.com/feed.xml" type="application/atom+xml" title="Ottmar’s Notes">
@@ -58,33 +58,33 @@
 <div class="item-content" itemprop="articleBody">
 
 <p>The following simplified example deployment master script is given:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w">
-</span><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
-</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="n">deployment</span><span class="p">.</span><span class="n">log</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Script</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">Dummy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">demonstration</span><span class="w">
-</span><span class="w"></span><span class="c1">-- normally we call here some other scripts like
-</span><span class="c1">-- @other-script.sql
-</span><span class="c1"></span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">anonymous</span><span class="w"> </span><span class="n">block</span><span class="w">
-</span><span class="w"></span><span class="k">begin</span><span class="w">
-</span><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="w">
-</span><span class="w">    </span><span class="o">-</span><span class="mi">20000</span><span class="p">,</span><span class="w"> 
-</span><span class="w">    </span><span class="s1">&#39;Error test for SQL*Plus &lt;&gt; SQLcl comparison&#39;</span><span class="w">
-</span><span class="w">  </span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="o">/</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="p">:</span><span class="o">-</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="n">prompt</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
-</span></code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">whenever</span><span class="w"> </span><span class="k">sqlerror</span><span class="w"> </span><span class="n">exit</span><span class="w"> </span><span class="k">sql</span><span class="p">.</span><span class="k">sqlcode</span><span class="w"> </span><span class="k">rollback</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="n">deployment</span><span class="p">.</span><span class="n">log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Script</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">Dummy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">demonstration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- normally we call here some other scripts like
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- @other-script.sql
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Step</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">anonymous</span><span class="w"> </span><span class="n">block</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">raise_application_error</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">-</span><span class="mi">20000</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s1">&#39;Error test for SQL*Plus &lt;&gt; SQLcl comparison&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="o">========================================</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w"> </span><span class="n">Deployment</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="p">:</span><span class="o">-</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">prompt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">spool</span><span class="w"> </span><span class="k">off</span><span class="w">
+</span></span></span></code></pre></div><p>When we call this in SQL*Plus (version 19.5), we get the following output (in
 the console and also in deployment.log) with an indication of what went wrong
 with our deployment:</p>
 <pre tabindex="0"><code>Example Deployment Master Script
@@ -121,9 +121,9 @@ this&hellip;</p>
 Windows, not Mac, not Linux&hellip;</p>
 <p>So, if you are facing this problem on Windows then you have to wait for a future
 release or set as a workaround the feedback to on:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">on</span><span class="w">
-</span><span class="w"></span><span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span><span class="w">
-</span></code></pre></div><p>Here the output on my Windows 10 laptop:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">set</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="k">off</span><span class="w"> </span><span class="n">feedback</span><span class="w"> </span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">snip</span><span class="o">&gt;</span><span class="w">
+</span></span></span></code></pre></div><p>Here the output on my Windows 10 laptop:</p>
 <pre tabindex="0"><code>Demo Deployment Master Script
 ========================================
 Step 1: Dummy for demonstration
@@ -133,13 +133,13 @@ Rollback
 Error starting at line : 10 File @ C:\temp\deployment.sql
 In Command -
 begin
-  raise_application_error(-20000, 'error test for SQL*Plus &lt;&gt; SQLcl comparison');
+  raise_application_error(-20000, &#39;error test for SQL*Plus &lt;&gt; SQLcl comparison&#39;);
 end;
 Error report -
 ORA-20000: error test for SQL*Plus &lt;&gt; SQLcl comparison
 ORA-06512: at line 2
-20000. 00000 -  &quot;%s&quot;
-*Cause:    The stored procedure 'raise_application_error'
+20000. 00000 -  &#34;%s&#34;
+*Cause:    The stored procedure &#39;raise_application_error&#39;
            was called which causes this error to be generated.
 *Action:   Correct the problem as described in the error message or contact
            the application administrator or DBA for more information.

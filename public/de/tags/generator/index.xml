@@ -4,27 +4,25 @@
     <title>Generator on Ottmar’s Notizen</title>
     <link>https://ogobrecht.com/de/tags/generator/</link>
     <description>Recent content in Generator on Ottmar’s Notizen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://ogobrecht.com/de/tags/generator/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>de</language>
+    <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
+    <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
+    <lastBuildDate>Mon, 30 Aug 2021 13:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/de/tags/generator/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Erstellung schneller Insert-Skripte</title>
       <link>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</guid>
-      <description>Vor einigen Wochen habe ich eine neue Version meines PLEX-Projekts veröffentlicht. Ich habe die Möglichkeit verbessert, Tabellendaten als Insert-Skripte zu exportieren. Bisher war PLEX nur in der Lage, CSV-Daten zu exportieren. Der Grund dafür war, dass ich PLEX ursprünglich entwickelt habe, um die Einführung einer Versionskontrolle in Oracle-DB-Projekten zu beschleunigen, und die Möglichkeit CSV-Daten zu exportieren war dazu gedacht, Änderungen in Stammdatentabellen zu verfolgen.
-Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert.</description>
+      <description>&lt;p&gt;Vor einigen Wochen habe ich eine neue Version meines &lt;a href=&#34;https://github.com/ogobrecht/plex&#34;&gt;PLEX-Projekts&lt;/a&gt; veröffentlicht. Ich habe die Möglichkeit verbessert, Tabellendaten als Insert-Skripte zu exportieren. Bisher war PLEX nur in der Lage, CSV-Daten zu exportieren. Der Grund dafür war, dass ich PLEX ursprünglich entwickelt habe, um die Einführung einer Versionskontrolle in Oracle-DB-Projekten zu beschleunigen, und die Möglichkeit CSV-Daten zu exportieren war dazu gedacht, Änderungen in Stammdatentabellen zu verfolgen.&lt;/p&gt;&#xA;&lt;p&gt;Es stellte sich heraus, dass ein Kollege von mir wollte, dass PLEX für das initiale Deployment einer neuen Anwendung Insert-Skripte für alle Daten in allen Tabellen exportiert. Ich habe eine erste Version implementiert, war aber mit der Laufzeit der Insert-Skripte nicht zufrieden. Ich höre jetzt einige Leute argumentieren, dass es bessere Tools als Insert-Skripte für den Import größerer Datenmengen gibt - aber manchmal ist dies der einzige akzeptierte Weg, weil nur SQL*Plus zur Ausführung der Deployment-Skripte zur Verfügung steht&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>APEX Meetup 17.06.2016, Frankfurt</title>
       <link>https://ogobrecht.com/de/posts/2016-06-17-apex-meetup-frankfurt/</link>
-      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate>
-      
+      <pubDate>Fri, 17 Jun 2016 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
       <guid>https://ogobrecht.com/de/posts/2016-06-17-apex-meetup-frankfurt/</guid>
-      <description>Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum Table API Generator dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema APEX Fine Art Printing, Markdown Überall gezeigt.
-Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt.</description>
+      <description>&lt;p&gt;Heute bin ich früh morgens mit dem Zug nach Frankfurt gefahren. Ich bin von Moritz Klein und Sabine Heimsath eingeladen worden - das Motto: &amp;ldquo;Ein ganz generisches APEX Meetup&amp;rdquo;. Passend zum Motto hatte ich einen Vortrag zum &lt;a href=&#34;https://ogobrecht.com/posts/2016-06-10-table-api-generator/&#34;&gt;Table API Generator&lt;/a&gt; dabei, meinem neuesten Open Source Projekt zusammen mit André Borngräber. Daneben habe ich noch einmal meinen APEX connect Vortrag zum Thema &lt;a href=&#34;https://ogobrecht.com/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/&#34;&gt;APEX Fine Art Printing, Markdown Überall&lt;/a&gt; gezeigt.&lt;/p&gt;&#xA;&lt;p&gt;Moritz hat mir dankenswerterweise für tagsüber Arbeitsasyl in seinem Office gewährt. Mittags waren wir lecker essen zusammen mit Sabine. Die zwei haben dann das Meetup für abends noch einmal besprochen.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
