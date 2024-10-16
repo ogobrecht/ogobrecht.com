@@ -6,8 +6,8 @@ slug: impressum
 Verantwortlich für den Inhalt dieser Webseite:
 
 Ottmar Gobrecht\
-Knappertsbuschstraße 19\
-81927 München (Germany)\
+Reichenau 13\
+92726 Waidhaus (Germany)\
 {{< author-email >}}
 
 [Datenschutz-Erklärung](/de/datenschutz-erklaerung/)
