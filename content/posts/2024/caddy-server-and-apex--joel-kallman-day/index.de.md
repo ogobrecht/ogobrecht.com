@@ -1,5 +1,5 @@
 ---
-title: Caddy Server - APEX hinter einem vollautomatischem SSL Proxy #JoelKallmanDay
+title: 'Caddy Server - APEX hinter einem vollautomatischem SSL Proxy #JoelKallmanDay'
 description: Vergesst selbstsignierte Zertifikate und Browser, die sich darüber beschweren
 tags: [Oracle, APEX, SSL, proxy, Caddy]
 slug: caddy-server-and-apex--joel-kallman-day

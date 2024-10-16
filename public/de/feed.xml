@@ -10,13 +10,13 @@
 <link href="https://ogobrecht.com/de/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://ogobrecht.com/de/" rel="alternate" type="text/html" hreflang="de" />
 <generator uri="https://gohugo.io/" version="0.135.0">Hugo</generator>
-<updated>2024-10-16T09:19:47+01:00</updated>
+<updated>2024-10-16T10:27:37+01:00</updated>
 
 
 <entry xml:lang="de">
 <id>https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</id>
-<link href="https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" rel="alternate" type="text/html" title="Caddy Server - APEX hinter einem vollautomatischem SSL Proxy" />
-<title type="html">Caddy Server - APEX hinter einem vollautomatischem SSL Proxy</title>
+<link href="https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/" rel="alternate" type="text/html" title="Caddy Server - APEX hinter einem vollautomatischem SSL Proxy #JoelKallmanDay" />
+<title type="html">Caddy Server - APEX hinter einem vollautomatischem SSL Proxy #JoelKallmanDay</title>
 <summary type="html">Vergesst selbstsignierte Zertifikate und Browser, die sich darüber beschweren</summary>
 <category term="oracle" label="Oracle" scheme="https://ogobrecht.com/tags/" />
 <category term="apex" label="APEX" scheme="https://ogobrecht.com/tags/" />
