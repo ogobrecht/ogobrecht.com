@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chart on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/chart/</link>
+    <link>https://ogobrecht.com/tags/chart/</link>
     <description>Recent content in Chart on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Sun, 09 Jun 2019 16:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/chart/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/tags/chart/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New Version of D3 Force Network Chart Available</title>
-      <link>http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
+      <link>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</link>
       <pubDate>Sun, 09 Jun 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</guid>
-      <description>First of all: Thanks to the community!&#xA;From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.&#xA;The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above.</description>
+      <guid>https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;Link label example&#34; src=&#34;https://ogobrecht.com/posts/2019-06-09-new-version-of-d3-force-network-chart-available/link-label.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;First of all: Thanks to the community!&lt;/p&gt;&#xA;&lt;p&gt;From time to time someone has new ideas or questions about the D3 network chart. Some time ago I thought my D3 implementation is more or less feature complete. But in the last weeks I worked again on the code to bring in new feature wishes from the community.&lt;/p&gt;&#xA;&lt;p&gt;The most visible one in the new version 3.1 is the ability to add labels to links - see the links between Allen, Blake and Ward in the screenshot above. The labels are positioned in a way that they are always readable - this is the reason why they appear sometimes above and sometimes below a link line (they are rotated, if needed). The nice thing is that you can also read both labels when you have links in both directions between two nodes. The other benefit of having labels on links is that they extend the area for the link click and hover events. This improves the usabiltiy in cases where the links should show a tooltip when they are hovered or some action should be executed when they are clicked. This is normally not so easy because the links are so narrow.&lt;/p&gt;</description>
     </item>
     <item>
       <title>New Major Version of D3 Force Network Chart Available</title>
-      <link>http://localhost:8888/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</link>
+      <link>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</link>
       <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</guid>
-      <description>Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes.</description>
+      <guid>https://ogobrecht.com/posts/2018-12-02-new-major-version-of-d3-force-network-chart-available/</guid>
+      <description>&lt;div id=&#34;example&#34;&gt;&lt;/div&gt;&lt;!--the graph container--&gt;&#xA;&lt;p&gt;Since APEX version 5 was published with the Universal Theme, I was thinking that I needed something for better responsiveness of the graph. Although it was possible to configure the graph to use the DOM parent width, the responsiveness was not so good because of situations where the window size does not change (we use the window resize event to trigger the change of the width) but the available space for the graph changes. How can the graph react to this?&lt;/p&gt;</description>
     </item>
     <item>
       <title>APEX Plugin dhtmlxGantt</title>
-      <link>http://localhost:8888/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</link>
+      <link>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
-      <description>Some weeks ago I was asked, if I can create a plugin for the Gantt chart library from dhtmlx.com. I had a look at the library and I thought that it should be possible.&#xA;Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality.</description>
+      <guid>https://ogobrecht.com/posts/2017-03-14-apex-plugin-dhtmlx-gantt/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;Preview&#34; src=&#34;https://raw.githubusercontent.com/ogobrecht/apex-plugin-dhtmlx-gantt/master/preview.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Some weeks ago I was asked, if I can create a plugin for the &lt;a href=&#34;https://dhtmlx.com/docs/products/dhtmlxGantt/&#34;&gt;Gantt chart library from dhtmlx.com&lt;/a&gt;. I had a look at the library and I thought that it should be possible.&lt;/p&gt;&#xA;&lt;p&gt;Because all my plugin developments are free time projects it took a while. Now the first public version is available. It is based on the GPLv2 version of the library, which has a reduced set of functionality. If you need advanced features like milestones, auto scheduling or calculating the critical path you can buy a Pro version of the library. I have no relation to the company behind dhtmlx.com, so please do not complain. As I told before I was asked for this plugin (which will be used in a Pro version there&amp;hellip;) and I like the visualization from DHTMLX.&lt;/p&gt;</description>
     </item>
     <item>
       <title>D3.js Force-Directed Network Chart</title>
-      <link>http://localhost:8888/posts/2015-02-20-d3js-force-directed-network-chart/</link>
+      <link>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</link>
       <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2015-02-20-d3js-force-directed-network-chart/</guid>
-      <description>My first Oracle APEX plugin and open source project :-)&#xA;Everything started some months ago when I stumbled over this fascinating force-directed graph. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.</description>
+      <guid>https://ogobrecht.com/posts/2015-02-20-d3js-force-directed-network-chart/</guid>
+      <description>&lt;p&gt;&lt;em&gt;My first Oracle APEX plugin and open source project :-)&lt;/em&gt;&lt;/p&gt;&#xA;&lt;div id=&#34;example&#34;&gt;&lt;/div&gt;&lt;!--the graph container--&gt;&#xA;&lt;p&gt;Everything started some months ago when I stumbled over this fascinating &lt;a href=&#34;https://bl.ocks.org/mbostock/4062045&#34;&gt;force-directed graph&lt;/a&gt;. I immediately had the idea to use this technology to visualize data models in APEX. My experience is, that direct after I documented a data model, this documentation is out of date. I wanted to have a live visualization of the data models. After the first implementation it turned out, that the resulting graph is also useful for other purposes and I decided to build up an APEX plugin for easier integration.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

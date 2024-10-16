@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schnellstart - Versionskontrolle für existierende Oracle-Projekte</title>
   <meta name="description" content="DOAG Red Stack Magazin 03-2019">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.132.1">
-  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
-  <link rel="canonical" href="http://localhost:8888/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/">
-  <link rel="alternate" href="http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/" hreflang="en" title="English">
-  <link rel="alternate" href="http://localhost:8888/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
+  <meta name="generator" content="Hugo 0.135.0">
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/">
+  <link rel="alternate" href="https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/" hreflang="en" title="English">
+  <link rel="alternate" href="https://ogobrecht.com/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -36,7 +36,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="Schnellstart - Versionskontrolle für existierende Oracle-Projekte">
   <meta name="twitter:description" content="DOAG Red Stack Magazin 03-2019">
-  <meta name="twitter:image" content="http://localhost:8888/assets/images/avatar.jpg">
+  <meta name="twitter:image" content="https://ogobrecht.com/assets/images/avatar.jpg">
   <meta name="twitter:image:alt" content="Author photo">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -94,52 +94,52 @@
 <p>Abbildung 1 zeigt das Ergebnis bezogen auf die Fragestellung.</p>
 <figure>
 <table>
-<thead>
-<tr>
-<th>Kriterium</th>
-<th>SQL Dev.</th>
-<th>PL/SQL Dev.</th>
-<th>Toad</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Datei pro Objekt</td>
-<td>Ja</td>
-<td>Ja</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>Unterverz. pro Typ</td>
-<td>Ja</td>
-<td>Nein</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>FK Constr. extra</td>
-<td>Ja</td>
-<td>Nein</td>
-<td>Ja</td>
-</tr>
-<tr>
-<td>Verhi. &ldquo;object exist&rdquo;</td>
-<td>Nein</td>
-<td>Nein</td>
-<td>Nein</td>
-</tr>
-<tr>
-<td>Export Daten</td>
-<td>Ja</td>
-<td>Nein</td>
-<td><em><strong>Jein</strong></em></td>
-</tr>
-<tr>
-<td>Export APEX App</td>
-<td><em><strong>Jein</strong></em></td>
-<td>Nein</td>
-<td>Nein</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">Kriterium</th>
+          <th style="text-align: left">SQL Dev.</th>
+          <th style="text-align: left">PL/SQL Dev.</th>
+          <th style="text-align: left">Toad</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Datei pro Objekt</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Unterverz. pro Typ</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">FK Constr. extra</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Ja</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Verhi. &ldquo;object exist&rdquo;</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Export Daten</td>
+          <td style="text-align: left">Ja</td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left"><em><strong>Jein</strong></em></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Export APEX App</td>
+          <td style="text-align: left"><em><strong>Jein</strong></em></td>
+          <td style="text-align: left">Nein</td>
+          <td style="text-align: left">Nein</td>
+      </tr>
+  </tbody>
 </table>
 
 <figcaption>Abbildung 1: Toolvergleich DDL-Export</figcaption>

@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Npm on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/npm/</link>
+    <link>https://ogobrecht.com/tags/npm/</link>
     <description>Recent content in Npm on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Wed, 13 Oct 2021 12:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/tags/npm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Generate APEX plug-ins on the command line</title>
-      <link>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
+      <link>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
-      <description>Table of Contents Introduction Creating a template from the existing plug-in JavaScript helper functions for conversion Build script to build the plug-in when changes are made in the source code. NPM scripts for orchestration A complete example Another way Introduction Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others.</description>
+      <guid>https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/</guid>
+      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#creating-a-template-from-the-existing-plug-in&#34;&gt;Creating a template from the existing plug-in&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#javascript-helper-functions-for-conversion&#34;&gt;JavaScript helper functions for conversion&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#build-script-to-build-the-plug-in-when-changes-are-made-in-the-source-code&#34;&gt;Build script to build the plug-in when changes are made in the source code.&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#npm-scripts-for-orchestration&#34;&gt;NPM scripts for orchestration&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#a-complete-example&#34;&gt;A complete example&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#another-way&#34;&gt;Another way&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Everyone who develops plug-ins for APEX knows the problem: Once a plug-in is finished, future maintenance is usually just a matter of uploading updated JavaScript files to the plug-in and finally downloading the plug-in to make it available to others. This can be a very time consuming process when troubleshooting or implementing a new feature.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PLOC - Convert PL/SQL Code into Markdown Docs</title>
-      <link>http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
+      <link>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
-      <description>Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)&#xA;Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code.</description>
+      <guid>https://ogobrecht.com/posts/2019-01-10-ploc-plsql-code-to-doc-converter/</guid>
+      <description>&lt;p&gt;Some months ago I had to write a README file with Markdown syntax for a PL/SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)&lt;/p&gt;&#xA;&lt;p&gt;Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code. As you can imagine, the latter is sometimes - let&amp;rsquo;s say &amp;ldquo;out of date&amp;rdquo;, if it exists at all &amp;hellip;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://localhost:8888//sitemap.xml
+Sitemap: https://ogobrecht.com//sitemap.xml

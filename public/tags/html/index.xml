@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HTML on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/html/</link>
+    <link>https://ogobrecht.com/tags/html/</link>
     <description>Recent content in HTML on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Fri, 01 Dec 2017 20:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HydeBar</title>
-      <link>http://localhost:8888/posts/2017-11-29-hydebar/</link>
+      <link>https://ogobrecht.com/posts/2017-11-29-hydebar/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2017-11-29-hydebar/</guid>
-      <description>Earlier this year I wrote at the end of this post:&#xA;PS: In the meantime I switched complete to Markdown and Jekyll, a static site generator - but this is another story for another post &amp;hellip;&#xA;As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the JSDoc theme Minami and the Liquid docs site - both with nice sidebars.</description>
+      <guid>https://ogobrecht.com/posts/2017-11-29-hydebar/</guid>
+      <description>&lt;p&gt;Earlier this year I wrote at the end of &lt;a href=&#34;https://ogobrecht.com/posts/2017-03-05-dokuwiki-plugin-revealjs&#34;&gt;this post&lt;/a&gt;:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;PS: In the meantime I switched complete to Markdown and &lt;a href=&#34;https://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt;, a static site generator - but this is another story for another post &amp;hellip;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the &lt;a href=&#34;https://github.com/nijikokun/minami&#34;&gt;JSDoc theme Minami&lt;/a&gt; and the &lt;a href=&#34;https://shopify.github.io/liquid/&#34;&gt;Liquid docs site&lt;/a&gt; - both with nice sidebars. I wanted to have such a nice sidebar for my dev blog and began to look deeper how it was implemented. To my surprise the sidebar from the JSDoc theme Minami was complete CSS driven - cool.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Form Behaviour - Bug or Feature?</title>
-      <link>http://localhost:8888/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</link>
+      <link>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</link>
       <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</guid>
-      <description>Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.&#xA;The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue).</description>
+      <guid>https://ogobrecht.com/posts/2017-09-26-why-forms-with-single-input-are-submitted-by-the-enter-key/</guid>
+      <description>&lt;p&gt;Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.&lt;/p&gt;&#xA;&lt;p&gt;The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue). The reason was that the search field was the only input item on that page.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

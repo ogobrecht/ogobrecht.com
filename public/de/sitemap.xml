@@ -2,466 +2,453 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:8888/de/tags/caddy/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/tags/apex/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/caddy/"
+                href="https://ogobrecht.com/tags/apex/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/caddy/"
+                href="https://ogobrecht.com/de/tags/apex/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/tags/caddy/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
+                href="https://ogobrecht.com/tags/caddy/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
+                href="https://ogobrecht.com/de/tags/caddy/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/oracle-apex/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/oracle-apex/"
+                href="https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/oracle-apex/"
+                href="https://ogobrecht.com/de/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/tags/oracle/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/"
+                href="https://ogobrecht.com/tags/oracle/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/"
+                href="https://ogobrecht.com/de/tags/oracle/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/proxy/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/posts/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/proxy/"
+                href="https://ogobrecht.com/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/proxy/"
+                href="https://ogobrecht.com/de/posts/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/ssl/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/tags/proxy/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/ssl/"
+                href="https://ogobrecht.com/tags/proxy/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/ssl/"
+                href="https://ogobrecht.com/de/tags/proxy/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/tags/ssl/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/"
+                href="https://ogobrecht.com/tags/ssl/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/"
+                href="https://ogobrecht.com/de/tags/ssl/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/</loc>
-    <lastmod>2024-10-16T12:00:00+00:00</lastmod>
+    <loc>https://ogobrecht.com/de/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/"
+                href="https://ogobrecht.com/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/"
+                href="https://ogobrecht.com/de/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/apex/</loc>
+    <loc>https://ogobrecht.com/de/tags/</loc>
+    <lastmod>2024-10-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://ogobrecht.com/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://ogobrecht.com/de/tags/"
+                />
+  </url><url>
+    <loc>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/apex/"
+                href="https://ogobrecht.com/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/apex/"
+                href="https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</loc>
+    <loc>https://ogobrecht.com/de/tags/node.js/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/2021-10-13-generate-apex-plug-ins-on-the-command-line/"
+                href="https://ogobrecht.com/tags/node.js/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/"
+                href="https://ogobrecht.com/de/tags/node.js/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/node.js/</loc>
+    <loc>https://ogobrecht.com/de/tags/npm/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/node.js/"
+                href="https://ogobrecht.com/tags/npm/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/node.js/"
+                href="https://ogobrecht.com/de/tags/npm/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/npm/</loc>
+    <loc>https://ogobrecht.com/de/tags/plug-in/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/npm/"
+                href="https://ogobrecht.com/tags/plug-in/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/npm/"
+                href="https://ogobrecht.com/de/tags/plug-in/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/oracle/</loc>
+    <loc>https://ogobrecht.com/de/tags/script/</loc>
     <lastmod>2021-10-13T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/oracle/"
+                href="https://ogobrecht.com/tags/script/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/oracle/"
+                href="https://ogobrecht.com/de/tags/script/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/plug-in/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:8888/tags/plug-in/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="http://localhost:8888/de/tags/plug-in/"
-                />
-  </url><url>
-    <loc>http://localhost:8888/de/tags/script/</loc>
-    <lastmod>2021-10-13T12:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:8888/tags/script/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="http://localhost:8888/de/tags/script/"
-                />
-  </url><url>
-    <loc>http://localhost:8888/de/tags/debug/</loc>
+    <loc>https://ogobrecht.com/de/tags/debug/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/debug/"
+                href="https://ogobrecht.com/tags/debug/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/debug/"
+                href="https://ogobrecht.com/de/tags/debug/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</loc>
+    <loc>https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/"
+                href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/"
+                href="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/instrumentation/</loc>
+    <loc>https://ogobrecht.com/de/tags/instrumentation/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/instrumentation/"
+                href="https://ogobrecht.com/tags/instrumentation/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/instrumentation/"
+                href="https://ogobrecht.com/de/tags/instrumentation/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/log/</loc>
+    <loc>https://ogobrecht.com/de/tags/log/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/log/"
+                href="https://ogobrecht.com/tags/log/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/log/"
+                href="https://ogobrecht.com/de/tags/log/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/open-source-project/</loc>
+    <loc>https://ogobrecht.com/de/tags/open-source-project/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/open-source-project/"
+                href="https://ogobrecht.com/tags/open-source-project/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/open-source-project/"
+                href="https://ogobrecht.com/de/tags/open-source-project/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/pl/sql/</loc>
+    <loc>https://ogobrecht.com/de/tags/pl/sql/</loc>
     <lastmod>2021-10-04T12:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/pl/sql/"
+                href="https://ogobrecht.com/tags/pl/sql/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/pl/sql/"
+                href="https://ogobrecht.com/de/tags/pl/sql/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2021-01-31-create-fast-insert-scripts/</loc>
+    <loc>https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/</loc>
     <lastmod>2021-08-30T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/2021-01-31-create-fast-insert-scripts/"
+                href="https://ogobrecht.com/posts/2021-01-31-create-fast-insert-scripts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/2021-01-31-create-fast-insert-scripts/"
+                href="https://ogobrecht.com/de/posts/2021-01-31-create-fast-insert-scripts/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/generator/</loc>
+    <loc>https://ogobrecht.com/de/tags/generator/</loc>
     <lastmod>2021-08-30T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/generator/"
+                href="https://ogobrecht.com/tags/generator/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/generator/"
+                href="https://ogobrecht.com/de/tags/generator/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/doag/</loc>
+    <loc>https://ogobrecht.com/de/tags/doag/</loc>
     <lastmod>2019-12-01T16:06:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/doag/"
+                href="https://ogobrecht.com/tags/doag/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/doag/"
+                href="https://ogobrecht.com/de/tags/doag/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2019-11-19-doag-konferenz/</loc>
+    <loc>https://ogobrecht.com/de/posts/2019-11-19-doag-konferenz/</loc>
     <lastmod>2019-12-01T16:06:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/tags/slides/</loc>
+    <loc>https://ogobrecht.com/de/tags/slides/</loc>
     <lastmod>2019-12-01T16:06:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/tags/version-control/</loc>
+    <loc>https://ogobrecht.com/de/tags/version-control/</loc>
     <lastmod>2019-12-01T16:06:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/version-control/"
+                href="https://ogobrecht.com/tags/version-control/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/version-control/"
+                href="https://ogobrecht.com/de/tags/version-control/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</loc>
+    <loc>https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/</loc>
     <lastmod>2019-08-15T21:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/posts/2019-07-20-quick-start-version-control-for-oracle-projects/"
+                href="https://ogobrecht.com/posts/2019-07-20-quick-start-version-control-for-oracle-projects/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/"
+                href="https://ogobrecht.com/de/posts/2019-07-20-schnellstart-versionskontrolle-fuer-oracle-projekte/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</loc>
+    <loc>https://ogobrecht.com/de/posts/2019-03-11-doag-regionaltreffen-muenchen/</loc>
     <lastmod>2019-03-16T13:06:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/tags/chart/</loc>
+    <loc>https://ogobrecht.com/de/tags/chart/</loc>
     <lastmod>2017-08-12T20:06:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/chart/"
+                href="https://ogobrecht.com/tags/chart/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/chart/"
+                href="https://ogobrecht.com/de/tags/chart/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/tags/markdown/</loc>
+    <loc>https://ogobrecht.com/de/tags/markdown/</loc>
     <lastmod>2017-08-12T20:06:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/markdown/"
+                href="https://ogobrecht.com/tags/markdown/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/markdown/"
+                href="https://ogobrecht.com/de/tags/markdown/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</loc>
+    <loc>https://ogobrecht.com/de/posts/2016-11-17-reporting-mal-anders-markdown-sei-dank/</loc>
     <lastmod>2017-08-12T20:06:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/posts/2016-06-17-apex-meetup-frankfurt/</loc>
+    <loc>https://ogobrecht.com/de/posts/2016-06-17-apex-meetup-frankfurt/</loc>
     <lastmod>2017-08-12T20:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</loc>
+    <loc>https://ogobrecht.com/de/posts/2016-04-26-apex-fine-art-printing-markdown-ueberall/</loc>
     <lastmod>2017-08-12T20:03:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/tags/d3.js/</loc>
+    <loc>https://ogobrecht.com/de/tags/d3.js/</loc>
     <lastmod>2019-08-15T21:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/d3.js/"
+                href="https://ogobrecht.com/tags/d3.js/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/d3.js/"
+                href="https://ogobrecht.com/de/tags/d3.js/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2015-06-09-d3js-data-driven-documents/</loc>
+    <loc>https://ogobrecht.com/de/posts/2015-06-09-d3js-data-driven-documents/</loc>
     <lastmod>2017-08-12T20:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/tags/svg/</loc>
+    <loc>https://ogobrecht.com/de/tags/svg/</loc>
     <lastmod>2019-08-15T21:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/tags/svg/"
+                href="https://ogobrecht.com/tags/svg/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/tags/svg/"
+                href="https://ogobrecht.com/de/tags/svg/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/posts/2015-03-01-d3js-grundlagen/</loc>
+    <loc>https://ogobrecht.com/de/posts/2015-03-01-d3js-grundlagen/</loc>
     <lastmod>2019-08-15T21:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:8888/de/archiv/</loc>
+    <loc>https://ogobrecht.com/de/archiv/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/archive/"
+                href="https://ogobrecht.com/archive/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/archiv/"
+                href="https://ogobrecht.com/de/archiv/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/datenschutz-erklaerung/</loc>
+    <loc>https://ogobrecht.com/de/datenschutz-erklaerung/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/privacy-statement/"
+                href="https://ogobrecht.com/privacy-statement/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/datenschutz-erklaerung/"
+                href="https://ogobrecht.com/de/datenschutz-erklaerung/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/impressum/</loc>
+    <loc>https://ogobrecht.com/de/impressum/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/imprint/"
+                href="https://ogobrecht.com/imprint/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/impressum/"
+                href="https://ogobrecht.com/de/impressum/"
                 />
   </url><url>
-    <loc>http://localhost:8888/de/ueber/</loc>
+    <loc>https://ogobrecht.com/de/ueber/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:8888/about/"
+                href="https://ogobrecht.com/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="http://localhost:8888/de/ueber/"
+                href="https://ogobrecht.com/de/ueber/"
                 />
   </url>
 </urlset>

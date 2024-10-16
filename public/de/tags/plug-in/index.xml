@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Plug-In on Ottmar’s Notizen</title>
-    <link>http://localhost:8888/de/tags/plug-in/</link>
+    <link>https://ogobrecht.com/de/tags/plug-in/</link>
     <description>Recent content in Plug-In on Ottmar’s Notizen</description>
     <generator>Hugo</generator>
     <language>de</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Wed, 13 Oct 2021 12:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/de/tags/plug-in/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/de/tags/plug-in/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>APEX-Plug-ins auf der Kommandozeile generieren</title>
-      <link>http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</link>
+      <link>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</link>
       <pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
-      <description>Inhaltsverzeichnis Einleitung Erstellen eines Templates aus dem vorhandenen Plug-in JavaScript-Hilfsfunktionen für die Konvertierung Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode NPM Skripte zur Orchestrierung Ein komplettes Beispiel Ein anderer Weg Einleitung Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen.</description>
+      <guid>https://ogobrecht.com/de/posts/2021-10-13-apex-plugins-auf-der-kommandozeile-generieren/</guid>
+      <description>&lt;h2&gt;Inhaltsverzeichnis&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#einleitung&#34;&gt;Einleitung&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#erstellen-eines-templates-aus-dem-vorhandenen-plug-in&#34;&gt;Erstellen eines Templates aus dem vorhandenen Plug-in&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#javascript-hilfsfunktionen-für-die-konvertierung&#34;&gt;JavaScript-Hilfsfunktionen für die Konvertierung&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#build-skript-zum-bauen-des-plug-ins-bei-änderungen-im-quellcode&#34;&gt;Build-Skript zum Bauen des Plug-ins bei Änderungen im Quellcode&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#npm-skripte-zur-orchestrierung&#34;&gt;NPM Skripte zur Orchestrierung&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#ein-komplettes-beispiel&#34;&gt;Ein komplettes Beispiel&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#ein-anderer-weg&#34;&gt;Ein anderer Weg&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;einleitung&#34;&gt;Einleitung&lt;/h2&gt;&#xA;&lt;p&gt;Alle, die Plug-ins für APEX entwickeln, kennen das Problem: Ist ein Plug-in erst einmal fertig, dann geht es bei der zukünftigen Pflege meistens nur darum, aktualisierte JavaScript-Dateien in das Plugin hochzuladen und zum Schluss das Plug-in herunterzuladen, um es für andere zur Verfügung zu stellen. Das kann ein sehr zeitaufwendiger Prozess sein, wenn man Fehler sucht oder ein neues Feature implementiert.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

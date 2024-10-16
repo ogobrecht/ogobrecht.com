@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Caddy on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/caddy/</link>
+    <link>https://ogobrecht.com/tags/caddy/</link>
     <description>Recent content in Caddy on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
-    <lastBuildDate>Wed, 16 Oct 2024 12:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/caddy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ogobrecht.com/tags/caddy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Caddy Server - APEX behind a fully automated SSL proxy</title>
-      <link>http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</link>
+      <link>https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</guid>
-      <description></description>
+      <guid>https://ogobrecht.com/posts/2024-10-16-caddy-server-and-apex--joel-kallman-day/</guid>
+      <description>&lt;p&gt;How time flies. Almost exactly three years ago to the day, I wrote my last blog post. Many thanks to Tim Hall and his reminder to write something again for &lt;a href=&#34;https://oracle-base.com/blog/2024/09/27/joel-kallman-day-2024-announcement/&#34;&gt;#JoelKallmanDay&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2&gt;Table of Contents&lt;/h2&gt;&#xA;&lt;nav id=&#34;TableOfContents&#34;&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#installation&#34;&gt;Installation&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#caddy-configuration&#34;&gt;Caddy Configuration&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#ords-configuration&#34;&gt;ORDS Configuration&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#start-caddy&#34;&gt;Start Caddy&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever been annoyed by the fact that your browser always shows you in red in the URL in your development environment that you have issued the SSL certificate yourself and that it is therefore invalid for it?&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

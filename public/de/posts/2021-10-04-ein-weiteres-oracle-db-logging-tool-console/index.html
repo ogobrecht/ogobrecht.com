@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8888&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ein weiteres Oracle DB Logging-Tool: Console</title>
   <meta name="description" content="Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit">
   <meta name="author" content="Ottmar Gobrecht">
-  <meta name="generator" content="Hugo 0.132.1">
-  <link rel="stylesheet" href="http://localhost:8888/assets/styles/main.css">
-  <link rel="canonical" href="http://localhost:8888/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/">
-  <link rel="alternate" href="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" hreflang="en" title="English">
-  <link rel="alternate" href="http://localhost:8888/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
+  <meta name="generator" content="Hugo 0.135.0">
+  <link rel="stylesheet" href="https://ogobrecht.com/assets/styles/main.css">
+  <link rel="canonical" href="https://ogobrecht.com/de/posts/2021-10-04-ein-weiteres-oracle-db-logging-tool-console/">
+  <link rel="alternate" href="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/" hreflang="en" title="English">
+  <link rel="alternate" href="https://ogobrecht.com/de/feed.xml" type="application/atom+xml" title="Ottmar’s Notizen">
   <link rel="shortcut icon" href="/assets/icon/favicon.ico">
   <link rel="icon" sizes="16x16 32x32 64x64" href="/assets/icon/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16.png">
@@ -36,7 +36,7 @@
   <meta name="twitter:site" content="@ogobrecht">
   <meta name="twitter:title" content="Ein weiteres Oracle DB Logging-Tool: Console">
   <meta name="twitter:description" content="Einfach zu installieren, funktioniert ohne Kontext und besondere Rechte auf administrative Views, bringt APEX Integration mit">
-  <meta name="twitter:image" content="http://localhost:8888/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/pete-nuij-m-AqW5QCxNQ-unsplash.jpg">
+  <meta name="twitter:image" content="https://ogobrecht.com/posts/2021-10-04-yet-another-oracle-db-logging-tool-console/pete-nuij-m-AqW5QCxNQ-unsplash.jpg">
   <meta name="twitter:image:alt" content="Fliegende Eule">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -477,90 +477,90 @@
 <p>Wer sich dafür interessiert, was in der aktuellen Session von Console konfiguriert ist, kann sich das mit einer Pipelined Table Function anschauen oder in seiner Anwendung mit einem Report zur Verfügung stellen:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">status</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></div><table>
-<thead>
-<tr>
-<th>ATTRIBUTE</th>
-<th>VALUE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>c_version</td>
-<td>1.0.0</td>
-</tr>
-<tr>
-<td>localtimestamp</td>
-<td>2021-10-03 13:58:00</td>
-</tr>
-<tr>
-<td>sysdate</td>
-<td>2021-10-03 11:58:00</td>
-</tr>
-<tr>
-<td>g_conf_check_sysdate</td>
-<td>2021-10-03 11:58:10</td>
-</tr>
-<tr>
-<td>g_conf_exit_sysdate</td>
-<td>2021-10-03 12:58:00</td>
-</tr>
-<tr>
-<td>g_conf_client_identifier</td>
-<td>{o,o} 11ECD3500002</td>
-</tr>
-<tr>
-<td>g_conf_level</td>
-<td>5</td>
-</tr>
-<tr>
-<td>level_name(g_conf_level)</td>
-<td>trace</td>
-</tr>
-<tr>
-<td>g_conf_check_interval</td>
-<td>10</td>
-</tr>
-<tr>
-<td>g_conf_enable_ascii_art</td>
-<td>true</td>
-</tr>
-<tr>
-<td>g_conf_call_stack</td>
-<td>false</td>
-</tr>
-<tr>
-<td>g_conf_user_env</td>
-<td>false</td>
-</tr>
-<tr>
-<td>g_conf_apex_env</td>
-<td>false</td>
-</tr>
-<tr>
-<td>g_conf_cgi_env</td>
-<td>false</td>
-</tr>
-<tr>
-<td>g_conf_console_env</td>
-<td>false</td>
-</tr>
-<tr>
-<td>g_counters.count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>g_timers.count</td>
-<td>2</td>
-</tr>
-<tr>
-<td>g_saved_stack.count</td>
-<td>0</td>
-</tr>
-<tr>
-<td>g_prev_error_msg</td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">ATTRIBUTE</th>
+          <th style="text-align: left">VALUE</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">c_version</td>
+          <td style="text-align: left">1.0.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">localtimestamp</td>
+          <td style="text-align: left">2021-10-03 13:58:00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sysdate</td>
+          <td style="text-align: left">2021-10-03 11:58:00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_check_sysdate</td>
+          <td style="text-align: left">2021-10-03 11:58:10</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_exit_sysdate</td>
+          <td style="text-align: left">2021-10-03 12:58:00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_client_identifier</td>
+          <td style="text-align: left">{o,o} 11ECD3500002</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_level</td>
+          <td style="text-align: left">5</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">level_name(g_conf_level)</td>
+          <td style="text-align: left">trace</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_check_interval</td>
+          <td style="text-align: left">10</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_enable_ascii_art</td>
+          <td style="text-align: left">true</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_call_stack</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_user_env</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_apex_env</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_cgi_env</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_conf_console_env</td>
+          <td style="text-align: left">false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_counters.count</td>
+          <td style="text-align: left">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_timers.count</td>
+          <td style="text-align: left">2</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_saved_stack.count</td>
+          <td style="text-align: left">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">g_prev_error_msg</td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="apex-error-handling-function">APEX Error Handling Function</h2>
 <p>Für APEX bringt Console eine sogenannte &ldquo;<a href="https://docs.oracle.com/en/database/oracle/application-express/20.2/aeapi/Example-of-an-Error-Handling-Function.html#GUID-2CD75881-1A59-4787-B04B-9AAEC14E1A82">Error Handling Function</a>&rdquo; mit, die Fehler innerhalb der APEX-Laufzeitumgebung in die Log-Tabelle eintragen kann. Wer das nutzen möchte, muss diese Funktion in seiner Anwendung im &ldquo;Application Builder&rdquo; unter &ldquo;Edit Application Properties &gt; Error Handling &gt; Error Handling Function&rdquo; eintragen: <code>console.apex_error_handling</code>.</p>

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pandoc on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/pandoc/</link>
+    <link>https://ogobrecht.com/tags/pandoc/</link>
     <description>Recent content in Pandoc on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Sat, 12 Aug 2017 20:10:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/pandoc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/tags/pandoc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Markdown Reporter</title>
-      <link>http://localhost:8888/posts/2017-01-23-markdown-reporter/</link>
+      <link>https://ogobrecht.com/posts/2017-01-23-markdown-reporter/</link>
       <pubDate>Mon, 23 Jan 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2017-01-23-markdown-reporter/</guid>
-      <description>On the APEX connect 2016 in Berlin I talked about my APEX Markdown plugin and fine art printing with the help of Pandoc and LaTeX. When I was preparing my slides and documenting a SQL query in a Markdown code block I asked myself:&#xA;What, if the database is taking this Markdown code block and runs the query inside to convert it into data?&#xA;And what, if I take this Markdown text with the data in the code blocks and post it to a small webservice which converts the data blocks into charts and the whole document into HTML or a LaTeX based PDF?</description>
+      <guid>https://ogobrecht.com/posts/2017-01-23-markdown-reporter/</guid>
+      <description>&lt;p&gt;On the APEX connect 2016 in Berlin I talked about my APEX Markdown plugin and fine art printing with the help of Pandoc and LaTeX. When I was preparing my slides and documenting a SQL query in a Markdown code block I asked myself:&lt;/p&gt;&#xA;&lt;p&gt;What, if the database is taking this Markdown code block and runs the query inside to convert it into data?&lt;/p&gt;&#xA;&lt;p&gt;And what, if I take this Markdown text with the data in the code blocks and post it to a small webservice which converts the data blocks into charts and the whole document into HTML or a LaTeX based PDF?&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mac on Ottmar’s Notes</title>
-    <link>http://localhost:8888/tags/mac/</link>
+    <link>https://ogobrecht.com/tags/mac/</link>
     <description>Recent content in Mac on Ottmar’s Notes</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</managingEditor>
     <webMaster>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</webMaster>
     <lastBuildDate>Sat, 12 Aug 2017 20:12:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:8888/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ogobrecht.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pitfalls with Oracle 11g XE and Docker on Mac OS</title>
-      <link>http://localhost:8888/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/</link>
+      <link>https://ogobrecht.com/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate><author>ottmar.gobrecht@gmail.com (Ottmar Gobrecht)</author>
-      <guid>http://localhost:8888/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/</guid>
-      <description>Recently I tried to install Oracle XE into a docker container on Mac OS Sierra using the official docker file from Oracle. I had no luck, because the installation failed with this error message:&#xA;This system does not meet the minimum requirements for swap space. Based on the amount of physical memory available on the system, Oracle Database 11g Express Edition requires 2048 MB of swap space. This system has 0 MB of swap space.</description>
+      <guid>https://ogobrecht.com/posts/2017-03-21-pitfalls-with-oracle-11g-xe-and-docker-on-mac-os/</guid>
+      <description>&lt;p&gt;Recently I tried to install Oracle XE into a docker container on Mac OS Sierra using the &lt;a href=&#34;https://github.com/oracle/docker-images/blob/master/OracleDatabase/dockerfiles/11.2.0.2/Dockerfile.xe&#34;&gt;official docker file&lt;/a&gt; from Oracle. I had no luck, because the installation failed with this error message:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;This system does not meet the minimum requirements for swap space. Based on the amount of physical memory available on the system, Oracle Database 11g Express Edition requires 2048 MB of swap space. This system has 0 MB of swap space. Configure more swap space on the system and retry the installation.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
