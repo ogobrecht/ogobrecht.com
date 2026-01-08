@@ -1,7 +1,5 @@
-# About
-
-This is the source code of my [personal dev blog][blog]. I use [Hugo] as a static site generator with my own theme. This means that the source code is under [Apache License 2.0][license] and the content falls under regular copyright laws.
-
-[blog]: https://ogobrecht.com
-[Hugo]: https://gohugo.io/
-[license]: https://github.com/gohugoio/hugo/blob/master/LICENSE
+This is the source code of my [personal dev blog](https://ogobrecht.com). I
+use [Zola](https://www.getzola.org/) as a static site generator with the
+[tabi theme](https://github.com/welpo/tabi). This means that the source code
+is under [MIT license](https://github.com/welpo/tabi/blob/main/LICENSE) and
+the content falls under regular copyright laws.

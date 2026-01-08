@@ -1,5 +1,5 @@
 
-<!-- .slide: data-background-image="/assets/images/braden-collum-87874-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/braden-collum-87874-unsplash.jpg" -->
 
 # Schnellstart
 ## Versionskontrolle für existierende Oracle Projekte
@@ -27,13 +27,13 @@ DOAG Konferenz Nürnberg<br>
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/danielle-macinnes-IuLgi9PWETU-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/danielle-macinnes-IuLgi9PWETU-unsplash.jpg" -->
 
 # Motivation
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/michael-d-beckwith-575798-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/michael-d-beckwith-575798-unsplash.jpg" -->
 
 > „There is no clean (database) development without Version Control“
 >
@@ -41,7 +41,7 @@ DOAG Konferenz Nürnberg<br>
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/stephen-radford-hLUTRzcVkqg-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/stephen-radford-hLUTRzcVkqg-unsplash.jpg" -->
 
 ## Deployment Pain?!?
 
@@ -78,7 +78,7 @@ DOAG Konferenz Nürnberg<br>
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/clark-young-135435-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/clark-young-135435-unsplash.jpg" -->
 
 # Tools
 
@@ -119,7 +119,7 @@ DOAG Konferenz Nürnberg<br>
 
 ---
 
-## Anmerkungen Toad 
+## Anmerkungen Toad
 - Zwei Exportmöglichkeiten (mindestens)
   - Entweder Unterverzeichnisse pro Objekttyp...
   - ... oder Daten
@@ -145,13 +145,13 @@ DOAG Konferenz Nürnberg<br>
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/camylla-battani-784361-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/camylla-battani-784361-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/gabriel-gabriel-wVB8tH5_L9s-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/gabriel-gabriel-wVB8tH5_L9s-unsplash.jpg" -->
 
 # PLEX
 
@@ -265,13 +265,13 @@ Create Repo & Export App
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/kevin-grieve-660962-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/kevin-grieve-660962-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/andrea-cappiello-770323-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/andrea-cappiello-770323-unsplash.jpg" -->
 
 # DDL
 ## <span style="color:red;">D</span>urch <span style="color:red;">d</span>ie <span style="color:red;">L</span>andschaft ;-)
@@ -311,13 +311,13 @@ Von DEV über INT nach PROD
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/kawtar-cherkaoui-125346-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/kawtar-cherkaoui-125346-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/james-thomas-125093-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/james-thomas-125093-unsplash.jpg" -->
 
 # Geschwindigkeit
 
@@ -332,7 +332,7 @@ Von DEV über INT nach PROD
 
 ---
 
-## Demo 
+## Demo
 
 APEX Export & Deployment
 
@@ -347,13 +347,13 @@ APEX Export & Deployment
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/wayne-bishop-5737-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/wayne-bishop-5737-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/ricky-kharawala-308072-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/ricky-kharawala-308072-unsplash.jpg" -->
 
 # Mehr Tools
 
@@ -411,13 +411,13 @@ APEX Export & Deployment
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/alexander-andrews-511680-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/alexander-andrews-511680-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/matt-lamers-683008-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/matt-lamers-683008-unsplash.jpg" -->
 
 # Fazit
 
@@ -476,7 +476,7 @@ Versionskontrolle nach DevOps meint<br>
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/nick-de-partee-97063-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/nick-de-partee-97063-unsplash.jpg" -->
 
 # The End
 

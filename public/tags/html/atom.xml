@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://ogobrecht.com/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;ogobrecht.com</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>HTML</tabi:current_section>
+    </tabi:metadata><title>Ottmar’s Notes - HTML</title>
+        <subtitle>Mainly about Oracle APEX and PL&#x2F;SQL</subtitle>
+    <link href="https://ogobrecht.com/tags/html/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ogobrecht.com/tags/html/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2017-11-29T00:00:00+00:00</updated><id>https://ogobrecht.com/tags/html/atom.xml</id><entry xml:lang="en">
+        <title>HydeBar</title>
+        <published>2017-11-29T00:00:00+00:00</published>
+        <updated>2017-11-29T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/hydebar/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/hydebar/</id>
+        
+            <content type="html">&lt;p&gt;Earlier this year I wrote at the end of &lt;a href=&quot;&#x2F;blog&#x2F;dokuwiki-plugin-revealjs&quot;&gt;this post&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS: In the meantime I switched complete to Markdown and &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;jekyllrb.com&quot;&gt;Jekyll&lt;&#x2F;a&gt;, a static site generator - but this is another story for another post …&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;As always - it took a bit longer then expected. In the meantime I was fiddling around with Jekyll and modifying the default theme Minima to my needs. Then I stumbled over the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;nijikokun&#x2F;minami&quot;&gt;JSDoc theme Minami&lt;&#x2F;a&gt; and the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;shopify.github.io&#x2F;liquid&#x2F;&quot;&gt;Liquid docs site&lt;&#x2F;a&gt; - both with nice sidebars. I wanted to have such a nice sidebar for my dev blog and began to look deeper how it was implemented. To my surprise the sidebar from the JSDoc theme Minami was complete CSS driven - cool.&lt;&#x2F;p&gt;
+&lt;p&gt;It took me a while to full understand how it was working. With this knowledge and the design inspirations I was able to improve the Jekyll default theme to a sidebar template. As a bonus I integrated the HTML based slideshow library Reveal.js - you can write now your blog posts and slides with markdown.&lt;&#x2F;p&gt;
+&lt;p&gt;The nice thing about blogging with markdown is, that you don’t need to switch your tools - you use the usual ones from the daily programming job. It goes even better when you use GitHub: You commit your changes and GitHub takes care about generating your blog content from your sources. And the result is a fast and secure static site.&lt;&#x2F;p&gt;
+&lt;p&gt;I had a accepted talk at the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;2017.doag.org&#x2F;en&#x2F;home&#x2F;&quot;&gt;DOAG Conference + Exhibition 2017&lt;&#x2F;a&gt; in the stream “Strategy &amp;amp; Business Practices” about blogging for developers with Jekyll. Unfortunately short before I had an accident and broke my right upper arm :-(&lt;&#x2F;p&gt;
+&lt;p&gt;My colleague Markus Dötsch was taking over the presentation and I concentrated on delivering the free time project “Jekyll sidebar template”. This was the working title before I renamed it to “HydeBar” - a play with “Dr. Jekyll and Mr. Hyde” and the fact, that it is a sidebar template.&lt;&#x2F;p&gt;
+&lt;p&gt;Yesterday I released version 1.0.0. You can start blogging for free in five minutes with this &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ogobrecht.github.io&#x2F;hydebar&#x2F;features#quickstart-online-in-5-minutes&quot;&gt;quick start guide&lt;&#x2F;a&gt;. The &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ogobrecht.github.io&#x2F;hydebar&quot;&gt;online demo&lt;&#x2F;a&gt; is serving as template, documentation and showcase. The mentioned slides from the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;2017.doag.org&#x2F;en&#x2F;home&#x2F;&quot;&gt;DOAG Conference&lt;&#x2F;a&gt; are included in this demo (in German, sorry…).&lt;&#x2F;p&gt;
+&lt;p&gt;Happy blogging :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">A Jekyll Sidebar Template</summary>
+        </entry><entry xml:lang="en">
+        <title>Form Behaviour - Bug or Feature?</title>
+        <published>2017-09-26T00:00:00+00:00</published>
+        <updated>2017-09-26T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/why-forms-with-single-input-are-submitted-by-the-enter-key/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/why-forms-with-single-input-are-submitted-by-the-enter-key/</id>
+        
+            <content type="html">&lt;p&gt;Today I stumbled over this strange behaviour of an APEX page: The page was always submitted when I pressed the enter key in a search field to force an AJAX refresh on a report.&lt;&#x2F;p&gt;
+&lt;p&gt;The item property to submit the page on pressing enter was switched off. I asked my collegue Markus, who had this error also some time ago (I could not remember the solution, although he told me about this issue). The reason was that the search field was the only input item on that page.&lt;&#x2F;p&gt;
+&lt;p&gt;After a short Google search I found the “root cause” for this “bug”, or should I say “feature”? This behaviour is described in the &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;MarkUp&#x2F;html-spec&#x2F;html-spec_8.html#SEC8.2&quot;&gt;HTML 2.0 specification (section 8.2)&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;To workaround this you can simply create a second input item and hide it by setting the “HTML Form Element Attributes” to &lt;code&gt;style=&quot;display:none;&quot;&lt;&#x2F;code&gt;. This was also posted by &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;deneskubicek.blogspot.de&#x2F;2008&#x2F;06&#x2F;textfield-item-submiting-page.html&quot;&gt;Denes Kubicek&lt;&#x2F;a&gt; back in 2008.&lt;&#x2F;p&gt;
+&lt;p&gt;I like the idea of one of the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;1370021&#x2F;why-does-forms-with-single-input-field-submit-upon-pressing-enter-key-in-input&quot;&gt;Stack Overflow comments&lt;&#x2F;a&gt; to put anywhere into the form (in APEX in fact the whole page, e.g. the header or footer of a region) this HTML snippet and not to create an “useless” page item:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; class=&quot;language-html z-code&quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-tag z-inline z-form z-html&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-tag z-begin z-html&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name z-tag z-inline z-form z-html&quot;&gt;input&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-attribute-with-value z-html&quot;&gt;&lt;span class=&quot;z-entity z-other z-attribute-name z-html&quot;&gt;type&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-html&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double z-html&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;text&lt;span class=&quot;z-punctuation z-definition z-string z-end z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-attribute-with-value z-html&quot;&gt;&lt;span class=&quot;z-entity z-other z-attribute-name z-html&quot;&gt;name&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-html&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double z-html&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;StackOverflow1370021&lt;span class=&quot;z-punctuation z-definition z-string z-end z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-attribute-with-value z-style z-html&quot;&gt;&lt;span class=&quot;z-entity z-other z-attribute-name z-style z-html&quot;&gt;style&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-html&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-css&quot;&gt;&lt;span class=&quot;z-meta z-property-name z-css&quot;&gt;&lt;span class=&quot;z-support z-type z-property-name z-css&quot;&gt;display&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-key-value z-css&quot;&gt;:&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-property-value z-css&quot;&gt;&lt;span class=&quot;z-support z-constant z-property-value z-css&quot;&gt;none&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-rule z-css&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-end z-html&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-tag z-end z-html&quot;&gt;&#x2F;&amp;gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It is worth to mention that I run the newest Chrome browser and this “feature” is still available…&lt;&#x2F;p&gt;
+&lt;p&gt;Happy coding :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">Why forms with a single input field are submitted by the enter key</summary>
+        </entry>
+</feed>

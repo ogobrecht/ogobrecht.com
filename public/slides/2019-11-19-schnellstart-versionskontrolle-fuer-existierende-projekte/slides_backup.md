@@ -1,7 +1,7 @@
 -----
 
-<!-- .slide: data-background-image="/assets/images/danielle-macinnes-IuLgi9PWETU-unsplash.jpg" -->
-<!-- .slide: data-background-image="/assets/images/michael-d-beckwith-575798-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/danielle-macinnes-IuLgi9PWETU-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/michael-d-beckwith-575798-unsplash.jpg" -->
 
 # Motivation
 

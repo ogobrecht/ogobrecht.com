@@ -1,4 +1,4 @@
-##  APEX fine art printing, Markdown überall
+## APEX fine art printing, Markdown überall
 Ottmar Gobrecht<br>
 DOAG APEX Connect 2016, Berlin
 

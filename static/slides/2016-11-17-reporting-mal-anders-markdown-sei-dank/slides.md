@@ -1,4 +1,4 @@
-##  Reporting mal anders, Markdown sei Dank
+## Reporting mal anders, Markdown sei Dank
 **Ein Open Source Kochrezept**<br>
 Ottmar Gobrecht<br>
 DOAG Konferenz 2016, Nürnberg

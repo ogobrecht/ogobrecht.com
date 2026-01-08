@@ -1,4 +1,4 @@
-<!-- .slide: data-background-image="/assets/images/braden-collum-87874-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/braden-collum-87874-unsplash.jpg" -->
 
 # Schnellstart
 ## Versionskontrolle für (APEX-)Projekte
@@ -64,7 +64,7 @@ Anmerkungen:
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/michael-d-beckwith-575798-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/michael-d-beckwith-575798-unsplash.jpg" -->
 
 > “There is no clean (database) development without Version Control”
 >
@@ -72,7 +72,7 @@ Anmerkungen:
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/clark-young-135435-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/clark-young-135435-unsplash.jpg" -->
 
 # Tools
 
@@ -139,7 +139,7 @@ Anmerkungen:
 
 ---
 
-## Anmerkungen Toad 
+## Anmerkungen Toad
 - Zwei Exportmöglichkeiten (mindestens)
   - Entweder Unterverzeichnisse pro Objekttyp...
   - ... oder Daten
@@ -167,13 +167,13 @@ Anmerkungen:
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/camylla-battani-784361-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/camylla-battani-784361-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/tim-easley-326493-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/tim-easley-326493-unsplash.jpg" -->
 
 # PLEX
 
@@ -197,7 +197,7 @@ WITH
       p_include_templates    => true, -- If true, include templates for README.md, export and install scripts.
       p_include_runtime_log  => true, -- If true, generate file plex_backapp_log.md with runtime statistics.
       p_include_data         => true, -- If true, include CSV data of each table.
-      p_data_table_name_like => 'DEMO_PRODUCT_INFO,DEMO_STATES' -- A comma separated list of like expressions to filter the tables - example: 'EMP%,DEPT%' will be translated to: where ... and (table_name like 'EMP%' escape '\' or table_name like 'DEPT%' escape '\').  
+      p_data_table_name_like => 'DEMO_PRODUCT_INFO,DEMO_STATES' -- A comma separated list of like expressions to filter the tables - example: 'EMP%,DEPT%' will be translated to: where ... and (table_name like 'EMP%' escape '\' or table_name like 'DEPT%' escape '\').
     ));
   END backapp;
 
@@ -269,13 +269,13 @@ END;
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/kevin-grieve-660962-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/kevin-grieve-660962-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/andrea-cappiello-770323-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/andrea-cappiello-770323-unsplash.jpg" -->
 
 # DDL
 ## <span style="color:red;">D</span>urch <span style="color:red;">d</span>ie <span style="color:red;">L</span>andschaft ;-)
@@ -314,13 +314,13 @@ Unser Ansatz ist nur eine mögliche<br>Ausprägung der Idee
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/kawtar-cherkaoui-125346-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/kawtar-cherkaoui-125346-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/james-thomas-125093-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/james-thomas-125093-unsplash.jpg" -->
 
 # Geschwindigkeit
 
@@ -333,19 +333,19 @@ Unser Ansatz ist nur eine mögliche<br>Ausprägung der Idee
 
 ---
 
-## Demo 
+## Demo
 
 App Export/Import
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/wayne-bishop-5737-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/wayne-bishop-5737-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/ricky-kharawala-308072-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/ricky-kharawala-308072-unsplash.jpg" -->
 
 # Mehr Tools
 
@@ -378,13 +378,13 @@ App Export/Import
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/alexander-andrews-511680-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/alexander-andrews-511680-unsplash.jpg" -->
 
 ## Fragen?
 
 -----
 
-<!-- .slide: data-background-image="/assets/images/matt-lamers-683008-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/matt-lamers-683008-unsplash.jpg" -->
 
 # Fazit
 
@@ -449,7 +449,7 @@ Denis Savenko
 
 ---
 
-<!-- .slide: data-background-image="/assets/images/nick-de-partee-97063-unsplash.jpg" -->
+<!-- .slide: data-background-image="/img/nick-de-partee-97063-unsplash.jpg" -->
 
 # The End
 

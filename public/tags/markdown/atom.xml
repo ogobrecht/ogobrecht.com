@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://ogobrecht.com/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;ogobrecht.com</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Markdown</tabi:current_section>
+    </tabi:metadata><title>Ottmar’s Notes - Markdown</title>
+        <subtitle>Mainly about Oracle APEX and PL&#x2F;SQL</subtitle>
+    <link href="https://ogobrecht.com/tags/markdown/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ogobrecht.com/tags/markdown/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2019-01-10T00:00:00+00:00</updated><id>https://ogobrecht.com/tags/markdown/atom.xml</id><entry xml:lang="en">
+        <title>PLOC - Convert PL&#x2F;SQL Code into Markdown Docs</title>
+        <published>2019-01-10T00:00:00+00:00</published>
+        <updated>2019-01-10T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/ploc-plsql-code-to-doc-converter/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/ploc-plsql-code-to-doc-converter/</id>
+        
+            <content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;ploc.png&quot; alt=&quot;Screenshot with a source&#x2F;Markdown&#x2F;HTML comparison&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Some months ago I had to write a README file with Markdown syntax for a PL&#x2F;SQL open source project. I changed function and procedure parameters of the package often during the implementation. Therefore, maintaining the documentation was no fun in the beginning. Maybe you know this from your own (payed) projects ;-)&lt;&#x2F;p&gt;
+&lt;p&gt;Normally in the business world I see minimalistic comments in the code and a dedicated documentation independent of the code. As you can imagine, the latter is sometimes - let’s say “out of date”, if it exists at all …&lt;&#x2F;p&gt;
+&lt;p&gt;I don’t want to discuss the reasons for this here - you all know several ones. And I also do not have a general solution for code documentation. But I have some ideas what is important for me:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The base of a good PL&#x2F;SQL code documentation is a good code structure
+&lt;ul&gt;
+&lt;li&gt;No single functions and procedures - packages with meaningful names are the way to go&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;As I have the source code under version control in local files on my computer I need a command line tool for the doc generation - there is no need for a database connection
+&lt;ul&gt;
+&lt;li&gt;The CLI should be able to process multiple files (packages)&lt;&#x2F;li&gt;
+&lt;li&gt;For my small open source project I have only one package and I want to define a document name different then the package name, so I need a CLI parameter for that&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Comments should be written directly after the package&#x2F;function&#x2F;procedure signature (in the package spec, optionally it should also work for triggers and types)
+&lt;ul&gt;
+&lt;li&gt;I want to use Markdown for the comments - this allows me to write also bigger text parts and code examples&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;I don’t want to describe all parameters in a JavaDoc manner
+&lt;ul&gt;
+&lt;li&gt;PL&#x2F;SQL is strong typed, everything I need to know is visible in the signature of a function or procedure&lt;&#x2F;li&gt;
+&lt;li&gt;Replicating the parameters for documentation is error prone and does not follow the DRY principles&lt;&#x2F;li&gt;
+&lt;li&gt;With meaningful parameter names you need often no or only short comments - these can be placed directly after the parameters as single line comments&lt;&#x2F;li&gt;
+&lt;li&gt;Long descriptions can be written in the Markdown main comment&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;The package&#x2F;function&#x2F;procedure signature should be automatically included in the output as a code block for reference&lt;&#x2F;li&gt;
+&lt;li&gt;Output should also be Markdown - this can be easily read by humans and further processed by machines
+&lt;ul&gt;
+&lt;li&gt;Only documented functions&#x2F;procedures should be included in the output to keep the focus on the important stuff&lt;&#x2F;li&gt;
+&lt;li&gt;I want to have an automatic table of contents in each generated document&lt;&#x2F;li&gt;
+&lt;li&gt;With the help of &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;pandoc.org&#x2F;&quot;&gt;Pandoc&lt;&#x2F;a&gt; many formats like Word, RTF, PDF or HTML can be generated (for GitHub I only need Markdown)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;There are already several open source projects available for PL&#x2F;SQL code documentation generation:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;pldoc.sourceforge.net&#x2F;&quot;&gt;PLDoc&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;oradoclet.sourceforge.net&#x2F;&quot;&gt;OraDoclet&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;schemaspy.sourceforge.net&#x2F;&quot;&gt;SchemaSpy&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.naturaldocs.org&#x2F;&quot;&gt;Natural Docs&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;OraOpenSource&#x2F;plsql-md-doc&quot;&gt;PL&#x2F;SQL to Markdown Documenter&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Only the last one is able to generate Markdown docs, but the input has to be in JavaDoc. All the others can produce HTML output and often some other formats like RTF, Word or PDF. Natural Docs has a Markdown like simple text syntax, but also no Markdown output. Some of the tools can automatically document a whole schema - that is not the focus of PLOC. Most comparable is the intention of PL&#x2F;SQL to Markdown  Documenter.&lt;&#x2F;p&gt;
+&lt;p&gt;So I had to do it by myself. I called it PLOC (PLDoc was already used, so I skipped the D…) and it is implemented in JavaScript as a npm package and currently used by me for the following two projects: &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;plex&quot;&gt;PL&#x2F;SQL Export Utilities&lt;&#x2F;a&gt; and &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;OraMUC&#x2F;table-api-generator&quot;&gt;Oracle Table API Generator&lt;&#x2F;a&gt;. It is very lightweight - the main code without the CLI has currently less characters as the Markdown source of this blog post. Maybe it is also useful for you. If not, have a look at the other mentioned projects.&lt;&#x2F;p&gt;
+&lt;p&gt;More infos about &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;ploc&quot;&gt;PLOC&lt;&#x2F;a&gt; itself can be found on the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;ploc&quot;&gt;project page&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Happy coding and documenting :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">Another way to document PL&#x2F;SQL business logic</summary>
+        </entry><entry xml:lang="en">
+        <title>Markdown for Oracle APEX</title>
+        <published>2016-01-01T00:00:00+00:00</published>
+        <updated>2016-01-01T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/markdown-for-oracle-apex/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/markdown-for-oracle-apex/</id>
+        
+            <content type="html">&lt;p&gt;Some years ago I implemented a task board in APEX. For commenting I used the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;stackexchange.github.io&quot;&gt;stackexchange&lt;&#x2F;a&gt; &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;balpha&#x2F;pagedown&quot;&gt;markdown implementation&lt;&#x2F;a&gt; (&lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;code.google.com&#x2F;archive&#x2F;p&#x2F;pagedown&#x2F;&quot;&gt;old Google code repo&lt;&#x2F;a&gt;), which is a pure JavaScript converter and editor and based on &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;showdownjs&#x2F;showdown&quot;&gt;showdown.js&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Some months ago I had to implement an application, which should be able to have multiple editors on one page and the editors should be able to support a read only mode. Furthermore there were hard limits for the amount of text for each editor. Both things which are not so easy to implement with the rich text editor in APEX - no really read only mode and the amount of text is also a problem because of the HTML overhead.&lt;&#x2F;p&gt;
+&lt;p&gt;It was time to rethink my old implementation and to build a plugin, which creates for each text area with the class markdown an own editor. All other non input elements with a class markdown should simply rendered to HTML, which is then also the solution for the read only mode of the editors. APEX standard text area items supports a read only mode and the class markdown from the text area is also rendered by the APEX engine for this mode :-)&lt;&#x2F;p&gt;
+&lt;p&gt;The nice side effect is, that I don’t had to reinvent the wheel by creating an own item type - I could reuse the standard APEX text area item and things like the character counter working out of the box.&lt;&#x2F;p&gt;
+&lt;p&gt;You can find the sources and more informations on &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;markdown-apex-plugin&quot;&gt;GitHub&lt;&#x2F;a&gt; and a demo app on &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;apex.oracle.com&#x2F;pls&#x2F;apex&#x2F;f?p=66154&quot;&gt;apex.oracle.com&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Happy coding :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">A dynamic action type plugin</summary>
+        </entry>
+</feed>

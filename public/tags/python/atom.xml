@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://ogobrecht.com/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;ogobrecht.com</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Python</tabi:current_section>
+    </tabi:metadata><title>Ottmar’s Notes - Python</title>
+        <subtitle>Mainly about Oracle APEX and PL&#x2F;SQL</subtitle>
+    <link href="https://ogobrecht.com/tags/python/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ogobrecht.com/tags/python/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2017-01-23T00:00:00+00:00</updated><id>https://ogobrecht.com/tags/python/atom.xml</id><entry xml:lang="en">
+        <title>Markdown Reporter</title>
+        <published>2017-01-23T00:00:00+00:00</published>
+        <updated>2017-01-23T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/markdown-reporter/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/markdown-reporter/</id>
+        
+            <content type="html">&lt;p&gt;On the APEX connect 2016 in Berlin I talked about my APEX Markdown plugin and fine art printing with the help of Pandoc and LaTeX. When I was preparing my slides and documenting a SQL query in a Markdown code block I asked myself:&lt;&#x2F;p&gt;
+&lt;p&gt;What, if the database is taking this Markdown code block and runs the query inside to convert it into data?&lt;&#x2F;p&gt;
+&lt;p&gt;And what, if I take this Markdown text with the data in the code blocks and post it to a small webservice which converts the data blocks into charts and the whole document into HTML or a LaTeX based PDF?&lt;&#x2F;p&gt;
+&lt;p&gt;The idea to Markdown Reporter was born.&lt;&#x2F;p&gt;
+&lt;p&gt;I talked about this project on the DOAG conference in Nuremberg last November. Here are the &lt;a href=&quot;&#x2F;slides&#x2F;2016-11-17-reporting-mal-anders-markdown-sei-dank&#x2F;&quot;&gt;slides&lt;&#x2F;a&gt; (in german, sorry).&lt;&#x2F;p&gt;
+&lt;p&gt;If you want to know how it looks like - here is a &lt;a href=&quot;&#x2F;slides&#x2F;2016-11-17-reporting-mal-anders-markdown-sei-dank&#x2F;assets&#x2F;demo-report.pdf&quot;&gt;PDF demo report&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The implementation has three main components:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;An Oracle PL&#x2F;SQL Package for preprocessing your data and communicating with the printserver&lt;&#x2F;li&gt;
+&lt;li&gt;A Node.js based printserver, which is in fact a web based remote shell for the format converter &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;pandoc.org&#x2F;&quot;&gt;Pandoc&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;A Pandoc filter written in Python, which intercepts the converting process and generates the charts based on the preprocessed CSV data with the help of Pythons &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;matplotlib.org&#x2F;&quot;&gt;matplotlib&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The HTML and PDF output is complete vector based and all used tools are open source.&lt;&#x2F;p&gt;
+&lt;p&gt;You can find the sources and more informations on &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;markdown-reporter&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Happy reporting :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">Write your reports with Markdown, get HTML or LaTeX PDFs</summary>
+        </entry>
+</feed>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://ogobrecht.com/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;ogobrecht.com</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Reveal.js</tabi:current_section>
+    </tabi:metadata><title>Ottmar’s Notes - Reveal.js</title>
+        <subtitle>Mainly about Oracle APEX and PL&#x2F;SQL</subtitle>
+    <link href="https://ogobrecht.com/tags/reveal-js/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ogobrecht.com/tags/reveal-js/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2017-03-05T00:00:00+00:00</updated><id>https://ogobrecht.com/tags/reveal-js/atom.xml</id><entry xml:lang="en">
+        <title>DokuWiki Plugin Reveal.js</title>
+        <published>2017-03-05T00:00:00+00:00</published>
+        <updated>2017-03-05T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/dokuwiki-plugin-revealjs/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/dokuwiki-plugin-revealjs/</id>
+        
+            <content type="html">&lt;p&gt;&lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.dokuwiki.org&quot;&gt;DokuWiki&lt;&#x2F;a&gt; is very good for creating documentation in a team. It is PHP based, needs less resources and is running without a database only on files on nearly every webserver. If your infrastructure is crashed for whatever reason and you have at least access to the files (on the webserver or in a backup) you can read your documentation with a simple text editor, because DokuWiki’s syntax is designed to be readable as possible without any rendering to HTML.&lt;&#x2F;p&gt;
+&lt;p&gt;For the APEX connect 2015 I started to use Markdown and &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;pandoc.org&quot;&gt;Pandoc&lt;&#x2F;a&gt; to create HTML based slides. Pandoc supports different HTML slideshow tools - two of them are also available as plugins in DokuWiki: S5 and &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;lab.hakim.se&#x2F;reveal-js&quot;&gt;Reveal.js&lt;&#x2F;a&gt;. Reveal.js is the more modern library and I used this one together with Pandoc.&lt;&#x2F;p&gt;
+&lt;p&gt;For the DOAG conference last year I tried to use Reveals.js as a DokuWiki Plugin - I wanted to have at the same time a normal wiki page and the possibility to render this page as a slideshow. Unfortunately the existing plugin was only a base implementation and many features from Reveal.js were not available. I decided to contribute to the existing plugin. The list of my improvements is long - I had fun and learned a lot. The plugin can be found &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.dokuwiki.org&#x2F;plugin:revealjs&quot;&gt;here on the DokuWiki homepage&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Happy presenting :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+&lt;p&gt;PS: In the meantime I switched complete to Markdown and &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;jekyllrb.com&quot;&gt;Jekyll&lt;&#x2F;a&gt;, a static site generator - but this is another story for another post …&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">My contributions to an existing DokuWiki slideshow plugin</summary>
+        </entry>
+</feed>

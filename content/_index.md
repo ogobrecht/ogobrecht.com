@@ -1,8 +1,10 @@
----
-title: Home
-description: The last five posts and a list of all tags
----
++++
+title = "Latest posts"
 
-{{< list-section "posts" 5 >}}
+[extra]
+header = { title = "Hello! I'm Ottmar", img = "img/avatar.webp", img_alt = "Ottmar Gobrecht" }
+section_path = "blog/_index.md"
+max_posts = 5
++++
 
-More in the [archive](/archive/), subscribe via [RSS](/feed.xml), explore via tags: {{< flat-list-terms-alphabetical "tags" >}}
+I run this site to give back a little of what I have previously received from the development community. I mainly write about Oracle APEX and PL/SQL. For those who know me personally: Yes, the picture is a bit older...

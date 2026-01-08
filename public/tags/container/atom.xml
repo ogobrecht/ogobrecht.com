@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://ogobrecht.com/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;ogobrecht.com</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Container</tabi:current_section>
+    </tabi:metadata><title>Ottmar’s Notes - Container</title>
+        <subtitle>Mainly about Oracle APEX and PL&#x2F;SQL</subtitle>
+    <link href="https://ogobrecht.com/tags/container/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ogobrecht.com/tags/container/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2017-06-13T00:00:00+00:00</updated><id>https://ogobrecht.com/tags/container/atom.xml</id><entry xml:lang="en">
+        <title>Oracle DB 11gXE Install File Swap Check Disabler</title>
+        <published>2017-06-13T00:00:00+00:00</published>
+        <updated>2017-06-13T00:00:00+00:00</updated>
+        <author>
+            <name>Ottmar Gobrecht</name>
+        </author>
+        <link rel="alternate" href="https://ogobrecht.com/blog/ora11xe-install-file-swap-check-disabler/" type="text/html"/>
+        <id>https://ogobrecht.com/blog/ora11xe-install-file-swap-check-disabler/</id>
+        
+            <content type="html">&lt;p&gt;Many people have problems to install Oracle 11XE in a Docker environment because the install file checks the available swap space in the container. In a container environment this fails often - see &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;oracle&#x2F;docker-images&#x2F;issues&#x2F;294#issuecomment-301465754&quot;&gt;here&lt;&#x2F;a&gt; or &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.elastichosts.com&#x2F;blog&#x2F;oracle-database-installation-on-a-container-running-centos&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;, because the swap space is optimized for the entire stack and not controlled from within the operating system of the container.&lt;&#x2F;p&gt;
+&lt;p&gt;We have to disable the swap space check in the installation file. I wrote another &lt;a href=&quot;&#x2F;blog&#x2F;pitfalls-with-oracle-11g-xe-and-docker-on-mac-os&quot;&gt;blog post about this&lt;&#x2F;a&gt;. The problem is here, that you need a Linux based system to do the necessary steps. Under Windows you have no chance and you have to do it by yourself because for license reasons everyone has to download his&#x2F;her own copy of the install file from &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.oracle.com&#x2F;technetwork&#x2F;database&#x2F;database-technologies&#x2F;express-edition&#x2F;downloads&#x2F;index.html&quot;&gt;Oracle OTN&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;I came up with the idea to simply do all the steps in a Docker container under the same Linux (oraclelinux:7-slim) which is later on needed with the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;oracle&#x2F;docker-images&#x2F;blob&#x2F;master&#x2F;OracleDatabase&#x2F;dockerfiles&#x2F;11.2.0.2&#x2F;Dockerfile.xe&quot;&gt;official Oracle Docker file&lt;&#x2F;a&gt; for an XE instance. With this solution you are able to prepare the install file more or less automatically under every operating system, which can run Docker - also under Windows. For more Details see the &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;docker-ora11xe-swap-check-disabler&quot;&gt;project on GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Happy installing :-)&lt;&#x2F;p&gt;
+&lt;p&gt;Ottmar&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">A Docker file to prepare the 11gXE install file for use in a container environment</summary>
+        </entry>
+</feed>

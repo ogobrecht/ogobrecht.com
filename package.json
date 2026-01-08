@@ -1,9 +1,0 @@
-{
-  "name": "ogobrecht.github.io.sources",
-  "private": true,
-  "scripts": {
-    "server": "hugo server --port 8888",
-    "server-future": "hugo server --port 8888 --buildFuture",
-    "build": "hugo --cleanDestinationDir"
-  }
-}
