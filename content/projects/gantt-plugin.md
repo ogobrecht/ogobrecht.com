@@ -5,7 +5,7 @@ weight = 96
 template = "page.html"
 
 [taxonomies]
-tags = ["Oracle", "APEX", "Plug-in", "Gantt", "JavaScript"]
+tags = ["Oracle", "APEX", "Plug-in", "Gantt", "Chart", "JavaScript"]
 +++
 
 ## HTML5 Gantt Chart Based on dhtmlx.com Library
