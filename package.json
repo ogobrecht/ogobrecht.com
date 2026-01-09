@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "update-theme": "cd themes/tabi && git pull && cd -"
+  }
+}
