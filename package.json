@@ -1,5 +1,7 @@
 {
   "scripts": {
-    "update-theme": "cd themes/tabi && git pull && cd -"
+    "update-theme": "cd themes/tabi && git pull && cd -",
+    "zola serve": "zola serve --drafts",
+    "zola build": "zola build"
   }
 }

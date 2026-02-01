@@ -36,11 +36,11 @@
 &lt;p&gt;The implementation has three main components:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;An Oracle PL&#x2F;SQL Package for preprocessing your data and communicating with the printserver&lt;&#x2F;li&gt;
-&lt;li&gt;A Node.js based printserver, which is in fact a web based remote shell for the format converter &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;pandoc.org&#x2F;&quot;&gt;Pandoc&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
-&lt;li&gt;A Pandoc filter written in Python, which intercepts the converting process and generates the charts based on the preprocessed CSV data with the help of Pythons &lt;a class=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;matplotlib.org&#x2F;&quot;&gt;matplotlib&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;A Node.js based printserver, which is in fact a web based remote shell for the format converter &lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;pandoc.org&#x2F;&quot;&gt;Pandoc&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;A Pandoc filter written in Python, which intercepts the converting process and generates the charts based on the preprocessed CSV data with the help of Pythons &lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;matplotlib.org&#x2F;&quot;&gt;matplotlib&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;The HTML and PDF output is complete vector based and all used tools are open source.&lt;&#x2F;p&gt;
-&lt;p&gt;You can find the sources and more informations on &lt;a class=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;markdown-reporter&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;You can find the sources and more informations on &lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ogobrecht&#x2F;markdown-reporter&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Happy reporting :-)&lt;&#x2F;p&gt;
 &lt;p&gt;Ottmar&lt;&#x2F;p&gt;
 </content>

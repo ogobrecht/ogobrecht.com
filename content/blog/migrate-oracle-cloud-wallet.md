@@ -39,7 +39,7 @@ Now you need to extract the downloaded cloud wallet - for security reasons it ma
 
 My resulting sqlnet.ora:
 
-```conf
+```txt
 WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY = "C:\\path\\to\\my\\wallet")))
 SSL_SERVER_DN_MATCH = yes
 sqlnet.wallet_override = true
@@ -47,7 +47,7 @@ sqlnet.wallet_override = true
 
 My resulting tnsnames.ora:
 
-```conf
+```txt
 myCloudDbName_high, myAlias = (description = (...
 myCloudDbName_medium        = (description = (...
 myCloudDbName_low           = (description = (...
